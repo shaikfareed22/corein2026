@@ -1,6 +1,6 @@
 //
 //  NanoMuseComposerWatch.swift
-//  nanoMuse
+//  corein
 //
 //  The composer that disappears: the watch behind it, and the evidence for
 //  the next report.
@@ -56,7 +56,7 @@ final class NanoMuseComposerWatch: ObservableObject {
         UIFont.systemFont(ofSize: FontSettings.shared.scaledChatInput(16.5)).lineHeight.rounded(.up)
     }
 
-    private static let log = Logger(subsystem: "io.github.nanomuse.app", category: "nm.composer")
+    private static let log = Logger(subsystem: "com.corein.app", category: "nm.composer")
     /// How long a wrong state may last before the column is rebuilt.
     // nonisolated: read as a default argument (a nonisolated context); Xcode 27's compiler warns otherwise
     private nonisolated static let patience: TimeInterval = 1.0

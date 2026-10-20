@@ -47,7 +47,7 @@ FILES = (
 # Folders of the chats, as the runtime keeps them.
 DIRS = ("threads", "sessions")
 
-README = """Your nanoMuse data, exported {when}
+README = """Your corein data, exported {when}
 
 profile.json        the agent's name and look
 feed_posts.json     the Feed as it was written

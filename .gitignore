@@ -47,7 +47,7 @@ site/assets/
 # the docs site, built by pages.yml from website/ into site/docs/
 site/docs/
 
-# nanoMuse on DeepSeek Harness (harness/README.md): built by `pnpm build`, not committed
+# corein on DeepSeek Harness (harness/README.md): built by `pnpm build`, not committed
 harness/dsh-nanomuse/node_modules/
 harness/dsh-nanomuse/lib/
 
@@ -74,5 +74,5 @@ android/native/build/
 # uv lockfile: the project installs with `uv pip install -e .`, not `uv sync`
 uv.lock
 
-# nanoMuse Cloud relay runtime data
+# corein Cloud relay runtime data
 cloud/data/

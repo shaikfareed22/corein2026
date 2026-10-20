@@ -10,8 +10,8 @@ import java.io.IOException
 
 /**
  * The other devices of the account, as the phone's `nanomuse-pc` sees them, and the calls to
- * them. Everything travels through the hub: a computer joins by running nanoMuse Desktop
- * signed in to the same nanoMuse Cloud account, on any network, and answers the actions
+ * them. Everything travels through the hub: a computer joins by running corein Desktop
+ * signed in to the same corein Cloud account, on any network, and answers the actions
  * itself. (Until 0.1.23 a computer could also be paired over the local network with a
  * stand-alone host script; that path is gone — one way in, the same on every network.)
  *
@@ -157,11 +157,11 @@ object Computers {
         val all = all(context)
         val onHub = Hub.isConnected
         return buildString {
-            append("## Your devices (nanoMuse)\n")
+            append("## Your devices (corein)\n")
             if (all.isEmpty()) {
-                append("No other device is connected right now. The way to add a computer: install nanoMuse Desktop there (https://nanomuse.cn/#download) and sign in with the same nanoMuse Cloud account as this phone — it appears under [Devices](${Hub.DEEP_LINK}) within seconds, on any network. ")
+                append("No other device is connected right now. The way to add a computer: install corein Desktop there (https://corein.app/#download) and sign in with the same corein Cloud account as this phone — it appears under [Devices](${Hub.DEEP_LINK}) within seconds, on any network. ")
                 append("When the user wants something done on their PC or Mac, say so in one line and point to the desktop app. ")
-                if (!onHub) append("This phone is not on the hub itself; signing in to nanoMuse Cloud puts it there. ")
+                if (!onHub) append("This phone is not on the hub itself; signing in to corein Cloud puts it there. ")
             } else {
                 append("Connected: ").append(all.joinToString("; ") { "${it.name} (${it.kind}, ${it.os}, via the hub — any network)" }).append(". ")
                 append("`nanomuse-pc run \"<command>\" [--on <device>] [--cwd <dir>] [--timeout <s>]` runs a shell command there and returns exit code, stdout and stderr — the same approval rules as the phone's shell apply, decided on this phone before anything is sent; ")

@@ -1,8 +1,8 @@
 /**
- * About nanoMuse and the version (C2). The installed line reads
- * "nanoMuse Desktop <app> · harness <bundle>": the app's number from the Electron
+ * About corein and the version (C2). The installed line reads
+ * "corein Desktop <app> · harness <bundle>": the app's number from the Electron
  * shell (`nanomuse:info`), the bundle's from package.json at build time. The host
- * reads the latest release from nanomuse.cn's index (GitHub when the index is out of
+ * reads the latest release from corein.app's index (GitHub when the index is out of
  * reach), compares, and the second line says "0.1.x is out" with Update — the
  * installer for this computer — or "Latest 0.1.x — you have it". The host checks once
  * a day by itself; the result puts a dot on ••• and an "Update to 0.1.x" row in the menu.
@@ -17,7 +17,7 @@ import { DOCS_URL, ISSUES_URL, REPO_URL } from './panels.ts'
 import { Sheet } from './ui.tsx'
 import { useWindowsUpdates, updatePresentation, requestWindowsUpdate } from './windows-updates.ts'
 
-export const RELEASES_URL = 'https://github.com/nano-muse/nanoMuse/releases'
+export const RELEASES_URL = 'https://github.com/corein-app/corein/releases'
 
 interface AppInfo {
   version: string
@@ -47,7 +47,7 @@ export function useAppInfo(): AppInfo | undefined {
   )
 }
 
-/** "nanoMuse Desktop 0.1.34 · harness 0.1.34" under the shell; the bundle alone in a browser. */
+/** "corein Desktop 0.1.34 · harness 0.1.34" under the shell; the bundle alone in a browser. */
 export function versionLine(t: Translate, bundle: string, app: AppInfo | undefined): string {
   return app ? t('abVersionLine', { app: app.version || '—', bundle: bundle || '—' }) : t('abVersionBundle', { bundle: bundle || '—' })
 }
@@ -68,7 +68,7 @@ export function useUpdateCheck(): { info: UpdateInfo | null; checking: boolean; 
 
 /**
  * The version (C2), two lines that are always there: what is installed
- * ("nanoMuse Desktop 0.1.34 · harness 0.1.34"), and what the check found — "Checking…",
+ * ("corein Desktop 0.1.34 · harness 0.1.34"), and what the check found — "Checking…",
  * "Latest 0.1.35 — you have it", "0.1.35 is out" with Update, or "Could not check — Check
  * now". A check runs when the rows appear and nothing is known yet.
  */

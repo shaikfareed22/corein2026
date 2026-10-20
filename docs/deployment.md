@@ -2,7 +2,7 @@
 
 An agent that runs shell commands belongs in a box of its own. On a server, a container is that box: the agent sees only its data directory and its workspace.
 
-This page is about the Python runtime (the web app's agent) in Docker. Running the relay (your own sign-in, hub and sync) and pointing the apps at it is [self-hosting.md](self-hosting.md), which also puts the three ways to run nanoMuse yourself in order.
+This page is about the Python runtime (the web app's agent) in Docker. Running the relay (your own sign-in, hub and sync) and pointing the apps at it is [self-hosting.md](self-hosting.md), which also puts the three ways to run corein yourself in order.
 
 ## Docker
 
@@ -53,14 +53,14 @@ A user-level systemd unit is enough:
 ```ini
 # ~/.config/systemd/user/nanomuse.service
 [Unit]
-Description=nanoMuse
+Description=corein
 After=network-online.target
 
 [Service]
-WorkingDirectory=%h/nanoMuse
-ExecStart=%h/nanoMuse/.venv/bin/nanomuse serve --host 0.0.0.0 --no-qr
+WorkingDirectory=%h/corein
+ExecStart=%h/corein/.venv/bin/nanomuse serve --host 0.0.0.0 --no-qr
 Restart=on-failure
-EnvironmentFile=%h/nanoMuse/.env
+EnvironmentFile=%h/corein/.env
 
 [Install]
 WantedBy=default.target

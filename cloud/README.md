@@ -1,6 +1,6 @@
-# nanoMuse Cloud
+# corein Cloud
 
-A small relay that lets someone use nanoMuse without owning an API key. Sign up
+A small relay that lets someone use corein without owning an API key. Sign up
 with a phone number or an e-mail address, get a starter allowance of tokens, and
 the app talks to this server the way it would talk to any OpenAI-compatible
 provider. Your own key still works exactly as before — this is the "start now"
@@ -16,7 +16,7 @@ its base URL.
   `nm_…` API key. One phone/e-mail is one account with one starter grant; a
   second device signing in with the same number gets a second key, not a second
   grant. `POST /v1/auth/session-key` (0.13) turns a key into one that lapses on
-  its own (`ttl_s`, 90 days at most) — what nanoMuse Web starts a person's
+  its own (`ttl_s`, 90 days at most) — what corein Web starts a person's
   container with, so the gateway keeps no standing key of theirs; it shows in
   `/v1/me/sessions` with `expires_at` and `via: "session"`.
 - **OpenAI-shaped proxy.** `GET /v1/models`, `POST /v1/chat/completions`
@@ -150,7 +150,7 @@ listed are believed, and a peer on the Docker network that is not among them
 keeps its own address. A relay reached directly from the internet ignores the
 header, so a request cannot name its own address.
 
-Point the app at it: in nanoMuse, *Sign in — free* → enter a phone number or an e-mail → code.
+Point the app at it: in corein, *Sign in — free* → enter a phone number or an e-mail → code.
 The app stores the key in its encrypted preferences and sets up a provider
 with `PUBLIC_BASE` as its base URL. Nothing else in the app changes; you can
 add your own key next to it at any time.
@@ -175,15 +175,15 @@ for the full list. The ones that matter:
 | `SIGNUP_PER_DOMAIN_DAY` | 5 | new accounts one e-mail domain may open per rolling 24 hours when the domain is not a well-known mail provider (gmail.com, outlook.com, qq.com, 163.com and the like are never limited; phones never are); past it `POST /v1/auth/code` answers `429 domain_limited` and the timeline across accounts gets `signup.domain_limited` with the domain; 0 = off |
 | `SIGNUP_DOMAIN_ALLOW` | empty | comma-separated domains that join the built-in list of unlimited ones, your company's or school's for instance |
 | `SIGNUP_DOMAIN_BLOCK` | empty | comma-separated disposable mail domains blocked from opening new accounts in addition to the built-in blocklist (`DEFAULT_SIGNUP_DOMAIN_BLOCK`); `SIGNUP_DOMAIN_ALLOW` overrides an entry |
-| `REPO_URL` | `https://github.com/nano-muse/nanoMuse` | the repository the apps ask people to star, in `/v1/config` |
-| `IMPROVE_DEFAULT` | `0` | what *Help improve nanoMuse's AI models* (Data controls) starts as for accounts created from now on: `1` = on until the person turns it off, `0` = off until they turn it on; existing accounts keep their setting. State it in your privacy policy |
-| `PRIVACY_URL` | `https://nanomuse.cn/privacy/` | the policy the apps link from Data controls and the sign-in pages — the one that says what this relay keeps and its default |
-| `INVITE_URL` | `https://nanomuse.cn/web/?invite=` | the link the apps offer to share; the code is appended |
-| `OWN_KEY_DOCS` | `https://nanomuse.cn/own-key` | the guide the apps open for bringing one's own key or signing in with a plan (every provider by region, what each covers) |
+| `REPO_URL` | `https://github.com/corein-app/corein` | the repository the apps ask people to star, in `/v1/config` |
+| `IMPROVE_DEFAULT` | `0` | what *Help improve corein's AI models* (Data controls) starts as for accounts created from now on: `1` = on until the person turns it off, `0` = off until they turn it on; existing accounts keep their setting. State it in your privacy policy |
+| `PRIVACY_URL` | `https://corein.app/privacy/` | the policy the apps link from Data controls and the sign-in pages — the one that says what this relay keeps and its default |
+| `INVITE_URL` | `https://corein.app/web/?invite=` | the link the apps offer to share; the code is appended |
+| `OWN_KEY_DOCS` | `https://corein.app/own-key` | the guide the apps open for bringing one's own key or signing in with a plan (every provider by region, what each covers) |
 | `OPENROUTER_URL` | `https://openrouter.ai/keys` | the page for a key from OpenRouter, the way on for people outside mainland China (0.17) — the apps order the two by the person's `region` |
 | `DAY_OFFSET_H` | 8 | the operator's reports group by local day, midnight UTC+8 (Beijing) |
 | `TRAFFIC_DB` | empty | the site's daily traffic counts (`demo/showcase/mirror/traffic.py`), mounted read-only, for the operator's page; empty = that panel says it is not connected |
-| `WEB_INFO_URL` | empty | nanoMuse Web's gateway (`http://gateway:8000/api/web/info` on the same docker network) for its account and session counts on the operator's page |
+| `WEB_INFO_URL` | empty | corein Web's gateway (`http://gateway:8000/api/web/info` on the same docker network) for its account and session counts on the operator's page |
 | `WEB_ADMIN_URL`, `WEB_ADMIN_TOKEN` | empty | the showcase gateway's `/api/demo/admin` and its `SHOWCASE_ADMIN_TOKEN`: who tried the phone in the browser from where and with what, every demo and what it used — a panel on the operator's page and a section in the account drawer (relay 0.10) |
 | `USD_CNY` | 7.1 | for showing dollars next to yuan; display only |
 | `SIGNUP_TOKENS` | 0 (no ceiling) | starter token grant per account, the older allowance |
@@ -210,8 +210,8 @@ for the full list. The ones that matter:
 | `CLOUD_GEOIP_DB`, `CLOUD_GEOIP_URL`, `CLOUD_GEOIP_V6_URL` | next to the database; the project's `ip2region_v4.xdb`; empty | the file, where to fetch it, and the IPv6 file (37 MB) for a relay reached over IPv6 |
 | `HUB_ENABLED` | `true` | the devices hub at `/v1/hub` and the web console at `/app` ([docs/hub.md](../docs/hub.md)) |
 | `HUB_FRAME_LIMIT` | 16 MB | largest hub frame (files and screenshots travel inside frames); one socket may also send at most 60 frames and 8 MB a second sustained (twice that in a burst) — over it frames are dropped with one `rate_limited` error a second, and a socket that keeps flooding is closed with 4008 (0.13) |
-| `MAX_REQUEST_BYTES` | 16 MB (0.20; was 6) | largest REST request body — a chat request with a few screenshots, a sync push of 200 messages; over it the answer is 413 `too_large`, *Request body is N MB; this relay accepts up to M MB*. A declared `Content-Length` over the limit is refused before a byte is read, and a body that grows past it is refused as it arrives, so the relay never buffers more than the limit for one request. Both Caddy sites (`cloud/Caddyfile`, `deploy/nanomuse-hk/cloud.nanomuse.cn.caddy`) cap bodies at `request_body max_size 20MB`: just above 16 MiB plus multipart overhead for `/v1/images/edits`, so a legitimate payload always reaches the relay's own 413 message and nothing larger reaches the relay at all; raise both together if you raise this |
-| `GITHUB_REPO` | read off `REPO_URL` (`nano-muse/nanoMuse`) | the repository whose stars, forks, watchers, open issues and release downloads the relay reads (0.22, *Site* on the operator's page) — `owner/name` |
+| `MAX_REQUEST_BYTES` | 16 MB (0.20; was 6) | largest REST request body — a chat request with a few screenshots, a sync push of 200 messages; over it the answer is 413 `too_large`, *Request body is N MB; this relay accepts up to M MB*. A declared `Content-Length` over the limit is refused before a byte is read, and a body that grows past it is refused as it arrives, so the relay never buffers more than the limit for one request. Both Caddy sites (`cloud/Caddyfile`, `deploy/nanomuse-hk/cloud.corein.app.caddy`) cap bodies at `request_body max_size 20MB`: just above 16 MiB plus multipart overhead for `/v1/images/edits`, so a legitimate payload always reaches the relay's own 413 message and nothing larger reaches the relay at all; raise both together if you raise this |
+| `GITHUB_REPO` | read off `REPO_URL` (`corein-app/corein`) | the repository whose stars, forks, watchers, open issues and release downloads the relay reads (0.22, *Site* on the operator's page) — `owner/name` |
 | `GITHUB_TOKEN` | empty | optional; without one GitHub allows 60 requests an hour, the collector uses two every six hours. Set it only if the relay shares its address with something else that polls GitHub (a `403` from GitHub shows on the page and says so) |
 | `GITHUB_COLLECT` | `1` | `0` turns the collector off (a relay without a way out, tests) |
 | `GITHUB_API` | `https://api.github.com` | where the collector reads; a mirror for a relay that cannot reach GitHub |
@@ -356,7 +356,7 @@ a day, keeps the last good copy and falls back to the built-in defaults
 reached:
 
 ```json
-{"version": 1, "star": {"enabled": true, "url": "https://github.com/nano-muse/nanoMuse",
+{"version": 1, "star": {"enabled": true, "url": "https://github.com/corein-app/corein",
  "moments": {"signed_in": true, "tasks": [3, 10, 30], "new_look": true, "exhausted": true,
              "days_used": [7, 30], "goal_done": true},
  "cooldown_days": 7, "max_asks": 4, "text": "", "text_zh": ""}}
@@ -540,7 +540,7 @@ client: the accounts table has a *Client / IP* column, the drawer an
 *Addresses / IP* section (how often, first, last, platforms) and the address
 on every row, and an address opens the accounts seen from it
 (`/v1/admin/address?ip=`). The text of a chat is on the page only for
-accounts with *Help improve nanoMuse's AI models* on, and only the training
+accounts with *Help improve corein's AI models* on, and only the training
 view of it (below); every account that kept turns is in the *By account*
 table of the Data controls panel, and its conversations are read in full in
 the drawer — each turn expands to every message and tool call — with an
@@ -577,7 +577,7 @@ relay's own numbers by day (sign-ins, new and active accounts, sign-ups
 through an invite, data switches turned on, calls, refusals, upstream errors, and the
 provider's content-check refusals, counted apart since they say nothing about the provider),
 the remembered devices by kind and system, the invite funnel and — with
-`WEB_INFO_URL` — how many nanoMuse Web accounts and sessions the gateway
+`WEB_INFO_URL` — how many corein Web accounts and sessions the gateway
 holds; and, with `TRAFFIC_DB`, the project site's visits and downloads:
 page views, visitors, crawlers, downloads per file from the mirror next to
 GitHub's own download counts, stars, referring sites, the pages. The traffic
@@ -775,7 +775,7 @@ allowance plus any unused 0.4 credit, so nobody starts in debt.
 
 ### Data controls (0.9)
 
-*Help improve nanoMuse's AI models* is one switch per account, under Settings →
+*Help improve corein's AI models* is one switch per account, under Settings →
 Data controls on every app and on the console's account sheet
 (`/v1/me.contribute`, `POST /v1/me/contribute {on}`). With it on, each chat turn
 through the relay is kept in `samples` — **the training view only**: what the
@@ -839,7 +839,7 @@ curl -H "X-Admin-Token: $CLOUD_ADMIN_TOKEN" -H 'Content-Type: application/json' 
 # the whole policy; a key left out goes back to its default, not to what was stored
 curl -H "X-Admin-Token: $CLOUD_ADMIN_TOKEN" https://$CLOUD_DOMAIN/v1/admin/nudges
 curl -X PUT -H "X-Admin-Token: $CLOUD_ADMIN_TOKEN" -H 'Content-Type: application/json' \
-  -d '{"star":{"moments":{"tasks":[5,20]},"cooldown_days":14,"text":"A star on GitHub helps others find nanoMuse.","text_zh":"在 GitHub 点个 star，让更多人找到 nanoMuse。"}}' \
+  -d '{"star":{"moments":{"tasks":[5,20]},"cooldown_days":14,"text":"A star on GitHub helps others find corein.","text_zh":"在 GitHub 点个 star，让更多人找到 corein。"}}' \
   https://$CLOUD_DOMAIN/v1/admin/nudges
 # the switches (0.22): what is on, flip one with a note for the audit log, read the log —
 # from the relay's own shell (the CLI reads CLOUD_ADMIN_TOKEN and NANOMUSE_CLOUD_BASE, else

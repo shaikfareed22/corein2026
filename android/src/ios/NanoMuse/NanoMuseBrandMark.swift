@@ -1,11 +1,11 @@
 //
 //  NanoMuseBrandMark.swift
-//  nanoMuse
+//  corein
 //
 //  The app icon as a view, for the pages that stand for the app rather than
 //  for the agent (docs/brand.md): the sign-in page of the first run. The
 //  tile is the white squircle with the hairline edge and the N stroke in the
-//  brand gradient — drawn from the same path as `assets/brand/nanomuse-mark.svg`
+//  brand gradient — drawn from the same path as `assets/brand/corein-mark.svg`
 //  (tile coordinates, viewBox 0 0 100 100), so it needs no asset and matches
 //  the icon on the home screen. The face stays the agent's; it is never used
 //  where the app is meant.
@@ -13,7 +13,7 @@
 
 import SwiftUI
 
-/// The single pen stroke that reads as an N. Path from `nanomuse-mark.svg`, in a 100 × 100 tile.
+/// The single pen stroke that reads as an N. Path from `corein-mark.svg`, in a 100 × 100 tile.
 struct NanoMuseMarkShape: Shape {
     func path(in rect: CGRect) -> Path {
         let s = min(rect.width, rect.height) / 100

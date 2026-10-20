@@ -1,6 +1,6 @@
 //
 //  NanoMuseFeed.swift
-//  nanoMuse
+//  corein
 //
 //  The Feed, Muse style: short posts the agent writes for the person, from
 //  what it remembers (GLOBAL.md, the last week of diary, USER.md, goals).
@@ -367,7 +367,7 @@ enum NanoMuseFeedFlow {
         guard isFeedSession(session) else { return nil }
         let store = NanoMuseFeedStore.shared
         let recent = store.posts.prefix(24).map(\.title)
-        var s = "## This conversation writes the user's feed (nanoMuse)\n"
+        var s = "## This conversation writes the user's feed (corein)\n"
         s += "The Feed tab shows short posts you write for the user, like Muse's feed. The user's standing instruction for it:\n"
         s += "> " + store.preferences.replacingOccurrences(of: "\n", with: "\n> ") + "\n\n"
         s += "What you know about them right now (from GLOBAL.md, the diary of the last seven days, USER.md and their goals):\n"
@@ -798,5 +798,5 @@ struct NanoMuseFeedFenceCard: View {
 
 extension Notification.Name {
     /// Switch the Muse shell to a room: object is "feed" | "goals" | "ideas" | "library".
-    static let nanoMuseOpenRoom = Notification.Name("nanoMuse.openRoom")
+    static let nanoMuseOpenRoom = Notification.Name("corein.openRoom")
 }

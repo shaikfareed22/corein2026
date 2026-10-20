@@ -9,7 +9,7 @@ from pathlib import Path
 from nanomuse_cloud import providers as pv
 
 ROOT = Path(__file__).resolve().parents[2]
-DOCS = "https://nanomuse.cn/own-key"
+DOCS = "https://corein.app/own-key"
 
 
 def test_catalogue_copy_is_the_runtimes():

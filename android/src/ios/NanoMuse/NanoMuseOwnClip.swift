@@ -1,6 +1,6 @@
 //
 //  NanoMuseOwnClip.swift
-//  nanoMuse
+//  corein
 //
 //  A clip of the person's own as the face (#324). One short video from the
 //  photo library plays muted in a loop wherever the face moves: for the mood
@@ -455,7 +455,7 @@ struct NanoMuseOwnClipPreview: View {
                 onCancel()
             }
             .frame(maxWidth: .infinity)
-            Text(AppLocalized("The clip stays on this phone. It is not uploaded to nanoMuse Cloud or synced to your other devices."))
+            Text(AppLocalized("The clip stays on this phone. It is not uploaded to corein Cloud or synced to your other devices."))
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

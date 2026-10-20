@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to nanoMuse. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [Semantic Versioning](https://semver.org/). Unreleased changes are on `main`.
+All notable changes to corein (and, before the fork on 2026-10-20, to nanoMuse). The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [Semantic Versioning](https://semver.org/). Unreleased changes are on `main`.
 
 ## [Unreleased]
 

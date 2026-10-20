@@ -65,6 +65,6 @@ class MainChatFollowTest {
         assertTrue(MainChatFollow.keepAsIs("OpenAI", "OpenAI", listOf("i-openai", null)))
         // ours: named after the provider, that provider alone; it may be led with the pick
         assertFalse(MainChatFollow.keepAsIs("OpenAI", "OpenAI", listOf("i-openai")))
-        assertFalse(MainChatFollow.keepAsIs("nanoMuse Cloud", "nanoMuse Cloud", listOf("i-cloud", "i-cloud")))
+        assertFalse(MainChatFollow.keepAsIs("corein Cloud", "corein Cloud", listOf("i-cloud", "i-cloud")))
     }
 }

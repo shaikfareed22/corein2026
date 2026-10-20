@@ -8,7 +8,7 @@
  * models can do — `chat`, `vision` (the hands see the screen), `image` (pictures), `video` (clips).
  *
  * **One rule.** What the person has configured — the own-key rows this plugin wrote into the
- * harness's model adapter, the ChatGPT sign-in, nanoMuse Cloud while the allowance lasts — decides
+ * harness's model adapter, the ChatGPT sign-in, corein Cloud while the allowance lasts — decides
  * what the app offers: chat needs `chat`, the hands need `vision`, pictures `image`, clips `video`.
  * A capability nobody has is unavailable with one sentence (the browser half's words), never a raw
  * error; a model picker lists only the models of providers that have the capability.
@@ -309,12 +309,20 @@ export function ownProviderRow(p: OwnProvider, hint?: ReasoningHint): Record<str
     }
   }
   const api = apiOf(p.protocol, p.baseURL)
+  // Google's OpenAI-compatible layer rejects the `store` field pi-ai sends to a standard
+  // endpoint (400 "Unknown name store"); the row says so per model, where pi-ai reads compat.
+  const google = /generativelanguage\.googleapis\.com/.test(p.baseURL)
+  const fields = (m: OwnModel): Record<string, unknown> => {
+    const rf = reasoningFields(hint, api, m) as { compat?: Record<string, unknown> }
+    if (!google) return rf
+    return { ...rf, compat: { ...(rf.compat ?? {}), supportsStore: false } }
+  }
   return {
     displayName: p.label,
     api,
     baseURL: p.baseURL,
     ...(p.keyRef ? { apiKeyEnv: p.keyRef } : {}),
-    models: p.models.filter((m) => m.kind === 'chat').map((m) => ({ id: m.id, displayName: m.name, input: m.vision ? ['text', 'image'] : ['text'], ...reasoningFields(hint, api, m) })),
+    models: p.models.filter((m) => m.kind === 'chat').map((m) => ({ id: m.id, displayName: m.name, input: m.vision ? ['text', 'image'] : ['text'], ...fields(m) })),
   }
 }
 
@@ -432,7 +440,9 @@ export async function listModelRows(protocol: Protocol, baseURL: string, apiKey:
     for (const row of rows) {
       if (!row || typeof row !== 'object') continue
       const r = row as { id?: unknown; name?: unknown; reasoning?: unknown }
-      const id = typeof r.id === 'string' ? r.id : typeof r.name === 'string' ? r.name.replace(/^models\//, '') : ''
+      // Google's compatible layer lists ids as `models/<id>`; its chat endpoint takes either form,
+      // but the prefix hides the catalogue defaults and the thinking-level rules, so it is dropped.
+      const id = (typeof r.id === 'string' ? r.id : typeof r.name === 'string' ? r.name : '').replace(/^models\//, '')
       if (!id) continue
       const reasoning = parseListedReasoning(r.reasoning)
       out.push(reasoning ? { id, reasoning } : { id })

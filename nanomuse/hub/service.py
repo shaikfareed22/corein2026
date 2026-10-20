@@ -188,7 +188,7 @@ class HubService:
             logger.debug("cloud models not listed: {}", exc)
 
     async def _seed_from_env(self) -> None:
-        """A hosted runtime (nanoMuse Web) starts already signed in: the gateway that made the
+        """A hosted runtime (corein Web) starts already signed in: the gateway that made the
         container passes the account key in ``NANOMUSE_CLOUD_KEY`` (``NANOMUSE_CLOUD_HINT`` /
         ``NANOMUSE_CLOUD_CHANNEL`` for the account page). The key goes into the vault like
         one typed in; the relay becomes the model when nothing else is configured; the first
@@ -541,7 +541,7 @@ class HubService:
             "base_url": self.cloud.base_url,
             "signed_in": self.signed_in,
             "required": self.settings.cloud.required,
-            # the apps' *Use nanoMuse Cloud models*: the account's models as a source
+            # the apps' *Use corein Cloud models*: the account's models as a source
             "models": self.settings.cloud.models,
             "hint": str(cloud.get("hint") or ""),
             "channel": str(cloud.get("channel") or ""),
@@ -567,7 +567,7 @@ class HubService:
             raise CloudError(
                 409,
                 "chat_on_cloud",
-                "Add a provider of your own first; with nanoMuse Cloud off, nothing else "
+                "Add a provider of your own first; with corein Cloud off, nothing else "
                 "could answer.",
             )
         cloud = dict(self.data.get("cloud") or {})
@@ -682,7 +682,7 @@ class HubService:
             raise HubError(
                 "no_hub",
                 "not connected to the hub"
-                + ("" if self.signed_in else "; sign in to nanoMuse Cloud first"),
+                + ("" if self.signed_in else "; sign in to corein Cloud first"),
             )
         return await self.client.call(to, action, args, timeout=timeout, on_event=on_event)
 

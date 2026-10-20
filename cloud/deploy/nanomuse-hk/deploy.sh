@@ -11,7 +11,7 @@
 #      directory is given to uid 10001, the user the relay runs as in its container
 #   2. put this directory's compose file, backup and self-check scripts and systemd
 #      units in place; enable the backup and self-check timers
-#   3. drop cloud.nanomuse.cn.caddy into the showcase's sites.d/ and reload Caddy
+#   3. drop cloud.corein.app.caddy into the showcase's sites.d/ and reload Caddy
 #      (only when the file changed)
 #   4. docker compose up -d --build, then curl /healthz through the public name
 #
@@ -21,8 +21,8 @@ set -eu
 
 host=${RELAY_HOST:-nanomuse-hk}
 remote=${RELAY_DIR:-/opt/nanomuse/relay}
-showcase=${SHOWCASE_DIR:-/opt/nanomuse/nanoMuse/demo/showcase}
-public=${PUBLIC_BASE:-https://cloud.nanomuse.cn}
+showcase=${SHOWCASE_DIR:-/opt/nanomuse/corein/demo/showcase}
+public=${PUBLIC_BASE:-https://cloud.corein.app}
 here=$(cd "$(dirname "$0")" && pwd)
 cloud=$(cd "$here/../.." && pwd)
 build=1
@@ -53,11 +53,11 @@ fi
 # alone. SKIP_CADDY=1 leaves it out altogether (before the DNS record exists,
 # say — Caddy would otherwise start asking for a certificate it cannot get yet).
 if [ -z "${SKIP_CADDY:-}" ]; then
-	rsync -az "$here/cloud.nanomuse.cn.caddy" "$host:/tmp/cloud.nanomuse.cn.caddy"
-	ssh "$host" "if ! cmp -s /tmp/cloud.nanomuse.cn.caddy $showcase/sites.d/cloud.nanomuse.cn.caddy 2>/dev/null; then \
-			sudo install -m 644 /tmp/cloud.nanomuse.cn.caddy $showcase/sites.d/cloud.nanomuse.cn.caddy \
+	rsync -az "$here/cloud.corein.app.caddy" "$host:/tmp/cloud.corein.app.caddy"
+	ssh "$host" "if ! cmp -s /tmp/cloud.corein.app.caddy $showcase/sites.d/cloud.corein.app.caddy 2>/dev/null; then \
+			sudo install -m 644 /tmp/cloud.corein.app.caddy $showcase/sites.d/cloud.corein.app.caddy \
 			&& docker exec showcase-caddy-1 caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile \
-			&& echo 'caddy: reloaded with cloud.nanomuse.cn'; fi; rm -f /tmp/cloud.nanomuse.cn.caddy"
+			&& echo 'caddy: reloaded with cloud.corein.app'; fi; rm -f /tmp/cloud.corein.app.caddy"
 fi
 
 if [ -n "$build" ]; then

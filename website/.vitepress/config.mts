@@ -1,20 +1,20 @@
-// The nanoMuse docs site: VitePress over ../docs. Nothing is copied — the pages under
+// The corein docs site: VitePress over ../docs. Nothing is copied — the pages under
 // docs/ are the source, and this file only says how they are arranged and where the
 // links that leave docs/ go.
 //
 //   npm run docs:dev      # http://127.0.0.1:5173/<base>
 //   npm run docs:build    # .vitepress/dist, also the dead-link check
-//   DOCS_BASE=/docs/ npm run docs:build   # for nanomuse.cn/docs/
+//   DOCS_BASE=/docs/ npm run docs:build   # for corein.app/docs/
 //
-// DOCS_BASE defaults to /nanoMuse/docs/ — the project pages at nano-muse.github.io keep
-// site/index.html (the redirect to nanomuse.cn) and site/legacy.html at the root, and the
+// DOCS_BASE defaults to /corein/docs/ — the project pages at nano-muse.github.io keep
+// site/index.html (the redirect to corein.app) and site/legacy.html at the root, and the
 // docs sit beside them under /docs/.
 import { posix } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, type DefaultTheme } from 'vitepress'
 
-const REPO = 'https://github.com/nano-muse/nanoMuse'
-const base = process.env.DOCS_BASE ?? '/nanoMuse/docs/'
+const REPO = 'https://github.com/corein-app/corein'
+const base = process.env.DOCS_BASE ?? '/corein/docs/'
 
 // Directories under docs/ that are not pages of the site: task briefs and traces are
 // working notes, the archive is the Python line's record, the release notes and the
@@ -99,10 +99,10 @@ const useIt: DefaultTheme.SidebarItem[] = [
 ]
 
 const runIt: DefaultTheme.SidebarItem[] = [
-  { text: 'Run nanoMuse yourself', link: '/self-hosting' },
+  { text: 'Run corein yourself', link: '/self-hosting' },
   { text: 'The runtime in Docker', link: '/deployment' },
   { text: 'Configuration', link: '/configuration' },
-  { text: 'nanoMuse Cloud, the relay', link: '/cloud' },
+  { text: 'corein Cloud, the relay', link: '/cloud' },
 ]
 
 const understandIt: DefaultTheme.SidebarItem[] = [
@@ -112,7 +112,7 @@ const understandIt: DefaultTheme.SidebarItem[] = [
   { text: 'What stays on a phone, and whose it is', link: '/sync' },
   { text: 'The hub', link: '/hub' },
   { text: 'Design: how it looks, and why', link: '/design' },
-  { text: 'nanoMuse on DeepSeek Harness', link: '/harness' },
+  { text: 'corein on DeepSeek Harness', link: '/harness' },
   { text: 'The phone’s own capabilities', link: '/device' },
   { text: 'The app, as designed', link: '/app' },
   { text: 'The local runtime on the phone', link: '/local-runtime' },
@@ -157,10 +157,10 @@ const zhUseIt: DefaultTheme.SidebarItem[] = [
 ]
 
 const zhRunIt: DefaultTheme.SidebarItem[] = [
-  { text: '自己运行 nanoMuse', link: '/zh/self-hosting' },
+  { text: '自己运行 corein', link: '/zh/self-hosting' },
   { text: 'Docker 里的运行时', link: '/zh/deployment' },
   { text: '配置', link: '/zh/configuration' },
-  { text: 'nanoMuse Cloud：中继', link: '/zh/cloud' },
+  { text: 'corein Cloud：中继', link: '/zh/cloud' },
 ]
 
 const zhUnderstandIt: DefaultTheme.SidebarItem[] = [
@@ -170,7 +170,7 @@ const zhUnderstandIt: DefaultTheme.SidebarItem[] = [
   { text: '什么留在手机上，归谁', link: '/zh/sync' },
   { text: 'hub：设备互联', link: '/zh/hub' },
   { text: '设计：长什么样，为什么', link: '/zh/design' },
-  { text: 'DeepSeek Harness 上的 nanoMuse', link: '/zh/harness' },
+  { text: 'DeepSeek Harness 上的 corein', link: '/zh/harness' },
   { text: '手机自身的能力', link: '/zh/device' },
   { text: '手机 App 的设计', link: '/zh/app' },
   { text: '手机上的本地运行时', link: '/zh/local-runtime' },
@@ -180,7 +180,6 @@ const zhUnderstandIt: DefaultTheme.SidebarItem[] = [
 const zhContribute: DefaultTheme.SidebarItem[] = [
   { text: '参与贡献（英文）', link: `${REPO}/blob/main/CONTRIBUTING.md` },
   { text: 'AGENTS.md（英文）', link: `${REPO}/blob/main/AGENTS.md` },
-  { text: '中文 README', link: `${REPO}/blob/main/docs/readme/README_zh.md` },
   { text: '路线图', link: '/zh/roadmap' },
   { text: '各客户端的功能对照', link: '/zh/parity' },
   { text: '发布说明', link: `${REPO}/releases` },
@@ -188,7 +187,7 @@ const zhContribute: DefaultTheme.SidebarItem[] = [
 ]
 
 export default defineConfig({
-  title: 'nanoMuse',
+  title: 'corein',
   description: 'An open-source personal agent for every device you own.',
   lang: 'en',
   base,
@@ -204,11 +203,11 @@ export default defineConfig({
       label: 'English',
       lang: 'en',
       themeConfig: {
-        siteTitle: 'nanoMuse docs',
+        siteTitle: 'corein docs',
         // Home and Try it are the project site and the demo, the same two the homepage's bar has.
         nav: [
-          { text: 'Home', link: 'https://nanomuse.cn/' },
-          { text: 'Try it', link: 'https://demo.nanomuse.dev/' },
+          { text: 'Home', link: 'https://corein.app/' },
+          { text: 'Try it', link: 'https://demo.corein.app/' },
           { text: 'Get started', link: '/android' },
           { text: 'Run it yourself', link: '/self-hosting' },
           { text: 'Roadmap', link: '/roadmap' },
@@ -223,8 +222,8 @@ export default defineConfig({
         outline: { level: [2, 3], label: 'On this page' },
         editLink: { pattern: `${REPO}/edit/main/docs/:path`, text: 'Edit this page on GitHub' },
         footer: {
-          message: 'GPL-3.0-or-later. nanoMuse is an independent community project, not affiliated with Meta.',
-          copyright: 'The nanoMuse contributors',
+          message: 'GPL-3.0-or-later. corein is an independent community project, not affiliated with Meta.',
+          copyright: 'The corein contributors',
         },
         langMenuLabel: 'Change language',
       },
@@ -233,13 +232,13 @@ export default defineConfig({
       label: '简体中文',
       lang: 'zh-Hans',
       link: '/zh/',
-      title: 'nanoMuse',
+      title: 'corein',
       description: '开源的个人智能体，面向你的每一台设备。',
       themeConfig: {
-        siteTitle: 'nanoMuse 文档',
+        siteTitle: 'corein 文档',
         nav: [
-          { text: '首页', link: 'https://nanomuse.cn/' },
-          { text: '试一试', link: 'https://demo.nanomuse.dev/' },
+          { text: '首页', link: 'https://corein.app/' },
+          { text: '试一试', link: 'https://demo.corein.app/' },
           { text: '上手', link: '/zh/android' },
           { text: '自己部署', link: '/zh/self-hosting' },
           { text: '路线图', link: '/zh/roadmap' },
@@ -270,8 +269,8 @@ export default defineConfig({
           code: '404',
         },
         footer: {
-          message: 'GPL-3.0-or-later。nanoMuse 是独立的社区项目，与 Meta 无关。',
-          copyright: 'nanoMuse 贡献者',
+          message: 'GPL-3.0-or-later。corein 是独立的社区项目，与 Meta 无关。',
+          copyright: 'corein 贡献者',
         },
       },
     },
@@ -284,7 +283,7 @@ export default defineConfig({
     resolve: { alias: [{ find: /^vue(\/.*)?$/, replacement: `${fileURLToPath(new URL('../node_modules/vue', import.meta.url))}$1` }] },
   },
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}nanomuse-icon.svg` }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}corein-icon.svg` }],
   ],
   // Internal links are checked at build time. The link_open rule below turns every link that
   // leaves docs/ into a GitHub URL, so nothing should remain here; add a pattern only for a
@@ -332,7 +331,7 @@ export default defineConfig({
   // What both languages share. GitHub is not in socialLinks: the nav shows it with the
   // star count instead (theme/GitHubStars.vue, the `nav-bar-content-after` slot).
   themeConfig: {
-    logo: '/nanomuse-icon.svg',
+    logo: '/corein-icon.svg',
     socialLinks: [
       { icon: 'discord', link: 'https://discord.gg/bkTySmm28X' },
     ],

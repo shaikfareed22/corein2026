@@ -1,11 +1,11 @@
 # The public face of the showcase: Caddy with the Cloudflare DNS module (for the wildcard
 # certificate the per-session hostnames need), the Cloudflare IP-ranges module (so that behind
 # Cloudflare's proxy the visitor's address is still the visitor's), the built MobileGym with
-# the nanoMuse app installed and pointed at the gateway (as /phone.html), and the page around
+# the corein app installed and pointed at the gateway (as /phone.html), and the page around
 # the phone (site/page/, with MobileGym's own gesture keys and State Builder) at /.
 #
-# Build context is the repository root (see docker-compose.yml), so the nanoMuse app module can
-# be copied straight from demo/mobilegym/apps/nanoMuse, and the page from demo/showcase/site.
+# Build context is the repository root (see docker-compose.yml), so the corein app module can
+# be copied straight from demo/mobilegym/apps/corein, and the page from demo/showcase/site.
 
 FROM node:22-bookworm-slim AS site
 ARG MOBILEGYM_REPO=https://github.com/Purewhiter/mobilegym.git
@@ -30,13 +30,13 @@ RUN ref="${MOBILEGYM_REF:-$(grep -v '^#' /src/mobilegym.ref | tr -d '[:space:]')
  && git -C mobilegym fetch -q --depth 1 origin "${ref}" \
  && git -C mobilegym checkout -q --detach FETCH_HEAD \
  && echo "MobileGym ${ref} is $(git -C mobilegym rev-parse HEAD)"
-COPY demo/mobilegym/apps/nanoMuse mobilegym/apps/nanoMuse
+COPY demo/mobilegym/apps/corein mobilegym/apps/corein
 # the showcase's one change to MobileGym's seed (张伟's 微信 message invites to a hike, for the
 # page's weather line); the build fails if upstream's sentence is no longer there as expected
 COPY demo/mobilegym/patch-seed.sh /src/patch-seed.sh
 RUN sh /src/patch-seed.sh /src/mobilegym
 WORKDIR /src/mobilegym
-# modern-screenshot renders the phone's screenshot in the tab (the nanoMuse module's only
+# modern-screenshot renders the phone's screenshot in the tab (the corein module's only
 # extra dependency); --no-save keeps MobileGym's lockfile as upstream has it
 RUN npm ci --no-audit --no-fund \
  && npm install --no-save --no-audit --no-fund modern-screenshot@^4.7.0 \

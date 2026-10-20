@@ -37,12 +37,12 @@ class OwnProviderProxyTest {
     }
 
     @Test fun `only the provider hosts are routed, never the relay, the LAN or anything else`() {
-        OwnProviderProxy.setForTests(on, routed, relay = "nanomuse.cn")
+        OwnProviderProxy.setForTests(on, routed, relay = "corein.app")
         assertTrue(OwnProviderProxy.routes("chatgpt.com"))
         assertTrue(OwnProviderProxy.routes("CHATGPT.com"))
         assertTrue(OwnProviderProxy.routes("api.openai.com"))
         assertTrue(OwnProviderProxy.routes("sub.dashscope.aliyuncs.com"))
-        assertFalse(OwnProviderProxy.routes("nanomuse.cn"))
+        assertFalse(OwnProviderProxy.routes("corein.app"))
         assertFalse(OwnProviderProxy.routes("github.com"))
         assertFalse(OwnProviderProxy.routes("192.168.1.20"))
         assertFalse(OwnProviderProxy.routes("localhost"))
@@ -58,7 +58,7 @@ class OwnProviderProxyTest {
     }
 
     @Test fun `the selector answers the proxy for a provider and the system's answer for the rest`() {
-        OwnProviderProxy.setForTests(on, routed, relay = "nanomuse.cn")
+        OwnProviderProxy.setForTests(on, routed, relay = "corein.app")
         val system = object : ProxySelector() {
             override fun select(uri: URI?) = mutableListOf(Proxy.NO_PROXY)
             override fun connectFailed(uri: URI?, sa: java.net.SocketAddress?, ioe: java.io.IOException?) {}
@@ -68,7 +68,7 @@ class OwnProviderProxyTest {
         assertEquals(1, viaProxy.size)
         assertEquals(Proxy.Type.HTTP, viaProxy[0].type())
         assertEquals("127.0.0.1:7890", (viaProxy[0].address() as java.net.InetSocketAddress).let { "${it.hostString}:${it.port}" })
-        assertEquals(listOf(Proxy.NO_PROXY), selector.select(URI("https://nanomuse.cn/v1/hub")))
+        assertEquals(listOf(Proxy.NO_PROXY), selector.select(URI("https://corein.app/v1/hub")))
         assertEquals(listOf(Proxy.NO_PROXY), selector.select(URI("http://192.168.1.20:11434/v1/models")))
         // without a system selector there is still an answer
         assertEquals(listOf(Proxy.NO_PROXY), OwnProviderProxy.Selector(null).select(URI("https://example.com/")))

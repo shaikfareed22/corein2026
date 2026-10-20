@@ -1,7 +1,7 @@
 import XCTest
 @testable import Minis
 
-/// The pure parts of the nanoMuse iPhone layer, pinned so they cannot drift from Android:
+/// The pure parts of the corein iPhone layer, pinned so they cannot drift from Android:
 /// the fences the model writes, the words that change the avatar, the goal and feed blocks,
 /// the scheduler's arithmetic, the region rule, the model menu and the first-run gating.
 /// Android: AvatarFlowTest, GoalFlowTest, FencesTest, FirstRunSetupTest, SharedConnectorsTest.
@@ -673,16 +673,16 @@ final class NanoMuseLogicTests: XCTestCase {
     }
 
     func testUpdateIndexReadsTheReleasesList() {
-        // The index as nanomuse.cn/dl/index.json is written: releases newest first, each with a tag.
+        // The index as corein.app/dl/index.json is written: releases newest first, each with a tag.
         let index: [String: Any] = [
-            "repo": "nano-muse/nanoMuse",
-            "releases": [["tag": "v1.0.0", "name": "nanoMuse 1.0.0", "assets": [String]()], ["tag": "v0.1.41"]],
+            "repo": "corein-app/corein",
+            "releases": [["tag": "v1.0.0", "name": "corein 1.0.0", "assets": [String]()], ["tag": "v0.1.41"]],
         ]
         let found = NanoMuseUpdateCheck.parseIndex(index)
         XCTAssertEqual(found?.version, "v1.0.0", "the newest release's tag, as Android reads it")
         XCTAssertEqual(found?.page, NanoMuseUpdateCheck.downloadPage, "a tap leads to the download page")
         XCTAssertEqual(NanoMuseUpdateCheck.parseIndex(["releases": [["tag": ""], ["tag": "v0.9.0"]]])?.version, "v0.9.0", "an empty tag is skipped")
-        XCTAssertNil(NanoMuseUpdateCheck.parseIndex(["repo": "nano-muse/nanoMuse"]), "no releases, no answer")
+        XCTAssertNil(NanoMuseUpdateCheck.parseIndex(["repo": "corein-app/corein"]), "no releases, no answer")
         XCTAssertNil(NanoMuseUpdateCheck.parseIndex(["releases": [[String: Any]]()]))
         // The older shapes still read.
         XCTAssertEqual(NanoMuseUpdateCheck.parseIndex(["ios": ["version": "1.2.0", "page": "https://example.invalid/r"]]), NanoMuseUpdateCheck.Found(version: "1.2.0", page: "https://example.invalid/r"))

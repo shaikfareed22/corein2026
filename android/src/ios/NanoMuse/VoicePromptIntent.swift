@@ -1,6 +1,6 @@
 //
 //  VoicePromptIntent.swift
-//  nanoMuse
+//  corein
 //
 //  The Action Button's way in (#296): a Shortcut that opens the app and starts voice input,
 //  so a prompt can be spoken instead of typed. Bound once in Shortcuts, it sits on the Action
@@ -25,11 +25,11 @@ import Foundation
 
 private let logger = AppLogger(category: "VoicePromptIntent")
 
-/// Opens nanoMuse and starts voice input in a chat.
+/// Opens corein and starts voice input in a chat.
 struct VoicePromptIntent: AppIntent {
     static var title: LocalizedStringResource = "Voice Prompt"
     static var description = IntentDescription(
-        "Opens nanoMuse and starts listening. What you say lands in the composer; you send it with a tap."
+        "Opens corein and starts listening. What you say lands in the composer; you send it with a tap."
     )
 
     /// Listening needs the panel on screen (see the file header).
@@ -42,7 +42,7 @@ struct VoicePromptIntent: AppIntent {
     var session: SessionEntity?
 
     static var parameterSummary: some ParameterSummary {
-        Summary("Voice prompt to nanoMuse") {
+        Summary("Voice prompt to corein") {
             \.$session
         }
     }
@@ -52,7 +52,7 @@ struct VoicePromptIntent: AppIntent {
         let target = session?.id
         NanoMuseVoicePrompt.shared.request(session: target)
         if let sid = target, !sid.isEmpty {
-            // The route a notification tap and "Ask nanoMuse" already take: the buffer for a
+            // The route a notification tap and "Ask corein" already take: the buffer for a
             // cold launch, the event for an app that is running (ContentView and the Muse shell
             // both listen). The chat that comes up then finds the request addressed to it.
             NotificationNavigationStore.shared.setPending(sid)

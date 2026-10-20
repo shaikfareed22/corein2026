@@ -169,7 +169,7 @@ class Settings:
     trial_daily_tokens: int  # what all trials together may spend in a day
     trial_rpm: int  # requests per minute per trial
 
-    # nanoMuse Web: a kept Muse per Cloud account (accounts.py)
+    # corein Web: a kept Muse per Cloud account (accounts.py)
     web_enabled: bool
     web_relay_url: str  # the relay as the gateway calls it for sign-in
     web_relay_internal_url: str  # the relay as the containers reach it (same Docker network)
@@ -186,7 +186,7 @@ class Settings:
     web_cpus: str
     web_device_name: str
     web_slug_salt: str
-    # the visitors: a nanoMuse Cloud sign-in before a demo Muse, so the showcase knows who
+    # the visitors: a corein Cloud sign-in before a demo Muse, so the showcase knows who
     # is trying it; the sign-in goes to the relay at web_relay_url
     demo_signin_required: bool
     per_account_active: int
@@ -281,7 +281,7 @@ class Settings:
             trial_daily_tokens=_int("TRIAL_DAILY_TOKENS", 20_000_000),
             trial_rpm=_int("TRIAL_RPM", 30),
             web_enabled=_bool("WEB_ENABLED", False),
-            web_relay_url=_str("WEB_RELAY_URL", "https://cloud.nanomuse.cn").rstrip("/"),
+            web_relay_url=_str("WEB_RELAY_URL", "https://cloud.corein.app").rstrip("/"),
             web_relay_internal_url=_str(
                 "WEB_RELAY_INTERNAL_URL", "http://nanomuse-relay:8787"
             ).rstrip("/"),

@@ -1,6 +1,6 @@
 # Mac 侧协作任务 — iOS：聊天输入框显示不出来（0.1.39 → 0.1.40）
 
-> **状态（2026-10-06 下午）**：Mac 坏了，这一轮由 L 在 Linux 上做完——[PR #102](https://github.com/nano-muse/nanoMuse/pull/102)
+> **状态（2026-10-06 下午）**：Mac 坏了，这一轮由 L 在 Linux 上做完——[PR #102](https://github.com/corein-app/corein/pull/102)
 > 把输入栏改成消息列表下面的一行（不再是 overlay，也没有第二个宿主），并加了「设置 → 外观 → 输入框检查」，
 > 让设备自己给出第 4.2 节要的视图层级（红框 + 可复制的报告）。TestFlight build 11 从该分支构建，在
 > iPad 上验收。下面的内容留作 Mac 恢复后的参考；第 7.1 节（Mac dmg 的权限助手）仍只能在 Mac 上做。
@@ -18,7 +18,7 @@ Linux 上的代理（**L**）负责其余一切并统一发布；你负责 **只
 
 ## 0. 项目、现状、分工
 
-**nanoMuse** 是一个开源（GPL-3.0-or-later）的个人 agent：手机 app（Android 和 iOS，基于上游
+**corein** 是一个开源（GPL-3.0-or-later）的个人 agent：手机 app（Android 和 iOS，基于上游
 OpenMinis 子树 `android/`）、桌面 app（`harness/dsh-nanomuse/` 是 DeepSeek Harness 插件，
 `harness/desktop/` 是 Electron 壳，壳里带 Python 运行时给「手」用）、Python 运行时 `nanomuse/`、
 Web 控制台 `web/`、中继 `cloud/`（登录、模型、hub、会话同步）。先读 [AGENTS.md](../../AGENTS.md)
@@ -47,7 +47,7 @@ Web 控制台 `web/`、中继 `cloud/`（登录、模型、hub、会话同步）
 **仓库约定里和你最相关的几条**（全文在 AGENTS.md）：
 
 - `android/` 是上游子树，要保持可拉取：新代码放新文件（`android/src/ios/NanoMuse/*.swift`），
-  改上游文件时每处带一行 `// nanoMuse:` 注释，一处一改；不改 Xcode 工程结构、不改沙盒路径；
+  改上游文件时每处带一行 `// corein:` 注释，一处一改；不改 Xcode 工程结构、不改沙盒路径；
   品牌替换只走 `scripts/rebrand.py`（跑完必须输出 `clean`）。
 - 用户可见的字符串先英文、再简体中文、再 `Localizable.xcstrings` 已有的全部 locale；语气平实，
   无感叹号、无营销词；不照抄 Meta 的界面文案。
@@ -57,7 +57,7 @@ Web 控制台 `web/`、中继 `cloud/`（登录、模型、hub、会话同步）
 - 提交用 Conventional Commits（`fix(ios): …`）并带 DCO 签名（`git commit -s`，用这台 Mac 上的 git
   身份）；分支名以 `mac/` 开头；PR 到 `main`；不 force-push。
 - 永远没有秘密：API key、手机号、邮箱、token、证书、`.p8`、`config/config.toml`、`cloud/.env` 不进
-  提交、不进 PR 描述、不贴进聊天；日志贴出来之前打码。不在 `cloud.nanomuse.cn` 上注册测试账号——
+  提交、不进 PR 描述、不贴进聊天；日志贴出来之前打码。不在 `cloud.corein.app` 上注册测试账号——
   测试用维护者自己的账号（验证码由维护者输入）。
 
 ## 1. 环境（这台 Mac）
@@ -69,9 +69,9 @@ iPadOS 26.7.1**，上面装着 TestFlight build 10。是否有 iPhone，问维�
 
 ```bash
 # 1) 找到或建立 clone（上一个会话大概率已经 clone 过；路径不详）
-mdfind "kMDItemFSName == 'nanoMuse'" -onlyin ~ 2>/dev/null | head; ls -d ~/nanoMuse ~/code/nanoMuse ~/src/nanoMuse 2>/dev/null
+mdfind "kMDItemFSName == 'corein'" -onlyin ~ 2>/dev/null | head; ls -d ~/corein ~/code/corein ~/src/corein 2>/dev/null
 # 有：cd <clone> && git fetch origin && git checkout main && git pull --ff-only && git submodule update --init
-# 没有：git clone --recurse-submodules https://github.com/nano-muse/nanoMuse.git && cd nanoMuse
+# 没有：git clone --recurse-submodules https://github.com/corein-app/corein.git && cd corein
 git log --oneline -1          # 应是 9740986d 或更新
 
 # 2) 腾磁盘：原生依赖 + 一次 Debug 构建要十几 GB
@@ -126,7 +126,7 @@ L 在 Linux 上把壳和胶囊的代码从头读了一遍，没找到能让胶�
 
 ## 3. 代码在哪
 
-- 聊天界面 `Views/Chat/AIChatView.swift`（上游文件，6500 行，我们的改动都带 `// nanoMuse:`）：
+- 聊天界面 `Views/Chat/AIChatView.swift`（上游文件，6500 行，我们的改动都带 `// corein:`）：
   - `body`（~498 行）：`ZStack { messagesArea.safeAreaInset(edge: .top){…}.modifier(NanoMuseComposerHost(failSafe:stack:)) …; kernelBootOverlay }`。
   - `nmComposerStack` / `nmComposerTree`（~3499 行）：`ZStack(alignment: .bottom) { VStack { NanoMuseChatCardsHost; floatingToolPreview; inputBar }.background(NanoMuseComposerProbe).id(rebuildTick); inputPopupOverlay }`。
   - `inputBar`（~3778 行）：`nmPill` 为真时走 `nmPillRows` → `NanoMuseComposerPill { nmPillField }`；外面 `ComposerSurface(pill:)` 是灰色胶囊；`.onGeometryChange` 给 `inputBarHeight`（消息列表的底部内边距）和 `nmComposer.geometry(height:)`。
@@ -139,7 +139,7 @@ L 在 Linux 上把壳和胶囊的代码从头读了一遍，没找到能让胶�
   `NanoMuseChatCards.swift`（起名卡片等虚拟卡片，在输入条上方同一个栈里）、`NanoMuseFirstRun.swift`。
 - 壳 `NanoMuse/NanoMuseShell.swift`：`NanoMuseHomeView`（~333 行）= `ZStack { chatLayer … }.safeAreaInset(edge: .bottom) { NanoMuseBottomBar }`（底栏 56 pt，`.background(.bar)`；键盘弹出或语音面板打开时底栏隐藏，`NanoMuseKeyboardWatcher`）；`chatLayer`（~541 行）= `NavigationStack { AIChatView(...).id(id) }.safeAreaInset(edge: .top) { Muse 头部 }.toolbar(.hidden, for: .navigationBar)`。旁聊由 `navigationDestination` push 出来、带系统导航栏。
 - 开关：设置 → 外观 → **Muse home**（`NanoMuseAppearance.swift`，`@AppStorage("nanomuse.shell.enabled")`）。壳和胶囊由**同一个开关**决定。
-- 日志：我们的 `Logger(subsystem: "io.github.nanomuse.app", category: "nm.composer")`；上游的 `AppLogger(category: "InputBarLayout")` 同一个 subsystem。
+- 日志：我们的 `Logger(subsystem: "com.corein.app", category: "nm.composer")`；上游的 `AppLogger(category: "InputBarLayout")` 同一个 subsystem。
 - 文档：[docs/ios.md](../ios.md) *The composer (0.1.38)* 一段写的是 0.1.38 的假设，修完改成真相。
   `MinisTests/NanoMuseRound6Tests.swift` 守着 `AIChatView.body` 的类型深度和大小上限——**不要再往
   `AIChatView.body` 上加链接**，新行为进 `NanoMuseChatHooks` / `NanoMuseComposerHost` 或第三个 modifier。
@@ -151,7 +151,7 @@ L 在 Linux 上把壳和胶囊的代码从头读了一遍，没找到能让胶�
 iPad USB 连 Mac，**用它上面已经装着的 TestFlight build 10**：
 
 1. **Console.app** 选这台 iPad，Action 菜单勾上 *Include Info Messages* 和 *Include Debug Messages*，
-   过滤 `subsystem:io.github.nanomuse.app`；或者终端 `idevicesyslog | grep -E "nm\.composer|InputBarLayout|InputBarHealth"`。
+   过滤 `subsystem:com.corein.app`；或者终端 `idevicesyslog | grep -E "nm\.composer|InputBarLayout|InputBarHealth"`。
    然后在 iPad 上：杀掉 app → 打开 → 进主聊天 → 等 5 秒 → 切到 Feed 再切回 → 切后台再回来。要看的行：
    - `composer fail-safe: no composer one second after …（attached= hostH= frameH=）`、
      `composer fail-safe: still no composer …`、`composer self-heal: rebuilding …`——**fail-safe 触发了**
@@ -206,7 +206,7 @@ Xcode 的 View Debugger 够用就不必折腾它。
 
 证据到手再动手。几条硬约束：
 
-- 新代码放 `NanoMuse/*.swift`；上游文件里每处改动一行 `// nanoMuse:`，一处一改；不加链接到
+- 新代码放 `NanoMuse/*.swift`；上游文件里每处改动一行 `// corein:`，一处一改；不加链接到
   `AIChatView.body`（`NanoMuseRound6Tests` 会挡）。
 - 以**用户看得见**为准，不以探针为准：如果结论是 a 或 b，`NanoMuseComposerWatch` 的 fail-safe 根本
   不会触发，别指望它；被证明打偏的看门狗代码可以删，连 `docs/ios.md` 一起改成真相，不要留一段写错的
@@ -231,21 +231,21 @@ cd android/src/ios
 xcodebuild build -project Minis.xcodeproj -scheme Minis -configuration Debug \
   -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO     # NanoMuse/ 下零 warning
 cd ../../.. && .venv/bin/python scripts/rebrand.py                  # 没有 .venv 就 uv venv && uv pip install -e ".[dev]"
-gh workflow run "iOS · build check" --repo nano-muse/nanoMuse --ref mac/ios-composer-0140
+gh workflow run "iOS · build check" --repo corein-app/corein --ref mac/ios-composer-0140
 ```
 
 ## 7. 顺手的两项验收（证据收集完、等构建的时候做；只报告，发现问题另开 `mac/*` 分支）
 
 1. **Mac 桌面端 0.1.39 的权限助手**（#95 的真机验收，当时只在源码构建上验过）：下载
-   `https://github.com/nano-muse/nanoMuse/releases/download/v0.1.39/nanoMuse-Desktop-0.1.39-mac-arm64.dmg`，
-   拖进「应用程序」，先 `tccutil reset ScreenCapture io.github.nanomuse.desktop.computer-use` 和
-   `tccutil reset Accessibility io.github.nanomuse.desktop.computer-use`，打开 app（Gatekeeper 说无法验证
+   `https://github.com/corein-app/corein/releases/download/v0.1.39/corein-Desktop-0.1.39-mac-arm64.dmg`，
+   拖进「应用程序」，先 `tccutil reset ScreenCapture com.corein.desktop.computer-use` 和
+   `tccutil reset Accessibility com.corein.desktop.computer-use`，打开 app（Gatekeeper 说无法验证
    → 系统设置 → 隐私与安全性 → 仍要打开），Settings → Computer use 按它的指引走：两个面板里出现的是不是
-   **nanoMuse Computer Use** 那一行、授权后测试截图是不是真实屏幕、`~/.nanomuse/desktop/desktop.log` 里
+   **corein Computer Use** 那一行、授权后测试截图是不是真实屏幕、`~/.nanomuse/desktop/desktop.log` 里
    `helper:` 行有没有 `clearQuarantine`/translocation 的报错、退出再打开授权还在不在、一个真实任务
    （「打开计算器，算 12×34」）跑不跑得通。数据目录 `~/.nanomuse/desktop` 是维护者正在用的：想从头来，
    先 `mv ~/.nanomuse/desktop ~/.nanomuse/desktop.bak`（告诉维护者，完了可以 mv 回去），然后用 Finder 或
-   `open -a nanoMuse` 启动——不要从终端直接跑 `Contents/MacOS/nanoMuse`，那样权限会记在 Terminal 名下，
+   `open -a corein` 启动——不要从终端直接跑 `Contents/MacOS/corein`，那样权限会记在 Terminal 名下，
    测的就不是用户看到的流程了。
 2. **iPad 上 build 10 的账号隔离**（#97）：A 登录 → 聊两句 → 退出 → B 登录：列表里没有 A 的会话；
    切回 A，A 的回来。需要维护者的两个账号和验证码；没有第二个账号就跳过并注明。
@@ -268,9 +268,9 @@ L 这边同时在做：拿到你的 PR 后合并、发 0.1.40、TestFlight build
 | 原生依赖 | `android/deps/{build_lame,build_ffmpeg,build_ish,prepare_alpine_rootfs,build_rclone_ios}.sh`（[docs/ios.md](../ios.md)、[android/BUILDING.md](../../android/BUILDING.md)） |
 | 输入框 | `NanoMuse/NanoMuseComposer*.swift`、`NanoMuse/NanoMuseChatModifiers.swift`、`Views/Chat/AIChatView.swift`（`inputBar`、`nmComposerTree`、`nmPill*`） |
 | 壳 | `NanoMuse/NanoMuseShell.swift`（`NanoMuseHomeView`、`chatLayer`、`NanoMuseBottomBar`） |
-| 日志 | Console.app，`subsystem:io.github.nanomuse.app`（`nm.composer`、`InputBarLayout`）；`idevicesyslog` |
+| 日志 | Console.app，`subsystem:com.corein.app`（`nm.composer`、`InputBarLayout`）；`idevicesyslog` |
 | 调试服务（DEBUG） | `Debug/DebugServer.swift`，端口 8321，`iproxy 8321 8321` |
-| 上游改动标记 | `// nanoMuse:`；品牌替换 `python scripts/rebrand.py`（必须输出 `clean`） |
+| 上游改动标记 | `// corein:`；品牌替换 `python scripts/rebrand.py`（必须输出 `clean`） |
 | Mac 桌面端 | `harness/desktop/mac/computer-use/`、`harness/desktop/src/{mac-helper,mac-permissions}.ts`；数据目录 `~/.nanomuse/desktop`（`desktop.log`） |
-| 已发布的安装包 | `https://github.com/nano-muse/nanoMuse/releases/tag/v0.1.39`；TestFlight build 10 = 0.1.39 |
+| 已发布的安装包 | `https://github.com/corein-app/corein/releases/tag/v0.1.39`；TestFlight build 10 = 0.1.39 |
 | 上一轮的任务单（背景） | [mac-work-0.1.39.md](mac-work-0.1.39.md)、[mac-check-0.1.37.md](mac-check-0.1.37.md) |

@@ -1,4 +1,4 @@
-/** Ids of the global panels nanoMuse adds to the harness's `main` seat. */
+/** Ids of the global panels corein adds to the harness's `main` seat. */
 
 /** The rooms of the Muse desktop, in the rail's order. */
 export const FEED_PANEL = 'nanomuse-feed'
@@ -11,7 +11,7 @@ export const DEVICES_PANEL = 'nanomuse-devices'
 
 export const ROOM_PANELS = [FEED_PANEL, IDEAS_PANEL, GOALS_PANEL, LIBRARY_PANEL, DEVICES_PANEL] as const
 
-/** Where a problem with nanoMuse is reported. */
-export const REPO_URL = 'https://github.com/nano-muse/nanoMuse'
-export const ISSUES_URL = 'https://github.com/nano-muse/nanoMuse/issues'
-export const DOCS_URL = 'https://nanomuse.cn/docs/desktop'
+/** Where a problem with corein is reported. */
+export const REPO_URL = 'https://github.com/corein-app/corein'
+export const ISSUES_URL = 'https://github.com/corein-app/corein/issues'
+export const DOCS_URL = 'https://corein.app/docs/desktop'

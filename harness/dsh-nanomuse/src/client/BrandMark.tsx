@@ -1,6 +1,6 @@
 /**
  * The app's own mark (docs/brand.md): the N stroke on its white squircle tile with a hairline
- * edge, drawn inline from `assets/brand/nanomuse-icon.svg` so the bundle fetches nothing. It
+ * edge, drawn inline from `assets/brand/corein-icon.svg` so the bundle fetches nothing. It
  * stands for the app where the app speaks for itself — the sign-in pages, the permissions
  * page — never for the Muse: the face is the Muse, the mark is the app, and the mark never
  * goes in the chat. The tile stays white in the dark theme too (the brand's rule).
@@ -19,7 +19,7 @@ export function BrandMark({ size = 72, className }: { size?: number; className?:
     viewBox: '0 0 100 100',
     className: `nm-brand-mark${className ? ` ${className}` : ''}`,
     role: 'img',
-    'aria-label': 'nanoMuse',
+    'aria-label': 'corein',
     focusable: false,
   },
     h('defs', null,

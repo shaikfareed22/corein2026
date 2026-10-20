@@ -20,11 +20,11 @@ import { openStar } from './AccountPage.tsx'
 import { DOCS_URL, ISSUES_URL, REPO_URL } from './panels.ts'
 import { setPrefs, usePrefs } from './prefs.ts'
 
-const SITE_URL = 'https://nanomuse.cn/'
-const DISCUSS_URL = 'https://github.com/nano-muse/nanoMuse/discussions'
+const SITE_URL = 'https://corein.app/'
+const DISCUSS_URL = 'https://github.com/corein-app/corein/discussions'
 /** The privacy policy as every client links it (the relay, the web console and the phones agree). */
-const PRIVACY_URL = 'https://nanomuse.cn/privacy/'
-const LICENSE_URL = 'https://github.com/nano-muse/nanoMuse/blob/main/LICENSE'
+const PRIVACY_URL = 'https://corein.app/privacy/'
+const LICENSE_URL = 'https://github.com/corein-app/corein/blob/main/LICENSE'
 
 function Switch({ checked, onChange, label, disabled }: { checked: boolean; onChange(next: boolean): void; label: string; disabled?: boolean }): ReactNode {
   return h('button', { type: 'button', role: 'switch', className: 'nm-switch', 'aria-checked': checked, 'aria-label': label, disabled, onClick: () => onChange(!checked) })
@@ -118,7 +118,7 @@ export function makeHelpSection(t: Translate, version: string) {
         // going to GitHub from here counts as the star being done: the asks stop (C1)
         h(LinkRow, { icon: h(IconHeart, { size: 18 }), title: t('helpStar'), sub: t('helpStarSub'), onClick: () => openStar(REPO_URL) }),
         h(LinkRow, { icon: h(IconFile, { size: 18 }), title: t('helpDocs'), onClick: () => openLink(DOCS_URL) }),
-        h(LinkRow, { icon: h(IconLink, { size: 18 }), title: t('helpSite'), sub: 'nanomuse.cn', onClick: () => openLink(SITE_URL) }),
+        h(LinkRow, { icon: h(IconLink, { size: 18 }), title: t('helpSite'), sub: 'corein.app', onClick: () => openLink(SITE_URL) }),
         h(LinkRow, { icon: h(IconLink, { size: 18 }), title: t('helpDiscuss'), onClick: () => openLink(DISCUSS_URL) }),
         h(LinkRow, { icon: h(IconBug, { size: 18 }), title: t('helpIssue'), onClick: () => openLink(ISSUES_URL) })),
       h('div', { className: 'nm-card' },
@@ -263,7 +263,7 @@ export function AppBehaviorRows({ t }: { t: Translate }): ReactNode {
 // ---- Wallet, Secure storage, Channels: Muse's pages, with what is true here ----------
 
 /**
- * Wallet. Muse keeps payment methods here; nanoMuse pays for nothing on the person's
+ * Wallet. Muse keeps payment methods here; corein pays for nothing on the person's
  * behalf, and says so — the page explains what happens when something costs money, and
  * points at the usage quota that *is* an account balance of sorts.
  */
@@ -292,7 +292,7 @@ export function makeWalletSection(t: Translate, openSection: (id: string) => voi
 interface Folders { home: string; library: string; downloads: string; state: string }
 
 /**
- * Secure storage: what nanoMuse keeps that is secret or personal, and where — files on this
+ * Secure storage: what corein keeps that is secret or personal, and where — files on this
  * machine readable by this user alone (mode 0600), nothing in the system keychain. Each row
  * says what it is; the folder opens in the file manager.
  */

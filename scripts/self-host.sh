@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# nanoMuse Cloud — your own relay in one command.
+# corein Cloud — your own relay in one command.
 #
 #   bash scripts/self-host.sh           # a server with a domain: Caddy fetches the certificate
 #   bash scripts/self-host.sh --local   # this machine only: http://127.0.0.1:8787, codes in the log
@@ -15,7 +15,7 @@
 #   --no-start         write cloud/.env only
 #
 # Needs: docker with the compose plugin (or docker-compose), curl. docs/self-hosting.md
-# explains the three ways to run nanoMuse yourself; this script is the second.
+# explains the three ways to run corein yourself; this script is the second.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -147,7 +147,7 @@ if [ "$SENDER" = smtp ] || [ "$SENDER" = both ]; then
   ask V "     SMTP user" "$(get SMTP_USER)"; set_kv SMTP_USER "$V"
   ask_secret V "     SMTP password" "$([ -n "$(get SMTP_PASSWORD)" ] && echo 1 || echo 0)"
   [ -n "$V" ] && set_kv SMTP_PASSWORD "$V"
-  ask V "     From (e.g. nanoMuse <no-reply@$DOMAIN>)" "$(get SMTP_FROM)"; set_kv SMTP_FROM "$V"
+  ask V "     From (e.g. corein <no-reply@$DOMAIN>)" "$(get SMTP_FROM)"; set_kv SMTP_FROM "$V"
 fi
 if [ "$SENDER" = aliyun ] || [ "$SENDER" = both ]; then
   ask V "     Aliyun AccessKey id" "$(get ALIYUN_ACCESS_KEY_ID)"; set_kv ALIYUN_ACCESS_KEY_ID "$V"
@@ -186,7 +186,7 @@ fi
 # rotated by this script (rotating it would orphan every account).
 [ -z "$(get CLOUD_SECRET)" ] && set_kv CLOUD_SECRET "$(random_hex)"
 # A private relay for a few people: say so in INVITE_URL so invitations point here.
-[ "$(get INVITE_URL)" = "https://nanomuse.cn/web/?invite=" ] && set_kv INVITE_URL "$BASE/app/?invite="
+[ "$(get INVITE_URL)" = "https://corein.app/web/?invite=" ] && set_kv INVITE_URL "$BASE/app/?invite="
 
 say
 say "Wrote $ENV_FILE (mode 600). Back it up together with cloud/data/; see docs/self-hosting.md."
@@ -225,7 +225,7 @@ if [ "$ok" = 0 ]; then
 fi
 
 say
-say "nanoMuse Cloud is up."
+say "corein Cloud is up."
 say
 say "  Console   $BASE/app/           sign in here; the web console lives on the relay"
 say "  Admin     $BASE/app/admin/     accounts, allowance, usage"

@@ -13,7 +13,7 @@ the frames.
 ## In the apps
 
 - **Phone**: the drawer's *Coding* row (or *Settings → Coding agents*, or the
-  `nanomuse://coding` link). Pick a computer, an agent, a session; read the
+  `corein://coding` link). Pick a computer, an agent, a session; read the
   transcript; type a message and watch the run (the text as it streams, the
   tools as they are called) and stop it if it goes wrong.
 - **Web**: the *Coding* screen. This computer's agents at the top, the
@@ -56,8 +56,8 @@ resumable turns out unknown to the CLI.
 
 dsh is [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness): the
 chats of `dsh web` and of DeepSeek's own desktop app, kept under `~/.dsh`. The
-runtime and the nanoMuse desktop app both read and drive them; the runtime reads
-the store with `zstandard`, one of its dependencies. nanoMuse's own desktop chats
+runtime and the corein desktop app both read and drive them; the runtime reads
+the store with `zstandard`, one of its dependencies. corein's own desktop chats
 are kept in its own home and are not among them.
 
 dsh's store needs two things said: it is **zstd**, and it is **many zstd frames**
@@ -108,7 +108,7 @@ with *Remote control* off, a device that is not yet trusted raises a card on the
 screen, and the answer (once, always, no, or none in time) decides; the
 read-only actions are answered without asking.
 
-The agents' own API keys and sign-ins are theirs; nanoMuse never sees them. The
+The agents' own API keys and sign-ins are theirs; corein never sees them. The
 transcripts are read from disk and shown to you; they are not sent anywhere but
 to the device that asked.
 

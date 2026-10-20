@@ -11,7 +11,7 @@ import android.net.Uri
  * and with the model (`minis://attachments/x.png`, `minis://settings/soul`, the system prompt,
  * every saved conversation), and it stays. What the app registers with Android is `nanomuse`
  * (`AndroidManifest.xml`), so a phone that also has OpenMinis installed never sees a chooser
- * for the other app's links, and ours never land there. A `nanomuse://…` link coming in from
+ * for the other app's links, and ours never land there. A `corein://…` link coming in from
  * outside means the same as its `minis://…` form; a link the app opens on itself goes to its own
  * activity by name, never through the system's resolution of a scheme.
  */
@@ -31,10 +31,10 @@ object OwnScheme {
         return s == INTERNAL || s == SYSTEM
     }
 
-    /** `nanomuse://x` read as `minis://x`; any other scheme is left as written. */
+    /** `corein://x` read as `minis://x`; any other scheme is left as written. */
     fun internal(scheme: String?): String? = if (scheme?.lowercase() == SYSTEM) INTERNAL else scheme
 
-    /** The `minis://…` form of [url] when it is a `nanomuse://…` link; otherwise [url] itself. */
+    /** The `minis://…` form of [url] when it is a `corein://…` link; otherwise [url] itself. */
     fun internalUrl(url: String): String {
         val prefix = "$SYSTEM://"
         return if (url.regionMatches(0, prefix, 0, prefix.length, ignoreCase = true)) {

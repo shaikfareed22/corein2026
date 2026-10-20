@@ -61,12 +61,12 @@ def test_an_exhausted_allowance_carries_the_ways_on():
         "message": "Your free allowance (¥10) is used up. …",
         "left": 0,
         "grant": 10,
-        "invite_url": "https://nanomuse.cn/web/?invite=ABCD2345",
+        "invite_url": "https://corein.app/web/?invite=ABCD2345",
         "invite_bonus_cny": 5,
         "invitee_bonus_cny": 5,
         "contribute_bonus_available": False,
         "contribute_bonus_cny": 0,
-        "own_key_docs": "https://nanomuse.cn/own-key",
+        "own_key_docs": "https://corein.app/own-key",
         "type": "nanomuse_cloud",
     }
     exc = _status_error(openai.RateLimitError, 429, body)
@@ -81,12 +81,12 @@ def test_an_exhausted_allowance_carries_the_ways_on():
     assert notice["code"] == "allowance" and notice["allowance"] == {
         "left": 0,
         "grant": 10,
-        "invite_url": "https://nanomuse.cn/web/?invite=ABCD2345",
+        "invite_url": "https://corein.app/web/?invite=ABCD2345",
         "invite_bonus_cny": 5,
         "invitee_bonus_cny": 5,
         "contribute_bonus_available": False,
         "contribute_bonus_cny": 0,
-        "own_key_docs": "https://nanomuse.cn/own-key",
+        "own_key_docs": "https://corein.app/own-key",
     }
     # any other failure carries no such block
     other = _status_error(openai.RateLimitError, 429, {"code": "rate_limited", "message": "slow"})
@@ -153,7 +153,7 @@ def test_the_operators_switches_say_paused_not_broken():
         "reason": "allowance_paused",
         "left": 7,
         "grant": 10,
-        "invite_url": "https://nanomuse.cn/web/?invite=ABCD2345",
+        "invite_url": "https://corein.app/web/?invite=ABCD2345",
         "invite_bonus_cny": 5,
     }
     exc = _status_error(openai.RateLimitError, 429, body)
@@ -275,7 +275,7 @@ def test_update_check_caches_and_survives_failures(monkeypatch):
         calls += 1
         self.checked_at = time.monotonic()
         self.latest = "0.1.21"
-        self.url = "https://github.com/nano-muse/nanoMuse/releases/tag/v0.1.21"
+        self.url = "https://github.com/corein-app/corein/releases/tag/v0.1.21"
         self.error = None
 
     monkeypatch.setattr(update.UpdateCheck, "_check", fake_check)

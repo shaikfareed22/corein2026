@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONArray
 
 /**
- * The three models nanoMuse runs on. Muse ships with all of them built in; here each is one of
+ * The three models corein runs on. Muse ships with all of them built in; here each is one of
  * the user's own providers, chosen in Settings → Image & video models:
  *
  *  - the **chat model** — OpenMinis' default model group, unchanged;
@@ -50,7 +50,7 @@ object MediaModels {
 
     /**
      * Providers whose host speaks Model Studio's asynchronous video API: Model Studio itself, and
-     * nanoMuse Cloud, which relays those same paths (the account's own key is used).
+     * corein Cloud, which relays those same paths (the account's own key is used).
      */
     fun eligibleVideoInstances(context: Context): List<ProviderInstance> {
         val app = context.applicationContext as? MinisApp ?: return emptyList()
@@ -74,7 +74,7 @@ object MediaModels {
     /** True when the person switched the video model off (a choice, unlike "never chosen"). */
     fun videoSwitchedOff(context: Context): Boolean = prefs(context).getString(KEY_VIDEO_INSTANCE, null) == VIDEO_OFF
 
-    /** The video model nanoMuse would pick for [inst]: the catalogue's `defaults.video` for its vendor, else Wan 2.2 Flash. */
+    /** The video model corein would pick for [inst]: the catalogue's `defaults.video` for its vendor, else Wan 2.2 Flash. */
     fun defaultVideoModel(context: Context, inst: ProviderInstance): String =
         io.github.nanomuse.models.ModelSlots.defaultOf(context, inst, io.github.nanomuse.models.ModelSlots.Slot.VIDEO) ?: DEFAULT_VIDEO_MODEL
 
@@ -82,7 +82,7 @@ object MediaModels {
      * The video model, or null when there is none. The one chosen (Settings → Models, or →
      * Image & video models); with nothing chosen, in the Models page's order (0.1.41,
      * [io.github.nanomuse.models.SlotOrder]): the chat provider's own video model when the
-     * chat provider is the person's own and makes clips, else nanoMuse Cloud's when signed
+     * chat provider is the person's own and makes clips, else corein Cloud's when signed
      * in, else the first own provider that can. Off stays off. [automatic] leaves the choice
      * (and Off) aside and answers what that order gives now, for the picker's *Automatic* row.
      */
@@ -196,7 +196,7 @@ object MediaModels {
         val image = imageEndpoint(context)
         val video = videoEndpoint(context)
         return buildString {
-            append("Media models. Unlike Muse, whose image and video models are built in, nanoMuse runs on three models the user configures: ")
+            append("Media models. Unlike Muse, whose image and video models are built in, corein runs on three models the user configures: ")
             append("the chat model (you), an image model (avatar changes, pictures the user asks for) and a video model (the animated avatar, short clips). ")
             append("Image model: ").append(image?.let { "${it.model} via ${it.label}" } ?: "NOT SET").append(". ")
             append("Video model: ").append(video?.let { "${it.model} via ${it.label}" } ?: "NOT SET").append(".\n")
@@ -221,6 +221,6 @@ object MediaModels {
         "The user just asked you to change your avatar, but no image model is configured, so the app could not start the change. " +
             "Answer in the user's language: say that changing your look needs a provider with image models " +
             "(Alibaba Cloud Bailian, OpenAI with an API key, Gemini or OpenRouter — not a ChatGPT plan signed in through Codex, nor DeepSeek, Claude, Kimi or Groq), " +
-            "that nanoMuse ships no image model of its own, so this is something they set up themselves, and give the link [Image & video models]($DEEP_LINK) to open the setting. " +
+            "that corein ships no image model of its own, so this is something they set up themselves, and give the link [Image & video models]($DEEP_LINK) to open the setting. " +
             "Keep it to a few sentences and do not describe or invent a new look."
 }

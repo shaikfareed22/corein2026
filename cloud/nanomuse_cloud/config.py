@@ -563,7 +563,7 @@ class Settings:
     # refuses single-line scripted probes while settling normal chat turns.
     invite_settle_min_spent_uy: int = field(default_factory=lambda: _int("INVITE_SETTLE_MIN_SPENT_UY", 200))
     day_offset_h: int = field(default_factory=lambda: _int("DAY_OFFSET_H", 8))
-    # Data controls (0.9): "Help improve nanoMuse's AI models" keeps the text of an
+    # Data controls (0.9): "Help improve corein's AI models" keeps the text of an
     # account's chat turns — what the person wrote and what the model answered, the
     # model's tool calls, never the system prompt, a tool's result or a picture — for
     # the community's own model. IMPROVE_DEFAULT is what an account *created from now
@@ -575,18 +575,18 @@ class Settings:
     # INVITE_URL is the link the apps offer to share; the code is appended.
     # OWN_KEY_DOCS is the guide the apps open when the allowance is used up and
     # the person wants to bring their own model key.
-    invite_url: str = field(default_factory=lambda: _env("INVITE_URL", "https://nanomuse.cn/web/?invite="))
-    own_key_docs: str = field(default_factory=lambda: _env("OWN_KEY_DOCS", "https://nanomuse.cn/own-key"))
+    invite_url: str = field(default_factory=lambda: _env("INVITE_URL", "https://corein.app/web/?invite="))
+    own_key_docs: str = field(default_factory=lambda: _env("OWN_KEY_DOCS", "https://corein.app/own-key"))
     # OPENROUTER_URL is where someone outside mainland China gets a key (0.17): Alibaba
     # Cloud Bailian only signs up accounts from the mainland, so the "ways on" the relay
     # sends put OpenRouter first for everyone else (service.region).
     openrouter_url: str = field(default_factory=lambda: _env("OPENROUTER_URL", "https://openrouter.ai/keys"))
     # PRIVACY_URL is the policy the apps link from Data controls and the sign-in
     # pages — the one that states what this relay keeps and its default above.
-    privacy_url: str = field(default_factory=lambda: _env("PRIVACY_URL", "https://nanomuse.cn/privacy/"))
+    privacy_url: str = field(default_factory=lambda: _env("PRIVACY_URL", "https://corein.app/privacy/"))
     # REPO_URL is the project's repository, which the apps point to when they ask for a
     # star — at the first sign-in, when the allowance is used up, after the first task.
-    repo_url: str = field(default_factory=lambda: _env("REPO_URL", "https://github.com/nano-muse/nanoMuse"))
+    repo_url: str = field(default_factory=lambda: _env("REPO_URL", "https://github.com/corein-app/corein"))
 
     code_ttl_s: int = field(default_factory=lambda: _int("CODE_TTL_S", 600))
     code_per_identifier_10m: int = field(default_factory=lambda: _int("CODE_PER_IDENTIFIER_10M", 3))
@@ -665,10 +665,10 @@ class Settings:
     # the site's traffic database (demo/showcase/mirror/traffic.py), mounted read-only into
     # the container; empty = the "visits and downloads" panel says so and shows nothing
     traffic_db: str = field(default_factory=lambda: _env("TRAFFIC_DB"))
-    # nanoMuse Web's gateway on the same docker network (http://gateway:8000/api/web/info):
+    # corein Web's gateway on the same docker network (http://gateway:8000/api/web/info):
     # how many kept accounts and running sessions; empty = not asked
     web_info_url: str = field(default_factory=lambda: _env("WEB_INFO_URL"))
-    # the showcase's visitors (demo.nanomuse.dev/api/demo/admin, its SHOWCASE_ADMIN_TOKEN):
+    # the showcase's visitors (demo.corein.app/api/demo/admin, its SHOWCASE_ADMIN_TOKEN):
     # who tried the phone in the browser from where and with what, every demo and what it
     # used — shown on the admin page and in the account drawer; empty = not asked
     web_admin_url: str = field(default_factory=lambda: _env("WEB_ADMIN_URL"))

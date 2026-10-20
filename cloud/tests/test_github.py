@@ -24,12 +24,12 @@ class FakeGitHub:
             {
                 "tag_name": "v0.21.0",
                 "assets": [
-                    {"name": "nanoMuse-0.21.0.apk", "download_count": 400},
-                    {"name": "nanoMuse-0.21.0-arm64.dmg", "download_count": 50},
-                    {"name": "nanoMuse-Setup-0.21.0.exe", "download_count": 30},
+                    {"name": "corein-0.21.0.apk", "download_count": 400},
+                    {"name": "corein-0.21.0-arm64.dmg", "download_count": 50},
+                    {"name": "corein-Setup-0.21.0.exe", "download_count": 30},
                 ],
             },
-            {"tag_name": "v0.20.0", "assets": [{"name": "nanoMuse-0.20.0.apk", "download_count": 1000}]},
+            {"tag_name": "v0.20.0", "assets": [{"name": "corein-0.20.0.apk", "download_count": 1000}]},
         ]
         self.down = False
         self.rate_limited = False
@@ -44,7 +44,7 @@ class FakeGitHub:
             if self.rate_limited:
                 return httpx.Response(403, headers={"x-ratelimit-remaining": "0"}, json={"message": "API rate limit exceeded"})
             path = request.url.path
-            if path == "/repos/nano-muse/nanoMuse":
+            if path == "/repos/corein-app/corein":
                 return httpx.Response(
                     200,
                     json={
@@ -55,7 +55,7 @@ class FakeGitHub:
                         "open_issues_count": self.issues,
                     },
                 )
-            if path == "/repos/nano-muse/nanoMuse/releases":
+            if path == "/repos/corein-app/corein/releases":
                 page = int(request.url.params.get("page", "1"))
                 return httpx.Response(200, json=self.releases if page == 1 else [])
             return httpx.Response(404, json={"message": "Not Found"})
@@ -64,11 +64,11 @@ class FakeGitHub:
 
 
 def test_platform_of_asset():
-    assert platform_of_asset("nanoMuse-0.21.0.apk") == "android"
-    assert platform_of_asset("nanoMuse.ipa") == "ios"
-    assert platform_of_asset("nanoMuse-0.21.0-arm64.dmg") == "mac"
-    assert platform_of_asset("nanoMuse-Setup-0.21.0.exe") == "windows"
-    assert platform_of_asset("nanoMuse-0.21.0.AppImage") == "linux"
+    assert platform_of_asset("corein-0.21.0.apk") == "android"
+    assert platform_of_asset("corein.ipa") == "ios"
+    assert platform_of_asset("corein-0.21.0-arm64.dmg") == "mac"
+    assert platform_of_asset("corein-Setup-0.21.0.exe") == "windows"
+    assert platform_of_asset("corein-0.21.0.AppImage") == "linux"
     assert platform_of_asset("SHA256SUMS.txt") == "other"
 
 
@@ -76,7 +76,7 @@ async def test_snapshots_deltas_and_a_failure_that_keeps_the_last_one():
     gh = FakeGitHub()
     db = Database(":memory:")
     clock = {"t": 1_800_000_000}  # a fixed "now", moved by the test
-    c = GitHubCollector(db, "nano-muse/nanoMuse", token="ghp-test", transport=gh.transport(), clock=lambda: clock["t"])
+    c = GitHubCollector(db, "corein-app/corein", token="ghp-test", transport=gh.transport(), clock=lambda: clock["t"])
     assert c.enabled and c.status()["token"] is True and c.last_ok is None
 
     out = await c.collect()
@@ -92,7 +92,7 @@ async def test_snapshots_deltas_and_a_failure_that_keeps_the_last_one():
     }
     assert rows[("gh.stars", "")] == 120 and rows[("gh.forks", "")] == 7 and rows[("gh.watchers", "")] == 9 and rows[("gh.issues", "")] == 3
     assert rows[("gh.downloads", "total")] == 1480 and rows[("gh.downloads", "android")] == 1400 and rows[("gh.downloads", "mac")] == 50
-    assert rows[("gh.downloads", "asset:nanoMuse-0.21.0.apk")] == 400 and rows[("gh.downloads", "release:v0.20.0")] == 1000
+    assert rows[("gh.downloads", "asset:corein-0.21.0.apk")] == 400 and rows[("gh.downloads", "release:v0.20.0")] == 1000
 
     # a second run the same day overwrites the day's figure (the last run of a day stands)
     gh.stars = 125
@@ -111,7 +111,7 @@ async def test_snapshots_deltas_and_a_failure_that_keeps_the_last_one():
     assert days[day0 + 2 * DAY]["stars"] == 140 and days[day0 + 2 * DAY]["new_stars"] == 15
     assert days[day0 + 2 * DAY]["downloads"] == 1600 and days[day0 + 2 * DAY]["new_downloads"] == 120
     assert s["latest"]["stars"] == 140 and s["latest"]["downloads"] == 1600 and s["latest"]["platforms"]["android"] == 1520
-    assert s["latest"]["assets"][0] == {"name": "nanoMuse-0.20.0.apk", "downloads": 1000, "platform": "android"}
+    assert s["latest"]["assets"][0] == {"name": "corein-0.20.0.apk", "downloads": 1000, "platform": "android"}
     assert [r["tag"] for r in s["latest"]["releases"]] == ["v0.20.0", "v0.21.0"]
     # the first shown day compares to the snapshot before the window
     s = c.series(1)
@@ -129,7 +129,7 @@ async def test_snapshots_deltas_and_a_failure_that_keeps_the_last_one():
     out = await c.collect()
     assert out["ok"] is False and "GITHUB_TOKEN" in out["error"]
     # the last run's state survives a new collector over the same database (a restart)
-    again = GitHubCollector(db, "nano-muse/nanoMuse", transport=gh.transport(), clock=lambda: clock["t"])
+    again = GitHubCollector(db, "corein-app/corein", transport=gh.transport(), clock=lambda: clock["t"])
     assert again.last_ok == c.last_ok and again.error == c.error
     db.close()
 
@@ -140,7 +140,7 @@ async def test_a_failed_write_does_not_leave_the_collector_marked_running():
     "already running" until a restart. The flag is let go whatever happens."""
     gh = FakeGitHub()
     db = Database(":memory:")
-    c = GitHubCollector(db, "nano-muse/nanoMuse", transport=gh.transport(), clock=lambda: 1_800_000_000)
+    c = GitHubCollector(db, "corein-app/corein", transport=gh.transport(), clock=lambda: 1_800_000_000)
     kept = db.daily_set
 
     def refuse(*a, **k):
@@ -171,11 +171,11 @@ async def test_no_repository_means_no_collector():
 
 async def test_series_and_refresh_through_the_admin_api():
     gh = FakeGitHub()
-    app, client, sender, up, cloud, settings = make(github_repo="nano-muse/nanoMuse")
+    app, client, sender, up, cloud, settings = make(github_repo="corein-app/corein")
     # the collector the app made reads the fake, not GitHub
     app.state.collector.transport = gh.transport()
     r = await client.get("/v1/admin/github", headers=ADMIN)
-    assert r.status_code == 200 and r.json()["status"]["repo"] == "nano-muse/nanoMuse" and r.json()["latest"]["stars"] is None
+    assert r.status_code == 200 and r.json()["status"]["repo"] == "corein-app/corein" and r.json()["latest"]["stars"] is None
     r = await client.post("/v1/admin/github/refresh", headers=ADMIN)
     assert r.status_code == 200, r.text
     assert r.json()["ok"] and r.json()["stars"] == 120 and r.json()["status"]["last_ok"]
@@ -189,6 +189,6 @@ async def test_series_and_refresh_through_the_admin_api():
     r = await client.get("/v1/admin/stats/github_assets.csv", headers=ADMIN)
     assert r.status_code == 200 and r.headers["content-type"].startswith("text/csv")
     lines = r.text.splitlines()
-    assert lines[0] == "asset,platform,downloads" and lines[1] == "nanoMuse-0.20.0.apk,android,1000"
+    assert lines[0] == "asset,platform,downloads" and lines[1] == "corein-0.20.0.apk,android,1000"
     assert (await client.get("/v1/admin/github")).status_code == 401
     assert json.loads(json.dumps(s))  # plain JSON throughout

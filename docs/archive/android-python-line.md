@@ -2,7 +2,7 @@
 
 > **Historical.** This describes the two-flavour Android shell of the Python line
 > (tag `pre-openminis`): a WebView around `nanomuse serve`, with an on-phone runtime
-> in a chroot. The app in `android/` today is a different program — nanoMuse built on
+> in a chroot. The app in `android/` today is a different program — corein built on
 > OpenMinis — and is described in [../android.md](../android.md). Nothing below is a
 > download you can get; it is kept because the design of the capsule, the device
 > bridge and the notification service carried over.
@@ -10,7 +10,7 @@
 
 `android/` is a native shell around the web app, in two flavours:
 
-- **nanomuse.apk** (`local`) runs nanoMuse **on the phone itself**: the Python server, its tools and a small Alpine Linux live inside the app, unpacked on first start and run under a user-mode chroot. Nothing to install on a computer. arm64 phones, Android 8.0 or newer. How it works, what it can and cannot do: [local-runtime.md](../local-runtime.md).
+- **nanomuse.apk** (`local`) runs corein **on the phone itself**: the Python server, its tools and a small Alpine Linux live inside the app, unpacked on first start and run under a user-mode chroot. Nothing to install on a computer. arm64 phones, Android 8.0 or newer. How it works, what it can and cannot do: [local-runtime.md](../local-runtime.md).
 - **nanomuse-connect.apk** (`connect`) is the **remote for a `nanomuse serve` on your computer** — the same web app in a WebView, plus what a browser tab cannot do on a home network: notifications while the app is closed. Web Push needs `https://` and a push service in the middle; the app keeps its own connection to your server instead. Any CPU.
 
 The local build offers both on its first screen (*Run on this phone* / *Connect to my computer*), so it is the one to download unless the phone is 32-bit or storage is tight.
@@ -28,7 +28,7 @@ Everything else is the same web app, served by your `nanomuse serve`.
 
 ## Install
 
-Download [`nanomuse.apk`](https://github.com/nano-muse/nanoMuse/releases/latest/download/nanomuse.apk) (always the current release; the same file is also there as `nanomuse-<version>.apk`; the connect-only build is [`nanomuse-connect.apk`](https://github.com/nano-muse/nanoMuse/releases/latest/download/nanomuse-connect.apk)) and open it on the phone. Android asks once to allow installs from your browser or file manager. Android 8.0 (API 26) or newer. Every release is signed with the same key, so a newer APK installs over the old one and keeps its connection and data.
+Download [`nanomuse.apk`](https://github.com/corein-app/corein/releases/latest/download/nanomuse.apk) (always the current release; the same file is also there as `nanomuse-<version>.apk`; the connect-only build is [`nanomuse-connect.apk`](https://github.com/corein-app/corein/releases/latest/download/nanomuse-connect.apk)) and open it on the phone. Android asks once to allow installs from your browser or file manager. Android 8.0 (API 26) or newer. Every release is signed with the same key, so a newer APK installs over the old one and keeps its connection and data.
 
 **Run on this phone**: tap it, wait for the unpack (about a minute; ~330 MB of storage), and the app opens on the onboarding: give the agent a name, paste a model API key. That is all; there is no computer involved. The runtime shows a quiet *Running on this phone* notification while it is up, comes back after a reboot, and can be stopped from that notification.
 
@@ -121,4 +121,4 @@ The `versionName` in `android/app/build.gradle.kts` must match the tag, like the
 | `BootReceiver.kt` | Starts the notification service or the runtime after a reboot when *Start after a reboot* is on |
 | `Prefs.kt` | Mode, server URL, token, the local port and token, the notifications and boot switches, the agent's name |
 
-The events the service reacts to are the same ones the web app draws cards for: `approval` / `question` with `status: pending` (and their resolution), and `assistant` events with `source: background` and `final: true`. `demo/mobilegym/apps/nanoMuse/bridge.ts` does the same job for the simulator, in TypeScript.
+The events the service reacts to are the same ones the web app draws cards for: `approval` / `question` with `status: pending` (and their resolution), and `assistant` events with `source: background` and `final: true`. `demo/mobilegym/apps/corein/bridge.ts` does the same job for the simulator, in TypeScript.

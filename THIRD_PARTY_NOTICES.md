@@ -1,12 +1,18 @@
 # Third-party notices
 
-nanoMuse is licensed under the GNU General Public License, version 3 or later ([LICENSE](LICENSE), [NOTICE](NOTICE)). It stands on other people's work; this file says whose, and on what terms. Three lists: what the phone apps are built from, what our own runtime, relay, desktop and web code include, and projects we learned from without taking code.
+corein is licensed under the GNU General Public License, version 3 or later ([LICENSE](LICENSE), [NOTICE](NOTICE)). It is a fork of nanoMuse and stands on other people's work; this file says whose, and on what terms. First the project it forks, then three lists: what the phone apps are built from, what our own runtime, relay, desktop and web code include, and projects we learned from without taking code.
+
+## The project corein forks
+
+### nanoMuse (GPL-3.0-or-later)
+
+corein is a fork of [nanoMuse](https://github.com/nano-muse/nanoMuse), Copyright (C) 2026 nanoMuse contributors, by Guangyi Liu, Yong Liu and Jiangning Zhang (Zhejiang University) and the community listed in its repository. The fork starts at commit `821b7f6` (version 1.0.5, 2026-10-17); the whole upstream tree is in this repository's history and every change since 2026-10-20 is in `git log`. The nanoMuse name, the one-stroke N mark and the nanoMuse cover art are theirs and are not used by corein; the dragon face is kept as a bundled asset under the same licence as the rest of the tree. The paper that describes the design is *nanoMuse: An Open-Source Personal Agent for Every Device You Own* (arXiv:2610.08699); cite it for the ideas.
 
 ## The phone apps (`android/`: Android and iOS)
 
 ### OpenMinis (GPL-3.0)
 
-The app is a modified copy of [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13 (tag `1.13`, commit `4ef2900`), Copyright (C) the OpenMinis authors, imported with `git subtree` so that its history is in ours. Modifications since 2026-09-24 are recorded in `git log -- android/`, and every edit inside an upstream file carries a `// nanoMuse:` comment. The OpenMinis name and logo are theirs and are not used for this application. Both phone apps come from that subtree: the Android app in `android/src/android`, the iOS app in `android/src/ios`. What follows is OpenMinis's own third-party list for the parts this tree builds; upstream's full inventory with versions is [android/THIRD_PARTY_LICENSES.md](android/THIRD_PARTY_LICENSES.md).
+The app is a modified copy of [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13 (tag `1.13`, commit `4ef2900`), Copyright (C) the OpenMinis authors, imported with `git subtree` so that its history is in ours. Modifications since 2026-09-24 are recorded in `git log -- android/`, and every edit inside an upstream file carries a `// corein:` comment (`// nanoMuse:` in the upstream fork). The OpenMinis name and logo are theirs and are not used for this application. Both phone apps come from that subtree: the Android app in `android/src/android`, the iOS app in `android/src/ios`. What follows is OpenMinis's own third-party list for the parts this tree builds; upstream's full inventory with versions is [android/THIRD_PARTY_LICENSES.md](android/THIRD_PARTY_LICENSES.md).
 
 ### Native code (`android/deps/`)
 

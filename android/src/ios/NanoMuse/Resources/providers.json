@@ -21,8 +21,8 @@
         "image": "qwen-image-3.0",
         "video": "wan2.2-i2v-flash"
       },
-      "note": "One key for chat, hands, pictures and clips. Signs up accounts with a mainland China identity only; the international edition (dashscope-intl) does not carry these models. Pictures and clips go through Model Studio's own API, which nanoMuse speaks.",
-      "note_zh": "一把 key 覆盖对话、手、画图和视频。只给中国大陆身份注册；国际版（dashscope-intl）没有这几个模型。画图和视频走百炼自己的接口，nanoMuse 已支持。",
+      "note": "One key for chat, hands, pictures and clips. Signs up accounts with a mainland China identity only; the international edition (dashscope-intl) does not carry these models. Pictures and clips go through Model Studio's own API, which corein speaks.",
+      "note_zh": "一把 key 覆盖对话、手、画图和视频。只给中国大陆身份注册；国际版（dashscope-intl）没有这几个模型。画图和视频走百炼自己的接口，corein 已支持。",
       "verified": "2026-10"
     },
     {
@@ -151,8 +151,8 @@
         "hands": "doubao-seed-2-0-pro-260215",
         "image": "doubao-seedream-5-0-lite-260128"
       },
-      "note": "Model ids are dated deployments; the live list has the exact ones. Doubao Seed 2.0 reads pictures; Seedream draws them through /images/generations. Seedance video uses Ark's own task API, which nanoMuse does not speak, so clips are left out.",
-      "note_zh": "模型 id 带日期后缀，以实时列表为准。豆包 Seed 2.0 能看图；Seedream 画图走 /images/generations。Seedance 视频走方舟自己的任务接口，nanoMuse 还不支持，所以不列视频。",
+      "note": "Model ids are dated deployments; the live list has the exact ones. Doubao Seed 2.0 reads pictures; Seedream draws them through /images/generations. Seedance video uses Ark's own task API, which corein does not speak, so clips are left out.",
+      "note_zh": "模型 id 带日期后缀，以实时列表为准。豆包 Seed 2.0 能看图；Seedream 画图走 /images/generations。Seedance 视频走方舟自己的任务接口，corein 还不支持，所以不列视频。",
       "verified": "2026-10",
       "reasoning": {
         "doc": "https://docs.volcengine.com/docs/ark/model-parameter-support?lang=zh",
@@ -292,11 +292,11 @@
       "regions": ["global"],
       "capabilities": ["chat", "vision", "image"],
       "defaults": {
-        "chat": "gemini-3.8-flash",
-        "hands": "gemini-3.8-flash",
+        "chat": "gemini-3.5-flash-lite",
+        "hands": "gemini-3.5-flash-lite",
         "image": "gemini-2.5-flash-image"
       },
-      "note": "Google's OpenAI-compatible layer. Gemini models read pictures. Pictures through /images/generations work with gemini-2.5-flash-image and gemini-3-pro-image-preview only; the newer 3.1 image models are not served there. Veo video is not on the compatible layer, so clips are left out.",
+      "note": "gemini-3.5-flash-lite answers in about a second on the free tier and reads pictures; the full-size Flash models can take a minute there, and gemini-2.5-flash is retired for new accounts. Pictures through /images/generations work with gemini-2.5-flash-image and gemini-3-pro-image-preview only. Veo video is not on the compatible layer, so clips are left out.",
       "note_zh": "Google 的 OpenAI 兼容层。Gemini 模型能看图。走 /images/generations 画图只支持 gemini-2.5-flash-image 和 gemini-3-pro-image-preview，更新的 3.1 出图模型不在兼容层上。Veo 视频不走兼容层，所以不列视频。",
       "verified": "2026-10",
       "reasoning": {

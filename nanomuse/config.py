@@ -119,7 +119,7 @@ class LLMSettings(BaseModel):
     # `http://user:pass@host:port`, `socks5://host:port`), for a provider that this machine's
     # network cannot reach directly. Empty: the environment's HTTPS_PROXY / NO_PROXY apply as
     # usual. Honoured by the ChatGPT sign-in (`provider = "chatgpt"`): the Codex endpoint, the
-    # token refresh and the usage check all go through it; never nanoMuse Cloud.
+    # token refresh and the usage check all go through it; never corein Cloud.
     proxy: str = ""
     extra_headers: dict[str, str] = Field(default_factory=dict)
     extra_body: dict[str, Any] = Field(default_factory=dict)
@@ -204,7 +204,7 @@ class MediaSettings(BaseModel):
 
 
 class AgentSettings(BaseModel):
-    name: str = "nanoMuse"
+    name: str = "corein"
     max_steps: int = 30
     # Where the agent's files live. A relative path is relative to the current directory, which is
     # what a terminal user expects. When nothing is configured, Settings resolves it: a `workspace/`
@@ -545,18 +545,18 @@ class HandsSettings(BaseModel):
 
 
 class CloudSettings(BaseModel):
-    """nanoMuse Cloud: the relay the phone signs in to with a phone-number or e-mail code. The
+    """corein Cloud: the relay the phone signs in to with a phone-number or e-mail code. The
     account key lives in the vault (``NANOMUSE_CLOUD_KEY``); ``base_url`` is the relay.
     Signed in, the relay can be the model provider and the hub is reachable."""
 
-    base_url: str = "https://cloud.nanomuse.cn"
+    base_url: str = "https://cloud.corein.app"
     # Sign-in is part of setting up: the first-run flow does not finish without
     # an account (with it, the relay can be the model and the devices meet).
     # Self-hosters who run without a relay set this to false.
     required: bool = True
-    # The account's models as a source (the apps' *Use nanoMuse Cloud models* switch). Off,
+    # The account's models as a source (the apps' *Use corein Cloud models* switch). Off,
     # the relay leaves the automatic order of the hands, pictures and clips, and the hub's
-    # listing; the sign-in itself stays (sync, the devices). Only the explicit "use nanoMuse
+    # listing; the sign-in itself stays (sync, the devices). Only the explicit "use corein
     # Cloud this time" button reaches it then.
     models: bool = True
     # Conversations synced between the account's devices (docs/every-device.md): the text
@@ -608,7 +608,7 @@ class ServerSettings(BaseModel):
     # Largest file the app may attach to a message (photos from a phone run 3–12 MB).
     max_upload_mb: int = 25
     # Ask the download mirror's index, then GitHub Releases (once a day, or on "Check now")
-    # whether a newer nanoMuse is out, and say so under Settings → About. Nothing is downloaded
+    # whether a newer corein is out, and say so under Settings → About. Nothing is downloaded
     # or reported. NANOMUSE_NO_UPDATE_CHECK=1 also turns it off.
     update_check: bool = True
     # How long the services (tools, MCP servers, the cloud account) may take before the
@@ -815,7 +815,7 @@ def _apply_env_overrides(raw: dict[str, Any]) -> None:
         raw.setdefault("browser", {}).setdefault("enabled", True)
     if val := os.environ.get("NANOMUSE_BROWSER_BACKEND"):
         raw.setdefault("browser", {})["backend"] = val
-    # a hosted runtime (nanoMuse Web) is told where its relay is and what to call itself
+    # a hosted runtime (corein Web) is told where its relay is and what to call itself
     if val := os.environ.get("NANOMUSE_CLOUD_BASE_URL"):
         raw.setdefault("cloud", {})["base_url"] = val.rstrip("/")
     if val := os.environ.get("NANOMUSE_CLOUD_REQUIRED"):

@@ -95,9 +95,9 @@ def test_files_get_put(tmp_path: Path) -> None:
 
 
 def test_cloud_urls() -> None:
-    assert hub_url("https://cloud.nanomuse.cn/") == "wss://cloud.nanomuse.cn/v1/hub"
+    assert hub_url("https://cloud.corein.app/") == "wss://cloud.corein.app/v1/hub"
     assert hub_url("http://127.0.0.1:8080") == "ws://127.0.0.1:8080/v1/hub"
-    assert model_url("https://cloud.nanomuse.cn") == "https://cloud.nanomuse.cn/v1"
+    assert model_url("https://cloud.corein.app") == "https://cloud.corein.app/v1"
     # contract C4: the chat default when offered, else the first chat model; the hands
     # default is a separate pick (the relay's `for` field, else what the id says it sees)
     assert (
@@ -614,7 +614,7 @@ def test_sign_in_joins_hub_and_lists_devices(hub_server) -> None:
 def test_hosted_runtime_starts_signed_in_from_the_environment(
     settings: Settings, relay: FakeRelay, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """nanoMuse Web: the gateway hands the container the account key; the runtime comes up
+    """corein Web: the gateway hands the container the account key; the runtime comes up
     signed in, on the hub under the given name, with the relay as its model and no first run."""
     settings.server.token = "secret-token"
     settings.cloud.base_url = relay.base_url

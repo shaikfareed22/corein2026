@@ -182,7 +182,7 @@ def test_api_nudges_serves_the_policy_and_the_sign_in_copy(server, monkeypatch):
 def test_release_check_asks_the_mirror_first_and_github_second(monkeypatch):
     asked: list[str] = []
     index = {
-        "repo": "nano-muse/nanoMuse",
+        "repo": "corein-app/corein",
         "releases": [
             {"tag": "v0.1.40", "name": "0.1.40", "published_at": "2026-10-01", "assets": []},
             {"tag": "v0.1.39", "name": "0.1.39", "published_at": "2026-09-20", "assets": []},
@@ -210,7 +210,7 @@ def test_release_check_asks_the_mirror_first_and_github_second(monkeypatch):
                 200,
                 json={
                     "tag_name": "v0.1.41",
-                    "html_url": "https://github.com/nano-muse/nanoMuse/releases/tag/v0.1.41",
+                    "html_url": "https://github.com/corein-app/corein/releases/tag/v0.1.41",
                 },
                 request=httpx.Request("GET", url),
             )
@@ -222,7 +222,7 @@ def test_release_check_asks_the_mirror_first_and_github_second(monkeypatch):
     check = update.UpdateCheck(True, current="0.1.35")
     view = asyncio.run(check.view())
     assert asked == [update.INDEX_URL]  # the mirror answered: GitHub is not asked
-    assert view["latest"] == "0.1.40" and view["newer"] is True and view["source"] == "nanomuse.cn"
+    assert view["latest"] == "0.1.40" and view["newer"] is True and view["source"] == "corein.app"
     assert view["url"].endswith("/releases/tag/v0.1.40")
     assert view["download_url"] == update.DOWNLOAD_PAGE
     assert view["checked_at"] and datetime.fromisoformat(view["checked_at"]).tzinfo is not None

@@ -59,7 +59,7 @@ def _keys_in(text: str) -> set[str]:
 
 
 def _marked_spots(text: str) -> str:
-    """The lines of an upstream file that are ours: each ``// nanoMuse:`` comment with the
+    """The lines of an upstream file that are ours: each ``// corein:`` comment with the
     statement or block that follows it (the lines indented deeper than the comment, and the
     brace that closes them). Upstream's own lines, and their strings, are left out."""
     lines = text.split("\n")
@@ -67,7 +67,7 @@ def _marked_spots(text: str) -> str:
     i = 0
     while i < len(lines):
         line = lines[i]
-        if "nanoMuse:" not in line:
+        if "corein:" not in line:
             i += 1
             continue
         base = len(line) - len(line.lstrip(" "))
@@ -96,7 +96,7 @@ def _marked_spots(text: str) -> str:
 
 def _our_keys() -> set[str]:
     """Every string our Swift passes to AppLocalized as a literal: all of NanoMuse/, plus the
-    ``// nanoMuse:`` spots inside upstream's files."""
+    ``// corein:`` spots inside upstream's files."""
     keys: set[str] = set()
     for path in sorted(IOS.rglob("*.swift")):
         text = path.read_text(encoding="utf-8")
@@ -130,13 +130,13 @@ def test_every_nanomuse_string_is_in_the_catalogue_in_every_locale() -> None:
 def test_marked_spots_take_the_block_under_the_comment_and_nothing_else() -> None:
     text = (
         'Text(AppLocalized("upstream line"))\n'
-        "// nanoMuse: ours\n"
+        "// corein: ours\n"
         'Section(AppLocalized("ours one")) {\n'
         '    Text(AppLocalized("ours two"))\n'
         "\n"
         "}\n"
         'Text(AppLocalized("upstream again"))\n'
-        '    .help(AppLocalized("still upstream")) // nanoMuse: trailing marker\n'
+        '    .help(AppLocalized("still upstream")) // corein: trailing marker\n'
         'Text(AppLocalized("not ours"))\n'
     )
     assert _keys_in(_marked_spots(text)) == {"ours one", "ours two", "still upstream"}

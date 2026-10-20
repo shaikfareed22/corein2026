@@ -1,6 +1,6 @@
 //
 //  NanoMuseRoutineWakes.swift
-//  nanoMuse
+//  corein
 //
 //  A routine's turn is not the person's words. When a routine fires (the
 //  daily feed, a goal check-in, a routine made from an idea), its prompt
@@ -62,7 +62,7 @@ final class NanoMuseRoutineWakes {
     nonisolated static func framing(label: String, at: Date) -> String {
         let c = Calendar.current.dateComponents([.hour, .minute], from: at)
         let time = NanoMuseDay.clock(hour: c.hour ?? 0, minute: c.minute ?? 0)
-        return "## This turn is a routine's, not a message the person typed (nanoMuse)\n"
+        return "## This turn is a routine's, not a message the person typed (corein)\n"
             + "The routine \"\(label)\" they set up fired at \(time) and sent the next message on their behalf. "
             + "Do what it asks, then write to them as the one who brings it up: open with the result or the point itself, "
             + "do not thank them for asking or say \"as requested\", and keep it as short as the task allows. "

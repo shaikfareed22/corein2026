@@ -1,9 +1,9 @@
 //
 //  NanoMuseUpdateCheck.swift
-//  nanoMuse
+//  corein
 //
 //  The version row in Settings (contract C2): what is installed, what the latest
-//  release is, and a link to it when it is newer. The download index on nanomuse.cn
+//  release is, and a link to it when it is newer. The download index on corein.app
 //  answers first; GitHub's latest release is the fallback. Checked at most once a
 //  day on its own, or on demand from the row; the answer is kept in UserDefaults so
 //  the row has something to show straight away. Never loud: a failed check leaves
@@ -17,11 +17,11 @@ import Foundation
 final class NanoMuseUpdateCheck: ObservableObject {
     static let shared = NanoMuseUpdateCheck()
 
-    nonisolated static let indexURL = "https://nanomuse.cn/dl/index.json"
-    nonisolated static let githubURL = "https://api.github.com/repos/nano-muse/nanoMuse/releases/latest"
-    nonisolated static let fallbackReleasePage = "https://github.com/nano-muse/nanoMuse/releases/latest"
-    /// The download page on nanomuse.cn, where a release found through the index leads (Android's `DOWNLOAD_URL`).
-    nonisolated static let downloadPage = "https://nanomuse.cn/dl/"
+    nonisolated static let indexURL = "https://corein.app/dl/index.json"
+    nonisolated static let githubURL = "https://api.github.com/repos/corein-app/corein/releases/latest"
+    nonisolated static let fallbackReleasePage = "https://github.com/corein-app/corein/releases/latest"
+    /// The download page on corein.app, where a release found through the index leads (Android's `DOWNLOAD_URL`).
+    nonisolated static let downloadPage = "https://corein.app/dl/"
 
     private enum Keys {
         static let latest = "nm.update.latest"
@@ -157,7 +157,7 @@ final class NanoMuseUpdateCheck: ObservableObject {
         var request = URLRequest(url: url)
         request.timeoutInterval = 10
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("nanoMuse-iOS/\(installed)", forHTTPHeaderField: "User-Agent")
+        request.setValue("corein-iOS/\(installed)", forHTTPHeaderField: "User-Agent")
         guard let result = try? await URLSession.shared.data(for: request) else { return nil }
         let (data, response) = result
         guard (200..<300).contains((response as? HTTPURLResponse)?.statusCode ?? 0) else { return nil }

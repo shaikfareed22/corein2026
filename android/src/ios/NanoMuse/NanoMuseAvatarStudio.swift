@@ -1,16 +1,16 @@
 //
 //  NanoMuseAvatarStudio.swift
-//  nanoMuse
+//  corein
 //
 //  Describe a face → four candidates → pick one → the moods are posed
 //  from it → saved on this phone and in the account's profile. Pictures
 //  are drawn with a Bailian key on this phone when there is one, otherwise
-//  through nanoMuse Cloud with a cost estimate first (NanoMuseImageGen).
+//  through corein Cloud with a cost estimate first (NanoMuseImageGen).
 //  The chat-driven flow (NanoMuseAvatarFlow) drives this same model.
 //  Android: avatar/AvatarStudio.kt, ui/avatar/AvatarStudioScreen.kt.
 //
 
-import Combine // nanoMuse: the header follows the motion clips' progress through this model
+import Combine // corein: the header follows the motion clips' progress through this model
 import SwiftUI
 import UIKit
 
@@ -116,7 +116,7 @@ final class NanoMuseAvatarStudioModel: ObservableObject {
     @Published private(set) var lastError: String?
     /// Which round of candidates is up; files are named after it.
     private var round = 0
-    /// nanoMuse: `headerStatus` reads the motion clips' progress, so their changes are this model's too.
+    /// corein: `headerStatus` reads the motion clips' progress, so their changes are this model's too.
     private var motionWatch: AnyCancellable?
 
     private init() {
@@ -139,14 +139,14 @@ final class NanoMuseAvatarStudioModel: ObservableObject {
         switch phase {
         case .drawing: return AppLocalized("Generating options")
         case .posing: return AppLocalized("Finalizing avatar")
-        default: return NanoMuseAvatarMotion.shared.statusLine // nanoMuse: motion clips
+        default: return NanoMuseAvatarMotion.shared.statusLine // corein: motion clips
         }
     }
 
     var picturesPerFace: Int { NanoMuseAvatarPrompts.candidates + NanoMuseAvatarPrompts.posedMoods.count }
 
     /// Clips a new face costs from the allowance: one per animated mood when the video model is
-    /// nanoMuse Cloud and animation is on; 0 when they would come from a key of your own, or not at all.
+    /// corein Cloud and animation is on; 0 when they would come from a key of your own, or not at all.
     var clipsPerFace: Int {
         NanoMuseMediaModels.videoOnCloud && NanoMuseMediaModels.animateAvatar ? NanoMuseAvatarMotion.animated.count : 0
     }
@@ -158,13 +158,13 @@ final class NanoMuseAvatarStudioModel: ObservableObject {
             : String(format: AppLocalized("A new face is %d pictures"), picturesPerFace)
     }
 
-    /// A Bailian key on this phone draws the face; nanoMuse Cloud otherwise.
+    /// A Bailian key on this phone draws the face; corein Cloud otherwise.
     var usesOwnKey: Bool { NanoMuseImageGen.usesOwnKey }
 
     /// Whether a picture can be drawn at all right now; the reason when not.
     var cannotDrawReason: String? {
         if usesOwnKey || NanoMuseCloud.modelsOn { return nil }
-        return AppLocalized("Sign in to nanoMuse Cloud, or add an Alibaba Cloud Bailian key under Providers; the pictures are drawn with one of the two.")
+        return AppLocalized("Sign in to corein Cloud, or add an Alibaba Cloud Bailian key under Providers; the pictures are drawn with one of the two.")
     }
 
     /// Files of the candidates on screen, in order ("" where one failed).
@@ -346,9 +346,9 @@ final class NanoMuseAvatarStudioModel: ObservableObject {
             }
             NanoMuseProfileSync.shared.faceChanged()
             self.phase = .finished(drawn: drawn, total: moods.count)
-            // nanoMuse: the clips, in the background, once the poses are in (contract C3)
+            // corein: the clips, in the background, once the poses are in (contract C3)
             NanoMuseAvatarMotion.shared.animateIfEnabled()
-            // nanoMuse: the star ask goes through the policy's gate (contract C1)
+            // corein: the star ask goes through the policy's gate (contract C1)
             NanoMuseStar.shared.newLook()
         }
     }
@@ -362,7 +362,7 @@ struct NanoMuseAvatarStudioView: View {
 
     @ObservedObject private var studio = NanoMuseAvatarStudioModel.shared
     @ObservedObject private var faces = NanoMuseFaceStore.shared
-    @ObservedObject private var motion = NanoMuseAvatarMotion.shared // nanoMuse: clips
+    @ObservedObject private var motion = NanoMuseAvatarMotion.shared // corein: clips
     @ObservedObject private var own = NanoMuseOwnClip.shared
     @StateObject private var clipPicker = NanoMuseOwnClipPicker()
     @Environment(\.dismiss) private var dismiss
@@ -422,7 +422,7 @@ struct NanoMuseAvatarStudioView: View {
                 Section {
                     Text(studio.usesOwnKey
                          ? AppLocalized("Pictures are drawn with your Bailian key and kept on this phone; the face is shared with your other devices through your account. Each new face is eight pictures: four to choose from and four moods.")
-                         : AppLocalized("Pictures are drawn through nanoMuse Cloud and kept on this phone; the face is shared with your other devices through your account. Each new face is eight pictures: four to choose from and four moods."))
+                         : AppLocalized("Pictures are drawn through corein Cloud and kept on this phone; the face is shared with your other devices through your account. Each new face is eight pictures: four to choose from and four moods."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     Text(NanoMuseImageGen.providerLine())
@@ -485,7 +485,7 @@ struct NanoMuseAvatarStudioView: View {
                 Text(own.clip != nil
                      ? AppLocalized("Your clip is on and plays for every mood; the drawn stills still show where a still is used. Default face removes it.")
                      : AppLocalized("A short video of yours plays as the face at rest, and the other moods fall back to it. MP4 or MOV with H.264 or HEVC video, up to 15 seconds and 30 MB; it plays muted in a loop."))
-                Text(AppLocalized("The clip stays on this phone. It is not uploaded to nanoMuse Cloud or synced to your other devices."))
+                Text(AppLocalized("The clip stays on this phone. It is not uploaded to corein Cloud or synced to your other devices."))
             }
         }
     }
@@ -517,7 +517,7 @@ struct NanoMuseAvatarStudioView: View {
                 Spacer()
             }
             .padding(.vertical, 4)
-            // nanoMuse: the clips being drawn, or the last failure, one line (contract C3)
+            // corein: the clips being drawn, or the last failure, one line (contract C3)
             if let line = motion.statusLine {
                 HStack(spacing: 10) {
                     ProgressView()

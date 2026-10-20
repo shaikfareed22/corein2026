@@ -59,8 +59,8 @@ type SignInView = 'identifier' | 'code' | 'password'
 /** How long Start may take to open the main chat before we stop waiting. */
 const START_MS = 12_000
 /** The privacy policy as every client links it (the relay, the web console and the phones agree). */
-const PRIVACY_URL = 'https://nanomuse.cn/privacy/'
-const HANDS_URL = 'https://github.com/nano-muse/nanoMuse/blob/main/docs/sentinel.md'
+const PRIVACY_URL = 'https://corein.app/privacy/'
+const HANDS_URL = 'https://github.com/corein-app/corein/blob/main/docs/sentinel.md'
 
 function Pill({ children, onClick, disabled, type = 'button', ghost = false, small = false, className = '' }: {
   children?: ReactNode
@@ -276,7 +276,7 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
     if (!decided || !status || stage === null) return null
 
     const profile = live.streaming ? live.profile : status.profile
-    const name = profile?.name || 'nanoMuse'
+    const name = profile?.name || 'corein'
 
     let body: ReactNode
     if (starting) {

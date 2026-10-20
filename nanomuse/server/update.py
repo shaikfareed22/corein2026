@@ -1,9 +1,9 @@
-"""Is there a newer nanoMuse? The download mirror's index first, GitHub Releases second,
+"""Is there a newer corein? The download mirror's index first, GitHub Releases second,
 kept for a day, a failed check for an hour (contract C2: every client shows the installed
 and the latest version).
 
 Nothing is downloaded and nothing about the install is sent: the requests are the ones a
-browser makes when it opens the download page. ``https://nanomuse.cn/dl/index.json``
+browser makes when it opens the download page. ``https://corein.app/dl/index.json``
 (``{"repo", "releases": [{"tag", "name", "published_at", "assets"}]}``, newest first) is
 asked first with a short timeout, then ``api.github.com/.../releases/latest``. The check
 is off when ``server.update_check`` is false, when ``NANOMUSE_NO_UPDATE_CHECK`` is set,
@@ -26,11 +26,11 @@ import httpx
 from nanomuse import __version__
 from nanomuse.logger import logger
 
-INDEX_URL = "https://nanomuse.cn/dl/index.json"
-DOWNLOAD_PAGE = "https://nanomuse.cn/dl/"
-RELEASES_API = "https://api.github.com/repos/nano-muse/nanoMuse/releases/latest"
-RELEASES_PAGE = "https://github.com/nano-muse/nanoMuse/releases/latest"
-RELEASE_TAG_PAGE = "https://github.com/nano-muse/nanoMuse/releases/tag/{tag}"
+INDEX_URL = "https://corein.app/dl/index.json"
+DOWNLOAD_PAGE = "https://corein.app/dl/"
+RELEASES_API = "https://api.github.com/repos/corein-app/corein/releases/latest"
+RELEASES_PAGE = "https://github.com/corein-app/corein/releases/latest"
+RELEASE_TAG_PAGE = "https://github.com/corein-app/corein/releases/tag/{tag}"
 CACHE_S = 24 * 3600
 # a check that failed (the runtime came up before the network did) is tried again sooner
 RETRY_S = 3600
@@ -127,7 +127,7 @@ class UpdateCheck:
     async def _check(self) -> None:
         self.checked_at = time.monotonic()
         self.checked_wall = datetime.now(UTC).isoformat(timespec="seconds")
-        headers = {"User-Agent": f"nanoMuse/{self.current}"}
+        headers = {"User-Agent": f"corein/{self.current}"}
         errors: list[str] = []
         async with httpx.AsyncClient(follow_redirects=True) as client:
             # 1. the download mirror's index (short timeout: it is the quick way, not the only one)
@@ -137,7 +137,7 @@ class UpdateCheck:
                 tag = latest_from_index(r.json())
                 if not tag:
                     raise ValueError("no release in the index")
-                self._found(tag, RELEASE_TAG_PAGE.format(tag=tag), "nanomuse.cn")
+                self._found(tag, RELEASE_TAG_PAGE.format(tag=tag), "corein.app")
                 return
             except Exception as exc:  # noqa: BLE001 — the mirror is one of two ways
                 errors.append(exc.__class__.__name__)

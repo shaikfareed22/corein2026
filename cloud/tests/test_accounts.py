@@ -334,7 +334,7 @@ async def test_invites_and_the_operator_grow_the_one_pool():
     a = await sign_up(client, sender, "dev-a@example.com", "pixel")
     ka = a["api_key"]
     inv = (await client.get("/v1/me/invite", headers=auth(ka))).json()
-    assert len(inv["code"]) == 8 and inv["url"] == "https://nanomuse.cn/web/?invite=" + inv["code"]
+    assert len(inv["code"]) == 8 and inv["url"] == "https://corein.app/web/?invite=" + inv["code"]
     assert (
         inv["invites"] == 0 and inv["bonus_cny"] == 3 and inv["invitee_bonus_cny"] == 3 and inv["earned_cny"] == 0 and inv["friends"] == []
     )
@@ -492,18 +492,18 @@ async def test_admin_series_and_traffic(tmp_path):
         ("/", "Mozilla/5.0", "text/html; charset=utf-8", 200),
         ("/own-key/", "Mozilla/5.0 (X11)", "text/html", 200),
         ("/", "Googlebot/2.1", "text/html", 200),
-        ("/dl/v0.1.22/nanoMuse-0.1.22-arm64.apk", "Mozilla/5.0", "application/octet-stream", 200),
-        ("/dl/v0.1.22/nanoMuse-0.1.22-arm64.apk.sha256", "Mozilla/5.0", "application/octet-stream", 200),
+        ("/dl/v0.1.22/corein-0.1.22-arm64.apk", "Mozilla/5.0", "application/octet-stream", 200),
+        ("/dl/v0.1.22/corein-0.1.22-arm64.apk.sha256", "Mozilla/5.0", "application/octet-stream", 200),
     ):
         rec = {
             "ts": ts,
             "status": status,
             "size": 1000,
             "request": {
-                "host": "nanomuse.cn",
+                "host": "corein.app",
                 "uri": uri,
                 "client_ip": "203.0.113.7",
-                "headers": {"User-Agent": [ua], "Referer": ["https://github.com/nano-muse/nanoMuse"]},
+                "headers": {"User-Agent": [ua], "Referer": ["https://github.com/corein-app/corein"]},
             },
             "resp_headers": {"Content-Type": [ctype]},
         }
@@ -513,7 +513,7 @@ async def test_admin_series_and_traffic(tmp_path):
     conn.execute("COMMIT")
     conn.execute(
         "INSERT INTO github(day, ts, stars, forks, watchers, downloads, assets) VALUES (?,?,?,?,?,?,?)",
-        (mod.local_day(ts), int(ts), 24, 5, 3, 188, json.dumps({"v0.1.22": {"nanoMuse-0.1.22-arm64.apk": 100}})),
+        (mod.local_day(ts), int(ts), 24, 5, 3, 188, json.dumps({"v0.1.22": {"corein-0.1.22-arm64.apk": 100}})),
     )
     conn.close()
 
@@ -524,7 +524,7 @@ async def test_admin_series_and_traffic(tmp_path):
     day = tr["days"][-1]
     assert day["pages"] == 3 and day["visitors"] == 2 and day["bots"] == 1 and day["downloads"] == 1 and day["requests"] == 6
     assert tr["pages"][0] == {"name": "/", "hits": 2} and tr["referrers"] == [{"name": "github.com", "hits": 3}]
-    assert tr["downloads"] == [{"name": "nanoMuse-0.1.22-arm64.apk", "hits": 1, "bytes": 1000}]
+    assert tr["downloads"] == [{"name": "corein-0.1.22-arm64.apk", "hits": 1, "bytes": 1000}]
     assert tr["github"]["stars"] == 24 and tr["github"]["downloads"] == 188 and tr["github"]["days"][0]["stars"] == 24
     assert "203.0.113.7" not in r.text
 

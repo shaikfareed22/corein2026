@@ -1,7 +1,7 @@
-# nanoMuse Cloud
+# corein Cloud
 
 The "start now" path: sign up with a phone number (mainland China; the code comes by SMS)
-or an e-mail address, get a free allowance, and use nanoMuse without an API key of your own.
+or an e-mail address, get a free allowance, and use corein without an API key of your own.
 Bringing your own key still works exactly as before: this is one more
 provider, not a replacement.
 
@@ -18,10 +18,10 @@ Signing out brings that screen back
 runtime). The screen is a door, not a wall: *Use your own API key instead* steps
 past it into setup's own-key path, and with a key of your own the app works
 signed out (chat, hands, pictures, clips); the sign-in waits under
-*Connections* (phones: *Settings → nanoMuse Cloud*) for the Cloud models, sync
+*Connections* (phones: *Settings → corein Cloud*) for the Cloud models, sync
 and your devices. After the code the app has:
 
-- a provider called **nanoMuse Cloud** under *Settings → Providers*, an
+- a provider called **corein Cloud** under *Settings → Providers*, an
   ordinary OpenAI-compatible provider whose key is the token the relay issued;
 - the four rows of *Settings → Models* (web console: *Connections*) on the
   account's models when you had chosen none: the recommended chat model, the
@@ -29,12 +29,12 @@ and your devices. After the code the app has:
   a computer; each model on the relay's menu says which of the two it is for),
   the picture model and the clip model. A row you have not set follows one
   order: the chat model's provider when it is a key of yours that can do the
-  job, else nanoMuse Cloud while signed in, else the first key of yours that
+  job, else corein Cloud while signed in, else the first key of yours that
   can; the *Automatic* entry of the row says what that gives right now, and a
   key you add later asks *Use it for* before any row moves
   ([own-key.md](own-key.md#which-model-does-what)).
 
-*Settings → nanoMuse Cloud* (the *Account* screen) shows who is signed in (a
+*Settings → corein Cloud* (the *Account* screen) shows who is signed in (a
 masked hint, never the number) and since when; sets, changes or removes the
 **password** (eight characters or more; scrypt on the relay; locked for a while
 after repeated wrong attempts, and a fresh code sign-in opens it again); today's
@@ -133,7 +133,7 @@ and that the same address signing up again is a new, empty account. See
 
 ## Data controls
 
-*Settings → Data controls → Help improve nanoMuse's AI models* is a switch each
+*Settings → Data controls → Help improve corein's AI models* is a switch each
 person owns, the same on the phone, the web app, the desktop and the console.
 Off, the relay forwards a chat request and keeps nothing of it. On, each turn
 is kept as a training view: what you wrote, what the model answered and the
@@ -145,7 +145,7 @@ a voice note (a marker stands where one was). The point is a training set for
 the community's own open model. The page shows how many turns are kept; turn
 the switch off at any time (nothing more is kept) and delete what was kept
 with one tap; deleting the account deletes it too. Nothing is credited for
-the switch either way. On `cloud.nanomuse.cn` the switch is **on for accounts
+the switch either way. On `cloud.corein.app` the switch is **on for accounts
 created from relay 0.9 on, until the person turns it off**: the privacy
 policy says so, the page says so next to the switch, and accounts from before
 keep the choice they had made; a self-hosted relay sets its own default with
@@ -285,11 +285,11 @@ so it can skip its own echo).
 
 ## Allowance
 
-nanoMuse is a community project and charges nothing. The public relay at
-`cloud.nanomuse.cn` is paid for by the developer, so each account has a pool
+corein is a community project and charges nothing. The public relay at
+`cloud.corein.app` is paid for by the developer, so each account has a pool
 to draw on, for its lifetime, not by the day (relay 0.5):
 
-| | `cloud.nanomuse.cn` |
+| | `cloud.corein.app` |
 |---|---|
 | sign-up | open to anyone with a mainland China mobile number or an e-mail address |
 | free allowance | **¥10 per account** at the time of writing, across chat, pictures and clips; it does not reset. The figure is the relay's to set (it can go up without an app update; the apps print what the relay says, `/v1/config`), and the account page always shows the current one |
@@ -323,7 +323,7 @@ or fifty pictures. A new face (four candidates, four poses and four clips)
 comes to about ¥3.5, and the app shows the estimate and what is left before it
 draws.
 
-*Settings → nanoMuse Cloud* shows what was used of the pool in ¥ and $, what
+*Settings → corein Cloud* shows what was used of the pool in ¥ and $, what
 is left, and how the pool grows. At 80 % the app says so once; when the pool
 is spent the relay refuses with `allowance_exhausted` and the app shows the
 ways on: your own key, a plan you already pay for, or an invitation (+¥5 for
@@ -386,8 +386,8 @@ out, and the route says nothing about whether the number has an account or wheth
 it is off; the person is told `403 account_disabled` when they sign in with a code,
 or with the right password (a wrong one is answered like any wrong password).
 
-nanoMuse asks for one thing in return: a star on
-[GitHub](https://github.com/nano-muse/nanoMuse), which is what helps the
+corein asks for one thing in return: a star on
+[GitHub](https://github.com/corein-app/corein), which is what helps the
 project be found. The moments are the relay's to set, not the app's (0.1.35):
 `GET /v1/nudges` says when an ask is fair: after the third, tenth and
 thirtieth task it finishes for you, on the seventh and thirtieth day you open
@@ -475,7 +475,7 @@ The relay is also the meeting point for the account's devices: the **hub** at
 turns it off, `HUB_FRAME_LIMIT` caps one frame (files and screenshots travel
 inside frames, 16 MB by default).
 
-The apps talk to `https://cloud.nanomuse.cn` by default. *Use a different
+The apps talk to `https://cloud.corein.app` by default. *Use a different
 server* under the phone's sign-in form takes the address of a relay you run
 yourself ([android.md](android.md), [ios.md](ios.md)); the desktop reads it from
 the plugin's `config.baseURL` ([desktop.md](desktop.md)) and the web console is

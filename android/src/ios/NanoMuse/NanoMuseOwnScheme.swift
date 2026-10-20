@@ -2,8 +2,8 @@ import Foundation
 
 /// The app's own links have two names. Inside, they are `minis://…`: the system prompt, the
 /// sandbox, Markdown in a reply and every view speak that vocabulary, which is upstream's and must
-/// not change. Towards the system (Info.plist, the share extension) the app is `nanomuse://`, so a
-/// phone that also has OpenMinis installed never has two apps claiming one scheme. A `nanomuse://`
+/// not change. Towards the system (Info.plist, the share extension) the app is `corein://`, so a
+/// phone that also has OpenMinis installed never has two apps claiming one scheme. A `corein://`
 /// link arriving from the system is read as its `minis://` form, nothing else changes.
 enum NanoMuseOwnScheme {
     /// What Info.plist registers; what the share extension opens.
@@ -19,7 +19,7 @@ enum NanoMuseOwnScheme {
         return s == internalScheme || s == system
     }
 
-    /// `nanomuse://x` reads as `minis://x`; any other URL is returned as it came.
+    /// `corein://x` reads as `minis://x`; any other URL is returned as it came.
     static func internalURL(_ url: URL) -> URL {
         let text = url.absoluteString
         guard let range = text.range(of: system + "://", options: [.anchored, .caseInsensitive]) else { return url }

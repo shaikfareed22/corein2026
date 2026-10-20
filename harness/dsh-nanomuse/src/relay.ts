@@ -1,5 +1,5 @@
 /**
- * The nanoMuse Cloud relay as a client: the handful of `/v1` calls the desktop
+ * The corein Cloud relay as a client: the handful of `/v1` calls the desktop
  * needs to sign in, learn who it is and which models the account's key may use.
  * Plain `fetch`, no Cordis — the service in `cloud.ts` owns state and wiring,
  * and the tests drive this against a fake relay.
@@ -60,7 +60,7 @@ export interface Account {
     used: number
     remaining: number
   }
-  /** Data controls — "Help improve nanoMuse's AI models" (relay 0.9); absent on an older relay. */
+  /** Data controls — "Help improve corein's AI models" (relay 0.9); absent on an older relay. */
   contribute?: DataControls
   /** The pool in yuan (relay 0.5+): what was granted, spent and is left, and the ways on. */
   spend?: Spend
@@ -153,7 +153,7 @@ export interface Estimate {
   videoModel: string
   /** Who draws the pictures (0.1.41): the account, or an own row (nothing billed by the account). */
   source?: 'cloud' | 'provider'
-  /** That source's label (`nanoMuse Cloud`, the row's label). */
+  /** That source's label (`corein Cloud`, the row's label). */
   label?: string
 }
 
@@ -250,7 +250,7 @@ function toAccount(me: Record<string, unknown>): Account {
   }
 }
 
-/** A client for one relay origin, e.g. `https://cloud.nanomuse.cn`. */
+/** A client for one relay origin, e.g. `https://cloud.corein.app`. */
 export class Relay {
   readonly origin: string
   private readonly fetchImpl: TimedFetch
@@ -529,7 +529,7 @@ export class Relay {
   }
 
   /**
-   * Data controls: flip "Help improve nanoMuse's AI models". While on, the relay keeps the
+   * Data controls: flip "Help improve corein's AI models". While on, the relay keeps the
    * account's chat turns (what was written, what was answered, the tool calls) for the
    * community's own model; the allowance is not touched.
    */

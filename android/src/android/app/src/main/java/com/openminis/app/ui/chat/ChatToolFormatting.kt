@@ -75,7 +75,7 @@ internal fun toolIconFor(toolName: String) = when (toolName) {
     else -> Icons.Default.Build
 }
 
-// Helper: tool display name for "nanoMuse is using X"
+// Helper: tool display name for "corein is using X"
 internal fun toolDisplayName(toolName: String): String = when (toolName) {
     "shell_execute" -> "terminal"
     "file_read" -> "file reader"
@@ -90,36 +90,36 @@ internal fun toolDisplayName(toolName: String): String = when (toolName) {
 }
 
 /**
- * Full "nanoMuse is …" label shown in the tool detail sheet's bottom bar.
+ * Full "corein is …" label shown in the tool detail sheet's bottom bar.
  * Mirrors iOS ToolLiveSheet.toolTitle so the wording matches per tool.
  */
 internal fun toolTitleLabel(toolName: String): String = when (toolName) {
-    "shell_execute" -> "nanoMuse is using Shell"
-    "file_read" -> "nanoMuse is reading File"
-    "file_write" -> "nanoMuse is using Editor"
-    "file_edit" -> "nanoMuse is editing File"
-    "browser_use" -> "nanoMuse is using Browser"
-    "read_image" -> "nanoMuse is reading Image"
-    "memory_write", "memory_get" -> "nanoMuse is using Memory"
-    "web_search" -> "nanoMuse is using Search"
-    else -> "nanoMuse is using ${toolDisplayName(toolName)}"
+    "shell_execute" -> "corein is using Shell"
+    "file_read" -> "corein is reading File"
+    "file_write" -> "corein is using Editor"
+    "file_edit" -> "corein is editing File"
+    "browser_use" -> "corein is using Browser"
+    "read_image" -> "corein is reading Image"
+    "memory_write", "memory_get" -> "corein is using Memory"
+    "web_search" -> "corein is using Search"
+    else -> "corein is using ${toolDisplayName(toolName)}"
 }
 
-// nanoMuse: the same label once the step is over (issue #67 — the sheet's bottom bar
+// corein: the same label once the step is over (issue #67 — the sheet's bottom bar
 // kept saying "is using" for a step that had finished long ago). Present tense while it
 // runs; what happened afterwards.
 internal fun toolTitleLabel(toolName: String, status: ToolBlockStatus?): String = when (status) {
     null, ToolBlockStatus.RUNNING, ToolBlockStatus.STREAMING, ToolBlockStatus.PENDING -> toolTitleLabel(toolName)
     ToolBlockStatus.SUCCESS -> when (toolName) {
-        "shell_execute" -> "nanoMuse used Shell"
-        "file_read" -> "nanoMuse read File"
-        "file_write" -> "nanoMuse used Editor"
-        "file_edit" -> "nanoMuse edited File"
-        "browser_use" -> "nanoMuse used Browser"
-        "read_image" -> "nanoMuse read Image"
-        "memory_write", "memory_get" -> "nanoMuse used Memory"
-        "web_search" -> "nanoMuse used Search"
-        else -> "nanoMuse used ${toolDisplayName(toolName)}"
+        "shell_execute" -> "corein used Shell"
+        "file_read" -> "corein read File"
+        "file_write" -> "corein used Editor"
+        "file_edit" -> "corein edited File"
+        "browser_use" -> "corein used Browser"
+        "read_image" -> "corein read Image"
+        "memory_write", "memory_get" -> "corein used Memory"
+        "web_search" -> "corein used Search"
+        else -> "corein used ${toolDisplayName(toolName)}"
     }
     ToolBlockStatus.FAILED -> "${toolDisplayName(toolName).replaceFirstChar { it.uppercase() }} failed"
     ToolBlockStatus.CANCELLED -> "${toolDisplayName(toolName).replaceFirstChar { it.uppercase() }} stopped"

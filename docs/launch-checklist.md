@@ -2,12 +2,12 @@
 
 > **Archived.** This was the working list for the first public release of the Python
 > line. Domains (`nanomuse.dev`), artifacts (two APKs, a rootfs) and the mascot decision
-> (red panda) it mentions are not the current ones: the site is nanomuse.cn, the release
-> carries one `nanoMuse-<version>-arm64.apk`, the default face is the dragon. Kept
+> (red panda) it mentions are not the current ones: the site is corein.app, the release
+> carries one `corein-<version>-arm64.apk`, the default face is the dragon. Kept
 > unchanged as a record; the plan that replaced it is [roadmap.md](roadmap.md).
 
 
-Everything that has to happen before the first public release of nanoMuse, in the order it will be done. This is a working document: items are ticked as they land, and the [CHANGELOG](../CHANGELOG.md) records what shipped.
+Everything that has to happen before the first public release of corein, in the order it will be done. This is a working document: items are ticked as they land, and the [CHANGELOG](../CHANGELOG.md) records what shipped.
 
 Priorities: **P0**: the release does not go out without it. **P1**: the release should have it. **P2**: can follow in a point release.
 
@@ -17,7 +17,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 
 ## 0. What ships, and how we know it is done
 
-**Artifacts**: PyPI `nanomuse` · GitHub Release (`nanomuse-<ver>-local.apk` with the rootfs inside, `nanomuse-<ver>-connect.apk`, the rootfs, checksums) · a mirror at `dl.nanomuse.dev` · Docker image · the site at `nanomuse.dev` with the film · docs. The demo site (`demo.nanomuse.dev`) is already live; aligning it is P1 and not a release artifact.
+**Artifacts**: PyPI `nanomuse` · GitHub Release (`nanomuse-<ver>-local.apk` with the rootfs inside, `nanomuse-<ver>-connect.apk`, the rootfs, checksums) · a mirror at `dl.nanomuse.dev` · Docker image · the site at `nanomuse.dev` with the film · docs. The demo site (`demo.corein.app`) is already live; aligning it is P1 and not a release artifact.
 
 **Acceptance (P0, all on real phones)**
 
@@ -92,7 +92,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 
 ## 5. Model access and first run (P0)
 
-- [x] First-run checklist in this order: meet your nanoMuse (name it) → add a model → start; done items ticked, locked items greyed; ticks survive a reload (derived from the saved profile); `web/src/screens/Onboarding.tsx`
+- [x] First-run checklist in this order: meet your corein (name it) → add a model → start; done items ticked, locked items greyed; ticks survive a reload (derived from the saved profile); `web/src/screens/Onboarding.tsx`
 - [x] Provider form: grouped by protocol with vendor subtitles; masked key with a reveal toggle; vendor-specific placeholders and a *Get a key* link; Base URL with "/v1 is added when the URL has no path" (`normalize_base_url`, preset hosts kept verbatim); Ollama and custom endpoints may have an empty key; `ModelCard` in `ConnectionsScreen.tsx`, `connections.py`
 - [x] `/api/llm/models`: `/models` then `/v1/models` with the given or vaulted key, fall back to the preset's catalogue (`source` says which), never overwrite a typed model (a model carried over from another provider yields to the live list); verified against a local Ollama
 - [x] Chinese presets: DeepSeek / Kimi / Qwen / GLM / 豆包 / MiniMax, each with a link to get a key (`PROVIDERS`; catalogue names are a fallback: the live list is the source of truth and should be re-checked before release)
@@ -101,7 +101,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 
 ### 5a. Identity (as in Muse: the name comes first)
 
-- [x] **P0** Naming page: 1–20 characters, empty falls back to nanoMuse; six suggested names as chips plus a shuffle; the avatar; a one-line tagline (`web/src/components/IdentityForm.tsx`, shared with Settings)
+- [x] **P0** Naming page: 1–20 characters, empty falls back to corein; six suggested names as chips plus a shuffle; the avatar; a one-line tagline (`web/src/components/IdentityForm.tsx`, shared with Settings)
 - [x] **P0** The welcome screen down to three points: it does things for you / it keeps working when closed / it asks you first where it matters
 - [x] **P0** `Profile` (`nanomuse/server/service.py`) gains `tagline`; `style` splits into `tone` (formal / casual / playful / concise) + `communication` (short / detailed / bullets) + free text, each its own prompt paragraph; `tests/test_server.py::test_identity_fields_each_get_a_paragraph`
 - [x] **P0** Name audit: system prompt, approval and permission copy (`MuseSheet.tsx`), Settings heading, MobileGym `bridge.ts` (name from the hello / profile), the CLI banner (`· <name>`); the Android foreground notification keeps the product name while starting (no profile yet) and shows the agent's status text once connected
@@ -215,7 +215,7 @@ flowchart LR
 
 - [ ] `rootfs.yml`; `android.yml` builds the local and connect APKs with a size gate
 - [ ] `release.yml`: two APKs, the rootfs, checksums, notes; rsync to `dl.nanomuse.dev` in the same run
-- [x] PyPI pending publisher verified (`nano-muse/nanoMuse` + `release.yml` + environment Any, matching `environment: pypi` / `id-token: write`; the name `nanomuse` is free)
+- [x] PyPI pending publisher verified (`corein-app/corein` + `release.yml` + environment Any, matching `environment: pypi` / `id-token: write`; the name `nanomuse` is free)
 - [ ] First PyPI release: push a `v*` tag (must equal the `pyproject.toml` version); optionally tighten the environment to `pypi`
 - [ ] Decide whether to publish an `openmuse` 0.7.x transition release that only depends on `nanomuse`
 - [ ] Docker; review `showcase.yml`
@@ -243,7 +243,7 @@ flowchart LR
 ## 15. The site (P0)
 
 - [ ] **Apex online**: a `nanomuse.dev` vhost in the Caddyfile (static `/srv/www/site`), `www` 301, the `dl.` mirror; Cloudflare DNS A records (the token is on the server); fixes the current 500
-- [ ] `pages.yml` publishes twice: the Pages mirror (deploy key pushing to the root of `nano-muse.github.io`, with a canonical link) + rsync to the server; retire the `/nanoMuse/` path; update the repository homepage field
+- [ ] `pages.yml` publishes twice: the Pages mirror (deploy key pushing to the root of `nano-muse.github.io`, with a canonical link) + rsync to the server; retire the `/corein/` path; update the repository homepage field
 - [ ] **Eight sections**, copy written separately in Chinese and English, not translated: Hero (one line + one sentence + Download / GitHub + a quiet "try it in the browser" + a muted looping phone video) / Watch it work / Many hands (four tiles) / A Chinese day (seven case cards with trace links) / It asks first where it matters / Runs on your phone (the local build + what leaves the phone + a row of models) / Install (the three APK steps first, pip / Docker folded) / Footer
 - [ ] Copy rules: headlines ≤ 6 characters / 4 words; one idea per section; numbers over adjectives; banned: 赋能 / 一站式 / 极致 / 丝滑 / seamless / empower; no exclamation marks, no emoji headings; limits stated (Alpha, GUI needs Android 11+, Google login, no payments)
 - [ ] Real screenshots of real apps on one device frame and background; the red panda only in the hero and the ending

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the nanoMuse app icon for android/src/ios from assets/brand/.
+"""Generate the corein app icon for android/src/ios from assets/brand/.
 
 Idempotent; re-run after every upstream pull (CONTRIBUTING.md). Writes 1024x1024 PNGs:
 
@@ -13,7 +13,7 @@ Idempotent; re-run after every upstream pull (CONTRIBUTING.md). Writes 1024x1024
   pairing as the Android classic skins).
 
 iOS applies its own corner mask, so the tiles are full squares. The mark sits in the same frame
-as the Android legacy launcher icon (assets/brand/nanomuse-mark.svg is drawn on a 100-unit tile).
+as the Android legacy launcher icon (assets/brand/corein-mark.svg is drawn on a 100-unit tile).
 Needs Playwright with Chromium (`pip install playwright && playwright install chromium`).
 """
 

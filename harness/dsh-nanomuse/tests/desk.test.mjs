@@ -117,11 +117,11 @@ test('versions compare numerically, with pre-releases below the release', () => 
   // offered the installed release as an update
   assert.equal(compareVersions('0.1.40', 'dsh-nanomuse 0.1.40'), 0)
   assert.equal(compareVersions('dsh-nanomuse 0.1.41', 'v0.1.40'), 1)
-  assert.equal(compareVersions('nanoMuse-Desktop-0.1.40', '0.1.41'), -1)
+  assert.equal(compareVersions('corein-Desktop-0.1.40', '0.1.41'), -1)
 })
 
 test('the update check compares the bare bundle version, so the installed release is not offered again', async () => {
-  const mirror = { repo: 'nano-muse/nanoMuse', releases: [{ tag: 'v0.1.40', assets: [] }] }
+  const mirror = { repo: 'corein-app/corein', releases: [{ tag: 'v0.1.40', assets: [] }] }
   const fetchMirror = async () => ({ ok: true, status: 200, json: async () => mirror })
   const same = await checkForUpdate(BUNDLE_VERSION, fetchMirror)
   assert.equal(same.current, BUNDLE_VERSION)
@@ -138,30 +138,30 @@ test('the update check compares the bare bundle version, so the installed releas
 })
 
 test('the installer for this computer is picked from the release', () => {
-  const assets = ['nanoMuse-Desktop-0.1.34-linux-x64.AppImage', 'nanoMuse-Desktop-0.1.34-linux-x64.deb', 'nanoMuse-Desktop-0.1.34-mac-arm64.dmg', 'nanoMuse-Desktop-0.1.34-mac-x64.zip', 'nanoMuse-Desktop-0.1.34-win-x64.exe', 'nanoMuse-0.1.34-arm64.apk'].map((name) => ({ name, url: `https://x/${name}`, size: 1 }))
-  assert.equal(pickAsset(assets, 'darwin', 'arm64')?.name, 'nanoMuse-Desktop-0.1.34-mac-arm64.dmg')
-  assert.equal(pickAsset(assets, 'darwin', 'x64')?.name, 'nanoMuse-Desktop-0.1.34-mac-x64.zip')
-  assert.equal(pickAsset(assets, 'win32', 'x64')?.name, 'nanoMuse-Desktop-0.1.34-win-x64.exe')
-  assert.equal(pickAsset(assets, 'linux', 'x64')?.name, 'nanoMuse-Desktop-0.1.34-linux-x64.deb', 'the .deb is the one the docs prefer')
-  assert.equal(pickAsset(assets, 'linux', 'x64', true)?.name, 'nanoMuse-Desktop-0.1.34-linux-x64.AppImage', 'an AppImage install stays an AppImage')
+  const assets = ['corein-Desktop-0.1.34-linux-x64.AppImage', 'corein-Desktop-0.1.34-linux-x64.deb', 'corein-Desktop-0.1.34-mac-arm64.dmg', 'corein-Desktop-0.1.34-mac-x64.zip', 'corein-Desktop-0.1.34-win-x64.exe', 'corein-0.1.34-arm64.apk'].map((name) => ({ name, url: `https://x/${name}`, size: 1 }))
+  assert.equal(pickAsset(assets, 'darwin', 'arm64')?.name, 'corein-Desktop-0.1.34-mac-arm64.dmg')
+  assert.equal(pickAsset(assets, 'darwin', 'x64')?.name, 'corein-Desktop-0.1.34-mac-x64.zip')
+  assert.equal(pickAsset(assets, 'win32', 'x64')?.name, 'corein-Desktop-0.1.34-win-x64.exe')
+  assert.equal(pickAsset(assets, 'linux', 'x64')?.name, 'corein-Desktop-0.1.34-linux-x64.deb', 'the .deb is the one the docs prefer')
+  assert.equal(pickAsset(assets, 'linux', 'x64', true)?.name, 'corein-Desktop-0.1.34-linux-x64.AppImage', 'an AppImage install stays an AppImage')
   assert.equal(pickAsset(assets, 'linux', 'arm64'), undefined)
 })
 
-test('the update check reads the nanomuse.cn index first, GitHub second, and never throws (C2)', async () => {
-  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/nano-muse/nanoMuse/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'nanoMuse-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
-  const mirror = { repo: 'nano-muse/nanoMuse', releases: [{ tag: 'v0.1.33', assets: [{ name: 'nanoMuse-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
+test('the update check reads the corein.app index first, GitHub second, and never throws (C2)', async () => {
+  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/corein-app/corein/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'corein-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
+  const mirror = { repo: 'corein-app/corein', releases: [{ tag: 'v0.1.33', assets: [{ name: 'corein-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
   // both answer: the index wins, and GitHub is not asked at all
   const asked = []
   const both = async (url) => { asked.push(url); return { ok: true, status: 200, json: async () => (url.includes('github') ? github : mirror) } }
   const a = await checkForUpdate('0.1.33', both)
-  assert.equal(a.source, 'nanomuse.cn')
+  assert.equal(a.source, 'corein.app')
   assert.equal(a.latest, '0.1.33')
   assert.equal(a.newer, false)
-  assert.equal(a.assets[0].url, 'https://github.com/nano-muse/nanoMuse/releases/download/v0.1.33/nanoMuse-Desktop-0.1.33-linux-x64.AppImage')
-  assert.deepEqual(asked, ['https://nanomuse.cn/dl/index.json'])
+  assert.equal(a.assets[0].url, 'https://github.com/corein-app/corein/releases/download/v0.1.33/corein-Desktop-0.1.33-linux-x64.AppImage')
+  assert.deepEqual(asked, ['https://corein.app/dl/index.json'])
 
   // the index does not answer: GitHub
-  const b = await checkForUpdate('0.1.33', async (url) => (url.includes('nanomuse.cn') ? { ok: false, status: 502, json: async () => ({}) } : { ok: true, status: 200, json: async () => github }))
+  const b = await checkForUpdate('0.1.33', async (url) => (url.includes('corein.app') ? { ok: false, status: 502, json: async () => ({}) } : { ok: true, status: 200, json: async () => github }))
   assert.equal(b.source, 'github')
   assert.equal(b.latest, '0.1.34')
   assert.equal(b.newer, true)

@@ -1,9 +1,9 @@
 //
 //  NanoMuseProxy.swift
-//  nanoMuse
+//  corein
 //
 //  Settings → Network → HTTP proxy for own providers: one HTTP proxy, per device, that only
-//  the requests to own-key providers and the ChatGPT plan go through. Never nanoMuse Cloud,
+//  the requests to own-key providers and the ChatGPT plan go through. Never corein Cloud,
 //  the hub, a computer on the LAN or anything else the app fetches.
 //
 //  URLSession has no per-host proxy switch, so the proxy reaches a session as a proxy
@@ -17,7 +17,7 @@
 //
 //  Off by default. Nothing here is synced. The host, the port and the user name are in
 //  UserDefaults; the password is in the Keychain, on this device only, next to the relay's key
-//  (`io.github.nanomuse.app.proxy`). Up to 1.0.3 the password was a UserDefaults string too and
+//  (`com.corein.app.proxy`). Up to 1.0.3 the password was a UserDefaults string too and
 //  so part of every backup; `config()` moves it over once. The Android twin is
 //  io.github.nanomuse.net.OwnProviderProxy.
 //
@@ -51,10 +51,10 @@ enum NanoMuseProxy {
         static let credentialSpace = "nanomuse.proxy.credential_space"
     }
 
-    /// The Keychain item: the sweep on a fresh install removes every `io.github.nanomuse.app.*`
+    /// The Keychain item: the sweep on a fresh install removes every `com.corein.app.*`
     /// service, this one with them (NanoMuseAccountData.sweepDeviceKeychain).
     private enum KeychainItem {
-        static let service = "io.github.nanomuse.app.proxy"
+        static let service = "com.corein.app.proxy"
         static let account = "password"
     }
 
@@ -237,7 +237,7 @@ enum NanoMuseProxy {
     }
 
     /// Whether `host` is the relay's (as `refreshHosts` last read it): a 413 or a bare 5xx from
-    /// there is nanoMuse Cloud's refusal, not another provider's (NanoMuseRelayRefusal).
+    /// there is corein Cloud's refusal, not another provider's (NanoMuseRelayRefusal).
     static func isRelayHost(_ host: String) -> Bool {
         let h = host.lowercased()
         lock.lock()
@@ -419,7 +419,7 @@ enum NanoMuseProxy {
         defer { session.finishTasksAndInvalidate() }
         guard let u = URL(string: url) else { return Probe(ok: false, status: 0, millis: 0, host: host, failure: nil) }
         var request = URLRequest(url: u)
-        request.setValue("nanoMuse", forHTTPHeaderField: "User-Agent")
+        request.setValue("corein", forHTTPHeaderField: "User-Agent")
         do {
             let (data, response) = try await session.data(for: request)
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0

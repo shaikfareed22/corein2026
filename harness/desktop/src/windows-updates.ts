@@ -35,10 +35,10 @@ interface Sources {
 }
 
 const SOURCES: Sources = {
-  mirrorCheck: "https://nanomuse.cn/dl/win/",
-  githubCheck: "https://github.com/nano-muse/nanoMuse/releases/latest/download/",
-  mirrorVersion: (version) => `https://nanomuse.cn/dl/v${version}/`,
-  githubVersion: (version) => `https://github.com/nano-muse/nanoMuse/releases/download/v${version}/`,
+  mirrorCheck: "https://corein.app/dl/win/",
+  githubCheck: "https://github.com/corein-app/corein/releases/latest/download/",
+  mirrorVersion: (version) => `https://corein.app/dl/v${version}/`,
+  githubVersion: (version) => `https://github.com/corein-app/corein/releases/download/v${version}/`,
 };
 
 export interface WindowsUpdatesOptions {
@@ -273,7 +273,7 @@ export class WindowsUpdates {
     updater.allowPrerelease = false;
     updater.allowDowngrade = false;
     updater.disableWebInstaller = true;
-    updater.requestHeaders = { "User-Agent": `nanoMuse-Desktop/${this.options.currentVersion}` };
+    updater.requestHeaders = { "User-Agent": `corein-Desktop/${this.options.currentVersion}` };
     // The library queues quitAndInstall's quit before asynchronous spawn errors arrive.
     // This updater's app adapter refuses that queued quit once this attempt has failed.
     updater.on("error", () => { failed = true; });
@@ -281,7 +281,7 @@ export class WindowsUpdates {
   }
 
   private installer(info: UpdateInfo) {
-    const name = `nanoMuse-Desktop-${info.version}-win-x64.exe`;
+    const name = `corein-Desktop-${info.version}-win-x64.exe`;
     const files = info.files.filter((f) => /\.exe$/i.test(f.url));
     const file = files[0];
     if (files.length !== 1 || file?.url !== name || !file.sha512) throw new Error("No matching Windows installer integrity metadata");

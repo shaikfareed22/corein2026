@@ -46,10 +46,10 @@ import java.text.DateFormat
 import java.util.Date
 
 const val ROUTE_COMPUTERS = "nanomuse/computers"
-const val DESKTOP_DOWNLOAD_URL = "https://nanomuse.cn/#download"
+const val DESKTOP_DOWNLOAD_URL = "https://corein.app/#download"
 
 /**
- * Settings → Computers: the account's computers, as the hub knows them. One way in — nanoMuse
+ * Settings → Computers: the account's computers, as the hub knows them. One way in — corein
  * Desktop on the computer, signed in to the same account — so the page says which account this
  * phone uses (the usual reason a computer is missing is that it signed in to another one), lists
  * the computers with their system and when they were last seen, and a tap checks that one answers.

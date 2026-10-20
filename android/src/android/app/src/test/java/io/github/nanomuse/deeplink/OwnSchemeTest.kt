@@ -26,12 +26,12 @@ class OwnSchemeTest {
         assertEquals("minis", OwnScheme.internal("minis"))
         assertEquals("https", OwnScheme.internal("https"))
         assertEquals(null, OwnScheme.internal(null))
-        assertEquals("minis://settings/soul", OwnScheme.internalUrl("nanomuse://settings/soul"))
+        assertEquals("minis://settings/soul", OwnScheme.internalUrl("corein://settings/soul"))
         assertEquals("minis://session/abc/index.html?title=x", OwnScheme.internalUrl("NanoMuse://session/abc/index.html?title=x"))
         assertEquals("minis://attachments/a.png", OwnScheme.internalUrl("minis://attachments/a.png"))
-        assertEquals("https://nanomuse.cn/", OwnScheme.internalUrl("https://nanomuse.cn/"))
+        assertEquals("https://corein.app/", OwnScheme.internalUrl("https://corein.app/"))
         // the host part is not a scheme
-        assertEquals("https://nanomuse.cn/nanomuse://x", OwnScheme.internalUrl("https://nanomuse.cn/nanomuse://x"))
+        assertEquals("https://corein.app/corein://x", OwnScheme.internalUrl("https://corein.app/corein://x"))
     }
 
     @Test

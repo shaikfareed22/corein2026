@@ -1,10 +1,10 @@
-# cloud.nanomuse.cn — nanoMuse Cloud (the sign-in relay and the hub), served by
-# the showcase's Caddy next to nanomuse.cn. Goes into demo/showcase/sites.d/;
+# cloud.corein.app — corein Cloud (the sign-in relay and the hub), served by
+# the showcase's Caddy next to corein.app. Goes into demo/showcase/sites.d/;
 # the relay container (cloud/deploy/nanomuse-hk/docker-compose.yml) is on the
 # same `showcase_edge` network as `nanomuse-relay`. Certificate the ordinary
 # way, HTTP-01: the name points straight at this box.
 
-cloud.nanomuse.cn {
+cloud.corein.app {
 	# compressed, except the operator's samples export: it is sent whole with its length,
 	# and a download that gets re-encoded on the way has none — the browser gave up on it
 	@compressible not path /v1/admin/samples/export

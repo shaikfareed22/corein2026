@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Install the nanoMuse app into a MobileGym checkout.
+# Install the corein app into a MobileGym checkout.
 #
 #   demo/mobilegym/install.sh /path/to/mobilegym
 #
@@ -19,12 +19,12 @@ if [ ! -f "$target/os/createAppStore.ts" ] || [ ! -d "$target/apps" ]; then
   exit 1
 fi
 
-rm -rf "$target/apps/nanoMuse"
-cp -R "$here/apps/nanoMuse" "$target/apps/nanoMuse"
-echo "installed apps/nanoMuse into $target"
+rm -rf "$target/apps/corein"
+cp -R "$here/apps/corein" "$target/apps/corein"
+echo "installed apps/corein into $target"
 # the module's one dependency beyond MobileGym's own: it renders the phone's screenshot in the
 # tab. --no-save leaves the checkout's package.json and lockfile untouched.
 if [ -d "$target/node_modules" ] && [ ! -d "$target/node_modules/modern-screenshot" ]; then
   (cd "$target" && npm install --no-save --no-audit --no-fund modern-screenshot@^4.7.0)
 fi
-echo "next: (cd $target && npm install && npm install --no-save modern-screenshot && npm run dev), then open the nanoMuse app on the phone."
+echo "next: (cd $target && npm install && npm install --no-save modern-screenshot && npm run dev), then open the corein app on the phone."

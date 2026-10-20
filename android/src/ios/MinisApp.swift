@@ -128,12 +128,12 @@ struct MinisApp: App {
         //
         // `install` is idempotent, so the later onAppLaunch() call is a no-op.
         CrashSignalHandler.install()
-        // nanoMuse: join the devices hub once the account is signed in (a no-op otherwise).
+        // corein: join the devices hub once the account is signed in (a no-op otherwise).
         Task { @MainActor in NanoMuseHub.shared.autoStart() }
-        // nanoMuse: routines and goal check-ins — the BGAppRefreshTask must be registered before launch finishes.
+        // corein: routines and goal check-ins — the BGAppRefreshTask must be registered before launch finishes.
         NanoMuseScheduler.registerBackgroundTask()
-        Task { @MainActor in NanoMuseModelMenu.startFollowingPicks() } // nanoMuse: a pick in a chat's picker moves to the front of the Cloud group
-        Task { @MainActor in NanoMuseProxy.refreshHosts() } // nanoMuse: the provider hosts Settings → Network's proxy routes
+        Task { @MainActor in NanoMuseModelMenu.startFollowingPicks() } // corein: a pick in a chat's picker moves to the front of the Cloud group
+        Task { @MainActor in NanoMuseProxy.refreshHosts() } // corein: the provider hosts Settings → Network's proxy routes
         // [T-auto-grouping-default-on] Auto-grouping ships ON. `bool(forKey:)`
         // returns false for an unregistered key, so the default has to be
         // registered here rather than expressed at the (multiple) read sites —
@@ -167,7 +167,7 @@ struct MinisApp: App {
         Bundle.setLanguage(lang.isEmpty ? nil : lang)
         // [T-ios-soul-name-sidebar-stale] Pre-load cachedMetadata synchronously so
         // ContentView's `@State soulName` gets the real SOUL.md name on its very
-        // first render instead of the `.default` stub ("nanoMuse"). Without this the
+        // first render instead of the `.default` stub ("corein"). Without this the
         // @State initializer (evaluated at ContentView instantiation, before any
         // .onAppear refresh) locks the sidebar title to the default even when the
         // user set a custom name. refreshCache() only reads the tiny SOUL.md file.
@@ -190,7 +190,7 @@ struct MinisApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                NanoMuseRoot() // nanoMuse: the first run, then the Muse shell on iPhone and iPad; upstream ContentView when the shell is off and from the drawer
+                NanoMuseRoot() // corein: the first run, then the Muse shell on iPhone and iPad; upstream ContentView when the shell is off and from the drawer
                     .overlay(alignment: .top) {
                         BackgroundInterruptionBanner()
                     }
@@ -449,7 +449,7 @@ struct MinisApp: App {
     private func handleScenePhaseChange(_ phase: ScenePhase) {
         switch phase {
         case .active:
-            NanoMuseScheduler.shared.appBecameActive() // nanoMuse: run what came due while the phone slept
+            NanoMuseScheduler.shared.appBecameActive() // corein: run what came due while the phone slept
             let remaining = UIApplication.shared.backgroundTimeRemaining
             if let entry = backgroundEntryDate {
                 let elapsed = Date().timeIntervalSince(entry)
@@ -608,7 +608,7 @@ struct MinisApp: App {
             }
 
         case .background:
-            NanoMuseScheduler.shared.appWentBackground() // nanoMuse: ask for a background refresh, post the due-time notifications
+            NanoMuseScheduler.shared.appWentBackground() // corein: ask for a background refresh, post the due-time notifications
             backgroundEntryDate = Date()
             let remaining = UIApplication.shared.backgroundTimeRemaining
             lifecycleLog.info("[Lifecycle] → Background (remaining: \(Self.formatTimeRemaining(remaining)))")
@@ -664,8 +664,8 @@ struct MinisApp: App {
     // MARK: - FileProvider
 
     private static let fileProviderDomain = NSFileProviderDomain(
-        identifier: NSFileProviderDomainIdentifier("io.github.nanomuse.app.files"),
-        displayName: "nanoMuse"
+        identifier: NSFileProviderDomainIdentifier("com.corein.app.files"),
+        displayName: "corein"
     )
 
     /// Bumped when we need to force-rebuild the FileProvider domain on next launch
@@ -705,7 +705,7 @@ struct MinisApp: App {
         guard previous != current else { return }
         UserDefaults.standard.set(current, forKey: key)
 
-        guard let container = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.io.github.nanomuse.app") else { return }
+        guard let container = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.com.corein.app") else { return }
         let dir = container.appendingPathComponent("MinisConfig", isDirectory: true)
         try? fm.createDirectory(at: dir, withIntermediateDirectories: true)
         let url = dir.appendingPathComponent("fp-sync-trace.log")
@@ -1053,7 +1053,7 @@ struct MinisApp: App {
     private static func migrateSharedDirToAppGroup() {
         let fm = FileManager.default
         let library = fm.urls(for: .libraryDirectory, in: .userDomainMask).first!
-        let container = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.io.github.nanomuse.app")!
+        let container = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.com.corein.app")!
 
         let migrations: [(source: URL, dest: URL, label: String)] = [
             // Legacy Library/MinisChat/shared → new shared
@@ -1094,7 +1094,7 @@ struct MinisApp: App {
     /// targets logged during MOUNT setup.
     private static func logFPSyncTracePaths() {
         let fm = FileManager.default
-        let groupID = "group.io.github.nanomuse.app"
+        let groupID = "group.com.corein.app"
         let containerURL = fm.containerURL(forSecurityApplicationGroupIdentifier: groupID)
         let containerPath = containerURL?.path ?? "<nil>"
         let resolvedContainer = containerURL?.resolvingSymlinksInPath().path ?? "<nil>"

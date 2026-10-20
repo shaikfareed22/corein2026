@@ -14,7 +14,7 @@ import com.openminis.app.ui.navigation.Routes
  *   minis://settings                            → Settings home
  *   minis://settings/providers                  → Provider list
  *   minis://settings/providers/<instanceId>     → Provider detail
- *   minis://settings/providers/add[?preset=<catalogue id>[:oauth]] → Add a provider (nanoMuse: pre-filled for a vendor of assets/nanomuse/providers.json; `:oauth` opens on its sign-in)
+ *   minis://settings/providers/add[?preset=<catalogue id>[:oauth]] → Add a provider (corein: pre-filled for a vendor of assets/nanomuse/providers.json; `:oauth` opens on its sign-in)
  *   minis://settings/model-groups               → Model Groups (incl. Agent Loop section)
  *   minis://settings/model-groups/<groupId>     → Model Group detail
  *   minis://settings/usage                      → Token usage
@@ -94,7 +94,7 @@ sealed class DeepLinkAction {
         val title: String,
     ) : DeepLinkAction()
 
-    /** nanoMuse: one of the home shell's tabs (`minis://feed`), where a Feed notification lands. */
+    /** corein: one of the home shell's tabs (`minis://feed`), where a Feed notification lands. */
     data class OpenHomeTab(val tab: io.github.nanomuse.ui.home.HomeTab) : DeepLinkAction()
 
     data object Unknown : DeepLinkAction()
@@ -102,7 +102,7 @@ sealed class DeepLinkAction {
 
 object DeepLinkHandler {
     fun parse(uri: Uri?): DeepLinkAction {
-        // nanoMuse: the system knows the app as `nanomuse://`, the app itself says `minis://`; both are read here
+        // corein: the system knows the app as `corein://`, the app itself says `minis://`; both are read here
         if (uri == null || !io.github.nanomuse.deeplink.OwnScheme.isOwn(uri.scheme)) return DeepLinkAction.Unknown
         val host = uri.host ?: return DeepLinkAction.Unknown
         val path = uri.path.orEmpty()
@@ -126,7 +126,7 @@ object DeepLinkHandler {
                 else -> DeepLinkAction.Unknown
             }
             "settings" -> parseSettingsPath(uri)
-            "feed" -> DeepLinkAction.OpenHomeTab(io.github.nanomuse.ui.home.HomeTab.FEED) // nanoMuse: the feed's notification opens the Feed tab
+            "feed" -> DeepLinkAction.OpenHomeTab(io.github.nanomuse.ui.home.HomeTab.FEED) // corein: the feed's notification opens the Feed tab
             "session" -> {
                 // minis://session/<sessionId>                → OpenSession
                 // minis://session/<sessionId>/<resource-path> → OpenHtmlPreview
@@ -173,7 +173,7 @@ object DeepLinkHandler {
 
         return when (head) {
             "providers" ->
-                if (arg == "add") DeepLinkAction.OpenSettingsScreen(Routes.addProvider(uri.getQueryParameter("preset"))) // nanoMuse: pre-filled provider form
+                if (arg == "add") DeepLinkAction.OpenSettingsScreen(Routes.addProvider(uri.getQueryParameter("preset"))) // corein: pre-filled provider form
                 else if (arg != null) DeepLinkAction.OpenSettingsScreen(Routes.providerDetail(arg))
                 else DeepLinkAction.OpenSettingsScreen(Routes.PROVIDER_LIST)
             "model-groups", "model_groups" ->
@@ -198,16 +198,16 @@ object DeepLinkHandler {
                 DeepLinkAction.OpenSettingsScreen(Routes.LOGS)
             }
             "appearance" -> DeepLinkAction.OpenSettingsScreen(Routes.APPEARANCE)
-            "soul" -> DeepLinkAction.OpenSettingsScreen(Routes.SOUL) // nanoMuse: the name pill links here
-            "avatar", "face" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.avatar.ROUTE_AVATAR_STUDIO) // nanoMuse: the avatar studio
-            "media" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.media.ROUTE_MEDIA_MODELS) // nanoMuse: image & video models
-            "models" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.models.ROUTE_MODELS) // nanoMuse: Settings → Models
-            "hands", "screen" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.hands.ROUTE_HANDS) // nanoMuse: the screen as a hand
-            "computers", "pc" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.reach.ROUTE_COMPUTERS) // nanoMuse: the account's computers
-            "cloud", "devices" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.cloud.ROUTE_CLOUD_ACCOUNT) // nanoMuse: the account and its devices on the hub
-            "coding", "agents" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.coding.ROUTE_CODING) // nanoMuse: the coding agents on the account's computers
-            "profile" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.profile.ROUTE_AGENT_PROFILE) // nanoMuse: the face links here
-            "network", "proxy" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.net.ROUTE_NETWORK) // nanoMuse: the proxy for own providers
+            "soul" -> DeepLinkAction.OpenSettingsScreen(Routes.SOUL) // corein: the name pill links here
+            "avatar", "face" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.avatar.ROUTE_AVATAR_STUDIO) // corein: the avatar studio
+            "media" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.media.ROUTE_MEDIA_MODELS) // corein: image & video models
+            "models" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.models.ROUTE_MODELS) // corein: Settings → Models
+            "hands", "screen" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.hands.ROUTE_HANDS) // corein: the screen as a hand
+            "computers", "pc" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.reach.ROUTE_COMPUTERS) // corein: the account's computers
+            "cloud", "devices" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.cloud.ROUTE_CLOUD_ACCOUNT) // corein: the account and its devices on the hub
+            "coding", "agents" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.coding.ROUTE_CODING) // corein: the coding agents on the account's computers
+            "profile" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.profile.ROUTE_AGENT_PROFILE) // corein: the face links here
+            "network", "proxy" -> DeepLinkAction.OpenSettingsScreen(io.github.nanomuse.ui.net.ROUTE_NETWORK) // corein: the proxy for own providers
             "background" -> DeepLinkAction.OpenSettingsScreen(Routes.BACKGROUND)
             "about" -> DeepLinkAction.OpenSettingsScreen(Routes.ABOUT)
             "permissions" -> DeepLinkAction.OpenPermissionSettings

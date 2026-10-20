@@ -109,7 +109,6 @@ App Store releases can lag behind: every update waits on review, and we hold
 builds back when stability warrants it. The TestFlight build is where fixes
 and new features land first.
 
-**→ [Join the TestFlight beta](https://testflight.apple.com/join/3BdkA5c3)**
 
 On Android, the [releases page](https://github.com/OpenMinis/OpenMinis/releases)
 always carries the latest APK.

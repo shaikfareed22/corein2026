@@ -81,7 +81,7 @@ class RelayAddressTest {
     }
 
     @Test fun `the account page shows host and port`() {
-        assertEquals("cloud.nanomuse.cn", RelayAddress.display("https://cloud.nanomuse.cn"))
+        assertEquals("cloud.corein.app", RelayAddress.display("https://cloud.corein.app"))
         assertEquals("192.168.1.20:8790", RelayAddress.display("http://192.168.1.20:8790"))
         assertEquals("box.example.org", RelayAddress.display("https://box.example.org/nanomuse"))
         assertTrue(RelayAddress.isDefault(NanoMuseCloud.DEFAULT_BASE))
