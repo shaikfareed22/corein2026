@@ -31,7 +31,7 @@ DEFAULT_NUDGES: dict[str, Any] = {
     "version": 1,
     "star": {
         "enabled": True,
-        "url": "https://github.com/corein-app/corein",
+        "url": "https://github.com/shaikfareed22/corein2026",
         "moments": {
             "signed_in": True,
             "tasks": [3, 10, 30],

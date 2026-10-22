@@ -156,7 +156,7 @@ object AvatarShare {
         val send = Intent(Intent.ACTION_SEND).apply {
             type = "image/png"
             putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_TEXT, context.getString(R.string.nm_avatar_share_bubble, agentName) + "\nhttps://github.com/corein-app/corein")
+            putExtra(Intent.EXTRA_TEXT, context.getString(R.string.nm_avatar_share_bubble, agentName) + "\nhttps://github.com/shaikfareed22/corein2026")
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         val chooser = Intent.createChooser(send, context.getString(R.string.nm_avatar_share_title)).apply {

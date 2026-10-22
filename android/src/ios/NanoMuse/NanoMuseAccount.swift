@@ -253,7 +253,7 @@ struct NanoMuseStarAsk: Equatable, Identifiable {
 @MainActor
 final class NanoMuseStar: ObservableObject {
     static let shared = NanoMuseStar()
-    static let repoURL = URL(string: "https://github.com/corein-app/corein")!
+    static let repoURL = URL(string: "https://github.com/shaikfareed22/corein2026")!
 
     private enum Keys {
         static let tasks = "nm.star.tasks"

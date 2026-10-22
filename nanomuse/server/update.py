@@ -28,9 +28,9 @@ from nanomuse.logger import logger
 
 INDEX_URL = "https://corein.app/dl/index.json"
 DOWNLOAD_PAGE = "https://corein.app/dl/"
-RELEASES_API = "https://api.github.com/repos/corein-app/corein/releases/latest"
-RELEASES_PAGE = "https://github.com/corein-app/corein/releases/latest"
-RELEASE_TAG_PAGE = "https://github.com/corein-app/corein/releases/tag/{tag}"
+RELEASES_API = "https://api.github.com/repos/shaikfareed22/corein2026/releases/latest"
+RELEASES_PAGE = "https://github.com/shaikfareed22/corein2026/releases/latest"
+RELEASE_TAG_PAGE = "https://github.com/shaikfareed22/corein2026/releases/tag/{tag}"
 CACHE_S = 24 * 3600
 # a check that failed (the runtime came up before the network did) is tried again sooner
 RETRY_S = 3600

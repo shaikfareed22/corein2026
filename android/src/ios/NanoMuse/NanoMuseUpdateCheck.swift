@@ -18,8 +18,8 @@ final class NanoMuseUpdateCheck: ObservableObject {
     static let shared = NanoMuseUpdateCheck()
 
     nonisolated static let indexURL = "https://corein.app/dl/index.json"
-    nonisolated static let githubURL = "https://api.github.com/repos/corein-app/corein/releases/latest"
-    nonisolated static let fallbackReleasePage = "https://github.com/corein-app/corein/releases/latest"
+    nonisolated static let githubURL = "https://api.github.com/repos/shaikfareed22/corein2026/releases/latest"
+    nonisolated static let fallbackReleasePage = "https://github.com/shaikfareed22/corein2026/releases/latest"
     /// The download page on corein.app, where a release found through the index leads (Android's `DOWNLOAD_URL`).
     nonisolated static let downloadPage = "https://corein.app/dl/"
 

@@ -36,9 +36,9 @@ interface Sources {
 
 const SOURCES: Sources = {
   mirrorCheck: "https://corein.app/dl/win/",
-  githubCheck: "https://github.com/corein-app/corein/releases/latest/download/",
+  githubCheck: "https://github.com/shaikfareed22/corein2026/releases/latest/download/",
   mirrorVersion: (version) => `https://corein.app/dl/v${version}/`,
-  githubVersion: (version) => `https://github.com/corein-app/corein/releases/download/v${version}/`,
+  githubVersion: (version) => `https://github.com/shaikfareed22/corein2026/releases/download/v${version}/`,
 };
 
 export interface WindowsUpdatesOptions {

@@ -46,7 +46,7 @@ HERE = Path(__file__).resolve().parent
 LOG_DIR = Path(os.environ.get("TRAFFIC_LOG_DIR") or HERE.parent / "logs" / "caddy")
 LOG_NAME = os.environ.get("TRAFFIC_LOG_NAME") or "corein.app.log"
 DB_PATH = Path(os.environ.get("TRAFFIC_DB") or "/var/lib/nanomuse-traffic/traffic.db")
-REPO = os.environ.get("TRAFFIC_REPO") or "corein-app/corein"
+REPO = os.environ.get("TRAFFIC_REPO") or "shaikfareed22/corein2026"
 OWN_HOSTS = {
     h.strip().lower()
     for h in (os.environ.get("TRAFFIC_HOSTS") or "corein.app,corein.app").split(",")

@@ -34,7 +34,7 @@ async def test_put_round_trip_bumps_the_version_and_reaches_me():
     body = {
         "star": {
             "enabled": True,
-            "url": "https://github.com/corein-app/corein",
+            "url": "https://github.com/shaikfareed22/corein2026",
             "moments": {
                 "signed_in": False,
                 "tasks": "10, 3, 50,3",

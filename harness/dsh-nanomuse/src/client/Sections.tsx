@@ -21,10 +21,10 @@ import { DOCS_URL, ISSUES_URL, REPO_URL } from './panels.ts'
 import { setPrefs, usePrefs } from './prefs.ts'
 
 const SITE_URL = 'https://corein.app/'
-const DISCUSS_URL = 'https://github.com/corein-app/corein/discussions'
+const DISCUSS_URL = 'https://github.com/shaikfareed22/corein2026/discussions'
 /** The privacy policy as every client links it (the relay, the web console and the phones agree). */
 const PRIVACY_URL = 'https://corein.app/privacy/'
-const LICENSE_URL = 'https://github.com/corein-app/corein/blob/main/LICENSE'
+const LICENSE_URL = 'https://github.com/shaikfareed22/corein2026/blob/main/LICENSE'
 
 function Switch({ checked, onChange, label, disabled }: { checked: boolean; onChange(next: boolean): void; label: string; disabled?: boolean }): ReactNode {
   return h('button', { type: 'button', role: 'switch', className: 'nm-switch', 'aria-checked': checked, 'aria-label': label, disabled, onClick: () => onChange(!checked) })

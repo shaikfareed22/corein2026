@@ -64,7 +64,7 @@ struct AboutView: View {
 
             // MARK: - Links
             Section("Links") {
-                Link(destination: URL(string: "https://github.com/corein-app/corein")!) {
+                Link(destination: URL(string: "https://github.com/shaikfareed22/corein2026")!) {
                     Label {
                         HStack {
                             Text("GitHub Repository")
@@ -78,7 +78,7 @@ struct AboutView: View {
                         Image(systemName: "link.circle.fill")
                     }
                 }
-                Link(destination: URL(string: "https://github.com/corein-app/corein/issues")!) {
+                Link(destination: URL(string: "https://github.com/shaikfareed22/corein2026/issues")!) {
                     Label {
                         HStack {
                             Text("Report an Issue")

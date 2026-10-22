@@ -503,7 +503,7 @@ async def test_admin_series_and_traffic(tmp_path):
                 "host": "corein.app",
                 "uri": uri,
                 "client_ip": "203.0.113.7",
-                "headers": {"User-Agent": [ua], "Referer": ["https://github.com/corein-app/corein"]},
+                "headers": {"User-Agent": [ua], "Referer": ["https://github.com/shaikfareed22/corein2026"]},
             },
             "resp_headers": {"Content-Type": [ctype]},
         }

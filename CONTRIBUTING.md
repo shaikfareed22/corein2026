@@ -51,7 +51,7 @@ python scripts/rebrand.py && python scripts/gen-android-icons.py && python scrip
 ## Working in the runtime, the relay and the web console
 
 ```bash
-git clone https://github.com/corein-app/corein.git && cd corein
+git clone https://github.com/shaikfareed22/corein2026.git && cd corein
 uv venv && source .venv/bin/activate
 uv pip install -e ".[dev]"            # add ",browser" for the Playwright tool
 nanomuse config init                  # config/config.toml is git-ignored

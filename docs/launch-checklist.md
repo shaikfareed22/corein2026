@@ -215,7 +215,7 @@ flowchart LR
 
 - [ ] `rootfs.yml`; `android.yml` builds the local and connect APKs with a size gate
 - [ ] `release.yml`: two APKs, the rootfs, checksums, notes; rsync to `dl.nanomuse.dev` in the same run
-- [x] PyPI pending publisher verified (`corein-app/corein` + `release.yml` + environment Any, matching `environment: pypi` / `id-token: write`; the name `nanomuse` is free)
+- [x] PyPI pending publisher verified (`shaikfareed22/corein2026` + `release.yml` + environment Any, matching `environment: pypi` / `id-token: write`; the name `nanomuse` is free)
 - [ ] First PyPI release: push a `v*` tag (must equal the `pyproject.toml` version); optionally tighten the environment to `pypi`
 - [ ] Decide whether to publish an `openmuse` 0.7.x transition release that only depends on `nanomuse`
 - [ ] Docker; review `showcase.yml`

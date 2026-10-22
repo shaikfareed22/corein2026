@@ -44,8 +44,8 @@ const PROFILE = "nanomuse";
 // the agent's reminders — an optional bundle of the harness, on by default here), then ours.
 const BUNDLES = ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@deepseek-ai/dsh-experimental-schedule-bundle", "dsh-nanomuse"];
 const BUNDLE = "dsh-nanomuse";
-const RELEASES_PAGE = "https://github.com/corein-app/corein/releases/latest";
-const ISSUES_PAGE = "https://github.com/corein-app/corein/issues";
+const RELEASES_PAGE = "https://github.com/shaikfareed22/corein2026/releases/latest";
+const ISSUES_PAGE = "https://github.com/shaikfareed22/corein2026/issues";
 const DOCS_PAGE = "https://corein.app/docs/desktop";
 const HARNESS_PAGE = "https://github.com/deepseek-ai/deepseek-harness";
 

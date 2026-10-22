@@ -121,7 +121,7 @@ test('versions compare numerically, with pre-releases below the release', () => 
 })
 
 test('the update check compares the bare bundle version, so the installed release is not offered again', async () => {
-  const mirror = { repo: 'corein-app/corein', releases: [{ tag: 'v0.1.40', assets: [] }] }
+  const mirror = { repo: 'shaikfareed22/corein2026', releases: [{ tag: 'v0.1.40', assets: [] }] }
   const fetchMirror = async () => ({ ok: true, status: 200, json: async () => mirror })
   const same = await checkForUpdate(BUNDLE_VERSION, fetchMirror)
   assert.equal(same.current, BUNDLE_VERSION)
@@ -148,8 +148,8 @@ test('the installer for this computer is picked from the release', () => {
 })
 
 test('the update check reads the corein.app index first, GitHub second, and never throws (C2)', async () => {
-  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/corein-app/corein/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'corein-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
-  const mirror = { repo: 'corein-app/corein', releases: [{ tag: 'v0.1.33', assets: [{ name: 'corein-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
+  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/shaikfareed22/corein2026/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'corein-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
+  const mirror = { repo: 'shaikfareed22/corein2026', releases: [{ tag: 'v0.1.33', assets: [{ name: 'corein-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
   // both answer: the index wins, and GitHub is not asked at all
   const asked = []
   const both = async (url) => { asked.push(url); return { ok: true, status: 200, json: async () => (url.includes('github') ? github : mirror) } }
@@ -157,7 +157,7 @@ test('the update check reads the corein.app index first, GitHub second, and neve
   assert.equal(a.source, 'corein.app')
   assert.equal(a.latest, '0.1.33')
   assert.equal(a.newer, false)
-  assert.equal(a.assets[0].url, 'https://github.com/corein-app/corein/releases/download/v0.1.33/corein-Desktop-0.1.33-linux-x64.AppImage')
+  assert.equal(a.assets[0].url, 'https://github.com/shaikfareed22/corein2026/releases/download/v0.1.33/corein-Desktop-0.1.33-linux-x64.AppImage')
   assert.deepEqual(asked, ['https://corein.app/dl/index.json'])
 
   // the index does not answer: GitHub

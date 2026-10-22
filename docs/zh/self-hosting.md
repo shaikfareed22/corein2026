@@ -26,7 +26,7 @@ corein Cloud 就是 corein.app 背后的那个中继：邮箱或手机号登录�
 ### 一条命令 {#in-one-command}
 
 ```bash
-git clone https://github.com/corein-app/corein.git && cd corein
+git clone https://github.com/shaikfareed22/corein2026.git && cd corein
 bash scripts/self-host.sh
 ```
 

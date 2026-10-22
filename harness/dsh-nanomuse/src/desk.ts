@@ -384,9 +384,9 @@ export function readSharedConnectors(raw: unknown): SharedConnector[] {
 
 // ---- the update check (B5) ---------------------------------------------------------
 
-export const RELEASES_API = 'https://api.github.com/repos/corein-app/corein/releases/latest'
+export const RELEASES_API = 'https://api.github.com/repos/shaikfareed22/corein2026/releases/latest'
 export const RELEASES_INDEX = 'https://corein.app/dl/index.json'
-export const RELEASES_PAGE = 'https://github.com/corein-app/corein/releases'
+export const RELEASES_PAGE = 'https://github.com/shaikfareed22/corein2026/releases'
 
 export interface ReleaseAsset {
   name: string
@@ -508,7 +508,7 @@ export async function checkForUpdate(current: string, fetchImpl: Fetch = fetch a
     const rel = (index.releases ?? []).find((r) => r.tag)
     const latest = String(rel?.tag ?? '').replace(/^v/, '')
     if (!rel || !latest) throw new Error('no release')
-    const repo = index.repo || 'corein-app/corein'
+    const repo = index.repo || 'shaikfareed22/corein2026'
     return {
       ...base,
       latest,

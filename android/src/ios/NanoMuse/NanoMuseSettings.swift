@@ -229,7 +229,7 @@ enum NanoMuseLinks {
         let info = Bundle.main.infoDictionary
         let version = info?["CFBundleShortVersionString"] as? String ?? "?"
         let build = info?["CFBundleVersion"] as? String ?? "?"
-        var components = URLComponents(string: "https://github.com/corein-app/corein/issues/new")!
+        var components = URLComponents(string: "https://github.com/shaikfareed22/corein2026/issues/new")!
         components.queryItems = [
             URLQueryItem(name: "template", value: "bug_report.yml"),
             URLQueryItem(name: "labels", value: "bug,ios"),
@@ -237,7 +237,7 @@ enum NanoMuseLinks {
             URLQueryItem(name: "version", value: "\(version) (\(build))"),
             URLQueryItem(name: "os", value: "iOS \(UIDevice.current.systemVersion), \(UIDevice.current.model)"),
         ]
-        return components.url ?? URL(string: "https://github.com/corein-app/corein/issues")!
+        return components.url ?? URL(string: "https://github.com/shaikfareed22/corein2026/issues")!
     }
 }
 

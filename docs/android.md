@@ -32,7 +32,7 @@ update*) and offers the download.
 ## Install
 
 1. Download `corein-<version>-arm64.apk` from the
-   [latest release](https://github.com/corein-app/corein/releases/latest). Verify with
+   [latest release](https://github.com/shaikfareed22/corein2026/releases/latest). Verify with
    `sha256sum -c corein-<version>-arm64.apk.sha256` if you like.
 2. Open it. Android asks once to allow installs from your browser or file manager.
 3. **Sign in.** The first screen is the account: a phone number or an e-mail address,

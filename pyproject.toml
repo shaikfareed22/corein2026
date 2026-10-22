@@ -78,9 +78,9 @@ nanomuse-open = "nanomuse.bridge.cli:open_main"
 [project.urls]
 Homepage = "https://corein.app"
 Documentation = "https://corein.app/docs/"
-Repository = "https://github.com/corein-app/corein"
-Issues = "https://github.com/corein-app/corein/issues"
-Changelog = "https://github.com/corein-app/corein/blob/main/CHANGELOG.md"
+Repository = "https://github.com/shaikfareed22/corein2026"
+Issues = "https://github.com/shaikfareed22/corein2026/issues"
+Changelog = "https://github.com/shaikfareed22/corein2026/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["nanomuse"]

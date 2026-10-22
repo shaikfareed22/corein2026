@@ -40,15 +40,15 @@
   | Windows 10+ | `corein-Desktop-<version>-win-x64.exe` (the desktop app, on DeepSeek Harness) |
   | macOS 12+ | `corein-Desktop-<version>-mac-arm64.dmg` / `-mac-x64.dmg` (or the `.zip`: unzip, drag to Applications) |
   | Linux x64 | `corein-Desktop-<version>-linux-x64.deb` / `.AppImage` (needs FUSE; `--appimage-extract-and-run` without) / `.tar.gz` (unpack anywhere, run `./corein-desktop`) |
-  | DeepSeek Harness Desktop you already run | `dsh-nanomuse-<version>.tgz`: `dsh plugin --profile desktop add …` ([how](https://github.com/corein-app/corein/blob/main/harness/README.md)) |
+  | DeepSeek Harness Desktop you already run | `dsh-nanomuse-<version>.tgz`: `dsh plugin --profile desktop add …` ([how](https://github.com/shaikfareed22/corein2026/blob/main/harness/README.md)) |
 
   In our measurements GitHub's own downloads are quick from China as well; if they fail where you are, the same files are on [corein.app/dl/v<version>/](https://corein.app/dl/v<version>/) within fifteen minutes.
 
 ## Community
 
-corein is open source, free and non-profit. Sign in with a phone number or an e-mail and you get a starting allowance; the developer pays for it. The account page shows what is left and how to add more. When it is gone, use your own key or a plan you already pay for ([how](https://github.com/corein-app/corein/blob/main/docs/own-key.md)). With an account, the text of your conversations is kept on corein Cloud so that your devices show the same chats; one switch in Data controls turns it off and deletes it; nothing is sold ([privacy policy](https://corein.app/privacy/)); delete the account whenever you want.
+corein is open source, free and non-profit. Sign in with a phone number or an e-mail and you get a starting allowance; the developer pays for it. The account page shows what is left and how to add more. When it is gone, use your own key or a plan you already pay for ([how](https://github.com/shaikfareed22/corein2026/blob/main/docs/own-key.md)). With an account, the text of your conversations is kept on corein Cloud so that your devices show the same chats; one switch in Data controls turns it off and deletes it; nothing is sold ([privacy policy](https://corein.app/privacy/)); delete the account whenever you want.
 
-A stable version is not the last word: corein keeps evolving, and the [roadmap](https://github.com/corein-app/corein/blob/main/docs/roadmap.md) says what comes next. We use it every day and know where it is rough; tell us where it broke for you and what you want it to do. Thanks to everyone who tried a build and reported what broke. [Open an issue](https://github.com/corein-app/corein/issues/new/choose) · [send a pull request](https://github.com/corein-app/corein/blob/main/CONTRIBUTING.md) · [Discussions](https://github.com/corein-app/corein/discussions) · [Discord](https://discord.gg/bkTySmm28X) · [star the repo](https://github.com/corein-app/corein); if it is useful to you, a star helps others find it.
+A stable version is not the last word: corein keeps evolving, and the [roadmap](https://github.com/shaikfareed22/corein2026/blob/main/docs/roadmap.md) says what comes next. We use it every day and know where it is rough; tell us where it broke for you and what you want it to do. Thanks to everyone who tried a build and reported what broke. [Open an issue](https://github.com/shaikfareed22/corein2026/issues/new/choose) · [send a pull request](https://github.com/shaikfareed22/corein2026/blob/main/CONTRIBUTING.md) · [Discussions](https://github.com/shaikfareed22/corein2026/discussions) · [Discord](https://discord.gg/bkTySmm28X) · [star the repo](https://github.com/shaikfareed22/corein2026); if it is useful to you, a star helps others find it.
 
 Based on [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13 (GPL-3.0), modified since 2026-09-24. The complete corresponding source of this build is tag `v<version>` plus the `android/deps/proot` submodule ([nano-muse/proot](https://github.com/nano-muse/proot)). The whole repository is GPL-3.0-or-later. corein Desktop carries DeepSeek Harness unmodified, with its licence files inside; *harness* in the name is the word, not DeepSeek's. corein is not affiliated with Meta; Muse is a trademark of Meta Platforms, Inc. The desktop follows what Muse's app looks like and does, written down from using it; none of Meta's assets, code or content is in it.
 
@@ -81,15 +81,15 @@ Based on [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13 (GPL-3.0), mod
   | Windows 10+ | `corein-Desktop-<version>-win-x64.exe`（桌面 App，基于 DeepSeek Harness） |
   | macOS 12+ | `corein-Desktop-<version>-mac-arm64.dmg` / `-mac-x64.dmg`（或 `.zip`：解压后拖进「应用程序」） |
   | Linux x64 | `corein-Desktop-<version>-linux-x64.deb` / `.AppImage`（需要 FUSE；没有就加 `--appimage-extract-and-run`）/ `.tar.gz`（解压到任意位置，运行 `./corein-desktop`）|
-  | 已在用 DeepSeek Harness Desktop | `dsh-nanomuse-<version>.tgz`：`dsh plugin --profile desktop add …`（[怎么装](https://github.com/corein-app/corein/blob/main/harness/README.md)） |
+  | 已在用 DeepSeek Harness Desktop | `dsh-nanomuse-<version>.tgz`：`dsh plugin --profile desktop add …`（[怎么装](https://github.com/shaikfareed22/corein2026/blob/main/harness/README.md)） |
 
   实测从国内直接下 GitHub 也不慢；万一下不动，同样的文件十五分钟内会出现在 [corein.app/dl/v<version>/](https://corein.app/dl/v<version>/)。
 
 ### 社区
 
-corein 开源、免费、非营利。手机号或邮箱登录后有一份起始额度，钱是开发者出的；剩多少、怎么加，账号页里有数。用完可以换成自己的 key，或者用你已经在付费的套餐登录（[教程](https://github.com/corein-app/corein/blob/main/docs/own-key.md)）。登录后，对话文字会保存在 corein Cloud，让你的几台设备看到同样的对话；「数据控制」里一个开关就能关掉并删除；数据不卖（[隐私政策](https://corein.app/privacy/)）；账号想删就删。
+corein 开源、免费、非营利。手机号或邮箱登录后有一份起始额度，钱是开发者出的；剩多少、怎么加，账号页里有数。用完可以换成自己的 key，或者用你已经在付费的套餐登录（[教程](https://github.com/shaikfareed22/corein2026/blob/main/docs/own-key.md)）。登录后，对话文字会保存在 corein Cloud，让你的几台设备看到同样的对话；「数据控制」里一个开关就能关掉并删除；数据不卖（[隐私政策](https://corein.app/privacy/)）；账号想删就删。
 
-稳定版也不是最后一句话：corein 在持续进化，接下来做什么写在[路线图](https://github.com/corein-app/corein/blob/main/docs/zh/roadmap.md)里。我们自己每天在用，知道哪些地方还糙；哪里坏了、想要什么，直接提 issue。谢谢每一位装过、试过、报过问题的人。[提 issue](https://github.com/corein-app/corein/issues/new/choose) · [发 PR](https://github.com/corein-app/corein/blob/main/CONTRIBUTING.md) · [Discussions](https://github.com/corein-app/corein/discussions) · [Discord](https://discord.gg/bkTySmm28X) · [点个 Star](https://github.com/corein-app/corein)；觉得有用，点个 Star，让更多人看到。
+稳定版也不是最后一句话：corein 在持续进化，接下来做什么写在[路线图](https://github.com/shaikfareed22/corein2026/blob/main/docs/zh/roadmap.md)里。我们自己每天在用，知道哪些地方还糙；哪里坏了、想要什么，直接提 issue。谢谢每一位装过、试过、报过问题的人。[提 issue](https://github.com/shaikfareed22/corein2026/issues/new/choose) · [发 PR](https://github.com/shaikfareed22/corein2026/blob/main/CONTRIBUTING.md) · [Discussions](https://github.com/shaikfareed22/corein2026/discussions) · [Discord](https://discord.gg/bkTySmm28X) · [点个 Star](https://github.com/shaikfareed22/corein2026)；觉得有用，点个 Star，让更多人看到。
 
 基于 [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13（GPL-3.0），自 2026-09-24 起修改；本版本的完整对应源码是 tag `v<version>` 加子模块 `android/deps/proot`（[nano-muse/proot](https://github.com/nano-muse/proot)）。整个仓库以 GPL-3.0-or-later 发布。corein 桌面版原样携带 DeepSeek Harness 及其许可证文件；名字里的 *harness* 是普通词，不是 DeepSeek 的名字。corein 与 Meta 无关，Muse 是 Meta Platforms, Inc. 的商标。桌面端照着 Muse 应用用起来的样子做，是用过之后写下来的；里面没有 Meta 的任何素材、代码或内容。
 

@@ -12,7 +12,7 @@ corein is a fork of [nanoMuse](https://github.com/nano-muse/nanoMuse) by Guangyi
 
 | | |
 |---|---|
-| **Android** 8.0+, arm64 | `corein-<version>-arm64.apk` from the [latest release](https://github.com/corein-app/corein/releases/latest): every version is signed with the same key and installs over the last |
+| **Android** 8.0+, arm64 | `corein-<version>-arm64.apk` from the [latest release](https://github.com/shaikfareed22/corein2026/releases/latest): every version is signed with the same key and installs over the last |
 | **iPhone / iPad** | TestFlight link to come; [iOS](docs/ios.md) says how to build it yourself |
 | **macOS** 12+ | `corein-Desktop-<version>-mac-arm64.dmg` and `-mac-x64.dmg`. Not notarised: right-click → *Open* the first time |
 | **Windows** 10+ | `corein-Desktop-<version>-win-x64.exe`: click *Run anyway* once |

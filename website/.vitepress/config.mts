@@ -13,7 +13,7 @@ import { posix } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, type DefaultTheme } from 'vitepress'
 
-const REPO = 'https://github.com/corein-app/corein'
+const REPO = 'https://github.com/shaikfareed22/corein2026'
 const base = process.env.DOCS_BASE ?? '/corein/docs/'
 
 // Directories under docs/ that are not pages of the site: task briefs and traces are

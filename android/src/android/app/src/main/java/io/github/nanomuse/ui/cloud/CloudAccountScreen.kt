@@ -1146,12 +1146,12 @@ fun CommunityNoticeCard(inset: Dp = 16.dp) {
             )
             Spacer(Modifier.height(6.dp))
             Row {
-                TextButton(onClick = { openExternalUrl(context, "https://github.com/corein-app/corein") }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
+                TextButton(onClick = { openExternalUrl(context, "https://github.com/shaikfareed22/corein2026") }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
                     Icon(Icons.Outlined.Code, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(6.dp))
                     Text(stringResource(R.string.nm_notice_github))
                 }
-                TextButton(onClick = { openExternalUrl(context, "https://github.com/corein-app/corein/issues/new/choose") }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
+                TextButton(onClick = { openExternalUrl(context, "https://github.com/shaikfareed22/corein2026/issues/new/choose") }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
                     Icon(Icons.Outlined.BugReport, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(6.dp))
                     Text(stringResource(R.string.nm_notice_issue))

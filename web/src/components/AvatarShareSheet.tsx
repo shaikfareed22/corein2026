@@ -31,7 +31,7 @@ const PALETTES: Palette[] = [
   { id: "green", background: "#D9F0DF", accent: "#2E7D4F", mood: "error" },
 ];
 
-const REPO = "github.com/corein-app/corein";
+const REPO = "github.com/shaikfareed22/corein2026";
 // the card, in CSS pixels; drawn at 2× for a crisp picture
 const W = 540;
 const H = 720;

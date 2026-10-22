@@ -342,7 +342,7 @@ that takes images).
 #    Cloudflare → My Profile → API Tokens: Zone → DNS → Edit and Zone → Zone → Read on the zone.
 
 # 2. the code
-git clone https://github.com/corein-app/corein.git && cd corein/demo/showcase
+git clone https://github.com/shaikfareed22/corein2026.git && cd corein/demo/showcase
 cp .env.example .env && $EDITOR .env          # names, ACME_EMAIL, CLOUDFLARE_API_TOKEN, keys
 
 # 3. what the sessions run

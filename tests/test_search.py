@@ -21,7 +21,7 @@ from nanomuse.tools import WebSearch
 from nanomuse.vault import CredentialVault
 
 DDG_ROWS = [
-    {"title": "corein", "href": "https://github.com/corein-app/corein", "body": "An agent."},
+    {"title": "corein", "href": "https://github.com/shaikfareed22/corein2026", "body": "An agent."},
     {"title": "Muse", "href": "https://example.com/muse", "body": "Something else."},
 ]
 

@@ -40,7 +40,7 @@ struct NanoMuseNudgePolicy: Equatable, Sendable {
     /// The built-in fallback — identical on Android, iOS, desktop and web.
     static let defaults = NanoMuseNudgePolicy(
         enabled: true,
-        url: "https://github.com/corein-app/corein",
+        url: "https://github.com/shaikfareed22/corein2026",
         signedIn: true,
         tasks: [3, 10, 30],
         newLook: true,

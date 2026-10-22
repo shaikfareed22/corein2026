@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url'
 export const NAME = 'corein'
 export const CLOUD = `${NAME} Cloud`
 export const DESKTOP = `${NAME} Desktop`
-export const REPO = 'corein-app/corein'
+export const REPO = 'shaikfareed22/corein2026'
 export const DOMAIN = 'corein.app'
 export const RELAY = `cloud.${DOMAIN}`
 export const DEMO = `demo.${DOMAIN}`

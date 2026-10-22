@@ -32,7 +32,7 @@ later be added on the relay (allowance, members, `SIGNUP_OPEN`) without touching
 | Desktop appId / executable / artifact | io.github.nanomuse.desktop / nanomuse-desktop / nanoMuse-Desktop-* | com.corein.desktop / corein-desktop / corein-Desktop-* |
 | Default relay | https://cloud.nanomuse.cn | https://cloud.corein.app |
 | Site, demo | nanomuse.cn, demo.nanomuse.dev | corein.app, demo.corein.app |
-| Repository | github.com/nano-muse/nanoMuse | github.com/corein-app/corein |
+| Repository | github.com/nano-muse/nanoMuse | github.com/shaikfareed22/corein2026 |
 | Brand mark, icon, wordmark, cover | the one-stroke N | the corein circuit-o mark and wordmark |
 | Upstream badges (stars, trendshift, hits, Discord, TestFlight link) | nanoMuse's | removed; owner adds their own when they exist |
 

@@ -17,7 +17,7 @@ import { DOCS_URL, ISSUES_URL, REPO_URL } from './panels.ts'
 import { Sheet } from './ui.tsx'
 import { useWindowsUpdates, updatePresentation, requestWindowsUpdate } from './windows-updates.ts'
 
-export const RELEASES_URL = 'https://github.com/corein-app/corein/releases'
+export const RELEASES_URL = 'https://github.com/shaikfareed22/corein2026/releases'
 
 interface AppInfo {
   version: string

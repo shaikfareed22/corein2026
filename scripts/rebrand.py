@@ -50,7 +50,7 @@ APP_ID = "com.corein.app"
 NAME = "corein"
 VERSION_NAME = "1.0.5"
 VERSION_CODE = 48
-REPO = "corein-app/corein"
+REPO = "shaikfareed22/corein2026"
 REPO_URL = f"https://github.com/{REPO}"
 PRIVACY_URL = f"{REPO_URL}/blob/main/docs/privacy.md"
 
@@ -149,8 +149,8 @@ def links() -> None:
     edit(
         JAVA / "data" / "UpdateChecker.kt",
         [
-            (r'private const val OWNER = "[^"]+"', 'private const val OWNER = "corein-app"'),
-            (r'private const val REPO = "[^"]+"', 'private const val REPO = "corein"'),
+            (r'private const val OWNER = "[^"]+"', 'private const val OWNER = "shaikfareed22"'),
+            (r'private const val REPO = "[^"]+"', 'private const val REPO = "corein2026"'),
             (
                 r'const val RELEASES_URL: String = "[^"]+"',
                 f'const val RELEASES_URL: String = "{REPO_URL}/releases"',

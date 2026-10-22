@@ -3,8 +3,8 @@ import { useT } from "../i18n";
 import { cx } from "../util";
 import { markStarred } from "./StarNudge";
 
-export const REPO_URL = "https://github.com/corein-app/corein";
-export const ISSUES_URL = "https://github.com/corein-app/corein/issues/new/choose";
+export const REPO_URL = "https://github.com/shaikfareed22/corein2026";
+export const ISSUES_URL = "https://github.com/shaikfareed22/corein2026/issues/new/choose";
 /** The notice on the site, with the whole story: who pays, what is kept, how to help. */
 export const NOTICE_URL = "https://corein.app/#open-source";
 

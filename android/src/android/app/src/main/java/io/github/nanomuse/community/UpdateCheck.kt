@@ -33,7 +33,7 @@ object UpdateCheck {
     /** Where "Update" goes on Android: the download page, with the APK and the store links. */
     const val DOWNLOAD_URL = "https://corein.app/dl/"
     const val INDEX_URL = "https://corein.app/dl/index.json"
-    const val GITHUB_LATEST_URL = "https://api.github.com/repos/corein-app/corein/releases/latest"
+    const val GITHUB_LATEST_URL = "https://api.github.com/repos/shaikfareed22/corein2026/releases/latest"
 
     /** A check is repeated at most this often on its own. */
     const val FRESH_MS = 24L * 60 * 60 * 1000

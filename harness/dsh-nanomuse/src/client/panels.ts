@@ -12,6 +12,6 @@ export const DEVICES_PANEL = 'nanomuse-devices'
 export const ROOM_PANELS = [FEED_PANEL, IDEAS_PANEL, GOALS_PANEL, LIBRARY_PANEL, DEVICES_PANEL] as const
 
 /** Where a problem with corein is reported. */
-export const REPO_URL = 'https://github.com/corein-app/corein'
-export const ISSUES_URL = 'https://github.com/corein-app/corein/issues'
+export const REPO_URL = 'https://github.com/shaikfareed22/corein2026'
+export const ISSUES_URL = 'https://github.com/shaikfareed22/corein2026/issues'
 export const DOCS_URL = 'https://corein.app/docs/desktop'

@@ -586,7 +586,7 @@ class Settings:
     privacy_url: str = field(default_factory=lambda: _env("PRIVACY_URL", "https://corein.app/privacy/"))
     # REPO_URL is the project's repository, which the apps point to when they ask for a
     # star — at the first sign-in, when the allowance is used up, after the first task.
-    repo_url: str = field(default_factory=lambda: _env("REPO_URL", "https://github.com/corein-app/corein"))
+    repo_url: str = field(default_factory=lambda: _env("REPO_URL", "https://github.com/shaikfareed22/corein2026"))
 
     code_ttl_s: int = field(default_factory=lambda: _int("CODE_TTL_S", 600))
     code_per_identifier_10m: int = field(default_factory=lambda: _int("CODE_PER_IDENTIFIER_10M", 3))

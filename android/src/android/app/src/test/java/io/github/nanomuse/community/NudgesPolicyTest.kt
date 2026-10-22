@@ -15,7 +15,7 @@ class NudgesPolicyTest {
           "version": 1,
           "star": {
             "enabled": true,
-            "url": "https://github.com/corein-app/corein",
+            "url": "https://github.com/shaikfareed22/corein2026",
             "moments": {
               "signed_in": true,
               "tasks": [3, 10, 30],
