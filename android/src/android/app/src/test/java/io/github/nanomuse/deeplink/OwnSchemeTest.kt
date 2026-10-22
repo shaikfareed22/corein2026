@@ -13,7 +13,7 @@ class OwnSchemeTest {
 
     @Test
     fun `both names are ours, in any case, and nothing else is`() {
-        for (s in listOf("minis", "MINIS", "nanomuse", "NanoMuse")) assertTrue(s, OwnScheme.isOwn(s))
+        for (s in listOf("minis", "MINIS", "corein", "Corein")) assertTrue(s, OwnScheme.isOwn(s))
         for (s in listOf(null, "", "http", "https", "minis-mcp", "nanomuse-mcp", "intent", "file")) {
             assertFalse(s ?: "null", OwnScheme.isOwn(s))
         }
@@ -21,13 +21,13 @@ class OwnSchemeTest {
 
     @Test
     fun `the system's name reads as the app's own`() {
-        assertEquals("minis", OwnScheme.internal("nanomuse"))
-        assertEquals("minis", OwnScheme.internal("NANOMUSE"))
+        assertEquals("minis", OwnScheme.internal("corein"))
+        assertEquals("minis", OwnScheme.internal("COREIN"))
         assertEquals("minis", OwnScheme.internal("minis"))
         assertEquals("https", OwnScheme.internal("https"))
         assertEquals(null, OwnScheme.internal(null))
         assertEquals("minis://settings/soul", OwnScheme.internalUrl("corein://settings/soul"))
-        assertEquals("minis://session/abc/index.html?title=x", OwnScheme.internalUrl("NanoMuse://session/abc/index.html?title=x"))
+        assertEquals("minis://session/abc/index.html?title=x", OwnScheme.internalUrl("Corein://session/abc/index.html?title=x"))
         assertEquals("minis://attachments/a.png", OwnScheme.internalUrl("minis://attachments/a.png"))
         assertEquals("https://corein.app/", OwnScheme.internalUrl("https://corein.app/"))
         // the host part is not a scheme
