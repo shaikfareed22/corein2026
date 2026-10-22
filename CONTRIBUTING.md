@@ -126,6 +126,10 @@ Two that go wrong most often: 非营利, never 非盈利; and `corein Cloud`, th
 
 Every feature, number and count in a README, a docs page or a release note is something a reader could check in this repository: a provider count is the length of `nanomuse/llm/providers.json`, a locale count is the `values-*` directories, a connector count is the catalogue. A feature that ships is described as what it does, never as a demo, a preview or something coming soon; a feature that does not ship yet is on the [roadmap](docs/roadmap.md), not in the install table. Copy about the avatar says what it does and does not state how many pictures or poses it has, since that number is the studio's and changes.
 
+## The fork
+
+corein is a fork of nanoMuse; [docs/fork.md](docs/fork.md) is the recipe for merging upstream, keeping the identity (`scripts/rebrand-corein.mjs`) and cutting a release from CI.
+
 ## The README
 
 `README.md` is the one description of corein. It keeps the same order of sections (install table, what it does, how it works, docs, self-host, contribute, *Origin*, disclaimer, licence) and the *Origin* section is never removed: it is how the fork meets the GPL's notice terms. Translations are welcome under `docs/readme/` once someone keeps them current.

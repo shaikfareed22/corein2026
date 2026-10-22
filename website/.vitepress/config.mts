@@ -210,6 +210,7 @@ export default defineConfig({
           { text: 'Try it', link: 'https://demo.corein.app/' },
           { text: 'Get started', link: '/android' },
           { text: 'Run it yourself', link: '/self-hosting' },
+          { text: 'Maintaining the fork', link: '/fork' },
           { text: 'Roadmap', link: '/roadmap' },
         ],
         sidebar: [
