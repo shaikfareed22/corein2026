@@ -39,7 +39,7 @@ const SKIP_DIRS = new Set(['.git', 'node_modules', 'deps', 'static', 'traces', '
 const SKIP_FILES = new Set(['CHANGELOG.md', 'NOTICE', 'THIRD_PARTY_NOTICES.md', 'CITATION.cff', 'README.md', 'rebrand-corein.mjs', 'package-lock.json', 'pnpm-lock.yaml', 'uv.lock'])
 const TEXT = /\.(md|txt|ts|tsx|mts|mjs|cjs|js|json|jsonc|yml|yaml|toml|py|kt|kts|swift|xml|xcstrings|html|css|svg|sh|ps1|env|example|cff|plist|pbxproj|strings|gradle|pro|properties|cfg|ini|Dockerfile|dockerignore|gitignore|editorconfig|caddy|conf)$/i
 const NAMED = new Set(['Dockerfile', 'Caddyfile', 'LICENSE', 'SECURITY.md', 'AGENTS.md', 'CLAUDE.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', '.env.example', '.dockerignore', '.gitattributes'])
-const MAX_BYTES = 4 * 1024 * 1024
+const MAX_BYTES = 16 * 1024 * 1024 // Localizable.xcstrings is 4.6 MB
 
 // Ordered: the longest, most specific tokens first so a later rule never sees a half-renamed one.
 const SUBS = [
