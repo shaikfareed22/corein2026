@@ -109,7 +109,7 @@ struct NanoMuseCloudError: LocalizedError, Sendable {
 
 @MainActor
 enum NanoMuseCloud {
-    static let defaultBase = "https://cloud.corein.app"
+    static let defaultBase = "https://cloud.fomo.corein.in"
     static let label = "corein Cloud"
 
     private enum Keys {

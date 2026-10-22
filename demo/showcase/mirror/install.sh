@@ -1,10 +1,10 @@
 #!/bin/sh
 # Puts the project site's mirror on this box, next to the showcase:
 #
-#   1. the site block  → ../sites.d/corein.app.caddy   (imported by the Caddyfile)
+#   1. the site block  → ../sites.d/fomo.corein.in.caddy   (imported by the Caddyfile)
 #   2. sync.sh         → /usr/local/bin/nanomuse-site-mirror, run every minute by a systemd timer
 #   3. release-sync.py → /usr/local/bin/nanomuse-release-mirror, every fifteen minutes: the newest
-#                        releases' packages under www/dl, served at corein.app/dl/
+#                        releases' packages under www/dl, served at fomo.corein.in/dl/
 #   4. traffic.py      → /usr/local/bin/nanomuse-traffic, every ten minutes: the site's access log
 #                        counted by day into /var/lib/nanomuse-traffic/traffic.db (the relay's
 #                        admin page reads it; cloud/deploy/nanomuse-hk mounts it)
@@ -13,7 +13,7 @@
 #
 # Run as root from anywhere: `sudo demo/showcase/mirror/install.sh`. Idempotent; run it again
 # after `git pull` to pick up changes to any of these files. DNS is yours: A records for
-# corein.app and corein.app pointing at this box, nothing in front of it.
+# fomo.corein.in and fomo.corein.in pointing at this box, nothing in front of it.
 set -eu
 
 here=$(cd "$(dirname "$(readlink -f "$0")")" && pwd)
@@ -35,7 +35,7 @@ if [ -s "$defaults.new" ]; then mv "$defaults.new" "$defaults"; else rm -f "$def
 [ -n "${WWW_ROOT:-}" ] && export WWW_ROOT
 
 install -d "$showcase/sites.d"
-install -m 644 "$here/corein.app.caddy" "$showcase/sites.d/corein.app.caddy"
+install -m 644 "$here/fomo.corein.in.caddy" "$showcase/sites.d/fomo.corein.in.caddy"
 
 ln -sfn "$here/sync.sh" /usr/local/bin/nanomuse-site-mirror
 ln -sfn "$here/release-sync.py" /usr/local/bin/nanomuse-release-mirror
@@ -64,4 +64,4 @@ docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/Caddy
 echo "caddy: applying"
 docker compose up -d caddy
 docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
-echo "done: site timer $(systemctl is-active nanomuse-site-mirror.timer), release timer $(systemctl is-active nanomuse-release-mirror.timer), traffic timer $(systemctl is-active nanomuse-traffic.timer); https://corein.app once DNS points here, packages at /dl/ once the first fetch is through"
+echo "done: site timer $(systemctl is-active nanomuse-site-mirror.timer), release timer $(systemctl is-active nanomuse-release-mirror.timer), traffic timer $(systemctl is-active nanomuse-traffic.timer); https://fomo.corein.in once DNS points here, packages at /dl/ once the first fetch is through"

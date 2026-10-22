@@ -1,7 +1,7 @@
 # The landing page (legacy)
 
 The corein homepage now lives in [nano-muse/nano-muse.github.io](https://github.com/nano-muse/nano-muse.github.io)
-and is served at <https://corein.app/>, with a GitHub Pages copy at <https://nano-muse.github.io/>.
+and is served at <https://fomo.corein.in/>, with a GitHub Pages copy at <https://nano-muse.github.io/>.
 `site/index.html` here is a redirect to it;
 the page below — the Python line's site with the promo film — is kept as `legacy.html` and
 still published by `.github/workflows/pages.yml` under `https://nano-muse.github.io/corein/legacy.html`.
@@ -35,6 +35,6 @@ pictures where the drawn red panda used to be (the panda left the app in 0.1.23)
 
 ## Domain
 
-`corein.app` is served by the showcase server, which pulls the homepage repository every minute
+`fomo.corein.in` is served by the showcase server, which pulls the homepage repository every minute
 (`demo/showcase/README.md`, "Other sites on the same Caddy"); GitHub Pages publishes the same
 repository at `nano-muse.github.io`. One push to that repository's `main` updates both.

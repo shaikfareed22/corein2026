@@ -190,7 +190,7 @@ The account-wide sync switch is in the app (*Data controls → Sync*); this is t
 
 ```toml
 [cloud]
-base_url = "https://cloud.corein.app"   # a relay you run yourself goes here
+base_url = "https://cloud.fomo.corein.in"   # a relay you run yourself goes here
 required = true
 sync = true
 models = true        # the account's models as a source; the console's "Use corein Cloud models"
@@ -450,7 +450,7 @@ update_check     = true          # Settings → About says when a newer release 
 start_grace      = 4             # seconds the services may take before the app answers anyway
 ```
 
-`update_check` asks the download mirror's index (`corein.app/dl/index.json`) and, when that does
+`update_check` asks the download mirror's index (`fomo.corein.in/dl/index.json`) and, when that does
 not answer, `api.github.com`, for the latest release once a day (sooner on *Check now*; a check
 that failed, as when the runtime came up before its network, is tried again after an hour) and shows
 the version under *Settings → About* with a link to the release page; nothing is downloaded and

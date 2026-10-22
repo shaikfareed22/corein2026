@@ -35,7 +35,7 @@ Python 线的 Android App 有两个变体。**connect** 是你电脑上那个 `n
 
 ## 东西放在哪 {#where-things-live}
 
-一切都在 App 的私有文件目录下（`/data/data/com.corein.app/files`），其他 App 读不到：
+一切都在 App 的私有文件目录下（`/data/data/com.corein.in/files`），其他 App 读不到：
 
 | 路径 | 箱子里 | 是什么 |
 | --- | --- | --- |

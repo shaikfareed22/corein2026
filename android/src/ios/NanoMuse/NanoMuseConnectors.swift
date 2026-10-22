@@ -110,7 +110,7 @@ enum NanoMuseConnectorsCatalogue {
 /// authorization server allows it).
 enum NanoMuseMcpAuthDiscovery {
     static let clientName = "corein"
-    static let clientURI = "https://corein.app"
+    static let clientURI = "https://fomo.corein.in"
     static let protocolVersion = "2025-06-18"
 
     enum Probe {

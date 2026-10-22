@@ -76,8 +76,8 @@ nanomuse-browser = "nanomuse.bridge.cli:browser_main"
 nanomuse-open = "nanomuse.bridge.cli:open_main"
 
 [project.urls]
-Homepage = "https://corein.app"
-Documentation = "https://corein.app/docs/"
+Homepage = "https://fomo.corein.in"
+Documentation = "https://fomo.corein.in/docs/"
 Repository = "https://github.com/shaikfareed22/corein2026"
 Issues = "https://github.com/shaikfareed22/corein2026/issues"
 Changelog = "https://github.com/shaikfareed22/corein2026/blob/main/CHANGELOG.md"

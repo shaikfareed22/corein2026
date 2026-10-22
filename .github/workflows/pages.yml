@@ -1,12 +1,12 @@
 name: Website
 
 # Publishes site/ to GitHub Pages: https://nano-muse.github.io/corein/
-# Since 0.1.6 the homepage lives in nano-muse/nano-muse.github.io, served at corein.app; this
+# Since 0.1.6 the homepage lives in nano-muse/nano-muse.github.io, served at fomo.corein.in; this
 # project page is a redirect to it, with the earlier page kept at legacy.html (its generated parts,
 # the dragon's five moods, icons, fonts, screenshots, are copied from web/ and docs/ below).
 # Since 0.1.38 the docs site (website/, VitePress over docs/) is built into site/docs/ and
 # published alongside: https://nano-muse.github.io/corein/docs/. The same build with
-# DOCS_BASE=/docs/ is what corein.app/docs/ serves.
+# DOCS_BASE=/docs/ is what fomo.corein.in/docs/ serves.
 
 on:
   push:

@@ -10,7 +10,7 @@ hero:
       link: /zh/android
     - theme: alt
       text: 在浏览器里看演示
-      link: https://demo.corein.app/
+      link: https://demo.fomo.corein.in/
     - theme: alt
       text: 自己部署
       link: /zh/self-hosting
@@ -26,7 +26,7 @@ hero:
 
 | | |
 |---|---|
-| **浏览器** | [demo.corein.app](https://demo.corein.app/)：登录之后，一台模拟手机里的 corein，旁边有中英文各一组可以点的例句。这是演示；下面的 App 才是正式版 |
+| **浏览器** | [demo.fomo.corein.in](https://demo.fomo.corein.in/)：登录之后，一台模拟手机里的 corein，旁边有中英文各一组可以点的例句。这是演示；下面的 App 才是正式版 |
 | **Android** 8.0 以上，arm64 | [corein-1.0.5-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-1.0.5-arm64.apk) · [怎么装](/zh/android) |
 | **iPhone / iPad** | [TestFlight](https://testflight.apple.com/join/ZHexbDqc)：测试版，已通过 Apple 的 beta 审核；从这个链接安装 · [iOS](/zh/ios) |
 | **macOS** 12 以上 | [Apple 芯片](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-mac-x64.dmg) · [桌面版](/zh/desktop) |
@@ -34,17 +34,17 @@ hero:
 | **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-linux-x64.tar.gz) |
 | **Docker** | `bash scripts/self-host.sh --local` 搭自己的中继；`docker compose up -d app` 跑网页版 · [自己部署](/zh/self-hosting) |
 
-所有下载都在 [最新版本](https://github.com/shaikfareed22/corein2026/releases/latest)；GitHub 下不动的话，同样的文件在 [corein.app/dl](https://corein.app/dl/)。
+所有下载都在 [最新版本](https://github.com/shaikfareed22/corein2026/releases/latest)；GitHub 下不动的话，同样的文件在 [fomo.corein.in/dl](https://fomo.corein.in/dl/)。
 
 [1.0.5 Lookout 改了什么](https://github.com/shaikfareed22/corein2026/releases/tag/v1.0.5) · [每个客户端能做什么](/zh/parity) · [从哪儿开始参与](/zh/roadmap) · [中继保存什么](/zh/privacy) · [什么留在手机上，归谁](/zh/sync)
 
 ## 宣传片 {#the-film}
 
-<video controls playsinline preload="metadata" poster="https://corein.app/media/film/poster-zh.png" style="width:100%;max-width:960px;border-radius:12px;display:block;margin:0 auto">
-  <source src="https://corein.app/media/film/nanomuse-film-zh-web.mp4" type="video/mp4">
+<video controls playsinline preload="metadata" poster="https://fomo.corein.in/media/film/poster-zh.png" style="width:100%;max-width:960px;border-radius:12px;display:block;margin:0 auto">
+  <source src="https://fomo.corein.in/media/film/nanomuse-film-zh-web.mp4" type="video/mp4">
 </video>
 
-74 秒，看 corein 在手机、电脑和网页上做什么。还有[英文版](https://corein.app/media/film/nanomuse-film-en-web.mp4)。
+74 秒，看 corein 在手机、电脑和网页上做什么。还有[英文版](https://fomo.corein.in/media/film/nanomuse-film-en-web.mp4)。
 
 ::: info corein 在持续进化
 个人智能体不该只长在别人的云里，corein 想做一个开源、低成本的平替：装在自己的设备上，模型自己选，中继也能自己架。我们希望和全球的开发者、使用者一起，让每个人真正拥有自己的个人智能体。提个 [issue](https://github.com/shaikfareed22/corein2026/issues/new/choose) 或者发个 [PR](../../CONTRIBUTING.md) 都是在帮 corein 变得更好。

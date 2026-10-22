@@ -147,21 +147,21 @@ test('the installer for this computer is picked from the release', () => {
   assert.equal(pickAsset(assets, 'linux', 'arm64'), undefined)
 })
 
-test('the update check reads the corein.app index first, GitHub second, and never throws (C2)', async () => {
+test('the update check reads the fomo.corein.in index first, GitHub second, and never throws (C2)', async () => {
   const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/shaikfareed22/corein2026/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'corein-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
   const mirror = { repo: 'shaikfareed22/corein2026', releases: [{ tag: 'v0.1.33', assets: [{ name: 'corein-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
   // both answer: the index wins, and GitHub is not asked at all
   const asked = []
   const both = async (url) => { asked.push(url); return { ok: true, status: 200, json: async () => (url.includes('github') ? github : mirror) } }
   const a = await checkForUpdate('0.1.33', both)
-  assert.equal(a.source, 'corein.app')
+  assert.equal(a.source, 'fomo.corein.in')
   assert.equal(a.latest, '0.1.33')
   assert.equal(a.newer, false)
   assert.equal(a.assets[0].url, 'https://github.com/shaikfareed22/corein2026/releases/download/v0.1.33/corein-Desktop-0.1.33-linux-x64.AppImage')
-  assert.deepEqual(asked, ['https://corein.app/dl/index.json'])
+  assert.deepEqual(asked, ['https://fomo.corein.in/dl/index.json'])
 
   // the index does not answer: GitHub
-  const b = await checkForUpdate('0.1.33', async (url) => (url.includes('corein.app') ? { ok: false, status: 502, json: async () => ({}) } : { ok: true, status: 200, json: async () => github }))
+  const b = await checkForUpdate('0.1.33', async (url) => (url.includes('fomo.corein.in') ? { ok: false, status: 502, json: async () => ({}) } : { ok: true, status: 200, json: async () => github }))
   assert.equal(b.source, 'github')
   assert.equal(b.latest, '0.1.34')
   assert.equal(b.newer, true)
@@ -170,7 +170,7 @@ test('the update check reads the corein.app index first, GitHub second, and neve
   const c = await checkForUpdate('0.1.33', async () => { throw new Error('offline') })
   assert.equal(c.source, 'none')
   assert.equal(c.latest, '')
-  assert.match(c.error, /corein.app: offline; github: offline/)
+  assert.match(c.error, /fomo.corein.in: offline; github: offline/)
 })
 
 test('each update request gives up after the timeout (5 s by default)', async () => {

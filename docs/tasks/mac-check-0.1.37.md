@@ -83,7 +83,7 @@ cd harness/desktop && npm ci && npm run typecheck
 - **打包态**（本任务单的所有权限项都用它）：
   ```bash
   npm run dist:dir && ../../scripts/desktop-app/package-mac.sh arm64     # Intel 用 x64
-  open dist/mac-arm64/corein.app                                        # 或 dist/mac/
+  open dist/mac-arm64/fomo.corein.in                                        # 或 dist/mac/
   ```
   bundle id `com.corein.desktop`。重测首次授权：
   `tccutil reset ScreenCapture com.corein.desktop; tccutil reset Accessibility com.corein.desktop`。
@@ -93,7 +93,7 @@ cd harness/desktop && npm ci && npm run typecheck
 
 ### A. 原生模块进了包并能加载
 
-- `dist/mac-arm64/corein.app/Contents/Resources/app.asar.unpacked/node_modules/@computer-use/` 下应有
+- `dist/mac-arm64/fomo.corein.in/Contents/Resources/app.asar.unpacked/node_modules/@computer-use/` 下应有
   `libnut-darwin/build/Release/libnut.node`、`node-mac-permissions/build/Release/permissions.node`、
   `mac-screen-capture-permissions/build/Release/screencapturepermissions.node`（`asarUnpack` 覆盖
   `**/node_modules/@computer-use/**`）。
@@ -106,7 +106,7 @@ cd harness/desktop && npm ci && npm run typecheck
 
 ### B. 启动时的权限提示（点 1）
 
-- 做法：`tccutil reset` 两项后，`open dist/mac-arm64/corein.app`。
+- 做法：`tccutil reset` 两项后，`open dist/mac-arm64/fomo.corein.in`。
 - 预期：窗口起来的同时（不等 boot 完），系统弹出「屏幕录制」请求和「辅助功能」请求各一次，
   两项都归在 **corein Desktop** 名下，并且「系统设置 → 隐私与安全性 → 屏幕录制」面板被打开一次。
   再次启动（权限仍未授予）：面板再开一次、系统对话框**不**再弹（macOS 只提示一次，之后只能去面板开）。
@@ -156,7 +156,7 @@ cd harness/desktop && npm ci && npm run typecheck
 
 ### E. Chromium 开关（点 5）
 
-- `ps -o command= -p $(pgrep -f "corein.app/Contents/MacOS" | head -1)` 的参数里**不会**显示
+- `ps -o command= -p $(pgrep -f "fomo.corein.in/Contents/MacOS" | head -1)` 的参数里**不会**显示
   `appendSwitch` 加的开关（它作用于内部命令行）；用 `--remote-debugging-port=9333` 启动后在 CDP 执行
   `Runtime.evaluate` 不行（是主进程），改为在 `desktop.log` 没有现成记录时，临时在 `main.ts` 的
   `whenReady` 后加一行 `log(app.commandLine.getSwitchValue("disable-features"))` 验证值等于
@@ -168,7 +168,7 @@ cd harness/desktop && npm ci && npm run typecheck
 
 ### F. 签名脚本（点 6）
 
-- ad-hoc：`codesign --verify --deep --strict dist/mac-arm64/corein.app` 应 `signature ok`；
+- ad-hoc：`codesign --verify --deep --strict dist/mac-arm64/fomo.corein.in` 应 `signature ok`；
   `codesign -dv --verbose=2 ".../app.asar.unpacked/node_modules/@computer-use/node-mac-permissions/build/Release/permissions.node"`
   应显示 ad-hoc 的新签名（0.1.37 起内层循环是 `for inner in runtime dsh app.asar.unpacked`）；
   若仍是 npm 发布时的签名或无签名，说明 `find … -name '*.node'` 那一遍漏了它，修脚本。

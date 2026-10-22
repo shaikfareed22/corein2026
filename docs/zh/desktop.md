@@ -18,7 +18,7 @@ Windows 版本还带着 electron-updater 要读的更新元数据：`latest.yml`
 SHA-512，旁边是安装包的 `.exe.blockmap`。CI 在把它们附上 release 之前，会先让 electron-updater
 亲自检查这一套：它必须能在 `latest.yml` 里找到候选版本、从测试源下载安装包并校验通过，字节对不上
 的会被拒绝（`harness/desktop/scripts/update-feed-check.mjs`）。这套元数据对应的更新源是下载镜像的
-[corein.app/dl/win/](https://corein.app/dl/win/)：只有当一个版本的 `latest.yml`、安装包和 `.blockmap`
+[fomo.corein.in/dl/win/](https://fomo.corein.in/dl/win/)：只有当一个版本的 `latest.yml`、安装包和 `.blockmap`
 三个都到齐、安装包的字节也对得上时，它才切到这个版本；在那之前继续提供上一个版本。
 代码在 [`harness/`](../../harness/) 下：插件包在 `harness/dsh-nanomuse`，Electron 外壳在
 `harness/desktop`；自己怎么构建见 [harness/README.md](../../harness/README.md)。到 0.1.29 为止，
@@ -105,7 +105,7 @@ harness 保留外部下载方式。不带软件内更新能力的版本，需先
   还有手的运行时（`nanomuse mcp` 继承同一组变量）。corein Cloud（中继、hub 的 WebSocket、同步）和本机回环永远不经过。
   外壳把它存在 `desktop.json` 里（权限 0600，因为地址里可能带密码），和「登录时启动」放在一起，启动 dsh Host 时写进它的环境
   （`HTTP_PROXY`、`HTTPS_PROXY`、SOCKS 时还有 `ALL_PROXY`，`NO_PROXY` 带着
-  `localhost,127.0.0.1,::1`、`cloud.corein.app` 和插件所连的中继，以及让 Node 的 fetch 读这些
+  `localhost,127.0.0.1,::1`、`cloud.fomo.corein.in` 和插件所连的中继，以及让 Node 的 fetch 读这些
   变量的 `NODE_USE_ENV_PROXY=1`），所以重启后生效；这一行下面的「立即重启」会在窗口不关的
   情况下重启 Host。手机上同样的设置在服务商表单里，网页版在自有 key 表单里，运行时是
   `[llm] proxy`（[own-key.md](own-key.md#when-the-provider-cannot-be-reached)）；
@@ -257,7 +257,7 @@ N min`。第二次启动会快很多，因为文件已经检查过一遍；如�
 ## macOS 权限 {#macos-permissions}
 
 手需要 macOS 给两样东西：截图要「录屏」，鼠标和键盘要「辅助功能」。从 0.1.38 起，这两项权限都
-归一个独立的小应用所有，即 **corein Computer Use**（`corein.app/Contents/Helpers/corein Computer
+归一个独立的小应用所有，即 **corein Computer Use**（`fomo.corein.in/Contents/Helpers/corein Computer
 Use.app`，bundle id 为 `com.corein.desktop.computer-use`）：你在「系统设置 → 隐私与安全性 →
 录屏」和「→ 辅助功能」里要打开的就是这一行。corein 桌面版本身两项都不持有。
 

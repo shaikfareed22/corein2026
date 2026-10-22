@@ -2,7 +2,7 @@
  * About corein and the version (C2). The installed line reads
  * "corein Desktop <app> · harness <bundle>": the app's number from the Electron
  * shell (`nanomuse:info`), the bundle's from package.json at build time. The host
- * reads the latest release from corein.app's index (GitHub when the index is out of
+ * reads the latest release from fomo.corein.in's index (GitHub when the index is out of
  * reach), compares, and the second line says "0.1.x is out" with Update — the
  * installer for this computer — or "Latest 0.1.x — you have it". The host checks once
  * a day by itself; the result puts a dot on ••• and an "Update to 0.1.x" row in the menu.

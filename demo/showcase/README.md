@@ -9,7 +9,7 @@ lines](#the-lines)): a new look for the Muse (it draws itself), the apps on the 
 for you ("打开微信，看看张伟最新发来的消息说了什么"; "Open Spotify and play Bad Habits by Ed
 Sheeran"), a send that waits for the visitor's word, two apps read for one answer, memory and
 a reminder; a tap puts the line in the chat on the phone, and anything else can be typed
-there. This is corein's web entry, what [corein.app/web](https://corein.app/web/) leads
+there. This is corein's web entry, what [fomo.corein.in/web](https://fomo.corein.in/web/) leads
 to.
 
 The page (`site/page/`) is plain HTML and a little script, with MobileGym in a frame on the
@@ -62,8 +62,8 @@ reported in English on the English page and the capsule's sentences follow. The 
 still slips into Chinese now and then after Chinese screen text; the setting makes it the
 exception rather than the rule.
 
-**The frame on the project site.** [corein.app](https://corein.app/) opens on this page in an
-`<iframe>` of `https://demo.corein.app/?embed=1`. In that mode the page has no header of its
+**The frame on the project site.** [fomo.corein.in](https://fomo.corein.in/) opens on this page in an
+`<iframe>` of `https://demo.fomo.corein.in/?embed=1`. In that mode the page has no header of its
 own (the site's bar is above it). The site passes its language and theme on the first load
 (`&lang=zh`, `&theme=dark`) and afterwards over `postMessage` (`{type: "nanomuse:lang", lang}`,
 `{type: "nanomuse:theme", theme}`; only from the project site's origins), and links out of the
@@ -158,7 +158,7 @@ phone lives in the visitor's tab (~400 MB of *their* memory). The server runs th
 | **sessions** | `ghcr.io/nano-muse/nanomuse` containers on an internal Docker network with no way out; the gateway is the only thing they can reach |
 
 ```
-visitor's browser ──HTTPS──▶ Caddy ── demo.corein.app ──▶ /srv/site (the page; /phone.html = MobileGym + corein app)
+visitor's browser ──HTTPS──▶ Caddy ── demo.fomo.corein.in ──▶ /srv/site (the page; /phone.html = MobileGym + corein app)
    │  the page                   │                      └▶ /api/demo/* ──▶ gateway
    │   └ MobileGym phone (frame) └── <id>.s.nanomuse.dev ─────────────────▶ gateway ──▶ nm-<id>:8787
    │      └ corein app (iframe)                                                          │
@@ -294,9 +294,9 @@ with the key shows what is left, and `/api/demo/info` carries the totals.
 
 The showcase gives a visitor a Muse for half an hour. With `WEB_ENABLED=1` the same gateway
 gives a *person* one that stays: a kept Muse per account, for anyone who would rather not
-install anything. With it off (the default, and what corein.app runs since 0.1.26: the
+install anything. With it off (the default, and what fomo.corein.in runs since 0.1.26: the
 phone in the browser, with its sign-in, took the web version's place), `/web/` redirects to
-the showcase site, the phone, so [corein.app/web/](https://corein.app/web/), which the
+the showcase site, the phone, so [fomo.corein.in/web/](https://fomo.corein.in/web/), which the
 project site's Caddy block hands to the gateway, stays the web entry either way. On, `/web/`
 is a sign-in page (served by the gateway; the site's Caddy block hands `/web/*` and
 `/api/web/*` over to it): an e-mail or a mobile number, then the six-digit code.
@@ -337,7 +337,7 @@ idles at ~150 MB), a domain on Cloudflare, and a 百炼 key (or any OpenAI-compa
 that takes images).
 
 ```bash
-# 1. DNS on Cloudflare:   demo.corein.app  A  <server>   DNS only (see the note on the proxy)
+# 1. DNS on Cloudflare:   demo.fomo.corein.in  A  <server>   DNS only (see the note on the proxy)
 #                         *.s.nanomuse.dev   A  <server>   DNS only; sessions are WebSockets to Caddy
 #    Cloudflare → My Profile → API Tokens: Zone → DNS → Edit and Zone → Zone → Read on the zone.
 
@@ -360,9 +360,9 @@ docker compose up -d --build
 docker compose logs -f gateway
 ```
 
-Open `https://demo.corein.app`: the phone turns itself on with corein in front, and a
+Open `https://demo.fomo.corein.in`: the phone turns itself on with corein in front, and a
 Muse starts after the sign-in (or by itself once the page has been in view for a while, see
-above). `curl https://demo.corein.app/api/demo/info` shows sessions in use and today's spend.
+above). `curl https://demo.fomo.corein.in/api/demo/info` shows sessions in use and today's spend.
 
 Updating: `git pull && docker pull ghcr.io/nano-muse/nanomuse:latest && docker compose pull && docker compose up -d`.
 Sessions in flight end when the gateway restarts; visitors get *Your Muse on the showcase server
@@ -404,12 +404,12 @@ The Caddyfile ends with `import /etc/caddy/sites.d/*.caddy`, and `docker-compose
 git. One file per site, its files under `www/<name>/`, then `docker compose up -d caddy`; a box
 that has no such sites is unchanged.
 
-The project site is served this way at [corein.app](https://corein.app): `mirror/` holds the
+The project site is served this way at [fomo.corein.in](https://fomo.corein.in): `mirror/` holds the
 site block and `sync.sh`, which a systemd timer runs every minute to pull
-[nano-muse.github.io](https://github.com/nano-muse/nano-muse.github.io) into `www/corein.app/`;
+[nano-muse.github.io](https://github.com/nano-muse/nano-muse.github.io) into `www/fomo.corein.in/`;
 a push to that repository is on the mirror within the minute, with no key or webhook anywhere.
 `sudo mirror/install.sh` sets up all of it and is safe to run again after `git pull`. What is not
-in the repository: two A records at the registrar (`corein.app`, `corein.app` → this box).
+in the repository: two A records at the registrar (`fomo.corein.in`, `fomo.corein.in` → this box).
 A server outside mainland China needs no ICP filing for a `.cn` name; one inside does.
 
 The same box mirrors the releases: `mirror/release-sync.py`, run by a second timer every fifteen
@@ -421,9 +421,9 @@ removed. `www/dl/win` is the Windows desktop's update feed (the URL in
 whole set electron-updater reads, `latest.yml`, the installer it names and that installer's
 `.blockmap`, with the installer's SHA-512 the one `latest.yml` promises; while a release's Windows
 build is still running, or its installer did not arrive whole, the feed stays on the previous
-release (`index.json` says which under `win`). The site block serves the directory at [corein.app/dl/](https://corein.app/dl/) with a
+release (`index.json` says which under `win`). The site block serves the directory at [fomo.corein.in/dl/](https://fomo.corein.in/dl/) with a
 listing, and the site's download switch ("GitHub / 国内镜像") rewrites its links to
-`https://corein.app/dl/<tag>/<file>`. About 1.3 GB per release; `MIRROR_RELEASES_KEEP` in
+`https://fomo.corein.in/dl/<tag>/<file>`. About 1.3 GB per release; `MIRROR_RELEASES_KEEP` in
 `/etc/default/nanomuse-site-mirror` changes how many are kept. `install.sh` installs this too and
 starts the first fetch in the background (`journalctl -u nanomuse-release-mirror` to watch it).
 

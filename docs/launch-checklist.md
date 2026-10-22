@@ -2,7 +2,7 @@
 
 > **Archived.** This was the working list for the first public release of the Python
 > line. Domains (`nanomuse.dev`), artifacts (two APKs, a rootfs) and the mascot decision
-> (red panda) it mentions are not the current ones: the site is corein.app, the release
+> (red panda) it mentions are not the current ones: the site is fomo.corein.in, the release
 > carries one `corein-<version>-arm64.apk`, the default face is the dragon. Kept
 > unchanged as a record; the plan that replaced it is [roadmap.md](roadmap.md).
 
@@ -17,7 +17,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 
 ## 0. What ships, and how we know it is done
 
-**Artifacts**: PyPI `nanomuse` · GitHub Release (`nanomuse-<ver>-local.apk` with the rootfs inside, `nanomuse-<ver>-connect.apk`, the rootfs, checksums) · a mirror at `dl.nanomuse.dev` · Docker image · the site at `nanomuse.dev` with the film · docs. The demo site (`demo.corein.app`) is already live; aligning it is P1 and not a release artifact.
+**Artifacts**: PyPI `nanomuse` · GitHub Release (`nanomuse-<ver>-local.apk` with the rootfs inside, `nanomuse-<ver>-connect.apk`, the rootfs, checksums) · a mirror at `dl.nanomuse.dev` · Docker image · the site at `nanomuse.dev` with the film · docs. The demo site (`demo.fomo.corein.in`) is already live; aligning it is P1 and not a release artifact.
 
 **Acceptance (P0, all on real phones)**
 

@@ -270,7 +270,7 @@ The Electron shell boots the same bundle with its bridge on Linux (screenshot ch
 | Skills, schedule, goals, memory, sub-agents             | dsh's own (`skill`, `schedule`, `goals`, compaction, delegation); ours are not ported                                                        | by design  |
 | Web UI, zh-CN                                           | dsh's web app (it ships zh); our strings in the bundle's locale table                                                                        | done       |
 | The desktop shell                                       | `harness/desktop`: our Electron shell, the harness's Host as a child in Node mode, dsh + the bundle + the runtime for the hands inside; installers for Windows, macOS, Linux from `desktop-app.yml` | done (unsigned) |
-| Browser demo at corein.app/web                         | Stays on the Python runtime                                                                                                                  | unchanged  |
+| Browser demo at fomo.corein.in/web                         | Stays on the Python runtime                                                                                                                  | unchanged  |
 | The phone                                               | Stays on the Python runtime; meets the desktop through the account and Reach                                                                 | unchanged  |
 
 ## What we learned building the slice

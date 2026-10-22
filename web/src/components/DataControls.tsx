@@ -8,7 +8,7 @@ import { cx } from "../util";
 import { MuseCaption, MuseCard, MuseDivider, MuseRow, MuseSwitchRow } from "./MuseList";
 
 /** The policy the apps link when the relay has not said where its own is. */
-export const PRIVACY_URL = "https://corein.app/privacy/";
+export const PRIVACY_URL = "https://fomo.corein.in/privacy/";
 
 /**
  * Settings → Data controls, in the shape of Muse's: one switch, *Help improve corein's AI

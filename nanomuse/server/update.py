@@ -3,7 +3,7 @@ kept for a day, a failed check for an hour (contract C2: every client shows the 
 and the latest version).
 
 Nothing is downloaded and nothing about the install is sent: the requests are the ones a
-browser makes when it opens the download page. ``https://corein.app/dl/index.json``
+browser makes when it opens the download page. ``https://fomo.corein.in/dl/index.json``
 (``{"repo", "releases": [{"tag", "name", "published_at", "assets"}]}``, newest first) is
 asked first with a short timeout, then ``api.github.com/.../releases/latest``. The check
 is off when ``server.update_check`` is false, when ``NANOMUSE_NO_UPDATE_CHECK`` is set,
@@ -26,8 +26,8 @@ import httpx
 from nanomuse import __version__
 from nanomuse.logger import logger
 
-INDEX_URL = "https://corein.app/dl/index.json"
-DOWNLOAD_PAGE = "https://corein.app/dl/"
+INDEX_URL = "https://fomo.corein.in/dl/index.json"
+DOWNLOAD_PAGE = "https://fomo.corein.in/dl/"
 RELEASES_API = "https://api.github.com/repos/shaikfareed22/corein2026/releases/latest"
 RELEASES_PAGE = "https://github.com/shaikfareed22/corein2026/releases/latest"
 RELEASE_TAG_PAGE = "https://github.com/shaikfareed22/corein2026/releases/tag/{tag}"
@@ -137,7 +137,7 @@ class UpdateCheck:
                 tag = latest_from_index(r.json())
                 if not tag:
                     raise ValueError("no release in the index")
-                self._found(tag, RELEASE_TAG_PAGE.format(tag=tag), "corein.app")
+                self._found(tag, RELEASE_TAG_PAGE.format(tag=tag), "fomo.corein.in")
                 return
             except Exception as exc:  # noqa: BLE001 — the mirror is one of two ways
                 errors.append(exc.__class__.__name__)

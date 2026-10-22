@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""nanomuse-traffic: how many people visit corein.app and download from it, by day.
+"""nanomuse-traffic: how many people visit fomo.corein.in and download from it, by day.
 
-Reads the JSON access log Caddy writes for the site (mirror/corein.app.caddy, kept for seven
+Reads the JSON access log Caddy writes for the site (mirror/fomo.corein.in.caddy, kept for seven
 days) from where the last run stopped, and adds what it finds to a small SQLite database of
 daily counts: page views, visitors, bots, downloads per file, referring sites, the pages
 themselves. Once a run it also asks GitHub for the repository's stars and the download counts
@@ -15,7 +15,7 @@ for a week is the only place they exist, and it stays on the box.
 
     TRAFFIC_LOG_DIR      where Caddy's log lands (docker-compose.yml mounts logs/caddy there);
                          default: the showcase's logs/caddy
-    TRAFFIC_LOG_NAME     the log's file name (default corein.app.log; rolled files sit beside it)
+    TRAFFIC_LOG_NAME     the log's file name (default fomo.corein.in.log; rolled files sit beside it)
     TRAFFIC_DB           the database (default /var/lib/nanomuse-traffic/traffic.db)
     TRAFFIC_REPO         the repository whose stars and release downloads are recorded
     TRAFFIC_HOSTS        the site's own names, left out of the referrers (comma separated)
@@ -44,12 +44,12 @@ from urllib.parse import urlsplit
 
 HERE = Path(__file__).resolve().parent
 LOG_DIR = Path(os.environ.get("TRAFFIC_LOG_DIR") or HERE.parent / "logs" / "caddy")
-LOG_NAME = os.environ.get("TRAFFIC_LOG_NAME") or "corein.app.log"
+LOG_NAME = os.environ.get("TRAFFIC_LOG_NAME") or "fomo.corein.in.log"
 DB_PATH = Path(os.environ.get("TRAFFIC_DB") or "/var/lib/nanomuse-traffic/traffic.db")
 REPO = os.environ.get("TRAFFIC_REPO") or "shaikfareed22/corein2026"
 OWN_HOSTS = {
     h.strip().lower()
-    for h in (os.environ.get("TRAFFIC_HOSTS") or "corein.app,corein.app").split(",")
+    for h in (os.environ.get("TRAFFIC_HOSTS") or "fomo.corein.in,fomo.corein.in").split(",")
     if h.strip()
 }
 DAY_OFFSET_S = int(os.environ.get("TRAFFIC_DAY_OFFSET_H") or "8") * 3600

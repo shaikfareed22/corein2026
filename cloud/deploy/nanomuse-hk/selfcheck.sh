@@ -2,7 +2,7 @@
 # The relay's self-check, every ten minutes (nanomuse-relay-selfcheck.timer; harmless by
 # hand). Reads a few things and writes one line to the journal:
 #
-#   GET https://cloud.corein.app/healthz              the public door answers
+#   GET https://cloud.fomo.corein.in/healthz              the public door answers
 #   GET http://nanomuse-relay:8787/v1/admin/health     aggregates only (api.py admin_health):
 #                                                      requests under way, the hub's counters,
 #                                                      the last hour's refusals, upstream errors
@@ -18,7 +18,7 @@
 # (state in STATE_DIR).
 #
 #   RELAY_DIR     where .env lives (default /opt/nanomuse/relay)
-#   PUBLIC_BASE   the public name (default https://cloud.corein.app)
+#   PUBLIC_BASE   the public name (default https://cloud.fomo.corein.in)
 #   DISK_MIN_MB   warn below this much free on the relay's volume (default 2048)
 #   BACKUP_DIR    where backup.sh writes (default /opt/nanomuse/backups, as in backup.sh)
 #   BACKUP_MAX_H  warn when the newest backup is older than this many hours (default 48)
@@ -26,7 +26,7 @@
 set -eu
 
 relay=${RELAY_DIR:-/opt/nanomuse/relay}
-public=${PUBLIC_BASE:-https://cloud.corein.app}
+public=${PUBLIC_BASE:-https://cloud.fomo.corein.in}
 disk_min=${DISK_MIN_MB:-2048}
 backups=${BACKUP_DIR:-/opt/nanomuse/backups}
 backup_max_h=${BACKUP_MAX_H:-48}

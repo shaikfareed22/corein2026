@@ -10,7 +10,7 @@ hero:
       link: /android
     - theme: alt
       text: Try it in the browser
-      link: https://demo.corein.app/
+      link: https://demo.fomo.corein.in/
     - theme: alt
       text: Run it yourself
       link: /self-hosting
@@ -26,7 +26,7 @@ hero:
 
 | | |
 |---|---|
-| **Browser** | [demo.corein.app](https://demo.corein.app/): a corein on a simulated phone, after a sign-in, with lines to try beside it in English and in Chinese. A demo; the apps below are the real thing |
+| **Browser** | [demo.fomo.corein.in](https://demo.fomo.corein.in/): a corein on a simulated phone, after a sign-in, with lines to try beside it in English and in Chinese. A demo; the apps below are the real thing |
 | **Android** 8.0+, arm64 | [corein-1.0.5-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-1.0.5-arm64.apk) · [how to install](/android) |
 | **iPhone / iPad** | [TestFlight](https://testflight.apple.com/join/ZHexbDqc): a beta that passed Apple's beta review; the link installs it · [iOS](/ios) |
 | **macOS** 12+ | [Apple Silicon](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-mac-x64.dmg) · [the desktop app](/desktop) |
@@ -34,17 +34,17 @@ hero:
 | **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.0.5/corein-Desktop-1.0.5-linux-x64.tar.gz) |
 | **Docker** | `bash scripts/self-host.sh --local` for your own relay; `docker compose up -d app` for the web app · [run it yourself](/self-hosting) |
 
-Every download is on the [latest release](https://github.com/shaikfareed22/corein2026/releases/latest); the same files are at [corein.app/dl](https://corein.app/dl/) when GitHub is slow where you are.
+Every download is on the [latest release](https://github.com/shaikfareed22/corein2026/releases/latest); the same files are at [fomo.corein.in/dl](https://fomo.corein.in/dl/) when GitHub is slow where you are.
 
 [What changed in 1.0.5 Lookout](https://github.com/shaikfareed22/corein2026/releases/tag/v1.0.5) · [What each client can do](/parity) · [Where to start contributing](/roadmap) · [What the relay keeps](/privacy) · [What stays on a phone, and whose it is](/sync)
 
 ## The film
 
-<video controls playsinline preload="metadata" poster="https://corein.app/media/film/poster-en.png" style="width:100%;max-width:960px;border-radius:12px;display:block;margin:0 auto">
-  <source src="https://corein.app/media/film/nanomuse-film-en-web.mp4" type="video/mp4">
+<video controls playsinline preload="metadata" poster="https://fomo.corein.in/media/film/poster-en.png" style="width:100%;max-width:960px;border-radius:12px;display:block;margin:0 auto">
+  <source src="https://fomo.corein.in/media/film/nanomuse-film-en-web.mp4" type="video/mp4">
 </video>
 
-74 seconds: what corein does on your phone, your computer and the web. Also in [Chinese](https://corein.app/media/film/nanomuse-film-zh-web.mp4).
+74 seconds: what corein does on your phone, your computer and the web. Also in [Chinese](https://fomo.corein.in/media/film/nanomuse-film-zh-web.mp4).
 
 ::: info corein keeps evolving
 A personal agent should not live only in someone else's cloud, so corein is the open-source, low-cost alternative: on your own devices, with a model you choose and a relay you can host yourself. We want to build it with developers and users everywhere, so that each person truly owns a personal agent. Open an [issue](https://github.com/shaikfareed22/corein2026/issues/new/choose) or send a [pull request](../CONTRIBUTING.md); either one helps corein get better.

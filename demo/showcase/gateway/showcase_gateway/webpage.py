@@ -20,7 +20,7 @@ PAGE = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>corein Web</title>
 <meta name="description" content="corein in the browser — sign in with a phone number or an e-mail, nothing to install. Free, open source, non-profit.">
-<link rel="icon" href="https://corein.app/assets/icon-512.png">
+<link rel="icon" href="https://fomo.corein.in/assets/icon-512.png">
 <script>try{var t=localStorage.getItem("nanomuse_theme")||"light";if(t==="system")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
 :root{--bg:#F3F3F5;--card:#fff;--ink:#1C1B22;--muted:#6E6B7A;--line:#E4E3EA;--accent:#5B4EE6;--accent-ink:#fff;--warn:#B23B3B}
@@ -94,7 +94,7 @@ i.en,i.zh{font-style:normal}
 <main>
 <div class="page">
   <section class="words">
-    <div class="brand"><img src="https://corein.app/assets/icon-512.png" alt=""><div><b>corein Web</b>
+    <div class="brand"><img src="https://fomo.corein.in/assets/icon-512.png" alt=""><div><b>corein Web</b>
     <small><i class="zh">打开网页就能用，不用下载</i><i class="en">In the browser, nothing to install</i></small></div></div>
     <h1 class="title"><i class="zh">试试 corein</i><i class="en">Try corein</i></h1>
     <p><i class="zh">手机号或邮箱收个验证码，一分钟后就有一台属于你的 corein，模型自带。</i><i class="en">A phone number or an e-mail, a code, and a minute later a corein of your own is here, model included.</i></p>
@@ -144,14 +144,14 @@ i.en,i.zh{font-style:normal}
   <section class="more">
   <div class="notice tip">
     <b><i class="zh">浏览器版适合先试一试</i><i class="en">The browser version is for a first try</i></b>
-    <i class="zh">要天天用，推荐装手机 App——功能最全，智能体整个跑在手机上；电脑上装桌面版。同一个账号登录，就是同一个 corein。<a href="https://corein.app/#download">下载手机 App 和桌面版</a></i>
-    <i class="en">For every day, install the phone app — the fullest, the whole agent runs on the phone — and the desktop app on your computer. The same account is the same corein everywhere. <a href="https://corein.app/#download">Get the phone and desktop apps</a></i>
+    <i class="zh">要天天用，推荐装手机 App——功能最全，智能体整个跑在手机上；电脑上装桌面版。同一个账号登录，就是同一个 corein。<a href="https://fomo.corein.in/#download">下载手机 App 和桌面版</a></i>
+    <i class="en">For every day, install the phone app — the fullest, the whole agent runs on the phone — and the desktop app on your computer. The same account is the same corein everywhere. <a href="https://fomo.corein.in/#download">Get the phone and desktop apps</a></i>
   </div>
   <div class="notice">
-    <b><a href="https://corein.app/#open-source" rel="noopener"><i class="zh">免费、开源、非营利</i><i class="en">Free, open source, non-profit</i></a></b>
+    <b><a href="https://fomo.corein.in/#open-source" rel="noopener"><i class="zh">免费、开源、非营利</i><i class="en">Free, open source, non-profit</i></a></b>
     <i class="zh">每个账号都有一份由开发者承担的免费模型额度，用完换自己的 key：中国大陆用阿里云百炼，海外用 OpenRouter。登录后，对话文字会保存在 corein Cloud，让你的几台设备看到同样的对话——「数据控制」里一个开关就能关掉；数据不会出售。</i>
     <i class="en">Every account starts with an allowance of model use paid by the developer; after that, your own key — Alibaba Cloud Bailian in mainland China, OpenRouter elsewhere. With an account, the text of your conversations is kept on corein Cloud so that your devices show the same chats — a switch in Data controls turns it off; nothing is sold.</i>
-    <br><a href="https://github.com/shaikfareed22/corein2026" rel="noopener"><i class="zh">GitHub</i><i class="en">GitHub</i></a><a href="https://corein.app/own-key" rel="noopener"><i class="zh">换自己的 key</i><i class="en">Bring your own key</i></a>
+    <br><a href="https://github.com/shaikfareed22/corein2026" rel="noopener"><i class="zh">GitHub</i><i class="en">GitHub</i></a><a href="https://fomo.corein.in/own-key" rel="noopener"><i class="zh">换自己的 key</i><i class="en">Bring your own key</i></a>
   </div>
   <div class="foot">
     <i class="zh">你的 corein 运行在我们的服务器上，数据只有你能访问；长时间不用会休眠，登录即唤醒。</i>

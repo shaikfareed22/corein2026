@@ -55,7 +55,7 @@ const PKG_VERSION = JSON.parse(readFileSync(new URL('../package.json', import.me
 const PREVIOUS = '0.1.0'
 /** One patch release beyond the version under test. */
 const BEYOND = PKG_VERSION.replace(/(\d+)$/, (n) => String(Number(n) + 1))
-const checkedByPrevious = (latest) => ({ current: PREVIOUS, latest, newer: true, page: 'https://github.com/shaikfareed22/corein2026/releases', assets: [], notes: '', source: 'corein.app', checkedAt: Date.now() })
+const checkedByPrevious = (latest) => ({ current: PREVIOUS, latest, newer: true, page: 'https://github.com/shaikfareed22/corein2026/releases', assets: [], notes: '', source: 'fomo.corein.in', checkedAt: Date.now() })
 
 test('the bundle version the tests run under is the package version, a release, not the fallback', () => {
   assert.equal(BUNDLE_VERSION, PKG_VERSION)
@@ -100,7 +100,7 @@ test('right after installing this version over the previous one, the sidebar is 
 test('a failed check is cached an hour, a successful one a day, and another version\'s never', () => {
   const now = Date.now()
   const good = { ...checkedByPrevious(BEYOND), current: BUNDLE_VERSION, checkedAt: now }
-  const failed = { ...good, latest: '', newer: false, source: 'none', error: 'corein.app: 503; github: 403' }
+  const failed = { ...good, latest: '', newer: false, source: 'none', error: 'fomo.corein.in: 503; github: 403' }
   assert.equal(updateCacheFresh(good, BUNDLE_VERSION, now + UPDATE_EVERY_MS - 1), true)
   assert.equal(updateCacheFresh(good, BUNDLE_VERSION, now + UPDATE_EVERY_MS), false)
   assert.equal(updateCacheFresh(failed, BUNDLE_VERSION, now + UPDATE_RETRY_MS - 1), true)
@@ -134,7 +134,7 @@ test('a check that read nothing is not kept for the day: the next quiet check as
     down = false
     const forced = await out.svc.update(true)
     assert.equal(asked, 1)
-    assert.equal(forced.source, 'corein.app')
+    assert.equal(forced.source, 'fomo.corein.in')
     assert.equal(forced.latest, BUNDLE_VERSION)
     // a failure older than an hour is asked again by a quiet check, where a success would still be cached
     down = true
@@ -144,7 +144,7 @@ test('a check that read nothing is not kept for the day: the next quiet check as
     assert.equal(asked, 2)
     asked = 0
     out.svc.state.update = { ...forced, checkedAt: Date.now() - UPDATE_RETRY_MS - 1 }
-    assert.equal((await out.svc.update(false)).source, 'corein.app')
+    assert.equal((await out.svc.update(false)).source, 'fomo.corein.in')
     assert.equal(asked, 0)
   } finally {
     globalThis.fetch = realFetch

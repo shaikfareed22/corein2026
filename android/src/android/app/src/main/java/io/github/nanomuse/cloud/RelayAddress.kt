@@ -69,7 +69,7 @@ object RelayAddress {
         return LanOnly.isLocal(h)
     }
 
-    /** `cloud.corein.app`, `relay.example.org:8790`, `192.168.1.20:8790` — the address as the account page shows it. */
+    /** `cloud.fomo.corein.in`, `relay.example.org:8790`, `192.168.1.20:8790` — the address as the account page shows it. */
     fun display(baseUrl: String): String {
         val uri = runCatching { URI(baseUrl) }.getOrNull() ?: return baseUrl
         val host = uri.host ?: return baseUrl

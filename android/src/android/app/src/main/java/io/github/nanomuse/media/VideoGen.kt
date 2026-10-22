@@ -45,7 +45,7 @@ object VideoGen {
         val label: String get() = instance.label
         /**
          * `https://….maas.aliyuncs.com`, `https://dashscope.aliyuncs.com` or corein Cloud's
-         * `https://cloud.corein.app`, without the API path (the relay serves the same
+         * `https://cloud.fomo.corein.in`, without the API path (the relay serves the same
          * `/api/v1/…` video paths as Model Studio, next to its OpenAI-shaped `/v1`).
          */
         val host: String get() = ImageGen.baseUrlOf(instance)

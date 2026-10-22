@@ -79,11 +79,11 @@ win:
   # is uploaded from the build: the workflow attaches the three files to the GitHub release,
   # from which the download mirror picks them up.
   # The generic provider only shapes the metadata: the file URLs in latest.yml are relative
-  # names, so the same pair serves from GitHub and from corein.app/dl/win alike. Never a
+  # names, so the same pair serves from GitHub and from fomo.corein.in/dl/win alike. Never a
   # publisher certificate (docs/desktop.md): the SHA-512 is the installer's own integrity.
   publish:
     provider: generic
-    url: "https://corein.app/dl/win/"
+    url: "https://fomo.corein.in/dl/win/"
 nsis:
   oneClick: false
   perMachine: false

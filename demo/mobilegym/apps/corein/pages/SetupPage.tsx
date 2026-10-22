@@ -43,7 +43,7 @@ export default function SetupPage() {
 }
 
 /** Where the real thing is: the Android app and the desktop, on the project site. */
-const DOWNLOAD_URL = 'https://corein.app/#download';
+const DOWNLOAD_URL = 'https://fomo.corein.in/#download';
 
 type Phase = 'idle' | 'starting' | 'failed';
 type Step = 'welcome' | 'signin' | 'meet';
@@ -227,7 +227,7 @@ function ShowcaseFlow({ gateway, onOwnServer }: { gateway: string; onOwnServer: 
 }
 
 /** Where the project explains itself: the open-source section of the site (the APK's NOTICE_URL). */
-const NOTICE_URL = 'https://corein.app/#open-source';
+const NOTICE_URL = 'https://fomo.corein.in/#open-source';
 
 /** The Android welcome page's card (FirstRunSetup.kt NoticeCard): free, open source, non-profit; a tap opens the site. */
 function NoticeCard({ title, body, closing }: { title: string; body: string; closing: string }) {

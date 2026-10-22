@@ -3,7 +3,7 @@
 
 Asks the GitHub API for the repository's releases, takes the newest KEEP that are neither
 drafts nor pre-releases, and fetches every asset of each into WWW_ROOT/dl/<tag>/<name> —
-Caddy serves that directory at https://corein.app/dl/ (mirror/corein.app.caddy). A file
+Caddy serves that directory at https://fomo.corein.in/dl/ (mirror/fomo.corein.in.caddy). A file
 is downloaded to a dot-file next to it (`.<name>.part`, which the site block's `hide .*`
 keeps out of the listing) and renamed once whole, so a visitor never gets, or sees, half a
 package; one already present with the right size is left alone. Each download is checked
@@ -46,7 +46,7 @@ from pathlib import Path
 REPO = os.environ.get("MIRROR_RELEASES_REPO", "shaikfareed22/corein2026")
 KEEP = max(1, int(os.environ.get("MIRROR_RELEASES_KEEP", "2")))
 API = f"https://api.github.com/repos/{REPO}/releases?per_page=10"
-UA = "nanomuse-release-mirror (+https://corein.app)"
+UA = "nanomuse-release-mirror (+https://fomo.corein.in)"
 CHUNK = 1 << 20
 
 

@@ -26,12 +26,12 @@ later be added on the relay (allowance, members, `SIGNUP_OPEN`) without touching
 | Product name (every UI string, docs, store copy) | nanoMuse | corein |
 | Relay product name | nanoMuse Cloud | corein Cloud |
 | Desktop product | nanoMuse Desktop | corein Desktop |
-| Android applicationId | io.github.nanomuse.app | com.corein.app |
+| Android applicationId | io.github.nanomuse.app | com.corein.in |
 | iOS bundle ids | io.github.nanomuse.* | com.corein.* |
 | System URL scheme | nanomuse:// | corein:// |
 | Desktop appId / executable / artifact | io.github.nanomuse.desktop / nanomuse-desktop / nanoMuse-Desktop-* | com.corein.desktop / corein-desktop / corein-Desktop-* |
-| Default relay | https://cloud.nanomuse.cn | https://cloud.corein.app |
-| Site, demo | nanomuse.cn, demo.nanomuse.dev | corein.app, demo.corein.app |
+| Default relay | https://cloud.nanomuse.cn | https://cloud.fomo.corein.in |
+| Site, demo | nanomuse.cn, demo.nanomuse.dev | fomo.corein.in, demo.fomo.corein.in |
 | Repository | github.com/nano-muse/nanoMuse | github.com/shaikfareed22/corein2026 |
 | Brand mark, icon, wordmark, cover | the one-stroke N | the corein circuit-o mark and wordmark |
 | Upstream badges (stars, trendshift, hits, Discord, TestFlight link) | nanoMuse's | removed; owner adds their own when they exist |

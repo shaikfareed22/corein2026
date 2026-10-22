@@ -13,14 +13,14 @@
   var status = document.getElementById("status");
   var lookGroup = document.getElementById("group-look");
   // ?embed=1 (the inline script in index.html sets data-embed): this page is the frame on the
-  // project site, corein.app. The site has the header, so ours is hidden (page.css); links
+  // project site, fomo.corein.in. The site has the header, so ours is hidden (page.css); links
   // out of the page open in the top window, not inside the frame; the site tells us its
   // language and theme over postMessage ({type: "nanomuse:lang", lang} / {type: "nanomuse:theme",
   // theme}), the first paint taking them from ?lang= and ?theme=. Nothing on this page
   // scrolls, so a wheel turned over the frame reaches the site by itself (the browser hands a
   // scroll on to the parent when the frame has nowhere to go).
   var embed = root.getAttribute("data-embed") === "1";
-  var EMBEDDERS = ["https://corein.app", "https://corein.app", "https://nano-muse.github.io"];
+  var EMBEDDERS = ["https://fomo.corein.in", "https://fomo.corein.in", "https://nano-muse.github.io"];
   // the page that holds the frame, when it is one of ours (a local preview of the site counts
   // while this page is served locally too)
   var embedder = (function () {

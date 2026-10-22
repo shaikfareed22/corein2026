@@ -45,9 +45,9 @@ and rebranding is the script, never a hand edit.
 
 Applied by `python scripts/rebrand.py` (idempotent; run after every upstream pull):
 
-- **Identity.** Bundle ids `com.corein.app` (+ `.ShareExtension`, `.AgentWidget`,
-  `.FileProvider`), the app group `group.com.corein.app`, the iCloud container
-  `iCloud.com.corein.app`, the background-task, UTType and URL-scheme ids that carry the
+- **Identity.** Bundle ids `com.corein.in` (+ `.ShareExtension`, `.AgentWidget`,
+  `.FileProvider`), the app group `group.com.corein.in`, the iCloud container
+  `iCloud.com.corein.in`, the background-task, UTType and URL-scheme ids that carry the
   bundle id. Unlike Android there is no source-package constraint on iOS, so the whole family
   moves. The URL schemes the system knows the app by are `nanomuse` (the share extension opens
   `corein://share`) and `nanomuse-mcp`, so a phone that also has OpenMinis installed never has
@@ -129,7 +129,7 @@ Ours, in `NanoMuse/`:
   one on becoming active, then a check every minute), and posts a local notification at each
   due time (*Check-in: 〈goal〉. Open to run it*) whose tap opens the conversation. The
   `BGAppRefreshTask` it asks for when it goes to the background
-  (`com.corein.app.scheduler`) never runs a routine: when iOS grants it, the handler
+  (`com.corein.in.scheduler`) never runs a routine: when iOS grants it, the handler
   posts the reminder for whatever came due and asks for the next slot, nothing more. Every piece
   of copy about routines says so. *Settings → corein → Scheduled tasks* lists them all, the
   goal check-ins and the feed's included.
@@ -289,7 +289,7 @@ Ours, in `NanoMuse/`:
 - **Network** (`NanoMuseProxy.swift`, `NanoMuseNetworkView.swift`, *Settings → corein →
   Network*): the HTTP proxy for own providers: host, port, optional user name and password, off
   by default, on this phone only: the address and the user name in `UserDefaults`, the password
-  in the Keychain as a device-only item (`com.corein.app.proxy`, the relay key's rules;
+  in the Keychain as a device-only item (`com.corein.in.proxy`, the relay key's rules;
   a password a 1.0.3 build kept in `UserDefaults` moves over at the first read). `URLSession`
   has no per-host proxy switch, so
   the proxy reaches a session as a proxy auto-configuration script in
@@ -323,7 +323,7 @@ Ours, in `NanoMuse/`:
   and *Make / Redo clips*; the studio's cost estimate counts the clips.
 - **Version, star asks, the feed's first day (0.1.35)** (`NanoMuseUpdateCheck.swift`,
   `NanoMuseNudges.swift`): the Version row shows the installed build and the latest release
-  (`corein.app/dl/index.json` first, GitHub second, a day's cache: *Latest 0.1.x, you have it*
+  (`fomo.corein.in/dl/index.json` first, GitHub second, a day's cache: *Latest 0.1.x, you have it*
   / *0.1.x is out* / *Could not check, tap to try again*). The star asks follow the relay's
   policy (`/v1/nudges`, `nudges` in `/v1/me`, the same defaults built in): never in the first
   conversation, then the 3rd / 10th / 30th task (`NanoMuseStarWatch`: a person-started session
@@ -514,11 +514,11 @@ Ours, in `NanoMuse/`:
   post's detail rows are a `Grid` whose label column takes the longest label; the avatar size
   is a menu, not five segments.
 - **The third audit: the version row (1.0.x)** (`NanoMuseUpdateCheck.swift`,
-  `MinisTests/NanoMuseLogicTests.swift`): the download index at `corein.app/dl/index.json` is
+  `MinisTests/NanoMuseLogicTests.swift`): the download index at `fomo.corein.in/dl/index.json` is
   `{"releases": [{"tag": "v1.0.0", …}, …]}`, newest first, and that is what the row reads now,
   as Android's `UpdateCheck.parseIndex` does; the shapes the row used to look for (`ios.version`,
   `latest`) were never written, so on a phone that cannot reach GitHub the row always said *Could
-  not check*. A release found through the index leads to `corein.app/dl/`; one found through
+  not check*. A release found through the index leads to `fomo.corein.in/dl/`; one found through
   GitHub leads to its release page. `parseIndex` and `parseGitHubLatest` are pure and tested.
 - **The third audit: the sign-in sheet (1.0.x)** (`NanoMuseFirstRun.swift`): *Sign in · free* on
   the welcome page opens the account page as a sheet; once the code or password goes through, the
@@ -743,10 +743,10 @@ for review after the internal testers have had it. The pipeline is the same eith
 Set up on 2026-10-03, all of it under the account holder's developer account (team
 `TN43QYW8K4`), nothing of which is in the repository:
 
-- the app record *corein*, iOS, bundle id `com.corein.app`, SKU `nanomuse-ios`,
+- the app record *corein*, iOS, bundle id `com.corein.in`, SKU `nanomuse-ios`,
   Apple ID `6818802049`; the three extension bundle ids `…app.ShareExtension`,
-  `…app.FileProvider`, `…app.AgentWidget`; the app group `group.com.corein.app` and the
-  iCloud container `iCloud.com.corein.app`; the capabilities the four `.entitlements`
+  `…app.FileProvider`, `…app.AgentWidget`; the app group `group.com.corein.in` and the
+  iCloud container `iCloud.com.corein.in`; the capabilities the four `.entitlements`
   ask for (App Groups, HealthKit with clinical records, HomeKit, iCloud/CloudKit, NFC tag
   reading, WeatherKit) turned on on the identifiers;
 - the API key *corein CI* (role App Manager), the Apple Distribution certificate
@@ -777,14 +777,14 @@ Set up on 2026-10-03, all of it under the account holder's developer account (te
 ### Once, in App Store Connect
 
 1. **The app record.** *Apps → + → New App*: platform iOS, name corein, bundle id
-   `com.corein.app`, a SKU. Automatic signing registers identifiers, but the app record
+   `com.corein.in`, a SKU. Automatic signing registers identifiers, but the app record
    itself is created once, by hand. If the bundle id is not offered in the list, register it first
    under *Certificates, Identifiers & Profiles → Identifiers*.
 2. **Capabilities on the identifier.** The entitlements ask for App Groups, iCloud (CloudKit),
    HealthKit (with clinical records), HomeKit, NFC tag reading and WeatherKit. Automatic signing
    turns most of these on by itself; if the first archive fails on a capability, enable it on the
-   identifier by hand, and create the iCloud container `iCloud.com.corein.app` and the
-   app group `group.com.corein.app` there. WeatherKit also has to be enabled on the
+   identifier by hand, and create the iCloud container `iCloud.com.corein.in` and the
+   app group `group.com.corein.in` there. WeatherKit also has to be enabled on the
    *Services* tab of the identifier.
 3. **An API key.** *Users and Access → Integrations → App Store Connect API → Team Keys → +*,
    role **App Manager** (Developer is not enough to upload). Download the `.p8` once; note the
@@ -878,7 +878,7 @@ what became of it here:
 | `cloud`: relay client, sign-in, account | Done: `NanoMuse/NanoMuseCloud*.swift`, `NanoMuseAccount*.swift` (0.1.32: password, invite code, the allowance in yuan, usage, sessions, timeline, delete) |
 | `ui.onboarding`: the first run with *Sign in · free* | Done (0.1.34): `NanoMuseFirstRun.swift`, the first conversation included; 0.1.35 the Notifications page; no Hands page on iOS |
 | `community.StarPrompt`, `community.Nudges`: the star asks from the relay's policy | Done (0.1.35): `NanoMuseNudges.swift`, `NanoMuseStar` (the moments, the cooldown and the cap from `/v1/nudges`) |
-| `community.UpdateCheck`, the Version row | Done (0.1.35): `NanoMuseUpdateCheck.swift` (installed and latest, `corein.app/dl/index.json` then GitHub) |
+| `community.UpdateCheck`, the Version row | Done (0.1.35): `NanoMuseUpdateCheck.swift` (installed and latest, `fomo.corein.in/dl/index.json` then GitHub) |
 | `avatar.VideoGen`, `avatar.AvatarMotion`: the motion clips | Done (0.1.35): `NanoMuseVideoGen.swift`, `NanoMuseAvatarMotion.swift`, `NanoMuseMediaModels.swift` |
 | `nm.show_steps`: the agent's steps, on by default since 0.1.37 | 0.1.32: `NanoMuseSteps.swift`; finished messages keep to the conversation, a running one shows its steps |
 | `connectors`: the catalogue, `SharedConnectors` | Done: `NanoMuseConnectors.swift` (0.1.33 the catalogue, 0.1.34 the other devices' entries) |

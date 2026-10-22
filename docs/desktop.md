@@ -20,7 +20,7 @@ which names the installer and its SHA-512, and the installer's `.exe.blockmap`. 
 anything is attached: it must find the candidate version in `latest.yml`, download the
 installer from a test feed and verify it, and refuse one whose bytes do not match
 (`harness/desktop/scripts/update-feed-check.mjs`). The feed the metadata is built for is the
-download mirror's [corein.app/dl/win/](https://corein.app/dl/win/), which moves to a new
+download mirror's [fomo.corein.in/dl/win/](https://fomo.corein.in/dl/win/), which moves to a new
 release only once its `latest.yml`, installer and `.blockmap` are all there and the installer's
 bytes match; until then it serves the previous release. The code is under
 [`harness/`](../harness/): the bundle of plugins in
@@ -134,7 +134,7 @@ speaking as corein through the `nanomuse` preset, with:
   do. The shell keeps it in `desktop.json` (mode 0600, since the address may carry a
   password) next to *open at login* and puts it on the dsh
   Host's environment at start (`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY` for SOCKS, `NO_PROXY`
-  with `localhost,127.0.0.1,::1`, `cloud.corein.app` and the relay the plugin talks to, and
+  with `localhost,127.0.0.1,::1`, `cloud.fomo.corein.in` and the relay the plugin talks to, and
   `NODE_USE_ENV_PROXY=1`, which is what makes Node's fetch read them), so it takes effect
   after a restart; *Restart now* under the row restarts the Host with the window up. The
   phones have the same setting in the provider form, the web app in the own-key form, the
@@ -340,7 +340,7 @@ should every start stay slow, excluding the install folder from real-time scanni
 
 The hands need two things from macOS: *Screen Recording* for the screenshots and
 *Accessibility* for the mouse and the keyboard. Since 0.1.38 both belong to a small app of
-their own, **corein Computer Use** (`corein.app/Contents/Helpers/corein Computer
+their own, **corein Computer Use** (`fomo.corein.in/Contents/Helpers/corein Computer
 Use.app`, bundle id `com.corein.desktop.computer-use`): that is the row you switch
 on in System Settings → Privacy & Security → Screen Recording and → Accessibility. corein
 Desktop itself holds neither.

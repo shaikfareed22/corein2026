@@ -35,9 +35,9 @@ interface Sources {
 }
 
 const SOURCES: Sources = {
-  mirrorCheck: "https://corein.app/dl/win/",
+  mirrorCheck: "https://fomo.corein.in/dl/win/",
   githubCheck: "https://github.com/shaikfareed22/corein2026/releases/latest/download/",
-  mirrorVersion: (version) => `https://corein.app/dl/v${version}/`,
+  mirrorVersion: (version) => `https://fomo.corein.in/dl/v${version}/`,
   githubVersion: (version) => `https://github.com/shaikfareed22/corein2026/releases/download/v${version}/`,
 };
 

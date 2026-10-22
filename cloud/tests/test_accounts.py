@@ -334,7 +334,7 @@ async def test_invites_and_the_operator_grow_the_one_pool():
     a = await sign_up(client, sender, "dev-a@example.com", "pixel")
     ka = a["api_key"]
     inv = (await client.get("/v1/me/invite", headers=auth(ka))).json()
-    assert len(inv["code"]) == 8 and inv["url"] == "https://corein.app/web/?invite=" + inv["code"]
+    assert len(inv["code"]) == 8 and inv["url"] == "https://fomo.corein.in/web/?invite=" + inv["code"]
     assert (
         inv["invites"] == 0 and inv["bonus_cny"] == 3 and inv["invitee_bonus_cny"] == 3 and inv["earned_cny"] == 0 and inv["friends"] == []
     )
@@ -500,7 +500,7 @@ async def test_admin_series_and_traffic(tmp_path):
             "status": status,
             "size": 1000,
             "request": {
-                "host": "corein.app",
+                "host": "fomo.corein.in",
                 "uri": uri,
                 "client_ip": "203.0.113.7",
                 "headers": {"User-Agent": [ua], "Referer": ["https://github.com/shaikfareed22/corein2026"]},

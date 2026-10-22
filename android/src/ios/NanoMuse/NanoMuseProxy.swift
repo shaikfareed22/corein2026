@@ -17,7 +17,7 @@
 //
 //  Off by default. Nothing here is synced. The host, the port and the user name are in
 //  UserDefaults; the password is in the Keychain, on this device only, next to the relay's key
-//  (`com.corein.app.proxy`). Up to 1.0.3 the password was a UserDefaults string too and
+//  (`com.corein.in.proxy`). Up to 1.0.3 the password was a UserDefaults string too and
 //  so part of every backup; `config()` moves it over once. The Android twin is
 //  io.github.nanomuse.net.OwnProviderProxy.
 //
@@ -51,10 +51,10 @@ enum NanoMuseProxy {
         static let credentialSpace = "nanomuse.proxy.credential_space"
     }
 
-    /// The Keychain item: the sweep on a fresh install removes every `com.corein.app.*`
+    /// The Keychain item: the sweep on a fresh install removes every `com.corein.in.*`
     /// service, this one with them (NanoMuseAccountData.sweepDeviceKeychain).
     private enum KeychainItem {
-        static let service = "com.corein.app.proxy"
+        static let service = "com.corein.in.proxy"
         static let account = "password"
     }
 

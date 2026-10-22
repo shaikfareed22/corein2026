@@ -53,7 +53,7 @@ build 39，中继 0.20.0。下一版 0.1.39 由 L 统一发布；**你不改任�
   **不要自己合并**，L 看过 CI 后合并。不 force-push。
 - **永远没有秘密。** API key、手机号、邮箱、token、证书、`.p8`、`config/config.toml`、
   `cloud/.env` 不进提交、不进 PR 描述、不贴进聊天；日志贴出来之前把这些打码。
-  不在 `cloud.corein.app` 上注册测试账号——测试用维护者自己的账号（登录验证码由维护者输入）。
+  不在 `cloud.fomo.corein.in` 上注册测试账号——测试用维护者自己的账号（登录验证码由维护者输入）。
 
 ## 1. 环境
 
@@ -82,7 +82,7 @@ bash mac/computer-use/build.sh                       # → mac/computer-use/buil
 - **打包态**（所有权限项都用它）：
   ```bash
   npm run dist:dir && ../../scripts/desktop-app/package-mac.sh arm64     # Intel 用 x64
-  open dist/mac-arm64/corein.app                                        # 或 dist/mac/
+  open dist/mac-arm64/fomo.corein.in                                        # 或 dist/mac/
   ```
   没有证书时是 ad-hoc 签名，Gatekeeper 会说「无法验证」，到系统设置 → 隐私与安全性里点
   *仍要打开*。已发布的 0.1.38 安装包在
@@ -144,7 +144,7 @@ Computer use 页面本身就报错。把 `desktop.log` 里 `helper:`、`operator
   `permissions.ts`、`Capsule.tsx`（`helper` 标志决定文案）、`locales.ts` 的 `pmOnlyHelper`、
   `pmTryShotBlackHelper`、`pmBlackBodyHelper`、`pmBlackRelaunchHelper` 等 key。
 - 打包：`electron-builder.yml` `mac.extraFiles` 把 `build/corein Computer Use.app` 放到
-  `corein.app/Contents/Helpers/`；`scripts/desktop-app/package-mac.sh` 先签助手再签外层
+  `fomo.corein.in/Contents/Helpers/`；`scripts/desktop-app/package-mac.sh` 先签助手再签外层
   （没有证书时都是 ad-hoc）；`.github/workflows/desktop-app.yml` 的 macOS job 跑 `build.sh`
   （CI 上 0 warning 通过）。
 - 文档：`docs/desktop.md` → *macOS permissions*、*macOS signing*。

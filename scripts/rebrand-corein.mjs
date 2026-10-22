@@ -19,10 +19,10 @@ export const NAME = 'corein'
 export const CLOUD = `${NAME} Cloud`
 export const DESKTOP = `${NAME} Desktop`
 export const REPO = 'shaikfareed22/corein2026'
-export const DOMAIN = 'corein.app'
+export const DOMAIN = 'fomo.corein.in'
 export const RELAY = `cloud.${DOMAIN}`
 export const DEMO = `demo.${DOMAIN}`
-export const ANDROID_ID = 'com.corein.app'
+export const ANDROID_ID = 'com.fomo.corein.in'
 export const IOS_PREFIX = 'com.corein'
 export const SCHEME = 'corein'
 export const DESKTOP_APP_ID = 'com.corein.desktop'
@@ -36,7 +36,7 @@ const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 const SKIP_DIRS = new Set(['.git', 'node_modules', 'deps', 'static', 'traces', 'screenshots', 'releases', 'superpowers', 'dist', 'build', '.gradle', 'DerivedData'])
 // Files kept as history or authored by hand for the fork.
 // README.md is written for the fork and names nanoMuse on purpose in its Origin section.
-const SKIP_FILES = new Set(['CHANGELOG.md', 'NOTICE', 'THIRD_PARTY_NOTICES.md', 'CITATION.cff', 'README.md', 'rebrand-corein.mjs', 'package-lock.json', 'pnpm-lock.yaml', 'uv.lock'])
+const SKIP_FILES = new Set(['CHANGELOG.md', 'NOTICE', 'THIRD_PARTY_NOTICES.md', 'CITATION.cff', 'README.md', 'CONTRIBUTING.md', 'fork.md', 'rebrand-corein.mjs', 'package-lock.json', 'pnpm-lock.yaml', 'uv.lock'])
 const TEXT = /\.(md|txt|ts|tsx|mts|mjs|cjs|js|json|jsonc|yml|yaml|toml|py|kt|kts|swift|xml|xcstrings|html|css|svg|sh|ps1|env|example|cff|plist|pbxproj|strings|gradle|pro|properties|cfg|ini|Dockerfile|dockerignore|gitignore|editorconfig|caddy|conf)$/i
 const NAMED = new Set(['Dockerfile', 'Caddyfile', 'LICENSE', 'SECURITY.md', 'AGENTS.md', 'CLAUDE.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', '.env.example', '.dockerignore', '.gitattributes'])
 const MAX_BYTES = 16 * 1024 * 1024 // Localizable.xcstrings is 4.6 MB

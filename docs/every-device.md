@@ -357,7 +357,7 @@ Hands events shown while it works. None of it blocks the desktop work.
 
 ## The browser: a demo on a simulated phone
 
-[corein.app/web](https://corein.app/web/) leads to the showcase: a simulated
+[fomo.corein.in/web](https://fomo.corein.in/web/) leads to the showcase: a simulated
 phone in the browser (MobileGym, with the corein app brought to the front:
 `demo/mobilegym/apps/corein`) and, behind it, a private corein of the
 visitor's own that the showcase gateway starts for the visit, the
@@ -368,7 +368,7 @@ account's password; `demo/showcase/gateway/showcase_gateway/visitors.py`), so
 the project knows who is trying it and the same account is there on the day
 the app is installed. The page says so plainly: this is a demo, a long way from
 the Android app, and where the apps are. The homepage at
-[corein.app](https://corein.app/) shows the same page in a frame (`?embed=1`,
+[fomo.corein.in](https://fomo.corein.in/) shows the same page in a frame (`?embed=1`,
 no header of its own). The phone turns itself on; the Muse behind it is started
 once the page has reason to think a person is looking (a few seconds in view,
 or a pointer, key or wheel), never for a scripted browser, and never before the
@@ -418,7 +418,7 @@ the hands elsewhere; the hub is already enough for them.
 
 Released with 0.1.19: the APK, the desktop installers (`corein-Desktop-…`,
 [`.github/workflows/desktop-app.yml`](../.github/workflows/desktop-app.yml)),
-the terminal binary (dropped in 0.1.39), and corein Web at corein.app/web (the demo on a
+the terminal binary (dropped in 0.1.39), and corein Web at fomo.corein.in/web (the demo on a
 simulated phone since 0.1.26).
 
 ## Debugging it all on one machine

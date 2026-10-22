@@ -1,6 +1,6 @@
 # corein Cloud on nanomuse-hk
 
-The production relay behind `https://cloud.corein.app` runs on the same Hong
+The production relay behind `https://cloud.fomo.corein.in` runs on the same Hong
 Kong box as the project site, behind the showcase's Caddy
 (`demo/showcase`). This directory is everything specific to that box; the
 relay itself is [`cloud/`](../../README.md).
@@ -10,10 +10,10 @@ relay itself is [`cloud/`](../../README.md).
 | host | `nanomuse-hk` (SSH alias), Ubuntu 24.04, Docker |
 | relay | `/opt/nanomuse/relay/` — `docker-compose.yml`, `.env`, `src/`, `data/cloud.db` |
 | container | `nanomuse-relay`, on the `showcase_edge` network, no published ports; runs as uid 10001, which owns `data/` on the host (`deploy.sh` keeps it so) |
-| TLS / vhost | `demo/showcase/sites.d/cloud.corein.app.caddy` → `nanomuse-relay:8787` |
+| TLS / vhost | `demo/showcase/sites.d/cloud.fomo.corein.in.caddy` → `nanomuse-relay:8787` |
 | backups | `/opt/nanomuse/backups/cloud-*.db.gz`, daily 04:10 UTC, 30 days (`backup.sh`, systemd timer) |
 | self-check | `selfcheck.sh` every 10 min (systemd timer): the public `/healthz`, the relay's `/v1/admin/health` (aggregates only: requests under way, hub counters, the hour's upstream errors, content-check refusals and refusals, the database), free disk, and the age of the newest `cloud-*.db.gz` under `/opt/nanomuse/backups` (a problem when it is older than 48 hours, `BACKUP_MAX_H`, or there is none) — one line in the journal (`journalctl -t nanomuse-selfcheck`); with `ALERT_URL` in `.env` (a webhook taking `{"text": …}`) a problem is posted there, once an hour per problem |
-| admin | `https://cloud.corein.app/app/admin/`, token in `/opt/nanomuse/relay/ADMIN_TOKEN.txt` (0600) |
+| admin | `https://cloud.fomo.corein.in/app/admin/`, token in `/opt/nanomuse/relay/ADMIN_TOKEN.txt` (0600) |
 | DNS | DNSPod: `cloud` A → the box's address, same as the apex |
 
 ## First time
@@ -25,7 +25,7 @@ sudo mkdir -p /opt/nanomuse/relay && sudo chown "$USER" /opt/nanomuse/relay
 cd /opt/nanomuse/relay
 umask 077
 cat > .env <<EOF
-PUBLIC_BASE=https://cloud.corein.app
+PUBLIC_BASE=https://cloud.fomo.corein.in
 CLOUD_SECRET=$(openssl rand -hex 32)
 CLOUD_ADMIN_TOKEN=$(openssl rand -hex 32)
 # anyone may sign in; the members below (comma-separated phone numbers /
@@ -35,11 +35,11 @@ SIGNUP_OPEN=1
 ALLOWED_IDENTIFIERS=
 ALLOWANCE_CNY=10
 INVITE_BONUS_CNY=5
-OWN_KEY_DOCS=https://corein.app/own-key
+OWN_KEY_DOCS=https://fomo.corein.in/own-key
 # what "Help improve corein's AI models" starts as for new accounts (1 = on
 # until turned off under Settings → Data controls); say it in PRIVACY_URL
 IMPROVE_DEFAULT=1
-PRIVACY_URL=https://corein.app/privacy/
+PRIVACY_URL=https://fomo.corein.in/privacy/
 DAY_OFFSET_H=8
 USD_CNY=7.1
 # no token ceiling; usage is metered and shown
@@ -50,9 +50,9 @@ PER_MINUTE_REQUESTS=30
 CODE_SENDER=log
 SMTP_HOST=smtpdm.aliyun.com
 SMTP_PORT=465
-SMTP_USER=no-reply@mail.corein.app
+SMTP_USER=no-reply@mail.corein.in
 SMTP_PASSWORD=
-SMTP_FROM=corein <no-reply@mail.corein.app>
+SMTP_FROM=corein <no-reply@mail.corein.in>
 # the 百炼 key the relay spends (public endpoints; never a private one)
 UPSTREAM_BASE=https://dashscope.aliyuncs.com/compatible-mode/v1
 DASHSCOPE_BASE=https://dashscope.aliyuncs.com/api/v1

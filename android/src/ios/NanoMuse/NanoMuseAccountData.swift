@@ -239,8 +239,8 @@ final class NanoMuseAccountData {
         guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess, let items = result as? [[String: Any]] else { return }
         var removed = 0
         for item in items {
-            guard let service = item[kSecAttrService as String] as? String, service.hasPrefix("com.corein.app."),
-                  service != "com.corein.app.device" else { continue }
+            guard let service = item[kSecAttrService as String] as? String, service.hasPrefix("com.corein.in."),
+                  service != "com.corein.in.device" else { continue }
             var delete: [String: Any] = [
                 kSecClass as String: kSecClassGenericPassword,
                 kSecAttrService as String: service,
@@ -256,7 +256,7 @@ final class NanoMuseAccountData {
     /// legacy entry. Called after every sign-in and once at start (the 0.1.39 entry moves).
     static func keepRelayKeyOnThisDevice() {
         guard let inst = NanoMuseCloud.instance else { return }
-        let service = "com.corein.app.provider.\(inst.id)"
+        let service = "com.corein.in.provider.\(inst.id)"
         let syncQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
@@ -272,7 +272,7 @@ final class NanoMuseAccountData {
     }
 
     nonisolated static func saveRelayKey(_ key: String, instanceId: String) {
-        let service = "com.corein.app.provider.\(instanceId)"
+        let service = "com.corein.in.provider.\(instanceId)"
         let base: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,

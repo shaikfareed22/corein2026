@@ -147,7 +147,7 @@ export function unavailableLine(t: (s: string, v?: Record<string, string | numbe
 }
 
 /** The guide every unavailable line links to. */
-export const OWN_KEY_DOCS_URL = "https://corein.app/own-key";
+export const OWN_KEY_DOCS_URL = "https://fomo.corein.in/own-key";
 
 /**
  * The runtime's view when it has one; else the bundled catalogue with nothing known about

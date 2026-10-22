@@ -3,7 +3,7 @@
 Sign in with the same account on your phone, your computers and the web console, and
 they work as one: say it on one device and it gets done on another, approvals come back to
 the device where you typed, and the main conversation follows you. This page walks
-through it on the public relay, `cloud.corein.app`, from a fresh phone to "the phone tells
+through it on the public relay, `cloud.fomo.corein.in`, from a fresh phone to "the phone tells
 the Mac to build the project". The protocol is [hub.md](hub.md); how the account and the
 free pool work is [cloud.md](cloud.md); a relay of your own is [self-hosting.md](self-hosting.md).
 
@@ -42,7 +42,7 @@ to the same account) joins the same way ([app.md](app.md), [cli.md](cli.md)).
 
 ## 3. The web console
 
-`https://cloud.corein.app/app/`, the same sign-in. It shows the account's devices and
+`https://cloud.fomo.corein.in/app/`, the same sign-in. It shows the account's devices and
 conversations; pick a device, type, and approvals show as cards. A relay of your own serves
 the same console at its `/app/`.
 

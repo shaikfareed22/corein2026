@@ -222,7 +222,7 @@ def test_release_check_asks_the_mirror_first_and_github_second(monkeypatch):
     check = update.UpdateCheck(True, current="0.1.35")
     view = asyncio.run(check.view())
     assert asked == [update.INDEX_URL]  # the mirror answered: GitHub is not asked
-    assert view["latest"] == "0.1.40" and view["newer"] is True and view["source"] == "corein.app"
+    assert view["latest"] == "0.1.40" and view["newer"] is True and view["source"] == "fomo.corein.in"
     assert view["url"].endswith("/releases/tag/v0.1.40")
     assert view["download_url"] == update.DOWNLOAD_PAGE
     assert view["checked_at"] and datetime.fromisoformat(view["checked_at"]).tzinfo is not None

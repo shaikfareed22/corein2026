@@ -145,7 +145,7 @@ a voice note (a marker stands where one was). The point is a training set for
 the community's own open model. The page shows how many turns are kept; turn
 the switch off at any time (nothing more is kept) and delete what was kept
 with one tap; deleting the account deletes it too. Nothing is credited for
-the switch either way. On `cloud.corein.app` the switch is **on for accounts
+the switch either way. On `cloud.fomo.corein.in` the switch is **on for accounts
 created from relay 0.9 on, until the person turns it off**: the privacy
 policy says so, the page says so next to the switch, and accounts from before
 keep the choice they had made; a self-hosted relay sets its own default with
@@ -286,10 +286,10 @@ so it can skip its own echo).
 ## Allowance
 
 corein is a community project and charges nothing. The public relay at
-`cloud.corein.app` is paid for by the developer, so each account has a pool
+`cloud.fomo.corein.in` is paid for by the developer, so each account has a pool
 to draw on, for its lifetime, not by the day (relay 0.5):
 
-| | `cloud.corein.app` |
+| | `cloud.fomo.corein.in` |
 |---|---|
 | sign-up | open to anyone with a mainland China mobile number or an e-mail address |
 | free allowance | **¥10 per account** at the time of writing, across chat, pictures and clips; it does not reset. The figure is the relay's to set (it can go up without an app update; the apps print what the relay says, `/v1/config`), and the account page always shows the current one |
@@ -475,7 +475,7 @@ The relay is also the meeting point for the account's devices: the **hub** at
 turns it off, `HUB_FRAME_LIMIT` caps one frame (files and screenshots travel
 inside frames, 16 MB by default).
 
-The apps talk to `https://cloud.corein.app` by default. *Use a different
+The apps talk to `https://cloud.fomo.corein.in` by default. *Use a different
 server* under the phone's sign-in form takes the address of a relay you run
 yourself ([android.md](android.md), [ios.md](ios.md)); the desktop reads it from
 the plugin's `config.baseURL` ([desktop.md](desktop.md)) and the web console is

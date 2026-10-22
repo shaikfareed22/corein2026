@@ -575,15 +575,15 @@ class Settings:
     # INVITE_URL is the link the apps offer to share; the code is appended.
     # OWN_KEY_DOCS is the guide the apps open when the allowance is used up and
     # the person wants to bring their own model key.
-    invite_url: str = field(default_factory=lambda: _env("INVITE_URL", "https://corein.app/web/?invite="))
-    own_key_docs: str = field(default_factory=lambda: _env("OWN_KEY_DOCS", "https://corein.app/own-key"))
+    invite_url: str = field(default_factory=lambda: _env("INVITE_URL", "https://fomo.corein.in/web/?invite="))
+    own_key_docs: str = field(default_factory=lambda: _env("OWN_KEY_DOCS", "https://fomo.corein.in/own-key"))
     # OPENROUTER_URL is where someone outside mainland China gets a key (0.17): Alibaba
     # Cloud Bailian only signs up accounts from the mainland, so the "ways on" the relay
     # sends put OpenRouter first for everyone else (service.region).
     openrouter_url: str = field(default_factory=lambda: _env("OPENROUTER_URL", "https://openrouter.ai/keys"))
     # PRIVACY_URL is the policy the apps link from Data controls and the sign-in
     # pages — the one that states what this relay keeps and its default above.
-    privacy_url: str = field(default_factory=lambda: _env("PRIVACY_URL", "https://corein.app/privacy/"))
+    privacy_url: str = field(default_factory=lambda: _env("PRIVACY_URL", "https://fomo.corein.in/privacy/"))
     # REPO_URL is the project's repository, which the apps point to when they ask for a
     # star — at the first sign-in, when the allowance is used up, after the first task.
     repo_url: str = field(default_factory=lambda: _env("REPO_URL", "https://github.com/shaikfareed22/corein2026"))
@@ -668,7 +668,7 @@ class Settings:
     # corein Web's gateway on the same docker network (http://gateway:8000/api/web/info):
     # how many kept accounts and running sessions; empty = not asked
     web_info_url: str = field(default_factory=lambda: _env("WEB_INFO_URL"))
-    # the showcase's visitors (demo.corein.app/api/demo/admin, its SHOWCASE_ADMIN_TOKEN):
+    # the showcase's visitors (demo.fomo.corein.in/api/demo/admin, its SHOWCASE_ADMIN_TOKEN):
     # who tried the phone in the browser from where and with what, every demo and what it
     # used — shown on the admin page and in the account drawer; empty = not asked
     web_admin_url: str = field(default_factory=lambda: _env("WEB_ADMIN_URL"))

@@ -46,7 +46,7 @@ const BUNDLES = ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@deepseek
 const BUNDLE = "dsh-nanomuse";
 const RELEASES_PAGE = "https://github.com/shaikfareed22/corein2026/releases/latest";
 const ISSUES_PAGE = "https://github.com/shaikfareed22/corein2026/issues";
-const DOCS_PAGE = "https://corein.app/docs/desktop";
+const DOCS_PAGE = "https://fomo.corein.in/docs/desktop";
 const HARNESS_PAGE = "https://github.com/deepseek-ai/deepseek-harness";
 
 const zh = (app.getLocale() || "").toLowerCase().startsWith("zh");
@@ -1934,7 +1934,7 @@ function about(): void {
 
 function buildMenu(): void {
   const help: Electron.MenuItemConstructorOptions[] = [
-    { label: T.website, click: () => void shell.openExternal("https://corein.app/") },
+    { label: T.website, click: () => void shell.openExternal("https://fomo.corein.in/") },
     { label: T.docs, click: () => void shell.openExternal(DOCS_PAGE) },
     { label: T.releases, click: () => void shell.openExternal(RELEASES_PAGE) },
     { label: T.issue, click: () => void shell.openExternal(ISSUES_PAGE) },
@@ -2017,7 +2017,7 @@ if (!app.requestSingleInstanceLock({ version: app.getVersion() })) {
     applicationName: "corein",
     applicationVersion: app.getVersion(),
     copyright: "GPL-3.0-or-later · the corein community · built on DeepSeek Harness (MIT)",
-    website: "https://corein.app/",
+    website: "https://fomo.corein.in/",
   });
   app.whenReady().then(async () => {
     registerBridge();

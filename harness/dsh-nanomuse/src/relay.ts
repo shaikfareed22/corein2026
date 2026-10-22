@@ -250,7 +250,7 @@ function toAccount(me: Record<string, unknown>): Account {
   }
 }
 
-/** A client for one relay origin, e.g. `https://cloud.corein.app`. */
+/** A client for one relay origin, e.g. `https://cloud.fomo.corein.in`. */
 export class Relay {
   readonly origin: string
   private readonly fetchImpl: TimedFetch

@@ -97,7 +97,7 @@ export function SettingsScreen() {
     if (!s) void refreshSettings();
   }, [s, refreshSettings]);
 
-  // the runtime asks corein.app/dl (then GitHub) at most once a day; "Check now" asks again
+  // the runtime asks fomo.corein.in/dl (then GitHub) at most once a day; "Check now" asks again
   const checkRelease = useCallback(async (refresh = false) => {
     setChecking(true);
     try {
@@ -502,7 +502,7 @@ const SECTION_IDS: SectionId[] = ["who", "sentinel", "proactivity", "notificatio
 
 /**
  * The Version card (contract C2): the installed release, and the latest one as the runtime
- * found it on corein.app/dl or GitHub — "you have it", "x is out" with Update, or "could
+ * found it on fomo.corein.in/dl or GitHub — "you have it", "x is out" with Update, or "could
  * not check" with a try again. Permanent: both lines are there whatever the answer. A phone
  * shell checks on its own, so the latest line says so instead.
  */

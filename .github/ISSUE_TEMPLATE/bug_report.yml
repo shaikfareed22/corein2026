@@ -51,7 +51,7 @@ body:
         - Daemon (nanomuse daemon / goals run) / 后台进程
         - Docker
         - Library / API
-        - The showcase (demo.corein.app) / 展示站
+        - The showcase (demo.fomo.corein.in) / 展示站
     validations:
       required: true
   - type: input

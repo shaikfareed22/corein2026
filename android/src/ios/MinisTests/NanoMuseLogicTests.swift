@@ -673,7 +673,7 @@ final class NanoMuseLogicTests: XCTestCase {
     }
 
     func testUpdateIndexReadsTheReleasesList() {
-        // The index as corein.app/dl/index.json is written: releases newest first, each with a tag.
+        // The index as fomo.corein.in/dl/index.json is written: releases newest first, each with a tag.
         let index: [String: Any] = [
             "repo": "shaikfareed22/corein2026",
             "releases": [["tag": "v1.0.0", "name": "corein 1.0.0", "assets": [String]()], ["tag": "v0.1.41"]],

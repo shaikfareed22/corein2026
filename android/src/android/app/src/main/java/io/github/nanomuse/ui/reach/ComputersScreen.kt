@@ -46,7 +46,7 @@ import java.text.DateFormat
 import java.util.Date
 
 const val ROUTE_COMPUTERS = "nanomuse/computers"
-const val DESKTOP_DOWNLOAD_URL = "https://corein.app/#download"
+const val DESKTOP_DOWNLOAD_URL = "https://fomo.corein.in/#download"
 
 /**
  * Settings → Computers: the account's computers, as the hub knows them. One way in — corein

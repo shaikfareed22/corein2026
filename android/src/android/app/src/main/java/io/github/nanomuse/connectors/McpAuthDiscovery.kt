@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
 object McpAuthDiscovery {
     private const val TAG = "McpAuthDiscovery"
     private const val CLIENT_NAME = "corein"
-    private const val CLIENT_URI = "https://corein.app"
+    private const val CLIENT_URI = "https://fomo.corein.in"
     private const val PROTOCOL = "2025-06-18"
     private const val TIMEOUT_S = 15L
 

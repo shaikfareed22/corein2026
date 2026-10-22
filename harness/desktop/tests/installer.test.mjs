@@ -41,7 +41,7 @@ test("the Windows build writes the update metadata electron-updater reads", () =
   assert.ok(win.includes("  publish:"), "win.publish is set");
   const start = win.findIndex((line) => line === "  publish:");
   assert.ok(win.slice(start, start + 4).includes("    provider: generic"), "win.publish.provider is generic");
-  assert.ok(win.slice(start, start + 4).includes('    url: "https://corein.app/dl/win/"'), "win.publish.url is the mirror's dl/win");
+  assert.ok(win.slice(start, start + 4).includes('    url: "https://fomo.corein.in/dl/win/"'), "win.publish.url is the mirror's dl/win");
 });
 
 test("the clips the installer must carry are in the bundle's assets", () => {

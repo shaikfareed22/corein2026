@@ -10,7 +10,7 @@
 //  schedule while it sleeps: when a routine comes due and the app is not
 //  up, the phone shows "Check-in: <goal> — open to run it", and the run
 //  happens when the person opens the app. Android has WorkManager for this
-//  (com.corein.app.scheduled.*); the words here say what the phone can
+//  (com.corein.in.scheduled.*); the words here say what the phone can
 //  and cannot do.
 //
 
@@ -122,7 +122,7 @@ final class NanoMuseScheduler: ObservableObject {
     static let shared = NanoMuseScheduler()
 
     /// Also listed under BGTaskSchedulerPermittedIdentifiers in Info.plist.
-    nonisolated static let backgroundTaskId = "com.corein.app.scheduler"
+    nonisolated static let backgroundTaskId = "com.corein.in.scheduler"
     static let notificationCategory = "NANOMUSE_ROUTINE"
     private static let maxRunsKept = 10
 

@@ -2,7 +2,7 @@
  * The desk behind the hands (0.1.34): the approvals and holds the chat's cards and
  * the capsule answer (shared contracts C1 and C2 of this release), what the account's
  * connectors look like to the other devices (C3), and the update check the
- * About row runs (corein.app/dl/index.json first, GitHub releases as the fallback).
+ * About row runs (fomo.corein.in/dl/index.json first, GitHub releases as the fallback).
  *
  * No Cordis here: `cloud.ts` owns the wiring, this file owns the shapes and
  * the decisions so the tests can drive them without a host.
@@ -385,7 +385,7 @@ export function readSharedConnectors(raw: unknown): SharedConnector[] {
 // ---- the update check (B5) ---------------------------------------------------------
 
 export const RELEASES_API = 'https://api.github.com/repos/shaikfareed22/corein2026/releases/latest'
-export const RELEASES_INDEX = 'https://corein.app/dl/index.json'
+export const RELEASES_INDEX = 'https://fomo.corein.in/dl/index.json'
 export const RELEASES_PAGE = 'https://github.com/shaikfareed22/corein2026/releases'
 
 export interface ReleaseAsset {
@@ -404,7 +404,7 @@ export interface UpdateInfo {
   page: string
   assets: ReleaseAsset[]
   notes: string
-  source: 'github' | 'corein.app' | 'none'
+  source: 'github' | 'fomo.corein.in' | 'none'
   checkedAt: number
   error?: string
 }
@@ -483,7 +483,7 @@ export function pickAsset(assets: ReleaseAsset[], platform: string, arch: string
 type Fetch = (url: string, init?: { headers?: Record<string, string>; signal?: AbortSignal }) => Promise<{ ok: boolean; status: number; json(): Promise<unknown> }>
 
 /**
- * The latest release, from the mirror's index on corein.app first (reachable from the
+ * The latest release, from the mirror's index on fomo.corein.in first (reachable from the
  * mainland, no rate limit), then GitHub's API when the index does not answer. Each
  * request has 5 s (C2). Never throws: a failed check is an `UpdateInfo` with
  * `source: 'none'` and an `error`.
@@ -515,10 +515,10 @@ export async function checkForUpdate(current: string, fetchImpl: Fetch = fetch a
       newer: compareVersions(latest, current) > 0,
       page: `https://github.com/${repo}/releases/tag/${rel.tag}`,
       assets: (rel.assets ?? []).flatMap((a) => (a.name ? [{ name: a.name, url: `https://github.com/${repo}/releases/download/${rel.tag}/${a.name}`, size: Number(a.size ?? 0) || 0 }] : [])),
-      source: 'corein.app',
+      source: 'fomo.corein.in',
     }
   } catch (error: unknown) {
-    errors.push(`corein.app: ${error instanceof Error ? error.message : String(error)}`)
+    errors.push(`fomo.corein.in: ${error instanceof Error ? error.message : String(error)}`)
   }
   try {
     const rel = (await get(RELEASES_API)) as { tag_name?: string; html_url?: string; body?: string; assets?: { name?: string; browser_download_url?: string; size?: number }[] }

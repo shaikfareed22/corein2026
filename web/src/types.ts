@@ -863,11 +863,11 @@ export interface UpdateView {
   newer: boolean;
   /** The release page of the latest. */
   url: string;
-  /** The download page (corein.app/dl). */
+  /** The download page (fomo.corein.in/dl). */
   download_url?: string;
   /** When the runtime last asked (ISO, UTC), or null before the first check. */
   checked_at?: string | null;
-  /** Where the answer came from: `corein.app`, `github`, or null. */
+  /** Where the answer came from: `fomo.corein.in`, `github`, or null. */
   source?: string | null;
   error?: string | null;
 }

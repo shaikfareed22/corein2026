@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * The installed version and the latest one, side by side (shared contract C2). The latest
- * comes from the download index on corein.app first, then GitHub's latest release; it is
+ * comes from the download index on fomo.corein.in first, then GitHub's latest release; it is
  * looked up at most once a day and the answer kept, with a "check now" for a stale or failed
  * check. Only the two lines of the Version row live on this; the in-app APK download on the
  * About page is the upstream UpdateChecker, untouched.
@@ -31,8 +31,8 @@ object UpdateCheck {
     private const val KEY_FAILED = "failed"
 
     /** Where "Update" goes on Android: the download page, with the APK and the store links. */
-    const val DOWNLOAD_URL = "https://corein.app/dl/"
-    const val INDEX_URL = "https://corein.app/dl/index.json"
+    const val DOWNLOAD_URL = "https://fomo.corein.in/dl/"
+    const val INDEX_URL = "https://fomo.corein.in/dl/index.json"
     const val GITHUB_LATEST_URL = "https://api.github.com/repos/shaikfareed22/corein2026/releases/latest"
 
     /** A check is repeated at most this often on its own. */
@@ -109,7 +109,7 @@ object UpdateCheck {
         }
     }
 
-    /** The index on corein.app, then GitHub; null when neither answered with a version. */
+    /** The index on fomo.corein.in, then GitHub; null when neither answered with a version. */
     internal fun fetchLatest(): String? {
         get(INDEX_URL)?.let { parseIndex(it) }?.let { return it }
         return get(GITHUB_LATEST_URL)?.let { parseGitHubLatest(it) }

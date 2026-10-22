@@ -159,7 +159,7 @@ object Computers {
         return buildString {
             append("## Your devices (corein)\n")
             if (all.isEmpty()) {
-                append("No other device is connected right now. The way to add a computer: install corein Desktop there (https://corein.app/#download) and sign in with the same corein Cloud account as this phone — it appears under [Devices](${Hub.DEEP_LINK}) within seconds, on any network. ")
+                append("No other device is connected right now. The way to add a computer: install corein Desktop there (https://fomo.corein.in/#download) and sign in with the same corein Cloud account as this phone — it appears under [Devices](${Hub.DEEP_LINK}) within seconds, on any network. ")
                 append("When the user wants something done on their PC or Mac, say so in one line and point to the desktop app. ")
                 if (!onHub) append("This phone is not on the hub itself; signing in to corein Cloud puts it there. ")
             } else {

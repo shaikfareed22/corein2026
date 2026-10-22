@@ -19,7 +19,7 @@ import { IconDevices, IconGlobe, IconLaptop, IconPencil, IconPhone, IconRefresh 
 import { useLive, type LiveDevice } from './live.ts'
 import { MoreButton } from './ui.tsx'
 
-const DOWNLOAD_URL = 'https://corein.app/dl/'
+const DOWNLOAD_URL = 'https://fomo.corein.in/dl/'
 
 function ago(t: Translate, seconds: number): string {
   if (!seconds) return ''

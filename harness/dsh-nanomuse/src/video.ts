@@ -13,7 +13,7 @@
  *  4. the MP4 is downloaded from the `video_url` the task ends with.
  *
  * `host` is Model Studio itself (`https://dashscope.aliyuncs.com`) with the person's own
- * key, or the corein relay (`https://cloud.corein.app`), which serves the same
+ * key, or the corein relay (`https://cloud.fomo.corein.in`), which serves the same
  * `/api/v1/…` paths next to its OpenAI-shaped `/v1` and pays from the account's allowance.
  *
  * The two model families take different bodies: MiniMax wants `media[first_frame]`,
@@ -32,7 +32,7 @@ export const DEFAULT_VIDEO_MODEL = 'wan2.2-i2v-flash'
 
 /** One video model on one host: what `imageToVideo` needs and nothing more. */
 export interface VideoEndpoint {
-  /** `https://dashscope.aliyuncs.com` or `https://cloud.corein.app`, without an API path. */
+  /** `https://dashscope.aliyuncs.com` or `https://cloud.fomo.corein.in`, without an API path. */
   host: string
   apiKey: string
   model: string

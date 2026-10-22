@@ -361,7 +361,7 @@ page it opened, named for the page you came from; a pick in the sidebar starts f
   and a line says so when another app already holds it; and the keyboard reference); **About** (corein, built on DeepSeek Harness, the licence, and two version
   lines that are always there: *corein Desktop <app> · harness <bundle>: installed*
   and *Latest 0.1.x: you have it* / *0.1.x is out · Update* / *Could not check · tap to
-  try again*; the check reads `corein.app/dl/index.json` first and GitHub's releases
+  try again*; the check reads `fomo.corein.in/dl/index.json` first and GitHub's releases
   second, once a day); and *Developer*: *Show DeepSeek
   Harness controls* (the model picker, the modes, the workspace browser in place of the
   chats column). The harness's other rows (permission presets, font size, link opening,
@@ -524,7 +524,7 @@ page it opened, named for the page you came from; a pick in the sidebar starts f
   look go, the account signs out; the chats stay).
 - **Help & support**: the docs, the site, discussions, report an issue, the version.
 - **Legal**: the licence, the Meta trademark notice, the acknowledgements (DeepSeek
-  Harness, OpenMinis) and the privacy policy (`corein.app/privacy/`, the page every
+  Harness, OpenMinis) and the privacy policy (`fomo.corein.in/privacy/`, the page every
   client links).
 - **Advanced**: every page another plugin registers (the harness's plugin manager,
   archived sessions…), grouped at the bottom so they are there and out of the way.
@@ -634,7 +634,7 @@ nowhere else.
   account in the mainland, the account page lists Bailian first and OpenRouter second;
   elsewhere the other way round, each with *Get a key*.
 - **Updates.** Once a day, and on *Check for updates* in About, the host reads the
-  mirror's index at `corein.app/dl/index.json` first (reachable from the mainland, no
+  mirror's index at `fomo.corein.in/dl/index.json` first (reachable from the mainland, no
   rate limit) and GitHub's releases API when the index does not answer, then compares
   versions; a newer one shows as a dot, an *Update to 0.1.x* menu item and a *Download*
   button for this platform's asset in About (on Linux the `.deb`, or the AppImage when

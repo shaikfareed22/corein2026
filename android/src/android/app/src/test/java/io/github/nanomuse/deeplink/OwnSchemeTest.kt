@@ -29,9 +29,9 @@ class OwnSchemeTest {
         assertEquals("minis://settings/soul", OwnScheme.internalUrl("corein://settings/soul"))
         assertEquals("minis://session/abc/index.html?title=x", OwnScheme.internalUrl("Corein://session/abc/index.html?title=x"))
         assertEquals("minis://attachments/a.png", OwnScheme.internalUrl("minis://attachments/a.png"))
-        assertEquals("https://corein.app/", OwnScheme.internalUrl("https://corein.app/"))
+        assertEquals("https://fomo.corein.in/", OwnScheme.internalUrl("https://fomo.corein.in/"))
         // the host part is not a scheme
-        assertEquals("https://corein.app/corein://x", OwnScheme.internalUrl("https://corein.app/corein://x"))
+        assertEquals("https://fomo.corein.in/corein://x", OwnScheme.internalUrl("https://fomo.corein.in/corein://x"))
     }
 
     @Test

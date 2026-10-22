@@ -6,7 +6,7 @@ import { markStarred } from "./StarNudge";
 export const REPO_URL = "https://github.com/shaikfareed22/corein2026";
 export const ISSUES_URL = "https://github.com/shaikfareed22/corein2026/issues/new/choose";
 /** The notice on the site, with the whole story: who pays, what is kept, how to help. */
-export const NOTICE_URL = "https://corein.app/#open-source";
+export const NOTICE_URL = "https://fomo.corein.in/#open-source";
 
 /**
  * The community notice, said plainly wherever the project is introduced: free, open source,

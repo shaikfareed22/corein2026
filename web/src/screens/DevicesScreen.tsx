@@ -19,7 +19,7 @@ import { cx, relativeTime } from "../util";
  * with *Forget*. Only this device: a card on how to add one. On a computer the card for its
  * own hands follows, as before. There is no "cloud computer" section — we have none.
  */
-const DOWNLOAD_URL = "https://corein.app/dl/";
+const DOWNLOAD_URL = "https://fomo.corein.in/dl/";
 
 export function DevicesScreen() {
   const { state, dispatch, openThread, setTab, toast } = useStore();

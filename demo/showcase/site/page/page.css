@@ -44,7 +44,7 @@ a:hover { text-decoration: underline; }
 i.en, i.zh { font-style: normal; }
 html[data-lang="en"] .zh, html[data-lang="zh"] .en { display: none; }
 
-/* ---- ?embed=1: the frame on the project site (corein.app). The site has the header; this
+/* ---- ?embed=1: the frame on the project site (fomo.corein.in). The site has the header; this
    page shows the stage alone, from the top edge (page.js). */
 html[data-embed] { --top-h: 0px; }
 html[data-embed] .top { display: none; }

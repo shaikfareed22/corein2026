@@ -230,7 +230,7 @@ function DataControlsLink({ me }: { me: CloudMe }) {
 function Invite({ invite: inv }: { invite: NonNullable<CloudMe["invite"]> }) {
   const t = useT();
   const { toast } = useStore();
-  const link = inv.url || `https://corein.app/web/?invite=${inv.code}`;
+  const link = inv.url || `https://fomo.corein.in/web/?invite=${inv.code}`;
   const earned = inv.earned_cny ?? inv.invites * inv.bonus_cny;
   const copy = async (text: string) => {
     try {

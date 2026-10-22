@@ -4,12 +4,12 @@
 1.13（GPL-3.0）：一个原生 App，智能体**在手机上**运行，Linux shell、浏览器、MCP 服务器、
 技能和定时任务都装在 APK 里，再加上 corein 自己的身份、设计和功能。属于 corein 的一切
 都在 `io.github.nanomuse.*` 下；OpenMinis 文件里的改动用 `// corein:` 标出。应用 id 是
-`com.corein.app`，系统认得这个 App 的 URL scheme 是 `corein://`，这样同一部手机上也装了
+`com.corein.in`，系统认得这个 App 的 URL scheme 是 `corein://`，这样同一部手机上也装了
 OpenMinis 时，不会有两个 App 抢同一个 scheme；App 内部的链接仍是 `minis://…`（上游的词汇，沙箱、
 系统提示词和模型都用它），从系统进来的 `corein://` 链接按它的 `minis://` 形式读，App 自己打开
 自己的链接时一律按名字指向 `MainActivity`，不交给系统去解析
 （`io.github.nanomuse.deeplink.OwnScheme`）。沙箱的 offload 套接字（proot 和 App 之间通信的
-抽象套接字）也是 App 自己的：叫 `com.corein.app.native-offload`，不用上游的
+抽象套接字）也是 App 自己的：叫 `com.corein.in.native-offload`，不用上游的
 `native-offload`，因为抽象套接字在整台设备上只有一个命名空间，两个 App 用同一个名字，后启动的那个
 会在启动时直接死掉；如果连这个名字都还被我们自己上一个进程占着，服务端就改绑一个带进程号的名字，
 并把它告诉 proot（`io.github.nanomuse.sandbox.OffloadSocketName`）。这个选择的来龙去脉
@@ -19,7 +19,7 @@ OpenMinis 时，不会有两个 App 抢同一个 scheme；App 内部的链接仍
 
 一个 APK，一种架构：`corein-<version>-arm64.apk`（arm64-v8a，Android 8.0 / API 26 及以上，
 `targetSdk` 35）。每个版本都用同一把签名密钥，所以新 APK 直接覆盖旧的，数据保留。没有上架
-Play 商店：「设置 → 版本」把已安装的构建和最新版本并排显示（先查 `corein.app/dl/index.json`，
+Play 商店：「设置 → 版本」把已安装的构建和最新版本并排显示（先查 `fomo.corein.in/dl/index.json`，
 再查这个仓库的 GitHub Releases：「最新 0.1.x，你用的就是它」/「0.1.x 已发布，点此更新」），
 并提供下载。
 

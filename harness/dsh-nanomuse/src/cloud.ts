@@ -104,7 +104,7 @@ export interface Config {
 }
 
 export const Config: z<Config> = z.object({
-  baseURL: z.string().default('https://cloud.corein.app').description('The corein Cloud relay.'),
+  baseURL: z.string().default('https://cloud.fomo.corein.in').description('The corein Cloud relay.'),
   deviceName: z.string().default('').description('This device in the account\'s device list; empty means the host name.'),
   statePath: z.string().default('').description('Account snapshot file; empty means $DSH_HOME/nanomuse/cloud.json.'),
 })

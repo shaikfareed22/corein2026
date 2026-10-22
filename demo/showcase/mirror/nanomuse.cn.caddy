@@ -1,20 +1,20 @@
-# corein.app — the project site, mirrored from github.com/nano-muse/nano-muse.github.io by
+# fomo.corein.in — the project site, mirrored from github.com/nano-muse/nano-muse.github.io by
 # sync.sh (every minute, from the systemd timer). Certificates come the ordinary way, HTTP-01:
 # both names point straight at this box, nothing in front. Installed into sites.d/ by install.sh.
 
-corein.app {
-	redir https://corein.app{uri} permanent
+fomo.corein.in {
+	redir https://fomo.corein.in{uri} permanent
 }
 
-corein.app {
-	root * /srv/www/corein.app
+fomo.corein.in {
+	root * /srv/www/fomo.corein.in
 	encode zstd gzip
 
 	# the access log, for the daily counts traffic.py keeps (visits, downloads, referrers): JSON
 	# lines, rolled at 20 MB, kept a week and no longer. docker-compose.yml mounts logs/caddy here.
 	# Rolled files stay uncompressed so traffic.py can finish reading one by its inode.
 	log {
-		output file /var/log/caddy/corein.app.log {
+		output file /var/log/caddy/fomo.corein.in.log {
 			roll_size 20MiB
 			roll_keep 20
 			roll_keep_for 168h
@@ -36,7 +36,7 @@ corein.app {
 	respond @hidden 404
 
 	# /web is the gateway's: with the kept Muses on (WEB_ENABLED=1) a sign-in page, after which
-	# the browser goes to <slug>.s.nanomuse.dev (the gateway's session domain; corein.app has
+	# the browser goes to <slug>.s.nanomuse.dev (the gateway's session domain; fomo.corein.in has
 	# no wildcard record); with them off, as on the project's server since 0.1.26, a redirect
 	# to the showcase site — the demo on the simulated phone. The gateway is the showcase's,
 	# on the edge network of this Caddy — see demo/showcase/README.md.
@@ -73,7 +73,7 @@ corein.app {
 	# an address that is not there: the site's own page (404.html in the repository), with
 	# the status kept
 	handle_errors 404 {
-		root * /srv/www/corein.app
+		root * /srv/www/fomo.corein.in
 		rewrite * /404.html
 		file_server
 	}

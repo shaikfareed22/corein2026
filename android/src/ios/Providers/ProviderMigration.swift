@@ -9,8 +9,8 @@ private let logger = AppLogger(category: "ProviderMigration")
 @MainActor
 enum ProviderMigration {
 
-    private static let migrationKey = "com.corein.app.provider-migration-v1-done"
-    private static let oauthMigrationKey = "com.corein.app.provider-migration-oauth-v2-done"
+    private static let migrationKey = "com.corein.in.provider-migration-v1-done"
+    private static let oauthMigrationKey = "com.corein.in.provider-migration-oauth-v2-done"
 
     /// Run migration if it hasn't been performed yet.
     static func migrateIfNeeded(store: ProviderConfigStore) {
@@ -105,7 +105,7 @@ enum ProviderMigration {
         // MARK: - Anthropic
 
         // API Key
-        if let key = readLegacyKeychain(service: "com.corein.app.anthropic-api-key") {
+        if let key = readLegacyKeychain(service: "com.corein.in.anthropic-api-key") {
             let instance = ProviderInstance(
                 label: "Anthropic API Key",
                 providerType: .anthropic,
@@ -145,7 +145,7 @@ enum ProviderMigration {
         // MARK: - Gemini
 
         // API Key
-        if let key = readLegacyKeychain(service: "com.corein.app.gemini-api-key") {
+        if let key = readLegacyKeychain(service: "com.corein.in.gemini-api-key") {
             let instance = ProviderInstance(
                 label: "Gemini API Key",
                 providerType: .gemini,
@@ -184,7 +184,7 @@ enum ProviderMigration {
         // MARK: - OpenAI
 
         // API Key
-        if let key = readLegacyKeychain(service: "com.corein.app.openai-api-key") {
+        if let key = readLegacyKeychain(service: "com.corein.in.openai-api-key") {
             let instance = ProviderInstance(
                 label: "OpenAI API Key",
                 providerType: .openAI,
@@ -289,7 +289,7 @@ enum ProviderMigration {
     }
 
     private static func loadLegacyAgentModelSettings() -> LegacyAgentModelSettings {
-        let key = "com.corein.app.agent-model-settings"
+        let key = "com.corein.in.agent-model-settings"
         guard let data = UserDefaults.standard.data(forKey: key),
               let settings = try? JSONDecoder().decode(LegacyAgentModelSettings.self, from: data)
         else {
@@ -302,7 +302,7 @@ enum ProviderMigration {
     private static func isLegacyActiveProvider(_ rawValue: String) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: "com.corein.app.active-provider",
+            kSecAttrService as String: "com.corein.in.active-provider",
             kSecAttrAccount as String: "auth-mode",
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne,

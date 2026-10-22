@@ -186,7 +186,7 @@ fi
 # rotated by this script (rotating it would orphan every account).
 [ -z "$(get CLOUD_SECRET)" ] && set_kv CLOUD_SECRET "$(random_hex)"
 # A private relay for a few people: say so in INVITE_URL so invitations point here.
-[ "$(get INVITE_URL)" = "https://corein.app/web/?invite=" ] && set_kv INVITE_URL "$BASE/app/?invite="
+[ "$(get INVITE_URL)" = "https://fomo.corein.in/web/?invite=" ] && set_kv INVITE_URL "$BASE/app/?invite="
 
 say
 say "Wrote $ENV_FILE (mode 600). Back it up together with cloud/data/; see docs/self-hosting.md."

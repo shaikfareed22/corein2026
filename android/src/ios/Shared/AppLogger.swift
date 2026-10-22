@@ -3,7 +3,7 @@ import Foundation
 struct AppLogger {
     let category: String
 
-    init(subsystem: String = "com.corein.app", category: String) {
+    init(subsystem: String = "com.corein.in", category: String) {
         self.category = category
     }
 

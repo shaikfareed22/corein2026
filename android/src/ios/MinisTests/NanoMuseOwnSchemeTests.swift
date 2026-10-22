@@ -19,9 +19,9 @@ final class NanoMuseOwnSchemeTests: XCTestCase {
         XCTAssertEqual(read("NanoMuse://settings/soul"), "minis://settings/soul")
         XCTAssertEqual(read("corein://session/abc/index.html?title=x&y=1"), "minis://session/abc/index.html?title=x&y=1")
         XCTAssertEqual(read("minis://attachments/a.png"), "minis://attachments/a.png")
-        XCTAssertEqual(read("https://corein.app/"), "https://corein.app/")
+        XCTAssertEqual(read("https://fomo.corein.in/"), "https://fomo.corein.in/")
         // the host part is not a scheme
-        XCTAssertEqual(read("https://corein.app/corein://x"), "https://corein.app/corein://x")
+        XCTAssertEqual(read("https://fomo.corein.in/corein://x"), "https://fomo.corein.in/corein://x")
         // a host with no path still has a host
         XCTAssertEqual(NanoMuseOwnScheme.internalURL(URL(string: "corein://share")!).host, "share")
     }

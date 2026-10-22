@@ -4,10 +4,10 @@
 //
 //   npm run docs:dev      # http://127.0.0.1:5173/<base>
 //   npm run docs:build    # .vitepress/dist, also the dead-link check
-//   DOCS_BASE=/docs/ npm run docs:build   # for corein.app/docs/
+//   DOCS_BASE=/docs/ npm run docs:build   # for fomo.corein.in/docs/
 //
 // DOCS_BASE defaults to /corein/docs/ — the project pages at nano-muse.github.io keep
-// site/index.html (the redirect to corein.app) and site/legacy.html at the root, and the
+// site/index.html (the redirect to fomo.corein.in) and site/legacy.html at the root, and the
 // docs sit beside them under /docs/.
 import { posix } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -206,8 +206,8 @@ export default defineConfig({
         siteTitle: 'corein docs',
         // Home and Try it are the project site and the demo, the same two the homepage's bar has.
         nav: [
-          { text: 'Home', link: 'https://corein.app/' },
-          { text: 'Try it', link: 'https://demo.corein.app/' },
+          { text: 'Home', link: 'https://fomo.corein.in/' },
+          { text: 'Try it', link: 'https://demo.fomo.corein.in/' },
           { text: 'Get started', link: '/android' },
           { text: 'Run it yourself', link: '/self-hosting' },
           { text: 'Maintaining the fork', link: '/fork' },
@@ -238,8 +238,8 @@ export default defineConfig({
       themeConfig: {
         siteTitle: 'corein 文档',
         nav: [
-          { text: '首页', link: 'https://corein.app/' },
-          { text: '试一试', link: 'https://demo.corein.app/' },
+          { text: '首页', link: 'https://fomo.corein.in/' },
+          { text: '试一试', link: 'https://demo.fomo.corein.in/' },
           { text: '上手', link: '/zh/android' },
           { text: '自己部署', link: '/zh/self-hosting' },
           { text: '路线图', link: '/zh/roadmap' },
