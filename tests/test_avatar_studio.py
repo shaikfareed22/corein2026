@@ -395,7 +395,7 @@ def test_video_host_is_the_root_of_the_model_url(base: str, host: str) -> None:
         base_url=base,
         api_key="k",
         image_model="i",
-        cloud="nanomuse" in base,
+        cloud="cloud." in base,  # the relay, whatever it is called
         video_model="wan2.2-i2v-flash",
     )
     assert ep.video_host == host and ep.clips

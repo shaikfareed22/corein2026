@@ -170,7 +170,7 @@ test('the update check reads the corein.app index first, GitHub second, and neve
   const c = await checkForUpdate('0.1.33', async () => { throw new Error('offline') })
   assert.equal(c.source, 'none')
   assert.equal(c.latest, '')
-  assert.match(c.error, /nanomuse\.cn: offline; github: offline/)
+  assert.match(c.error, /corein.app: offline; github: offline/)
 })
 
 test('each update request gives up after the timeout (5 s by default)', async () => {

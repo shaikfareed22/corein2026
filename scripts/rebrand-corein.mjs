@@ -35,7 +35,8 @@ const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 // Directories never touched: vendored trees, build output, history, this design's own record.
 const SKIP_DIRS = new Set(['.git', 'node_modules', 'deps', 'static', 'traces', 'screenshots', 'releases', 'superpowers', 'dist', 'build', '.gradle', 'DerivedData'])
 // Files kept as history or authored by hand for the fork.
-const SKIP_FILES = new Set(['CHANGELOG.md', 'NOTICE', 'THIRD_PARTY_NOTICES.md', 'CITATION.cff', 'rebrand-corein.mjs', 'package-lock.json', 'pnpm-lock.yaml', 'uv.lock'])
+// README.md is written for the fork and names nanoMuse on purpose in its Origin section.
+const SKIP_FILES = new Set(['CHANGELOG.md', 'NOTICE', 'THIRD_PARTY_NOTICES.md', 'CITATION.cff', 'README.md', 'rebrand-corein.mjs', 'package-lock.json', 'pnpm-lock.yaml', 'uv.lock'])
 const TEXT = /\.(md|txt|ts|tsx|mts|mjs|cjs|js|json|jsonc|yml|yaml|toml|py|kt|kts|swift|xml|xcstrings|html|css|svg|sh|ps1|env|example|cff|plist|pbxproj|strings|gradle|pro|properties|cfg|ini|Dockerfile|dockerignore|gitignore|editorconfig|caddy|conf)$/i
 const NAMED = new Set(['Dockerfile', 'Caddyfile', 'LICENSE', 'SECURITY.md', 'AGENTS.md', 'CLAUDE.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', '.env.example', '.dockerignore', '.gitattributes'])
 const MAX_BYTES = 4 * 1024 * 1024
@@ -49,6 +50,7 @@ const SUBS = [
   [/\bdemo\.nanomuse\.dev\b/g, DEMO],
   [/\bwww\.nanomuse\.cn\b/g, DOMAIN],
   [/\bnanomuse\.cn\b/g, DOMAIN],
+  [/nanomuse\\\.cn/g, DOMAIN.replace('.', '\\.')], // the escaped form inside a regex literal (tests)
   [/\bio\.github\.nanomuse\.app\b/g, ANDROID_ID],
   [/\bio\.github\.nanomuse\.desktop\b/g, DESKTOP_APP_ID],
   [/\bio\.github\.nanomuse\.(MinisTests|MinisUITests)\b/g, `${IOS_PREFIX}.$1`],
