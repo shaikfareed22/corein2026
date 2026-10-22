@@ -59,6 +59,8 @@ const SUBS = [
   [/\bnanomuse-desktop\.exe\b/g, `${DESKTOP_EXE}.exe`],
   [/android:scheme="nanomuse"/g, `android:scheme="${SCHEME}"`],
   [/SYSTEM_SCHEME = "nanomuse"/g, `SYSTEM_SCHEME = "${SCHEME}"`],
+  [/const val SYSTEM = "nanomuse"/g, `const val SYSTEM = "${SCHEME}"`], // Android OwnScheme.kt
+  [/(CFBundleURLSchemes<\/key>\s*<array>(?:\s*<!--[\s\S]*?-->)?\s*)<string>nanomuse<\/string>/g, `$1<string>${SCHEME}</string>`], // iOS Info.plist
   [/\bnanomuse-mark\.svg\b/g, MARK],
   [/\bnanomuse-cover\.png\b/g, 'corein-cover.svg'],
   [/\bnanomuse-icon\.svg\b/g, 'corein-icon.svg'],

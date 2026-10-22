@@ -2358,9 +2358,7 @@ async def test_me_says_where_the_person_is_and_orders_the_ways_on_by_it(tmp_path
     assert [w["id"] for w in cn_ways] == ["bailian", "openrouter", "invite"]
     assert cn_ways[0] == {"id": "bailian", "url": "https://corein.app/own-key", "mainland_only": True, **WAY_FACTS["bailian"]}
     assert cn_ways[1] == {"id": "openrouter", "url": "https://openrouter.ai/keys", "mainland_only": False, **WAY_FACTS["openrouter"]}
-    assert (
-        cn_ways[2]["id"] == "invite" and cn_ways[2]["url"].startswith("https://corein.app/web/?invite=") and cn_ways[2]["bonus_cny"] == 5
-    )
+    assert cn_ways[2]["id"] == "invite" and cn_ways[2]["url"].startswith("https://corein.app/web/?invite=") and cn_ways[2]["bonus_cny"] == 5
     for who, ip in ((us, "8.8.8.8"), (nowhere, "9.9.9.9")):
         ways = (await client.get("/v1/me", headers=auth(who, ip))).json()["spend"]["ways"]
         assert [w["id"] for w in ways] == ["openrouter", "bailian", "invite"], who["region"]

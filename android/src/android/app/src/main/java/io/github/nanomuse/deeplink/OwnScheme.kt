@@ -17,7 +17,7 @@ import android.net.Uri
  */
 object OwnScheme {
     /** What the manifest registers: the name other apps and web pages can address. */
-    const val SYSTEM = "nanomuse"
+    const val SYSTEM = "corein"
 
     /** Upstream's in-app vocabulary; never registered with the system. */
     const val INTERNAL = "minis"

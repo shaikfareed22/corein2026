@@ -85,8 +85,7 @@ def test_a_page_without_news_only_moves_the_version(release_docs: ModuleType) ->
     page = "Download [v1.0.0](…/tag/v1.0.0) · 1.0.0 Keel · corein-1.0.0-arm64.apk · 1.0.0-win"
     text, left = release_docs.edit_page(page, "1.0.0", "1.0.1", "Keel", "Still")
     assert (
-        text
-        == "Download [v1.0.1](…/tag/v1.0.1) · 1.0.1 Still · corein-1.0.1-arm64.apk · 1.0.1-win"
+        text == "Download [v1.0.1](…/tag/v1.0.1) · 1.0.1 Still · corein-1.0.1-arm64.apk · 1.0.1-win"
     )
     assert left == 0
 

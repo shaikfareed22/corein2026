@@ -41,9 +41,7 @@ async def relay_request(
     try:
         r = await http.request(method, f"{base_url}{path}", json=body, headers=headers)
     except httpx.HTTPError as exc:
-        raise Refused(
-            502, "relay_unreachable", "corein Cloud is not reachable right now."
-        ) from exc
+        raise Refused(502, "relay_unreachable", "corein Cloud is not reachable right now.") from exc
     if r.status_code >= 400:
         code, message = error_fields(r)
         raise RelayError(

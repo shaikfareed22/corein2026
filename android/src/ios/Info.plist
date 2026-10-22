@@ -163,7 +163,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<!-- corein: the system knows the app as corein://, so a phone with OpenMinis too never has two apps on one scheme; inside, links stay minis:// (NanoMuseOwnScheme) -->
-				<string>nanomuse</string>
+				<string>corein</string>
 			</array>
 		</dict>
 		<dict>
