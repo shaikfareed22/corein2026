@@ -70,6 +70,7 @@ const SUBS = [
   [/OWNER = "nano-muse"/g, `OWNER = "${REPO.split('/')[0]}"`],
   [/\bnanoMuse Cloud\b/g, CLOUD],
   [/\bnanoMuse Desktop\b/g, DESKTOP],
+  [/\bnanoMuses\b/g, `${NAME}s`], // the German genitive in the iOS catalogue
   [/\bnanoMuse\b/g, NAME],
 ]
 
