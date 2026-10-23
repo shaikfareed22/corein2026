@@ -10,7 +10,7 @@
 # app icon from resources/app-icon.png when iconutil is there (the panes show it); an ad-hoc
 # signature so the bundle runs at all — scripts/desktop-app/package-mac.sh signs it again
 # with the release identity before the outer app. electron-builder copies the result into
-# fomo.corein.in/Contents/Helpers (electron-builder.yml, mac.extraFiles).
+# corein.app/Contents/Helpers (electron-builder.yml, mac.extraFiles).
 #
 #   VERSION                     the bundle's version (default: harness/desktop/package.json)
 #   ARCHS                       "arm64 x86_64" (default) — one of them for a quicker local build

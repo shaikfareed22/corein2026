@@ -514,7 +514,7 @@ test("an app under App Translocation does not start its helper, and says why", a
   const app = [dir, "AppTranslocation", "4F1C", "d", "fomo.corein.in", "Contents", "Helpers", `${HELPER_NAME}.app`].join("/");
   mkdirSync(app, { recursive: true });
   assert.equal(translocated(app), true);
-  assert.equal(translocated("/Applications/fomo.corein.in/Contents/Helpers/x.app"), false);
+  assert.equal(translocated("/Applications/corein.app/Contents/Helpers/x.app"), false);
   const fake = fakeHelper();
   const helper = new MacHelper({ appPath: app, dataDir: join(dir, "data"), launch: fake.launch, quarantine: () => ({ result: "none", detail: "" }) });
   assert.equal(helper.present(), true);
@@ -524,8 +524,8 @@ test("an app under App Translocation does not start its helper, and says why", a
 });
 
 test("defaultHelperPath: the env override, Contents/Helpers when packaged, the build dir in development", () => {
-  assert.equal(defaultHelperPath("/x/fomo.corein.in/Contents/MacOS/nanomuse-desktop", true, "/proj", { NANOMUSE_COMPUTER_USE_APP: "/elsewhere/Helper.app" }), "/elsewhere/Helper.app");
-  assert.equal(posix(defaultHelperPath("/x/fomo.corein.in/Contents/MacOS/nanomuse-desktop", true, "/proj", {})), "/x/fomo.corein.in/Contents/Helpers/corein Computer Use.app");
+  assert.equal(defaultHelperPath("/x/corein.app/Contents/MacOS/nanomuse-desktop", true, "/proj", { NANOMUSE_COMPUTER_USE_APP: "/elsewhere/Helper.app" }), "/elsewhere/Helper.app");
+  assert.equal(posix(defaultHelperPath("/x/corein.app/Contents/MacOS/nanomuse-desktop", true, "/proj", {})), "/x/corein.app/Contents/Helpers/corein Computer Use.app");
   assert.equal(posix(defaultHelperPath("/usr/bin/electron", false, "/proj", {})), "/proj/mac/computer-use/build/corein Computer Use.app");
 });
 

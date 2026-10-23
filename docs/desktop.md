@@ -340,7 +340,7 @@ should every start stay slow, excluding the install folder from real-time scanni
 
 The hands need two things from macOS: *Screen Recording* for the screenshots and
 *Accessibility* for the mouse and the keyboard. Since 0.1.38 both belong to a small app of
-their own, **corein Computer Use** (`fomo.corein.in/Contents/Helpers/corein Computer
+their own, **corein Computer Use** (`corein.app/Contents/Helpers/corein Computer
 Use.app`, bundle id `com.corein.desktop.computer-use`): that is the row you switch
 on in System Settings → Privacy & Security → Screen Recording and → Accessibility. corein
 Desktop itself holds neither.

@@ -257,7 +257,7 @@ N min`。第二次启动会快很多，因为文件已经检查过一遍；如�
 ## macOS 权限 {#macos-permissions}
 
 手需要 macOS 给两样东西：截图要「录屏」，鼠标和键盘要「辅助功能」。从 0.1.38 起，这两项权限都
-归一个独立的小应用所有，即 **corein Computer Use**（`fomo.corein.in/Contents/Helpers/corein Computer
+归一个独立的小应用所有，即 **corein Computer Use**（`corein.app/Contents/Helpers/corein Computer
 Use.app`，bundle id 为 `com.corein.desktop.computer-use`）：你在「系统设置 → 隐私与安全性 →
 录屏」和「→ 辅助功能」里要打开的就是这一行。corein 桌面版本身两项都不持有。
 

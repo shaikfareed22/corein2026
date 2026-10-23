@@ -115,7 +115,7 @@ def test_a_failed_signature_or_image_verification_stops_packaging(
 
 def test_executable_scripts_are_not_sent_to_codesign(package_tree: PackageTree) -> None:
     app_dir, env, trace = package_tree
-    script = app_dir / "dist/mac/fomo.corein.in/Contents/Resources/runtime/launcher.sh"
+    script = app_dir / "dist/mac/corein.app/Contents/Resources/runtime/launcher.sh"
     script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
     script.chmod(0o755)
     result = run_package(env)
@@ -126,7 +126,7 @@ def test_executable_scripts_are_not_sent_to_codesign(package_tree: PackageTree) 
 
 def test_a_single_bundle_named_after_the_executable_is_renamed(package_tree: PackageTree) -> None:
     app_dir, env, trace = package_tree
-    app = app_dir / "dist/mac/fomo.corein.in"
+    app = app_dir / "dist/mac/corein.app"
     candidate = app.with_name("nanomuse-desktop.app")
     app.rename(candidate)
     result = run_package(env)

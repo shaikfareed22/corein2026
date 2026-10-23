@@ -82,7 +82,7 @@ bash mac/computer-use/build.sh                       # → mac/computer-use/buil
 - **打包态**（所有权限项都用它）：
   ```bash
   npm run dist:dir && ../../scripts/desktop-app/package-mac.sh arm64     # Intel 用 x64
-  open dist/mac-arm64/fomo.corein.in                                        # 或 dist/mac/
+  open dist/mac-arm64/corein.app                                        # 或 dist/mac/
   ```
   没有证书时是 ad-hoc 签名，Gatekeeper 会说「无法验证」，到系统设置 → 隐私与安全性里点
   *仍要打开*。已发布的 0.1.38 安装包在
@@ -144,7 +144,7 @@ Computer use 页面本身就报错。把 `desktop.log` 里 `helper:`、`operator
   `permissions.ts`、`Capsule.tsx`（`helper` 标志决定文案）、`locales.ts` 的 `pmOnlyHelper`、
   `pmTryShotBlackHelper`、`pmBlackBodyHelper`、`pmBlackRelaunchHelper` 等 key。
 - 打包：`electron-builder.yml` `mac.extraFiles` 把 `build/corein Computer Use.app` 放到
-  `fomo.corein.in/Contents/Helpers/`；`scripts/desktop-app/package-mac.sh` 先签助手再签外层
+  `corein.app/Contents/Helpers/`；`scripts/desktop-app/package-mac.sh` 先签助手再签外层
   （没有证书时都是 ad-hoc）；`.github/workflows/desktop-app.yml` 的 macOS job 跑 `build.sh`
   （CI 上 0 warning 通过）。
 - 文档：`docs/desktop.md` → *macOS permissions*、*macOS signing*。

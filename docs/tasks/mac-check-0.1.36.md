@@ -59,7 +59,7 @@ cd harness/desktop && npm ci && npm run typecheck
 - **打包态**（验证权限、启动页、Dock 图标等）：
   ```bash
   npm run dist:dir && ../../scripts/desktop-app/package-mac.sh arm64     # Intel 用 x64
-  open dist/mac-arm64/fomo.corein.in                                        # 或 dist/mac/
+  open dist/mac-arm64/corein.app                                        # 或 dist/mac/
   ```
   本地没有证书时是 ad-hoc 签名；首次打开若被 Gatekeeper 拦下，系统设置 → 隐私与安全性 → 仍要打开。
   bundle id 是 `com.corein.desktop`。重测权限提示用

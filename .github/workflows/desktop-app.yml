@@ -175,7 +175,7 @@ jobs:
         if: runner.os == 'macOS'
         shell: bash
         # a universal bundle (arm64 + x86_64) under harness/desktop/mac/computer-use/build/,
-        # which electron-builder.yml copies into fomo.corein.in/Contents/Helpers
+        # which electron-builder.yml copies into corein.app/Contents/Helpers
         run: harness/desktop/mac/computer-use/build.sh
       - name: The app (macOS, signed and notarized with the Apple secrets, ad-hoc without; zip and APFS dmg by hand)
         if: runner.os == 'macOS'
