@@ -127,7 +127,7 @@ def test_executable_scripts_are_not_sent_to_codesign(package_tree: PackageTree) 
 def test_a_single_bundle_named_after_the_executable_is_renamed(package_tree: PackageTree) -> None:
     app_dir, env, trace = package_tree
     app = app_dir / "dist/mac/corein.app"
-    candidate = app.with_name("nanomuse-desktop.app")
+    candidate = app.with_name("corein-desktop.app")
     app.rename(candidate)
     result = run_package(env)
     assert result.returncode == 0, result.stdout + result.stderr
