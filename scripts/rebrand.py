@@ -48,8 +48,8 @@ IOS = ROOT / "android" / "src" / "ios"
 
 APP_ID = "com.corein.app"
 NAME = "corein"
-VERSION_NAME = "1.0.5"
-VERSION_CODE = 48
+VERSION_NAME = "1.1.0"
+VERSION_CODE = 49
 REPO = "shaikfareed22/corein2026"
 REPO_URL = f"https://github.com/{REPO}"
 PRIVACY_URL = f"{REPO_URL}/blob/main/docs/privacy.md"
