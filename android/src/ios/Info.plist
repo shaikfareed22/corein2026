@@ -4,8 +4,8 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.corein.in.liveactivity-refresh</string>
-		<string>com.corein.in.scheduler</string> <!-- corein: the routines' background refresh (NanoMuseScheduler) -->
+		<string>com.corein.app.liveactivity-refresh</string>
+		<string>com.corein.app.scheduler</string> <!-- corein: the routines' background refresh (NanoMuseScheduler) -->
 	</array>
 	<key>CFBundleDocumentTypes</key>
 	<array>
@@ -30,7 +30,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.corein.in.minisbak</string>
+				<string>com.corein.app.minisbak</string>
 			</array>
 		</dict>
 	</array>
@@ -154,7 +154,7 @@
 			<string>Claude OAuth Callback</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.corein.in</string>
+				<string>com.corein.app</string>
 			</array>
 		</dict>
 		<dict>
@@ -248,7 +248,7 @@
 			<key>UTTypeDescription</key>
 			<string>corein Backup</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.corein.in.minisbak</string>
+			<string>com.corein.app.minisbak</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

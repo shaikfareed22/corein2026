@@ -54,7 +54,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.corein.in"
+        applicationId = "com.corein.app"
         minSdk = 26
         targetSdk = 35
         versionCode = 48

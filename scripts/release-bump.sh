@@ -8,7 +8,7 @@
 #
 # Edits, in place: scripts/rebrand.py (VERSION_NAME / VERSION_CODE; run it afterwards, it writes
 # the Android versionName/versionCode and the iOS MARKETING_VERSION), nanomuse/__init__.py,
-# pyproject.toml, CITATION.cff (version and today's date-released), the relay console's
+# pyproject.toml, the relay console's
 # VERSION, web/ and the two harness/* package.json files with their lock files, and, with the
 # last two arguments, cloud/nanomuse_cloud/__init__.py and cloud/pyproject.toml. Run from the
 # repository root; the release recipe is in CONTRIBUTING.md.
@@ -86,8 +86,6 @@ plan() {
   bump scripts/rebrand.py "^VERSION_CODE = $oc$" "VERSION_CODE = $nc"
   bump nanomuse/__init__.py "^__version__ = \"$old_re\"$" "__version__ = \"$new\""
   bump pyproject.toml "^version = \"$old_re\"$" "version = \"$new\""
-  bump CITATION.cff "^version: $old_re$" "version: $new"
-  bump CITATION.cff "^date-released: .*$" "date-released: $(date +%F)"
   bump cloud/nanomuse_cloud/console/app.js "const VERSION = \"$old_re\";" "const VERSION = \"$new\";"
   for pkg in web/package.json harness/dsh-nanomuse/package.json harness/desktop/package.json; do
     bump "$pkg" "^  \"version\": \"$old_re\",$" "  \"version\": \"$new\","

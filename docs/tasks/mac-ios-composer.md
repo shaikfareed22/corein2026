@@ -139,7 +139,7 @@ L 在 Linux 上把壳和胶囊的代码从头读了一遍，没找到能让胶�
   `NanoMuseChatCards.swift`（起名卡片等虚拟卡片，在输入条上方同一个栈里）、`NanoMuseFirstRun.swift`。
 - 壳 `NanoMuse/NanoMuseShell.swift`：`NanoMuseHomeView`（~333 行）= `ZStack { chatLayer … }.safeAreaInset(edge: .bottom) { NanoMuseBottomBar }`（底栏 56 pt，`.background(.bar)`；键盘弹出或语音面板打开时底栏隐藏，`NanoMuseKeyboardWatcher`）；`chatLayer`（~541 行）= `NavigationStack { AIChatView(...).id(id) }.safeAreaInset(edge: .top) { Muse 头部 }.toolbar(.hidden, for: .navigationBar)`。旁聊由 `navigationDestination` push 出来、带系统导航栏。
 - 开关：设置 → 外观 → **Muse home**（`NanoMuseAppearance.swift`，`@AppStorage("nanomuse.shell.enabled")`）。壳和胶囊由**同一个开关**决定。
-- 日志：我们的 `Logger(subsystem: "com.corein.in", category: "nm.composer")`；上游的 `AppLogger(category: "InputBarLayout")` 同一个 subsystem。
+- 日志：我们的 `Logger(subsystem: "com.corein.app", category: "nm.composer")`；上游的 `AppLogger(category: "InputBarLayout")` 同一个 subsystem。
 - 文档：[docs/ios.md](../ios.md) *The composer (0.1.38)* 一段写的是 0.1.38 的假设，修完改成真相。
   `MinisTests/NanoMuseRound6Tests.swift` 守着 `AIChatView.body` 的类型深度和大小上限——**不要再往
   `AIChatView.body` 上加链接**，新行为进 `NanoMuseChatHooks` / `NanoMuseComposerHost` 或第三个 modifier。
@@ -151,7 +151,7 @@ L 在 Linux 上把壳和胶囊的代码从头读了一遍，没找到能让胶�
 iPad USB 连 Mac，**用它上面已经装着的 TestFlight build 10**：
 
 1. **Console.app** 选这台 iPad，Action 菜单勾上 *Include Info Messages* 和 *Include Debug Messages*，
-   过滤 `subsystem:com.corein.in`；或者终端 `idevicesyslog | grep -E "nm\.composer|InputBarLayout|InputBarHealth"`。
+   过滤 `subsystem:com.corein.app`；或者终端 `idevicesyslog | grep -E "nm\.composer|InputBarLayout|InputBarHealth"`。
    然后在 iPad 上：杀掉 app → 打开 → 进主聊天 → 等 5 秒 → 切到 Feed 再切回 → 切后台再回来。要看的行：
    - `composer fail-safe: no composer one second after …（attached= hostH= frameH=）`、
      `composer fail-safe: still no composer …`、`composer self-heal: rebuilding …`——**fail-safe 触发了**
@@ -268,7 +268,7 @@ L 这边同时在做：拿到你的 PR 后合并、发 0.1.40、TestFlight build
 | 原生依赖 | `android/deps/{build_lame,build_ffmpeg,build_ish,prepare_alpine_rootfs,build_rclone_ios}.sh`（[docs/ios.md](../ios.md)、[android/BUILDING.md](../../android/BUILDING.md)） |
 | 输入框 | `NanoMuse/NanoMuseComposer*.swift`、`NanoMuse/NanoMuseChatModifiers.swift`、`Views/Chat/AIChatView.swift`（`inputBar`、`nmComposerTree`、`nmPill*`） |
 | 壳 | `NanoMuse/NanoMuseShell.swift`（`NanoMuseHomeView`、`chatLayer`、`NanoMuseBottomBar`） |
-| 日志 | Console.app，`subsystem:com.corein.in`（`nm.composer`、`InputBarLayout`）；`idevicesyslog` |
+| 日志 | Console.app，`subsystem:com.corein.app`（`nm.composer`、`InputBarLayout`）；`idevicesyslog` |
 | 调试服务（DEBUG） | `Debug/DebugServer.swift`，端口 8321，`iproxy 8321 8321` |
 | 上游改动标记 | `// corein:`；品牌替换 `python scripts/rebrand.py`（必须输出 `clean`） |
 | Mac 桌面端 | `harness/desktop/mac/computer-use/`、`harness/desktop/src/{mac-helper,mac-permissions}.ts`；数据目录 `~/.nanomuse/desktop`（`desktop.log`） |

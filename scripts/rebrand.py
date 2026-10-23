@@ -18,7 +18,7 @@ What it changes, and only this:
 - A handful of first-run / notification strings reworded in corein's voice
   (COPY below, en + zh + zh-rTW; the other locales keep the upstream text).
 
-- iOS (android/src/ios, when present): the bundle ids (com.openminis.app* → com.fomo.corein.in*,
+- iOS (android/src/ios, when present): the bundle ids (com.openminis.app* → com.corein.app*,
   including the app group and iCloud container), the display names, MARKETING_VERSION /
   CURRENT_PROJECT_VERSION, "Minis" -> "corein" in Swift string literals and in
   Localizable.xcstrings (keys renamed, every translation updated), the About links, the
@@ -46,7 +46,7 @@ JAVA = MAIN / "java" / "com" / "openminis" / "app"
 RES = MAIN / "res"
 IOS = ROOT / "android" / "src" / "ios"
 
-APP_ID = "com.fomo.corein.in"
+APP_ID = "com.corein.app"
 NAME = "corein"
 VERSION_NAME = "1.0.5"
 VERSION_CODE = 48

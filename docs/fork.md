@@ -8,7 +8,7 @@ release. The design record is
 ## What the fork changes, and what it keeps
 
 Everything a person sees says corein: names, the ids the systems know the apps by
-(`com.corein.in`, `com.corein.*`, `corein://`, `com.corein.desktop`), the relay and site
+(`com.corein.app`, `com.corein.*`, `corein://`, `com.corein.desktop`), the relay and site
 domains, the repository, the brand files. Everything internal keeps upstream's name: the
 Python package `nanomuse`, `NANOMUSE_*` variables, `~/.nanomuse`, the Kotlin packages, the
 `nm_` string prefix, `dsh-nanomuse`, the Swift `NanoMuse*` types, the `nanomuse-mcp` OAuth

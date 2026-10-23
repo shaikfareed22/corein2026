@@ -340,7 +340,7 @@ struct MountDetailView: View {
     }
 
     private func signalFileProviderRoot() {
-        let domainIdentifier = NSFileProviderDomainIdentifier("com.corein.in.files")
+        let domainIdentifier = NSFileProviderDomainIdentifier("com.corein.app.files")
         NSFileProviderManager.getDomainsWithCompletionHandler { domains, _ in
             guard let domain = domains.first(where: { $0.identifier == domainIdentifier }) else {
                 return

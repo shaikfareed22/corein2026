@@ -36,7 +36,7 @@ Failures land on one screen with the runtime's last log lines, a **Try again** a
 
 ## Where things live
 
-Everything is under the app's private files directory (`/data/data/com.corein.in/files`), which no other app can read:
+Everything is under the app's private files directory (`/data/data/com.corein.app/files`), which no other app can read:
 
 | Path | Inside the box | What |
 | --- | --- | --- |

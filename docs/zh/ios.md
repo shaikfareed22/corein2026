@@ -42,9 +42,9 @@ scripts/gen-ios-icons.py         the app icon and the four alternates, from asse
 
 由 `python scripts/rebrand.py` 应用（幂等；每次拉取上游后跑一遍）：
 
-- **身份。** Bundle id `com.corein.in`（加 `.ShareExtension`、`.AgentWidget`、
-  `.FileProvider`）、app group `group.com.corein.in`、iCloud 容器
-  `iCloud.com.corein.in`，以及带着 bundle id 的后台任务、UTType 和 URL scheme 的
+- **身份。** Bundle id `com.corein.app`（加 `.ShareExtension`、`.AgentWidget`、
+  `.FileProvider`）、app group `group.com.corein.app`、iCloud 容器
+  `iCloud.com.corein.app`，以及带着 bundle id 的后台任务、UTType 和 URL scheme 的
   id。和 Android 不同，iOS 上没有源码包名的限制，所以整个家族一起换。系统认得这个 App 的
   URL scheme 是 `nanomuse`（分享扩展打开 `corein://share`）和 `nanomuse-mcp`，这样同一部手机上
   也装了 OpenMinis 时，不会有两个 App 抢同一个 scheme。App 内部的链接仍是 `minis://…`：那是上游
@@ -114,7 +114,7 @@ scripts/gen-ios-icons.py         the app icon and the four alternates, from asse
   每天 / 工作日 / 一次或每 N 小时）在一个专属的对话里作为无头回合运行（`NanoMuseHeadless`）。
   说实话：iPhone 只在 App 打开时运行它们（变为活跃时把到期的全跑一遍，之后每分钟查一次），
   并且在每个到期时刻发一条本地通知（*检查：〈目标〉，打开即运行*），点通知打开那个对话。
-  退到后台时申请的 `BGAppRefreshTask`（`com.corein.in.scheduler`）从不运行例程：
+  退到后台时申请的 `BGAppRefreshTask`（`com.corein.app.scheduler`）从不运行例程：
   iOS 批下来时，处理函数只给已到期的那些发提醒，再申请下一个时间片，仅此而已。
   所有关于例程的文案都这么写明了。*设置 → corein → 定时任务* 列出全部，目标检查和动态的
   那条也在内。
@@ -249,7 +249,7 @@ scripts/gen-ios-icons.py         the app icon and the four alternates, from asse
 - **网络**（`NanoMuseProxy.swift`、`NanoMuseNetworkView.swift`，*设置 → corein → 网络*）：
   给自己的服务商用的 HTTP 代理：主机、端口、可选的用户名和密码，默认关闭，只存在这台手机上：
   地址和用户名在 `UserDefaults` 里，密码在钥匙串里，是一条仅限本机的条目
-  （`com.corein.in.proxy`，规则同中继密钥；1.0.3 版存在 `UserDefaults` 里的密码会在
+  （`com.corein.app.proxy`，规则同中继密钥；1.0.3 版存在 `UserDefaults` 里的密码会在
   第一次读取时搬过去）。`URLSession` 没有按主机切换代理的开关，所以代理是以一段代理自动配置脚本
   的形式进入会话的（`connectionProxyDictionary`）：对目录里的主机、`chatgpt.com`、
   `auth.openai.com` 和服务商实例的自定义主机返回代理（从不包括中继的主机，也从不包括局域网
@@ -608,10 +608,10 @@ open src/ios/Minis.xcodeproj
 2026-10-03 配置完成，全部在账号持有人的开发者账号（团队 `TN43QYW8K4`）下，没有一样在
 仓库里：
 
-- App 记录 *corein*，iOS，bundle id `com.corein.in`，SKU `nanomuse-ios`，
+- App 记录 *corein*，iOS，bundle id `com.corein.app`，SKU `nanomuse-ios`，
   Apple ID `6818802049`；三个扩展的 bundle id `…app.ShareExtension`、`…app.FileProvider`、
-  `…app.AgentWidget`；app group `group.com.corein.in` 和 iCloud 容器
-  `iCloud.com.corein.in`；四个 `.entitlements` 要求的能力（App Groups、带临床记录的
+  `…app.AgentWidget`；app group `group.com.corein.app` 和 iCloud 容器
+  `iCloud.com.corein.app`；四个 `.entitlements` 要求的能力（App Groups、带临床记录的
   HealthKit、HomeKit、iCloud/CloudKit、NFC 标签读取、WeatherKit）已在标识符上打开；
 - API key *corein CI*（角色 App Manager）、Apple Distribution 证书
   *Apple Distribution: Guangyi Liu*（有效期至 2027-10-03）和四个 App Store 描述文件
@@ -636,13 +636,13 @@ open src/ios/Minis.xcodeproj
 ### 在 App Store Connect 里做一次的事 {#once-in-app-store-connect}
 
 1. **App 记录。** *Apps → + → New App*：平台 iOS，名字 corein，bundle id
-   `com.corein.in`，一个 SKU。自动签名会注册标识符，但 App 记录本身要手动创建一次。
+   `com.corein.app`，一个 SKU。自动签名会注册标识符，但 App 记录本身要手动创建一次。
    列表里没有这个 bundle id 的话，先到 *Certificates, Identifiers & Profiles → Identifiers*
    注册它。
 2. **标识符上的能力。** entitlements 要求 App Groups、iCloud（CloudKit）、HealthKit（带临床
    记录）、HomeKit、NFC 标签读取和 WeatherKit。自动签名会自己打开其中大部分；如果第一次归档
    在某项能力上失败，就手动在标识符上启用它，并在那里创建 iCloud 容器
-   `iCloud.com.corein.in` 和 app group `group.com.corein.in`。WeatherKit 还
+   `iCloud.com.corein.app` 和 app group `group.com.corein.app`。WeatherKit 还
    要在标识符的 *Services* 标签页里启用。
 3. **一把 API key。** *Users and Access → Integrations → App Store Connect API → Team Keys → +*，
    角色 **App Manager**（Developer 不够上传用）。`.p8` 只能下载一次；记下表格上方显示的

@@ -26,7 +26,7 @@ later be added on the relay (allowance, members, `SIGNUP_OPEN`) without touching
 | Product name (every UI string, docs, store copy) | nanoMuse | corein |
 | Relay product name | nanoMuse Cloud | corein Cloud |
 | Desktop product | nanoMuse Desktop | corein Desktop |
-| Android applicationId | io.github.nanomuse.app | com.corein.in |
+| Android applicationId | io.github.nanomuse.app | com.corein.app |
 | iOS bundle ids | io.github.nanomuse.* | com.corein.* |
 | System URL scheme | nanomuse:// | corein:// |
 | Desktop appId / executable / artifact | io.github.nanomuse.desktop / nanomuse-desktop / nanoMuse-Desktop-* | com.corein.desktop / corein-desktop / corein-Desktop-* |

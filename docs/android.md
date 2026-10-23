@@ -5,14 +5,14 @@
 browser, MCP servers, skills and scheduled tasks inside the APK, with corein's own
 identity, design and features on top. Everything of corein's lives in
 `io.github.nanomuse.*`; edits inside OpenMinis files are marked `// corein:`. The
-application id is `com.corein.in` and the URL scheme the system knows the app by is
+application id is `com.corein.app` and the URL scheme the system knows the app by is
 `corein://`, so a phone that also has OpenMinis installed never has two apps claiming one
 scheme; inside the app, links stay `minis://…` (upstream's vocabulary, shared with the sandbox,
 the system prompt and the model), a `corein://` link arriving from the system is read as its
 `minis://` form, and every link of the app's own that the app opens itself is addressed to
 `MainActivity` by name, never resolved by the system
 (`io.github.nanomuse.deeplink.OwnScheme`). The sandbox's offload socket, the abstract socket
-proot talks to the app through, is the app's own too: `com.corein.in.native-offload`
+proot talks to the app through, is the app's own too: `com.corein.app.native-offload`
 rather than upstream's `native-offload`, since abstract sockets are one namespace for every
 app on the device and whichever app bound the shared name second would die at start; when
 even that name is still held by a previous process of ours, the server binds a per-process
