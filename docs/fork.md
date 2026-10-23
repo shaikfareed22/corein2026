@@ -41,7 +41,7 @@ simplest way on any machine:
 
 ```sh
 docker run --rm -v "$PWD:/src" node:22 sh -c \
-  "git config --global --add safe.directory /src && git clone -q /src /tmp/r && cd /tmp/r/web && npm ci && npm run build && cp -R ../nanomuse/server/static/. /src/nanomuse/server/static/"
+  "git config --global --add safe.directory /src && git clone -q /src /tmp/r && cd /tmp/r/web && npm ci && npm run build && cp -R../nanomuse/server/static/. /src/nanomuse/server/static/"
 ```
 
 ## Cutting a release

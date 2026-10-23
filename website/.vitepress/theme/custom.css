@@ -1,35 +1,66 @@
-/* The docs site in the look of fomo.corein.in: the brand's one accent hue (docs/brand.md —
-   #015CFB on white, #58A6FF on dark), the same system font stack, the same near-black and
-   near-white surfaces. VitePress's default theme does the rest; dark mode is its own. */
+/* The docs site in the look of fomo.corein.in: a deep navy field, the brand's blue to violet
+   to cyan accent, the same type. VitePress's default theme does the rest; the site opens dark
+   and the toggle keeps a light reading mode. */
 
 :root {
-  --vp-c-brand-1: #015cfb;
-  --vp-c-brand-2: #0150d9;
-  --vp-c-brand-3: #0146bd;
-  --vp-c-brand-soft: rgba(1, 92, 251, 0.14);
-  --vp-font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC",
-    "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+  --vp-font-family-base: "Figtree", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
   --vp-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --vp-c-brand-1: #2563eb;
+  --vp-c-brand-2: #1d4ed8;
+  --vp-c-brand-3: #1e40af;
+  --vp-c-brand-soft: rgba(37, 99, 235, 0.14);
   --vp-c-bg: #ffffff;
-  --vp-c-bg-alt: #f5f5f7;
-  --vp-c-bg-soft: #f5f5f7;
-  --vp-c-text-1: #1a1a1a;
-  --vp-home-hero-name-color: var(--vp-c-text-1);
+  --vp-c-bg-alt: #f4f6fb;
+  --vp-c-bg-soft: #f4f6fb;
+  --vp-c-text-1: #0b1120;
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(90deg, #2563eb 0%, #7c3aed 50%, #0891b2 100%);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, rgba(37,99,235,.35) 50%, rgba(124,58,237,.35) 50%);
+  --vp-home-hero-image-filter: blur(56px);
+  --vp-button-brand-bg: linear-gradient(90deg, #2563eb, #7c3aed);
+  --vp-button-brand-hover-bg: linear-gradient(90deg, #1d4ed8, #6d28d9);
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
 }
 
 .dark {
-  --vp-c-brand-1: #58a6ff;
+  --vp-c-brand-1: #60a5fa;
   --vp-c-brand-2: #7ab8ff;
   --vp-c-brand-3: #9ccaff;
-  --vp-c-brand-soft: rgba(88, 166, 255, 0.16);
-  --vp-c-bg: #121212;
-  --vp-c-bg-alt: #1c1c1c;
-  --vp-c-bg-soft: #1c1c1c;
-  --vp-c-bg-elv: #1c1c1c;
-  --vp-c-text-1: #e8e8e8;
+  --vp-c-brand-soft: rgba(96, 165, 250, 0.16);
+  --vp-c-bg: #070b14;
+  --vp-c-bg-alt: #0b1120;
+  --vp-c-bg-soft: #0f172a;
+  --vp-c-bg-elv: #0f172a;
+  --vp-c-text-1: #e6eaf2;
+  --vp-c-text-2: #9aa4b8;
+  --vp-c-divider: rgba(255, 255, 255, 0.1);
+  --vp-c-gutter: rgba(255, 255, 255, 0.06);
+  --vp-home-hero-name-background: linear-gradient(90deg, #60a5fa 0%, #8b5cf6 50%, #22d3ee 100%);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, rgba(37,99,235,.45) 50%, rgba(124,58,237,.45) 50%);
+  --vp-button-brand-bg: linear-gradient(90deg, #2563eb, #7c3aed);
+  --vp-button-brand-hover-bg: linear-gradient(90deg, #3b82f6, #8b5cf6);
 }
 
-/* The home page's hero reads like the homepage: the name is the name, not a gradient. */
-.VPHero .name { font-weight: 600; }
-.VPHero .text { font-weight: 600; }
-.VPHero .tagline { max-width: 40rem; }
+/* the hero: the name in the accent gradient, the tagline readable */
+.VPHero .name { font-weight: 800; letter-spacing: -0.02em; }
+.VPHero .text { font-weight: 800; letter-spacing: -0.02em; }
+.VPHero .tagline { max-width: 42rem; }
+.VPButton.brand { color: #fff !important; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); transition: transform .15s ease, box-shadow .2s ease; }
+.VPButton.brand:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(99, 102, 241, 0.45); }
+
+/* cards, links and the sidebar: a touch of motion, nothing loud */
+.VPFeature { transition: transform .2s ease, border-color .2s ease; }
+.VPFeature:hover { transform: translateY(-3px); border-color: var(--vp-c-brand-1); }
+.vp-doc a { text-decoration-color: rgba(96, 165, 250, 0.45); text-underline-offset: 3px; }
+.VPSidebarItem.level-0 .text { font-weight: 700; }
+.VPNavBar.has-sidebar .content-body, .VPNavBar:not(.has-sidebar) { backdrop-filter: saturate(160%) blur(12px); }
+.vp-doc h2 { border-top: 1px solid var(--vp-c-divider); }
+.vp-doc div[class*="language-"] { border: 1px solid var(--vp-c-divider); }
+.vp-doc table { display: table; width: 100%; }
+@media (prefers-reduced-motion: reduce) { .VPFeature, .VPButton.brand { transition: none; transform: none !important; } }
+
+/* VitePress paints the brand button with background-color, which cannot take a gradient; paint it here */
+.VPButton.brand { background: linear-gradient(90deg, #2563eb, #7c3aed) !important; border-color: transparent !important; }
+.VPButton.brand:hover { background: linear-gradient(90deg, #3b82f6, #8b5cf6) !important; }
+.VPButton.alt { border-color: var(--vp-c-divider); }

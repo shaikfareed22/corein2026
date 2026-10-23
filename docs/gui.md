@@ -7,12 +7,12 @@
 > agent's own face (the dragon by default).
 
 
-Muse's abilities in the West come from services with APIs. Most of what a person in China does on a phone (12306, 微信, 支付宝, 美团) has no API a personal agent may call. corein therefore has a second pair of hands: with the *Phone* switch on, the agent can look at the phone's screen and tap, type and swipe in its apps, the way a person would. It is the same agent with the same Sentinel in front of it; GUI steps are just more tool calls.
+Muse's abilities in the West come from services with APIs. Most of what a person in China does on a phone (12306, WeChat, Alipay, Meituan) has no API a personal agent may call. corein therefore has a second pair of hands: with the *Phone* switch on, the agent can look at the phone's screen and tap, type and swipe in its apps, the way a person would. It is the same agent with the same Sentinel in front of it; GUI steps are just more tool calls.
 
 Three things decide how this part is built:
 
 - **Local.** The brain runs where you run it (your machine, or the phone itself in the Android build) and the screen goes to the model you configured, nobody else.
-- **China first.** The default model is on 阿里云百炼 in mainland China and OpenRouter (`qwen/qwen3.8-27b`) elsewhere, the sample tasks are 12306 and 微信, the sensitive-word list is Chinese first.
+- **China first.** The default model is on Alibaba Cloud Bailian in mainland China and OpenRouter (`qwen/qwen3.8-27b`) elsewhere, the sample tasks are 12306 and WeChat, the sensitive-word list is Chinese first.
 - **Any app.** The operator sees the screen as a picture and taps by position. It does not need an accessibility tree, labelled buttons or a per-app integration, so a new app costs nothing: the same loop that books a train reads a chat. When the device *has* a tree (the Android app), it is sent along as a second input (small text becomes readable and a password field is known to be one) but nothing depends on it.
 - **Last resort.** The screen is the fourth rung of a ladder (below): a skill, a command-line tool or an MCP server that does the thing exactly comes first, then a page fetched with the user's login, then the in-app browser. Every screen step is a model call and a picture; the agent climbs only when the rung below cannot do it, and says so before it starts.
 
@@ -27,15 +27,15 @@ There are four ways to reach a service, and they are tried lowest first:
 | 1 | a **skill**, a **CLI** or an **MCP server**: `feishu` through lark-cli, `amap` through its MCP server, mail, the calendar, files | whenever one exists: exact, instant, no screen |
 | 2 | a **fetch with the user's login**: `browser` action=fetch, `web_fetch` | a page that shows the answer once you are signed in |
 | 3 | the **in-app browser**, page by page | a site that needs clicking through, but is a site |
-| 4 | the **phone's screen**: `phone_task` | what lives in an app and nowhere else: a 微信 chat, 12306's real seats, an order in 美团, a payment |
+| 4 | the **phone's screen**: `phone_task` | what lives in an app and nowhere else: a WeChat chat, 12306's real seats, an order in Meituan, a payment |
 
 A skill says which rung it works on with `channel:` in its front matter: `api`, `cli`, `web`, `browser`, `gui` or `mixed` (`app-only` and `phone` are accepted for `gui`). A `gui` skill shows up in the agent's skill index as *[on the phone's screen]*, so the agent knows a rung-4 job when it sees one; `train-tickets` and `phone-messages` are the built-in examples. Before the first step on the screen the agent says in one line what it is about to do on the phone; if you did not ask for the phone yourself (it is climbing because the lower rungs failed), it asks first. The Activity view counts how many of a session's steps were on the screen, so you can see the ladder being kept.
 
 ## What it looks like
 
-Ask "帮我看看明天北京到上海最早的高铁" and the agent opens 12306 on the phone, sets the stations and the date, presses 查询车票, filters 只看高铁 and reads the list back to you. Ask it to reply to someone on 微信 and it opens the chat, types the text, and **stops at the send button until you approve**. Ask for something that mixes both worlds (research on the web, a ticket in 12306, an event in your calendar) and it moves between its native tools and the screen as it goes.
+Ask and the agent opens 12306 on the phone, sets the stations and the date, presses, filters  and reads the list back to you. Ask it to reply to someone on WeChat and it opens the chat, types the text, and **stops at the send button until you approve**. Ask for something that mixes both worlds (research on the web, a ticket in 12306, an event in your calendar) and it moves between its native tools and the screen as it goes.
 
-In the chat every GUI step shows up as a row such as `phone_act: tap "发送" at (318,742) in 微信 (wechat)`, so you can see what it did; on the phone a ripple marks where the finger landed and a caption says what Muse is doing (see [Showing the finger](#showing-the-finger)). Afterwards `nanomuse phone traces` lists every task and `nanomuse phone trace <id> -o trace.html` renders one as a page with every screen and every tap drawn on it.
+In the chat every GUI step shows up as a row such as `phone_act: tap "Send" at (318,742) in WeChat (wechat)`, so you can see what it did; on the phone a ripple marks where the finger landed and a caption says what Muse is doing (see [Showing the finger](#showing-the-finger)). Afterwards `nanomuse phone traces` lists every task and `nanomuse phone trace <id> -o trace.html` renders one as a page with every screen and every tap drawn on it.
 
 ## Turning it on
 
@@ -79,8 +79,8 @@ Other settings: `max_steps` (default 0 = no cap; set a number to bound a single 
 
 The agent does not have to run on the phone. A *device* connects to the corein server over the same WebSocket the app uses, announces itself and then answers requests for the screen and for actions. Two devices exist:
 
-- **MobileGym**: the simulated phone at [mobilegym.dev](https://mobilegym.dev/), with Chinese apps (微信, 支付宝, 铁路12306, 地图, 小红书 …) as React apps in the browser. The corein module for it (`demo/mobilegym/`) has the switch *Let corein operate this phone* on its setup page. This is the showcase environment: nothing real is touched.
-- **Android**: the corein app, through its own accessibility service: `takeScreenshot()` for the picture, `dispatchGesture()` for the finger, the accessibility tree for the element list, `performGlobalAction` for Back / Home / Recents, and the app's own list of launchable apps for `open_app`. Same protocol, real apps. It needs **Android 11 or newer** (that is where an accessibility service may take screenshots) and the service switched on:
+- **MobileGym**: the simulated phone at [mobilegym.dev](https://mobilegym.dev/), with Chinese apps  as React apps in the browser. The corein module for it (`demo/mobilegym/`) has the switch *Let corein operate this phone* on its setup page. This is the showcase environment: nothing real is touched.
+- **Android**: the corein app, through its own accessibility service: `takeScreenshot` for the picture, `dispatchGesture` for the finger, the accessibility tree for the element list, `performGlobalAction` for Back / Home / Recents, and the app's own list of launchable apps for `open_app`. Same protocol, real apps. It needs **Android 11 or newer** (that is where an accessibility service may take screenshots) and the service switched on:
 
   1. *Connections → Phone → This phone → Open Accessibility settings*, find **corein** under *Downloaded apps* and turn it on. Android explains what the service can do (see the screen, perform gestures) and asks you to confirm.
   2. On Android 13 and newer an app installed from a download (not a store) gets the switch greyed out with *Restricted setting*. Open the app's page in Settings (*App settings* on the same card), tap ⋮ → **Allow restricted settings**, then go back to step 1.
@@ -94,25 +94,25 @@ The agent does not have to run on the phone. A *device* connects to the corein s
 
 | Tool | Risk | What it does |
 |---|---|---|
-| `phone_screen` | SAFE, reads private data | The current screen: a screenshot for the model to look at, with a caption: `铁路12306 (railway12306) · /station-select · 360×800 · keyboard hidden` |
+| `phone_screen` | SAFE, reads private data | The current screen: a screenshot for the model to look at, with a caption: ` (railway12306) · /station-select · 360×800 · keyboard hidden` |
 | `phone_act` | MODERATE, or SENSITIVE (see below) | One action by position: `tap`, `long_press`, `double_tap` at `x`/`y` with a `label`; `swipe` to `x2`/`y2` or by `direction`; `type`, `enter`, `back`, `home`, `recents`, `open_app`, `wait`. Returns the screen after the action |
 | `phone_task` | as its steps | Hands a goal to the *phone operator*: a loop with its own model that looks, acts and looks again until the goal is met, it needs you, or it gives up. Each of its steps is a `phone_act` and goes through Sentinel like any other |
 
-**The screen is the last rung.** Search, a web page, mail, the calendar, files, a connector: when one of those gives the answer instantly and precisely, the agent uses it; the phone is for what only the user's own apps and accounts can do: 12306's real seats and prices, a 微信 chat, an order in 美团, a payment that needs their account. The phone is slower than a tool and every step is a model call, so the agent does not open 12306 to learn how far 北京 is from 上海 (see [The ladder](#the-ladder)).
+**The screen is the last rung.** Search, a web page, mail, the calendar, files, a connector: when one of those gives the answer instantly and precisely, the agent uses it; the phone is for what only the user's own apps and accounts can do: 12306's real seats and prices, a WeChat chat, an order in Meituan, a payment that needs their account. The phone is slower than a tool and every step is a model call, so the agent does not open 12306 to learn how far Beijing is from Shanghai (see [The ladder](#the-ladder)).
 
-The main agent uses `phone_task` for anything that takes more than a step or two ("open 12306, find the earliest train tomorrow from 北京 to 上海, report the first three"), and `phone_screen` / `phone_act` when it wants to look or do one thing itself. Both patterns are fine; the operator keeps the main model's context small.
+The main agent uses `phone_task` for anything that takes more than a step or two ("open 12306, find the earliest train tomorrow from Beijing to Shanghai, report the first three"), and `phone_screen` / `phone_act` when it wants to look or do one thing itself. Both patterns are fine; the operator keeps the main model's context small.
 
 ## The operator
 
 `phone_task(goal, app?, max_steps?)` runs an inner loop, ported from the `mobile_use` operator in [MemGUI-Bench](https://github.com/lgy0404/MemGUI-Bench) (MIT):
 
-1. **Look.** Take the screen. The operator's model gets one picture (the current screen) plus the goal and the list of what it has done so far, each earlier step as one sentence (`Step 3: 点击「查询车站」按钮。; Result: …`). When the device sent an element list, up to 60 of its lines follow, fields first, each with its words, kind, flags and centre on the same 999 grid the model answers in (`- "密码" · EditText [editable, password] @ 500,375`): a second input for reading small text and aiming, never the first.
+1. **Look.** Take the screen. The operator's model gets one picture (the current screen) plus the goal and the list of what it has done so far, each earlier step as one sentence. When the device sent an element list, up to 60 of its lines follow, fields first, each with its words, kind, flags and centre on the same 999 grid the model answers in (`- · EditText [editable, password] @ 500,375`): a second input for reading small text and aiming, never the first.
 2. **Decide.** The model answers in a fixed shape: a `Thought:` line, an `Action:` sentence in the user's language, and one `<tool_call>` calling `mobile_use` with `click`, `long_press`, `swipe`, `type`, `open`, `system_button` (Back, Home, Menu, Enter), `wait`, `answer`, `ask_user` or `terminate`. Coordinates come back on a 999×999 grid and are scaled to the phone's pixels. A reply in the wrong shape is sent back once with a reminder, three times at most.
 3. **Act.** The step becomes a `phone_act`, with the Action sentence as its `label`: that sentence is what Sentinel reads, what the approval card shows, and what the trace keeps. Then back to 1.
 
 It stops with `done` and the model's `answer` (the text it read off the screen goes there), with `ask` when the model calls `ask_user` or Sentinel wants a decision (the main agent asks you and continues with your answer), with `blocked` after two refusals, with `stopped` when you press **Stop** on the phone, with `failed` on `terminate(failure)`, after `max_steps`, or when the phone stops answering. The same action three times in a row gets a note in the history so the model changes tack.
 
-On a device with a capsule the operator also tells the phone when a task **begins** (the capsule appears with the goal), when it **ends** (the capsule goes), and when it **needs you**: an `ask` or a `blocked` becomes a card on the phone with the question and an *Open* button into the chat, because you are looking at 微信 at that moment, not at corein.
+On a device with a capsule the operator also tells the phone when a task **begins** (the capsule appears with the goal), when it **ends** (the capsule goes), and when it **needs you**: an `ask` or a `blocked` becomes a card on the phone with the question and an *Open* button into the chat, because you are looking at WeChat at that moment, not at corein.
 
 The operator's own rules, in its prompt: never type passwords, PINs, card numbers or one-time codes (`ask_user` first); never confirm a payment or a transfer it was not explicitly told to make; do only what the query asks, and when the query is "look this up", read and `answer` without pressing further.
 
@@ -122,7 +122,7 @@ Everything read from the screen is private data: the conversation is *tainted* a
 
 A `phone_act` is MODERATE (allowed on its own in the default mode) except when it looks like it commits to something, in which case it is SENSITIVE with a warning, and a warning always means **ask, once**:
 
-- a `tap`, `long_press`, `double_tap` or `enter` whose `label` contains one of `sensitive_words`: 确认支付, 立即付款, 转账, 提交订单, 立即购买, 发送, 删除, 注销, pay now, place order, send, delete … (an app's name is exempt: tapping the 支付宝 icon is not a payment step)
+- a `tap`, `long_press`, `double_tap` or `enter` whose `label` contains one of `sensitive_words`: Confirm payment,, Transfer, Submit order,, Send, Delete,, pay now, place order, send, delete … (an app's name is exempt: tapping the Alipay icon is not a payment step)
 - `type` with `submit`, typing and submitting in one step, which the operator never does: it types, then taps the send button on the next step, so that step can be checked with the text in the field
 
 A pointed action **must** carry a `label`: the words under the finger, as the screen shows them; the operator supplies its Action sentence. A tap without one still runs but carries a warning ("nothing says what is under the finger"), and a point outside the screen is refused before it reaches the phone.
@@ -157,7 +157,7 @@ The device announces itself once:
 
 ```json
 {"kind": "device", "name": "MobileGym", "platform": "mobilegym", "gui": true, "capsule": true,
- "apps": [{"id": "wechat", "name": "微信"}, {"id": "railway12306", "name": "铁路12306"}],
+ "apps": [{"id": "wechat", "name": "WeChat"}, {"id": "railway12306", "name":}],
  "screen": {"width": 720, "height": 1600}}
 ```
 
@@ -165,7 +165,7 @@ and gets `{"kind": "device_ack", "phone": {…}}` back. A device may announce ag
 
 ```json
 {"kind": "device_request", "id": "r1", "op": "screen", "params": {}}
-{"kind": "device_request", "id": "r2", "op": "act", "params": {"action": "tap", "x": 68.5, "y": 447.6, "label": "点击热门车站中的「北京」。"}}
+{"kind": "device_request", "id": "r2", "op": "act", "params": {"action": "tap", "x": 68.5, "y": 447.6, "label": ""}}
 ```
 
 and the device answers `{"kind": "device_result", "id": "r1", "ok": true, "result": …}` or `{"kind": "device_result", "id": "r1", "ok": false, "error": "…"}`.
@@ -173,7 +173,7 @@ and the device answers `{"kind": "device_result", "id": "r1", "ok": true, "resul
 A `screen` result is a picture and a few facts about it:
 
 ```json
-{"app": "railway12306", "app_name": "铁路12306", "route": "/station-select",
+{"app": "railway12306", "app_name":, "route": "/station-select",
  "width": 360, "height": 800, "keyboard": false,
  "screenshot": "<base64 PNG or JPEG>", "note": "optional"}
 ```
@@ -184,8 +184,8 @@ A device that has an accessibility tree (or a DOM, as the MobileGym module does)
 
 ```json
 {"nodes": [
-  {"id": "0.3.1", "class": "Button", "text": "查询车票", "cx": 180, "cy": 612, "box": [24, 588, 336, 636], "clickable": true},
-  {"id": "0.2.0", "class": "EditText", "hint": "密码", "cx": 180, "cy": 400, "editable": true, "password": true}
+  {"id": "0.3.1", "class": "Button", "text":, "cx": 180, "cy": 612, "box": [24, 588, 336, 636], "clickable": true},
+  {"id": "0.2.0", "class": "EditText", "hint":, "cx": 180, "cy": 400, "editable": true, "password": true}
 ]}
 ```
 
@@ -223,13 +223,13 @@ An executor that moves in silence is unnerving to watch and impossible to follow
 | `long_press` | a ring that holds, then fades | `seconds`, then 300 ms fade |
 | `swipe` | a line drawn from start to end with a ring at the end | the swipe's own duration (320 ms), then fade |
 | `type` | characters appear one by one | 40 ms per character |
-| every action | a caption at the bottom: `Muse · <label>` (or `输入 “…”`, `打开 <app>`, `滑动 up`) | 2.6 s, replaced by the next |
+| every action | a caption at the bottom: `Muse · <label>`  | 2.6 s, replaced by the next |
 
 After an action the executor waits for the UI to settle (650 ms on MobileGym; on Android until the accessibility events go quiet for 450 ms, 3 s at most) before it takes the screen it returns. The wait is part of the action, so a `screen` read never lands mid-transition.
 
 ### The capsule
 
-On a device with a capsule (the Android app, and the MobileGym module, which draws the same pill in the simulated phone), a task is never silent: a pill at the top of the screen shows the red panda, the step in progress (*Muse · 点击「查询车票」*) and a **Stop** button, over whatever app is being operated. It appears on `task begin`, follows every step, and goes on `task end`: a tick for a moment, then the phone comes back to corein, where the agent's report is (the Android app brings itself to the front; the MobileGym module resumes the corein app); it is not part of the screenshot. Stop is the user's brake; no long press, no menu: one tap, the action in flight fails with `nanomuse:stop`, the pill says *Stopped* and hides itself, the phone comes back to corein, and the agent asks what to do next instead of carrying on. When the agent needs the user (`ask`, `blocked`) the pill grows into a card with the question and an *Open* button that brings corein to the front; it stays a minute, then folds away.
+On a device with a capsule (the Android app, and the MobileGym module, which draws the same pill in the simulated phone), a task is never silent: a pill at the top of the screen shows the red panda, the step in progress  and a **Stop** button, over whatever app is being operated. It appears on `task begin`, follows every step, and goes on `task end`: a tick for a moment, then the phone comes back to corein, where the agent's report is (the Android app brings itself to the front; the MobileGym module resumes the corein app); it is not part of the screenshot. Stop is the user's brake; no long press, no menu: one tap, the action in flight fails with `nanomuse:stop`, the pill says *Stopped* and hides itself, the phone comes back to corein, and the agent asks what to do next instead of carrying on. When the agent needs the user (`ask`, `blocked`) the pill grows into a card with the question and an *Open* button that brings corein to the front; it stays a minute, then folds away.
 
 ### The same on the desktop
 
@@ -248,7 +248,7 @@ Where the hands' space comes from, by backend:
 | backend | the hands' space | notes |
 |---|---|---|
 | `desktop` (the desktop app) | the display's logical size × its scale factor; the scale factor is 1 on macOS (points) | the app's own operator (`@computer-use/nut-js`, a port of UI-TARS-desktop's) over loopback HTTP; `auto` takes it whenever the app set `NANOMUSE_OPERATOR_URL` |
-| `pyautogui` | `pyautogui.size()` | points on macOS, physical pixels elsewhere; not used on a Mac under the desktop app |
+| `pyautogui` | `pyautogui.size` | points on macOS, physical pixels elsewhere; not used on a Mac under the desktop app |
 | `xdotool` | `xdotool getdisplaygeometry` | X11 root pixels |
 
 On macOS under the desktop app there is **one path**: the operator takes every screenshot and every move, or the tool fails with the operator's reason; without Screen Recording that is *macOS: switch on corein Desktop under System Settings → Privacy & Security → Screen Recording, then quit and reopen the app.* (the operator detects the refusal and the all-black capture and answers `403`). The runtime never falls back to `mss` / `screencapture` or `pyautogui` there: the permission belongs to the app bundle, a fallback would ask TCC a second time for a process that is not in the pane, and a black picture would reach the model as if it were the screen. Linux and Windows keep the Python fallbacks, and so does a runtime started without the app ([desktop.md](desktop.md#macos-permissions)).
@@ -261,7 +261,7 @@ On Linux the operator works under **X11** (Xorg) only. The hands' space is the X
 
 The picture's size is bounded two ways: `[hands] max_image_width` (1600) and a pixel budget of 2 Mpx (`nanomuse/computer/coords.py`, `PICTURE_MAX_PIXELS`; the operator's `/screenshot` takes the same `max_pixels`, 0 for the screen as it is), both keeping the aspect ratio before the 28-pixel snap. A 4K screen comes down to half its side, 1080p is trimmed a little; a request with a few uncapped 4K pictures in it was what the relay refused with `413`.
 
-What `computer_screen` reports to the client (`status()` / the event): `picture_size` and `screen_size` separately. The desktop app draws the prediction marker (a turning dashed ring, a dot at the exact point, the action's name beside it, a dashed line for a drag) from the operator's own fractions of the display, so what you see is where it clicked, not where the client thought it would.
+What `computer_screen` reports to the client (`status` / the event): `picture_size` and `screen_size` separately. The desktop app draws the prediction marker (a turning dashed ring, a dot at the exact point, the action's name beside it, a dashed line for a drag) from the operator's own fractions of the display, so what you see is where it clicked, not where the client thought it would.
 
 ## Limits
 

@@ -52,12 +52,12 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | Feature | Android | iOS | Desktop | Web |
 |---|---|---|---|---|
 | Status line says what it is on, never "Thinking" | ✓ | ✓ 0.1.32 *"is on it"* | ✓ | ✓ |
-| Status line = the step's own words (`step`: *打开携程网站*), never the raw command | ✓ 0.1.33 | ✓ 0.1.33 | ✓ 0.1.33 | ✓ 0.1.33 |
+| Status line = the step's own words, never the raw command | ✓ 0.1.33 | ✓ 0.1.33 | ✓ 0.1.33 | ✓ 0.1.33 |
 | "Show the agent's steps", on by default since 0.1.37 (a stored off stays off) | ✓ 0.1.37 (`nm.show_steps`) | ✓ 0.1.37 (`nanomuse.show_steps`) *(2)* | ✓ 0.1.37 | ✓ 0.1.37 |
 | Star asks at the relay's moments (`/v1/nudges`: sign-in · 3rd / 10th / 30th task · 7th / 30th day · a goal reached · a new look · allowance spent; 7 days apart, 4 per device; never in the first conversation). Every card has *I already starred* next to *Star on GitHub*; either ends the asks on that device for good | ✓ 0.1.35 | ✓ 0.1.35 *(3)* | ✓ 0.1.35 | ✓ 0.1.35 |
 | First conversation: the app speaks first, asks what to call you, the model's `nanomuse-naming` fence becomes the naming card | ✓ | ✓ 0.1.34 | ✓ 0.1.35 *(25)* | ✓ *(39)* |
 | First run: "Sign in (free)" before anything else | ✓ | ✓ 0.1.32 *(4)* | ✓ | ✓ |
-| Approval cards, three tiers, remembered grants; a Permissions page listing the remembered grants by risk tier, with Revoke | ✓ | upstream's; since 1.0.4 the card for a step another device's Muse asks about (*Allow once / Allow for this chat / Always allow this on 〈device〉 / Deny*), the standing answers under *Approvals* on the agent's page with Revoke | ✓ Settings → Permissions → *Standing grants*: the remote-control switch, the trusted devices and the hands' per-app grants under the phone's three tiers | ✓ |
+| Approval cards, three tiers, remembered grants; a Permissions page listing the remembered grants by risk tier, with Revoke | ✓ | upstream's; since 1.0.4 the card for a step another device's Muse asks about (*Allow once / Allow for this chat / Always allow this on  / Deny*), the standing answers under *Approvals* on the agent's page with Revoke | ✓ Settings → Permissions → *Standing grants*: the remote-control switch, the trusted devices and the hands' per-app grants under the phone's three tiers | ✓ |
 | Approvals answered outside the app while the hands work | ✓ 0.1.33 capsule *Allow / Deny* | n/a *(10)* | ✓ 0.1.34 stage *Allow once / Always in app / Deny*, capsule when the window is behind *(17)* | n/a |
 | Hand-over: a login / code / payment / CAPTCHA goes back to the person, the agent waits and resumes (holds) | ✓ 0.1.33 `hand_over` | — *(16)* | ✓ 0.1.34 *Your turn* with *Done*, *I'll take it* *(16)* | ✓ 0.1.34 drivable browser viewer, hold cards *(16)* |
 | Face tap opens the agent page (Change avatar · Edit name · studio; Activity · Approvals · Daily · Soul & memory; share card) | ✓ | ✓ 0.1.34 | ✓ 0.1.34 | ✓ the agent sheet |
@@ -203,11 +203,11 @@ notes above; a settled item keeps its number and says how it went.
     coordinate space (points on a Mac), scroll units, ⌘ for `ctrl`, content protection (the Mac
     task sheet, F).
 20. **Services without a public remote MCP server.** The chat apps are settled in 0.1.34 the
-    way nanobot does it: 飞书, 钉钉, 企业微信 and Telegram are *channels* the agent answers in
+    way nanobot does it: Feishu, DingTalk, WeCom and Telegram are *channels* the agent answers in
     (`nanomuse/channels/`, the vendors' long-connection SDKs, no public address, pairing codes),
     which is what most people wanted from them. Still open as *connectors* (the agent reading or
-    acting in the service): Zoom, LinkedIn, Zoho Invoice, WHOOP, 腾讯文档, 滴答清单, 网易邮箱, QQ
-    邮箱, 微信读书: each a bridge of its own over the vendor's REST API, one developer account
+    acting in the service): Zoom, LinkedIn, Zoho Invoice, WHOOP,,,, QQ
+   , WeChat: each a bridge of its own over the vendor's REST API, one developer account
     per vendor. *Decision: which, if any, are worth a bridge?*
 21. **Hands on Linux under Wayland.** The capture and the pointer need X11 or XWayland today; a
     Wayland session gives a black frame (now an error with the hint). Since 0.1.36 the operator

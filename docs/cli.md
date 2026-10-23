@@ -83,7 +83,7 @@ A trigger fires when something happens rather than at a time: `mail` needs the e
 
 ```bash
 nanomuse calendar add Work "https://calendar.google.com/calendar/ical/…/basic.ics"   # link goes to the vault as CALENDAR_WORK
-nanomuse calendar add Family ~/family.ics                                            # or an .ics file on disk
+nanomuse calendar add Family ~/family.ics                                            # or an.ics file on disk
 nanomuse calendar agenda --days 7                                                    # what is on, grouped by day
 nanomuse calendar free --day tomorrow --minutes 45                                   # gaps in the working hours
 nanomuse calendar feeds                                                              # each feed: events, last read, error
@@ -99,7 +99,7 @@ nanomuse contacts search "ali"                          # by name, nickname, com
 nanomuse contacts list -n 20                            # the first people alphabetically
 nanomuse contacts add "Bob Li" -e bob@example.com --note landlord   # into the agent's own book
 nanomuse contacts sources                               # each address book: people, last read, error
-nanomuse contacts add-source Google ~/Downloads/contacts.vcf         # a .vcf file, or a link (→ vault CONTACTS_GOOGLE)
+nanomuse contacts add-source Google ~/Downloads/contacts.vcf         # a.vcf file, or a link (→ vault CONTACTS_GOOGLE)
 nanomuse contacts remove-source Google
 ```
 
@@ -111,7 +111,7 @@ The agent has the same view through its `contacts` tool; `doctor` reports how ma
 nanomuse skills list                                    # built-in and yours, on or off
 nanomuse skills show trip-plan                          # the SKILL.md, as the model reads it
 nanomuse skills new standup-notes                       # a SKILL.md to fill in, printed with its path
-nanomuse skills add ./my-skill/                         # a folder or a SKILL.md file …
+nanomuse skills add./my-skill/                         # a folder or a SKILL.md file …
 nanomuse skills add https://github.com/anthropics/skills/tree/main/skills/pdf   # … or a raw link / GitHub folder page
 nanomuse skills disable inbox-triage                    # out of the model's list; the folder stays
 nanomuse skills enable inbox-triage
@@ -125,7 +125,7 @@ Skills are folders with a `SKILL.md` in the [Agent Skills](https://agentskills.i
 ```bash
 nanomuse memory list
 nanomuse memory add "Prefers short answers" --category preference
-nanomuse memory recall "写邮件给房东"    # what the agent would recall for this, with closeness
+nanomuse memory recall    # what the agent would recall for this, with closeness
 nanomuse memory forget m_9f8e7d        # id or a phrase to search for
 nanomuse memory clear --yes
 nanomuse memory tidy --dry-run         # what a tidy-up would merge and drop
@@ -134,7 +134,7 @@ nanomuse memory changes                # the log, newest first
 nanomuse memory restore c_1a2b3c4d     # undo one change
 ```
 
-`memory recall` shows the ranking the agent would get for a message: keyword hits and, when an embedding endpoint is set up ([configuration → memory](configuration.md#memory)), hits by meaning fused in, each with its cosine closeness, the way to see whether "写邮件给房东" finds "the landlord is Bob Li" before relying on it. `doctor` says whether recall by meaning is on, with which model, and how many memories are indexed.
+`memory recall` shows the ranking the agent would get for a message: keyword hits and, when an embedding endpoint is set up ([configuration → memory](configuration.md#memory)), hits by meaning fused in, each with its cosine closeness, the way to see whether finds "the landlord is Bob Li" before relying on it. `doctor` says whether recall by meaning is on, with which model, and how many memories are indexed.
 
 ## Vault
 

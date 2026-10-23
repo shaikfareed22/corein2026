@@ -25,14 +25,14 @@ than in a second subtree, is what keeps `git subtree pull` working for both plat
 ```
 android/src/ios/                 the Xcode project: Minis.xcodeproj, app, extensions, tests
 android/src/ios/NanoMuse/        ours: corein Cloud client and screens (a synchronized folder
-                                 of the Minis target; drop a .swift file in, it is compiled)
+                                 of the Minis target; drop a.swift file in, it is compiled)
 android/src/ios/fastlane/        the TestFlight lane
 android/deps/build_lame.sh       LAME → FFmpeg → iSH → Alpine rootfs → rclone, in that order
 android/deps/build_ffmpeg.sh
 android/deps/build_ish.sh
 android/deps/prepare_alpine_rootfs.sh
 android/deps/build_rclone_ios.sh
-scripts/rebrand.py               the `ios()` step: ids, names, versions, strings, links, colours
+scripts/rebrand.py               the `ios` step: ids, names, versions, strings, links, colours
 scripts/gen-ios-icons.py         the app icon and the four alternates, from assets/brand/
 .github/workflows/ios-testflight.yml
 ```
@@ -81,15 +81,15 @@ Ours, in `NanoMuse/`:
   runs low (your own key, an invitation, a star once), usage by kind and by model, the devices
   holding a key, the timeline, deletion, the same sections as the phone's `CloudAccountScreen`.
 - **The agent's steps, the status line.** *Settings → Chat → Steps* keeps the tool capsules out of
-  finished messages unless asked for; the typing line reads *〈name〉 is on it*, not *is thinking*.
+  finished messages unless asked for; the typing line reads * is on it*, not *is thinking*.
   Both are one-line edits in upstream's `AssistantBlockView` / `ContentView`, marked `// corein:`.
 - **The Muse shell (0.1.33; iPad too since 0.1.34).** `NanoMuseRoot` replaces upstream's
   `ContentView` at the root; *Settings → corein* has the two switches (*Muse home*, *Face and
   name in the chat header*), and the OpenMinis layout stays one tap away in the drawer. The chat's
   navigation title becomes **face · name · status line** (`NanoMuseHeader.swift`): the status
   reads *waiting for you* while a question or an approval is up, then the running tool's
-  `tool_title` (the model's own words for the step, *打开携程网站*), then *writing the reply*,
-  then *On it: 〈brief〉*, and the model's name when idle; while a new face is being drawn it
+  `tool_title`, then *writing the reply*,
+  then *On it: *, and the model's name when idle; while a new face is being drawn it
   reads the avatar flow's line. The face (`NanoMuseFaces.swift`, the drawn face from Application
   Support, else an emoji on its colour when the desktop or the web console set one (kept in
   `avatar/emoji.json`, rendered as a still; the phone has no picker for it yet), else the dragon
@@ -115,10 +115,9 @@ Ours, in `NanoMuse/`:
   "always allow" answers, revocable), **Daily** (the routines and the goal check-ins with their
   next run, *Manage routines*), **Soul & memory** (SOUL.md and GLOBAL.md, editable), and the
   share sheet (`NanoMuseAvatarShareSheet`, Android `ui/avatar/AvatarShareSheet.kt`).
-- **The avatar, from the chat (0.1.34)** (`NanoMuseAvatarFlow.swift`, Android `avatar/AvatarFlow.kt`):
-  "换成一只橘猫" / "change your avatar to a red panda" is read before the model sees it (the same
+- **The avatar, from the chat (0.1.34)** (`NanoMuseAvatarFlow.swift`, Android `avatar/AvatarFlow.kt`): / "change your avatar to a red panda" is read before the model sees it (the same
   regexes, tested in `MinisTests/NanoMuseLogicTests.swift`); four candidates come up as a card in
-  the chat, picked by tap or by words (*the second one*, *第三个*, *regenerate*); then *Finalizing
+  the chat, picked by tap or by words ; then *Finalizing
   poses…*, the new face on, the profile pushed, a line in the memory, the share card. Through the
   relay with a cost card first (`/v1/estimate`), or through the person's own Bailian key
   (`NanoMuseImageGen.swift`, DashScope's native image endpoint) when the phone has one; the studio
@@ -127,7 +126,7 @@ Ours, in `NanoMuse/`:
   daily / weekdays / once or every N hours) run as a headless turn in a conversation of their own
   (`NanoMuseHeadless`). Honestly: the iPhone runs them only while the app is open (every due
   one on becoming active, then a check every minute), and posts a local notification at each
-  due time (*Check-in: 〈goal〉. Open to run it*) whose tap opens the conversation. The
+  due time (*Check-in:. Open to run it*) whose tap opens the conversation. The
   `BGAppRefreshTask` it asks for when it goes to the background
   (`com.corein.app.scheduler`) never runs a routine: when iOS grants it, the handler
   posts the reminder for whatever came due and asks for the next slot, nothing more. Every piece
@@ -147,7 +146,7 @@ Ours, in `NanoMuse/`:
 - **First run and settings (0.1.34)** (`NanoMuseFirstRun.swift`, `NanoMuseSettings.swift`,
   `NanoMuseCoding.swift`, `NanoMuseSystemFiles.swift`): the four pages of the Android first run
   (welcome → sign in · free → a password once for a fresh account → which model answers → meet
-  〈name〉), with *I have my own API key* opening the own-key sheet (the whole catalogue;
+  ), with *I have my own API key* opening the own-key sheet (the whole catalogue;
   see *Your own key* below), and the first conversation afterwards (the
   opening lines, "what should I call you?", the name chooser from the model's ` ```nanomuse-naming `
   block, GLOBAL.md and SOUL.md written). *Settings → corein*: the account, **Coding agents**
@@ -159,7 +158,7 @@ Ours, in `NanoMuse/`:
   (the one marked recommended *for chat*; `qwen3.8-27b` is the hands' model and never the chat
   default); a pick made in the chat's picker moves to the front of the Cloud group so new chats
   follow it, as Android's `followPick`. DeepSeek ids are text-only unless they name `v4.1` or
-  later, `vision` or `ocr`: a `// corein:` step at the top of `LLMModel.withInferredModality()`.
+  later, `vision` or `ocr`: a `// corein:` step at the top of `LLMModel.withInferredModality`.
 - **Models as four slots (0.1.41)** (`NanoMuseModelSlots.swift`, `NanoMuseModelsView.swift`;
   Android `ui/models/ModelsScreen.kt`): the first card of *Settings → corein* is *Models* and
   opens four rows: *Chat*, *Operating the screen* (disabled on iPhone, *Not on iPhone*, *Your
@@ -180,7 +179,7 @@ Ours, in `NanoMuse/`:
   signed in, else the first key that can), so Cloud is no longer passed over for a Bailian key
   you did not pick; the image and video models come from the catalogue's `defaults`, not from
   names in the code. The pictures and clips pickers open with an *Automatic* entry (*Currently
-  〈provider · model〉*) that forgets the stored choice and lets the slot follow that order
+   · model*) that forgets the stored choice and lets the slot follow that order
   again; the clips picker keeps *Off* under it. A group shows at most eight rows (the
   provider's catalogue default for the slot first, then the chosen model, then the rest as
   the list came) and ends in *Show n more* when it has more; once the groups together hold
@@ -193,14 +192,14 @@ Ours, in `NanoMuse/`:
   nothing, and saving no longer switches anything by itself. When a model of your own fails, the
   failure card (and upstream's plain error) gains *Use corein Cloud this time* while signed
   in: the retry runs on the relay's chat model (`NanoMuseCloudOnce`, read at the top of
-  `resolveCurrentEntry()`), and no slot changes. The relay's menu is kept on the phone at sign-in
+  `resolveCurrentEntry`), and no slot changes. The relay's menu is kept on the phone at sign-in
   and refreshed when the page opens. *Image & video models* stays as a shortcut with the animate
   toggle and the clip buttons.
 - **Connections across devices (0.1.34)** (`NanoMuseSharedConnectors` in
   `NanoMuseConnectors.swift`): the profile's `connectors` list says which device connected what
   (id, label, address without the query string, how it signs in, enabled, when, the device) and
   never a token; this phone puts its own entries, reads the others' back, and the Connectors page
-  lists them under *On your other devices*: *Connected on 〈device〉. Sign in here to use it on
+  lists them under *On your other devices*: *Connected on. Sign in here to use it on
   this phone*. The ways-on card in the account follows the region: Bailian first in mainland
   China, *Sign in with OpenRouter* first elsewhere.
 - **Connectors** (`NanoMuseConnectors.swift`): the desktop's catalogue from the bundled
@@ -214,10 +213,10 @@ Ours, in `NanoMuse/`:
   privacy page, deletion with a confirmation. **Reach** (`NanoMuseReach.swift`): a sheet per device
   of the account (open a link, send a note, a shell line, a screenshot) over the hub.
   **A task for another device** (`NanoMuseDeviceMention.swift`, `NanoMuseRemoteApproval.swift`):
-  a message that starts with `@〈device〉` goes to that device's Muse as a hub `task`; when a step
+  a message that starts with `@` goes to that device's Muse as a hub `task`; when a step
   there needs a yes, the `approval` event is answered here, where the task was typed
   ([hub.md](hub.md)), on a card with the Android phone's four answers: *Allow once*, *Allow for
-  this chat* (held in memory for that chat), *Always allow this on 〈device〉* (the same step on
+  this chat* (held in memory for that chat), *Always allow this on * (the same step on
   that device, kept on this phone under the device's id and listed with *Revoke* under
   *Approvals* on the agent's page), *Deny*; a payment gets only *Allow once* and *Deny*. No
   answer within the time the other side names (180 seconds when it names none) is a no, and a
@@ -369,7 +368,7 @@ Ours, in `NanoMuse/`:
   every UIKit ancestor of the probe with its frame, hidden flag and alpha, the text fields and
   collection views in the window, the watch's events) with a *Copy* row for a bug report. That
   page is the view hierarchy a device can give without a Mac. The pill's field is SwiftUI's own
-  `TextField(axis: .vertical)` with `@FocusState` and `lineLimit(1...6)`, not upstream's
+  `TextField(axis:.vertical)` with `@FocusState` and `lineLimit(1...6)`, not upstream's
   `UIViewRepresentable` text view. What the representable did and the native field does not: an
   image pasted straight into the field (the plus menu has *Paste image* when the pasteboard holds
   one), the select-and-replace capture for the correction learner, the exact caret for the `@` menu
@@ -391,7 +390,7 @@ Ours, in `NanoMuse/`:
   `since=0&tail=300`: the newest 300 texts, not the whole history. Presence: `POST
   /v1/sync/working {cid, working}` after the user line is pushed and after the turn's end is;
   the hub's `working` frame and `/v1/sync/state`'s `working` list fill a map that expires after
-  ten minutes, and the chat shows *〈device〉 is working…* under the last message when it is
+  ten minutes, and the chat shows * is working…* under the last message when it is
   another device's user line (`ChatMessage.nmWorkingDevice`). A remote user line as the tail is
   never this phone's interrupted turn: `recheckCanResumeFromHistory` leaves `canResume` off for
   it, so no banner, no Resume, nothing re-sent.
@@ -406,7 +405,7 @@ Ours, in `NanoMuse/`:
   `100.64/10` Tailscale hands out, loopback, link-local, IPv6 ULA, `localhost`, a name without a
   dot and the suffixes `.local`, `.lan`, `.home`, `.internal`, `.home.arpa`, `.localdomain`,
   `.ts.net` count as one's own. Signed in, the account page shows *Server:
-  〈host〉* with *Change*, which signs this phone out first: a key belongs to the relay that
+  * with *Change*, which signs this phone out first: a key belongs to the relay that
   issued it.
 - **One account's conversations, not the last person's (0.1.39, Contract C10)**
   (`NanoMuseSync.swift`, `NanoMuseShell.swift`): a conversation belongs to the account that first
@@ -448,7 +447,7 @@ Ours, in `NanoMuse/`:
   Notifications page of the first run shows the mark, as the welcome and sign-in do. After a
   new face is picked with a video model set, the reply says the four clips follow in the
   background (Android's sentence). In the account's Devices list an offline device shows when
-  it was last seen and a tap on an online one opens the main chat with `@〈name〉 ` in the
+  it was last seen and a tap on an online one opens the main chat with `@ ` in the
   composer (the Reach sheet's *Ask this device*). `NanoMuseRoot` draws nothing until it knows
   whether the setup is due, so a fresh install never shows the shell for a frame before the
   welcome page. The first conversation's fourth line no longer says the messages go *only* to
@@ -492,8 +491,8 @@ Ours, in `NanoMuse/`:
   right edge; a setup page's fine print is one paragraph with *Learn more* at its end. The
   permission prompts for NFC, Bluetooth and Face ID are in all nine languages (they fell back
   to the English `Info.plist` text), and the local-network prompt describes this app, not a
-  virtual machine. In 简体中文 the relay is *corein Cloud* everywhere, as the Settings row
-  that the sentences point to is named (it was *corein 云* or *corein 云端* in 16 places).
+  virtual machine. In Simplified Chinese the relay is *corein Cloud* everywhere, as the Settings row
+  that the sentences point to is named.
   HEARTBEAT.md renders each routine's cadence with the Routines list's words (*Daily · 08:00*,
   *Checks every 6 hours*) instead of English *daily*, *once*, *every 6 h*; the memory import
   prompt follows an in-app language change.
@@ -504,7 +503,7 @@ Ours, in `NanoMuse/`:
   sentences, a comma, a colon or a middle dot (*Before we start, what should I call you?*,
   *Sign in · free*, *Done. My new look is on.*), the rows of HEARTBEAT.md and the diagnostics
   report with them, and ten keys nothing referenced were dropped; upstream OpenMinis keys are
-  not ours and stay. 繁體中文 says *corein Cloud* as the other languages do, Russian says
+  not ours and stay. Traditional Chinese says *corein Cloud* as the other languages do, Russian says
   *Эл. почта*. `NanoMuseCopyTests` reads the catalogue and the `NanoMuse/` sources on the Mac
   and fails on a dash, an exclamation mark or a translated relay name in our keys. The vendor
   sheet tries a pasted key against the provider's model list before keeping it: a 401 or 403
@@ -527,15 +526,15 @@ Ours, in `NanoMuse/`:
   its Devices and sync rows, and the person had to swipe it away to find the setup had moved on.
 - **The third audit: Chinese words (1.0.x)** (`Localizable.xcstrings`, `NanoMuseShell.swift`,
   `NanoMuseAccountView.swift`, `MinisTests/NanoMuseCopyTests.swift`): the Chinese copy says what
-  Android says. The agent is 智能体 (繁體 智慧體) in the 19 keys where it was still "agent" in
+  Android says. The agent is   in the 19 keys where it was still "agent" in
   English (the system files' notes, the routines, *About the agent*, the avatar's failure line) or
-  代理, which in Settings → Network means the proxy; the relay is 中继 / 中繼 in the seven
-  relay sentences that said 中转 / 中轉 (*The relay says*, *Paused by the relay*, the paused
+ , which in Settings → Network means the proxy; the relay is  /  in the seven
+  relay sentences that said  /  (*The relay says*, *Paused by the relay*, the paused
   sign-ups, allowance, sync and hub, the private relay); *Hands* stays in English as Android's
-  设置 → Hands does; the chat tab has its own key, `tab.chat` (聊天, Android's `nm_tab_chat`),
-  instead of upstream's *Chat* (闲聊), and the account page's usage rows say 对话 for the chat
+   → Hands does; the chat tab has its own key, `tab.chat`,
+  instead of upstreams usage rows say  for the chat
   kind (`models.slot.chat`, Android's `nm_usage_kind_chat`). `NanoMuseCopyTests` fails on
-  "agent" in a Chinese value, 代理 where the English says agent, 中转 and 双手.
+  "agent" in a Chinese value,  where the English says agent,  and.
 - **The third audit: tasks from other devices (1.0.x)** (`NanoMuseHubTasks.swift`,
   `MinisTests/NanoMuseHubTasksTests.swift`): a `task` frame carries the asking device's screen
   language (`language`, [hub.md](hub.md)); the iPhone's Muse is now told to answer in it, where
@@ -648,7 +647,7 @@ Ours, in `NanoMuse/`:
   routine the person set up began its turn the same way. The feed's conversation is the agent's
   working room now and the lists leave it out (`shows` says no to it, as it does to another
   account's chats); the posts arrive in the Feed room as before. A routine's turn is marked as the
-  routine's: the row that carried its prompt is one quiet line, *Routine · 〈label〉 · 08:00*
+  routine's: the row that carried its prompt is one quiet line, *Routine ·  · 08:00*
   (`NanoMuseRoutineWakeRow`, kept under the row's id so it stays after a reload), and the model
   gets a one-turn addendum (`NanoMuseSessionAddenda`) saying the person did not type it, so it
   opens with the result instead of thanking them for asking. The prompt's text is unchanged, so
@@ -708,8 +707,8 @@ for rclone.
 
 ```bash
 git clone --recurse-submodules https://github.com/shaikfareed22/corein2026.git && cd corein/android
-./deps/build_lame.sh && ./deps/build_ffmpeg.sh          # FFmpeg links against LAME: this order
-./deps/build_ish.sh && ./deps/prepare_alpine_rootfs.sh  # the sandbox kernel and its rootfs
+./deps/build_lame.sh &&./deps/build_ffmpeg.sh          # FFmpeg links against LAME: this order
+./deps/build_ish.sh &&./deps/prepare_alpine_rootfs.sh  # the sandbox kernel and its rootfs
 ./deps/build_rclone_ios.sh                              # Rclone.xcframework
 cp src/ios/Configs/ProviderCustomization.xcconfig.example src/ios/Configs/ProviderCustomization.xcconfig
 open src/ios/Minis.xcodeproj

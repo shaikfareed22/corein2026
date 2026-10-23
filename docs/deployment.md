@@ -7,7 +7,7 @@ This page is about the Python runtime (the web app's agent) in Docker. Running t
 ## Docker
 
 ```bash
-cp .env.example .env && $EDITOR .env      # API key
+cp.env.example.env && $EDITOR.env      # API key
 nanomuse config init                      # or copy config/config.example.toml to config/config.toml
 docker compose up -d app                  # the phone app on http://<host>:8787
 docker compose logs app                   # shows the URL with the access token
@@ -26,7 +26,7 @@ The image runs as a non-root user with all capabilities dropped, and it carries 
 Without cloning, the published image (linux/amd64 and linux/arm64, so a Raspberry Pi or an Apple-silicon Mac works):
 
 ```bash
-docker run -d --name muse -p 8787:8787 --env-file .env \
+docker run -d --name muse -p 8787:8787 --env-file.env \
   -v nanomuse-data:/data -v "$PWD/workspace:/workspace" \
   ghcr.io/nano-muse/nanomuse:latest
 docker logs muse                          # the URL with the access token
@@ -39,9 +39,9 @@ docker logs muse                          # the URL with the access token
 Building by hand:
 
 ```bash
-docker build -t nanomuse .
-docker build --build-arg WITH_BROWSER=1 -t nanomuse:browser .   # with Chromium
-docker run -d --name muse -p 8787:8787 --env-file .env \
+docker build -t nanomuse.
+docker build --build-arg WITH_BROWSER=1 -t nanomuse:browser.   # with Chromium
+docker run -d --name muse -p 8787:8787 --env-file.env \
   -v nanomuse-data:/data -v "$PWD/workspace:/workspace" \
   -v "$PWD/config/config.toml:/app/config/config.toml:ro" nanomuse
 ```

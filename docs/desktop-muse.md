@@ -174,11 +174,11 @@ with the `face` map) and pulls it back under `faces/<id>/`. The prompts are the
 runtime's, so a face drawn on the phone or here comes out alike.
 
 **A new look from the chat** is the phone's `AvatarFlow`, word for word: "change your
-avatar to an orange cat with a scarf", "把你的形象换成一只橘猫", "become a robot" (the
+avatar to an orange cat with a scarf", "become a robot" (the
 same regular expressions, `src/avatar-flow.ts`) are caught before they are sent; a card
 above the composer says what four pictures will cost against today's allowance (the
 phone's `FaceCostDialog`), *Draw* brings the four candidates up numbered in a 2×2 grid,
-and you pick by clicking or in words ("the second one", "第三个", "regenerate"), then
+and you pick by clicking or in words ("the second one", "regenerate"), then
 *Finalizing* draws the other poses, the look goes on for every device, *Share avatar*
 offers the card. Once it is on, the host leaves the phone's memory line (`- <date>: the
 user changed my avatar to "…"`) and asks the agent to say so in one sentence and write
@@ -394,7 +394,7 @@ page it opened, named for the page you came from; a pick in the sidebar starts f
     any chat or hands choice that pointed at it. The custom endpoints are one row each (#294):
     a saved endpoint reads its name over its host and has *Rename* beside *Change key* and
     *Remove*; the *Add an endpoint* row under them adds another with a key of its own
-    (`NANOMUSE_KEY_CUSTOM`, `NANOMUSE_KEY_CUSTOM_2`, ...) without touching the others, and
+    (`NANOMUSE_KEY_CUSTOM`, `NANOMUSE_KEY_CUSTOM_2`,...) without touching the others, and
     each stands as a group of its own in the Models page's pickers. An endpoint saved before
     this stays the first row. The ChatGPT row runs the bundled runtime's
     sign-in: *Sign in* opens OpenAI's page, the row waits with *Cancel* (and *Open the
@@ -513,7 +513,7 @@ page it opened, named for the page you came from; a pick in the sidebar starts f
 - **Data controls**: *We take your privacy seriously* with the privacy policy, *Sync
   conversations between my devices* (the account's switch, with how many chats and
   messages the relay keeps and *Delete synced conversations*) and under it *Also sync
-  side chats* (同时同步旁聊; this computer's own switch, off by default; *Off: side
+  side chats* (; this computer's own switch, off by default; *Off: side
   chats stay on this device. On: this device's side chats go to the account and the
   other devices' side chats come here*; see [every-device.md](every-device.md)), *Help
   improve corein's AI models* (the relay's switch, with how many turns it kept and
@@ -581,7 +581,7 @@ serves `/nanomuse/rooms/*` and streams changes to the browser half:
   menu still creates a goal from your own words; *Check in* runs a check now.
 - **Library**: shelves (All, Documents, Web; Media: Images, Videos, Podcasts; System
   files at the foot), *Select*, *+ Create…* (a brief → a chat that writes the file under
-  `~/corein/Library`, `构件` in Chinese, with the workspace-write preset), *Recent*
+  `~/corein/Library`, `` in Chinese, with the workspace-write preset), *Recent*
   and a card grid; a viewer and a Markdown editor for text (restoring IDENTITY.md or SOUL.md
   to the stock text asks first), pictures and media inline, *Open* / *Show in folder* for the rest. Everything the agent delivers with `present`
   lands here, and `library_add` lists a file without delivering it.

@@ -67,7 +67,7 @@ on lets every device of the account through without the question.
 ## How a task travels
 
 ```
-you, on the phone ──"编译一下项目，把日志发我"──▶ phone's Muse
+you, on the phone ────▶ phone's Muse
                                                   │ delegate("desk", …)
                                                   ▼  hub: call task
                                          desk's Muse, in a side chat
@@ -110,7 +110,7 @@ device they were made on, and a synced message shows their names and sizes.
 Since 0.1.37 it is **one thread**. The main chat is one conversation across
 all devices: what you say to the muse on the phone is in the main chat on the
 computer and in the web app, in time order among what was said there, as a
-read-only bubble with *From Pixel 8* (来自 Pixel 8) under it; and the muse,
+read-only bubble with *From Pixel 8*  under it; and the muse,
 wherever it answers next, has read it. A side chat from another device is a
 chat on this one from the moment it is pulled, with its title, and continues
 here under the same conversation; nothing in the chat list says where a chat
@@ -128,14 +128,14 @@ studio takes it off every device.
 
 Since 0.1.38 it is **main first**. Only the main conversation travels unless a
 device asks for more: side chats stay on the device that made them, and no other
-device's side chats arrive. *Also sync side chats* (同时同步旁聊), under the sync
+device's side chats arrive. *Also sync side chats*, under the sync
 switch in *Data controls*, is per device and off by default. *Off: side chats
 stay on this device. On: this device's side chats go to the account and the
 other devices' side chats come here.* Turning it on sends this device's side
 chats up and pulls the others' down once from the start. A fresh sign-in pulls
 the newest 300 messages first so a long history is readable at once instead of
 arriving oldest-first. While another device is answering, the chat shows *kwai
-is working…* (kwai 正在处理…) under the last message, a presence note the relay
+is working…*  under the last message, a presence note the relay
 passes on and never stores; it goes when the reply lands, when the device says
 it is done, or after ten minutes. A message that arrived from another device is
 never shown as interrupted and never offers *Continue*, since only the device that
@@ -325,7 +325,7 @@ window* / *Whole screen*; `nanomuse/computer/mac_window.py`):
 - clicks, drags, scrolls and keys are delivered to the application's process
   (`CGEventPostToPid`), not to the system cursor, so the person keeps the mouse
   and can work in another window meanwhile; text goes in as unicode keyboard
-  events, so 中文 and emoji arrive as typed; when Accessibility is granted, a
+  events, so Chinese and emoji arrive as typed; when Accessibility is granted, a
   button under the point is pressed through the accessibility tree (`AXPress`)
   rather than by a synthetic click;
 - the agent names the window with `computer_act` → `computer_target` (`app`:
@@ -434,7 +434,7 @@ provider or a phone.
 #    on the command line) if you want the Cloud model to answer.
 mkdir -p /tmp/nm-dev/cloud
 CLOUD_DB=/tmp/nm-dev/cloud/cloud.db CODE_SENDER=log PUBLIC_BASE=http://127.0.0.1:8790 \
-  PYTHONPATH=cloud .venv/bin/python -m nanomuse_cloud --host 127.0.0.1 --port 8790 \
+  PYTHONPATH=cloud.venv/bin/python -m nanomuse_cloud --host 127.0.0.1 --port 8790 \
   > /tmp/nm-dev/cloud/relay.log 2>&1 &
 
 # 2. two runtimes, each with its own data dir, workspace and port
@@ -445,9 +445,9 @@ for d in a b; do
 done
 # ambient provider keys would be picked up as the model — clear them for a clean first run
 env -u OPENAI_API_KEY -u DASHSCOPE_API_KEY -u ANTHROPIC_API_KEY -u OPENAI_BASE_URL \
-  .venv/bin/nanomuse serve -c /tmp/nm-dev/a/config.toml --no-auth --no-qr --port 8799 > /tmp/nm-dev/a/serve.log 2>&1 &
+ .venv/bin/nanomuse serve -c /tmp/nm-dev/a/config.toml --no-auth --no-qr --port 8799 > /tmp/nm-dev/a/serve.log 2>&1 &
 env -u OPENAI_API_KEY -u DASHSCOPE_API_KEY -u ANTHROPIC_API_KEY -u OPENAI_BASE_URL \
-  .venv/bin/nanomuse serve -c /tmp/nm-dev/b/config.toml --no-auth --no-qr --port 8798 > /tmp/nm-dev/b/serve.log 2>&1 &
+ .venv/bin/nanomuse serve -c /tmp/nm-dev/b/config.toml --no-auth --no-qr --port 8798 > /tmp/nm-dev/b/serve.log 2>&1 &
 
 # 3. sign both in with the same e-mail in the first run (the code is in relay.log:
 #    grep -i code /tmp/nm-dev/cloud/relay.log), pick "Use the Cloud model" on each.

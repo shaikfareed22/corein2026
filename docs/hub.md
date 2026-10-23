@@ -26,9 +26,9 @@ on the phone shows which account the phone uses.
 
 On the phone, in any chat:
 
-- "在我 Mac 上列一下下载文件夹": `nanomuse-pc ls ~/Downloads --on mac`
-- "让电脑把项目编译一遍，把日志发给我": `nanomuse-pc task "…" --on desk`
-- "电脑截个图给我看": `nanomuse-pc screen --on desk`
+-: `nanomuse-pc ls ~/Downloads --on mac`
+-: `nanomuse-pc task "…" --on desk`
+-: `nanomuse-pc screen --on desk`
 
 On the computer, in corein Desktop (or `nanomuse chat` in a terminal):
 
@@ -282,7 +282,7 @@ computer's own hands) is in [every-device.md](every-device.md).
   refused (`no_screen`), the shell and files actions with `not_supported`. A step of a
   `task` that needs approval is not sent back as an `event`: with corein in front the
   phone shows its own card, in the background the step is declined and the answer says so.
-  The other way round, a `task` the phone sends (`@〈device〉`,
+  The other way round, a `task` the phone sends (`@`,
   [`NanoMuseDeviceMention.swift`](../android/src/ios/NanoMuse/NanoMuseDeviceMention.swift))
   has its `approval` events answered on the phone's card
   ([`NanoMuseRemoteApproval.swift`](../android/src/ios/NanoMuse/NanoMuseRemoteApproval.swift))

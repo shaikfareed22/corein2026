@@ -19,7 +19,7 @@ devices* keeps the phone connected so the others can ask it for things (a quiet
 notification shows while it is on); *Let other devices operate this phone* decides whether
 they may run a shell command, read files, take a screenshot or hand over a task here, and
 off, the phone still sees and drives the others; *This phone's name* is what you will say
-out loud, so make it short: "pixel", "小米". The list under it is every device of the
+out loud, so make it short: "pixel", "Xiaomi". The list under it is every device of the
 account, online or when it was last seen.
 
 The iPhone takes part with what iOS allows: it answers `info`, `open`, `notify` and `task`;
@@ -48,8 +48,7 @@ the same console at its `/app/`.
 
 ## 4. Try it
 
-On the phone: 「在 mac 上列一下下载文件夹」 「让 desk 把 ~/proj 编译一遍，把最后二十行日志发我」
-「电脑截个图给我看」 「给电脑发个通知：该睡了」
+On the phone:
 
 On the computer: "on the phone, take a screenshot", "tell pixel's Muse to read me the last
 notification", "send pixel a notification: build finished".
@@ -73,7 +72,7 @@ Signed in, the main conversation follows you to your other devices, and the side
 once *Also sync side chats* is on; *Data controls* on each device holds both switches
 ([sync.md](sync.md)). The agent's name and face
 are the account's. A connector signed in on one device shows on the others as *Connected
-on 〈device〉*, one tap to sign in there too ([hub.md](hub.md)). Models are chosen per device:
+on *, one tap to sign in there too ([hub.md](hub.md)). Models are chosen per device:
 each one's *Settings → Models* is its own.
 
 ## 7. Your own relay

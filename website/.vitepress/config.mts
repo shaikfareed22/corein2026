@@ -192,9 +192,10 @@ export default defineConfig({
   lang: 'en',
   base,
   srcDir: '../docs',
-  srcExclude: ['tasks/**', 'archive/**', 'traces/**', 'briefs/**', 'releases/**', 'readme/**', ...notPages],
+  srcExclude: ['tasks/**', 'archive/**', 'traces/**', 'briefs/**', 'releases/**', 'readme/**', 'zh/**', 'fork.md', ...notPages],
   cleanUrls: true,
   lastUpdated: false,
+  appearance: 'dark',
   // One site, two languages. `root` is English at /, `zh` is 简体中文 at /zh/ with the same
   // file names under docs/zh/. Nav, sidebar, search, footer and the edit link are per
   // locale; the language menu in the nav is VitePress's own.
@@ -207,10 +208,8 @@ export default defineConfig({
         // Home and Try it are the project site and the demo, the same two the homepage's bar has.
         nav: [
           { text: 'Home', link: 'https://fomo.corein.in/' },
-          { text: 'Try it', link: 'https://demo.fomo.corein.in/' },
           { text: 'Get started', link: '/android' },
           { text: 'Run it yourself', link: '/self-hosting' },
-          { text: 'Maintaining the fork', link: '/fork' },
           { text: 'Roadmap', link: '/roadmap' },
         ],
         sidebar: [
@@ -227,52 +226,6 @@ export default defineConfig({
           copyright: 'The corein contributors',
         },
         langMenuLabel: 'Change language',
-      },
-    },
-    zh: {
-      label: '简体中文',
-      lang: 'zh-Hans',
-      link: '/zh/',
-      title: 'corein',
-      description: '开源的个人智能体，面向你的每一台设备。',
-      themeConfig: {
-        siteTitle: 'corein 文档',
-        nav: [
-          { text: '首页', link: 'https://fomo.corein.in/' },
-          { text: '试一试', link: 'https://demo.fomo.corein.in/' },
-          { text: '上手', link: '/zh/android' },
-          { text: '自己部署', link: '/zh/self-hosting' },
-          { text: '路线图', link: '/zh/roadmap' },
-        ],
-        sidebar: [
-          { text: '上手', items: zhGetStarted },
-          { text: '使用', items: zhUseIt },
-          { text: '自己部署', items: zhRunIt },
-          { text: '理解它', collapsed: true, items: zhUnderstandIt },
-          { text: '参与', collapsed: true, items: zhContribute },
-        ],
-        outline: { level: [2, 3], label: '本页目录' },
-        docFooter: { prev: '上一页', next: '下一页' },
-        editLink: { pattern: `${REPO}/edit/main/docs/:path`, text: '在 GitHub 上编辑此页' },
-        lastUpdatedText: '最后更新',
-        darkModeSwitchLabel: '外观',
-        lightModeSwitchTitle: '切换到浅色',
-        darkModeSwitchTitle: '切换到深色',
-        sidebarMenuLabel: '目录',
-        returnToTopLabel: '回到顶部',
-        langMenuLabel: '切换语言',
-        skipToContentLabel: '跳到正文',
-        notFound: {
-          title: '没有这一页',
-          quote: '地址可能打错了，或者这一页已经搬走。',
-          linkLabel: '回到文档首页',
-          linkText: '回到文档首页',
-          code: '404',
-        },
-        footer: {
-          message: 'GPL-3.0-or-later。corein 是独立的社区项目，与 Meta 无关。',
-          copyright: 'corein 贡献者',
-        },
       },
     },
   },
@@ -333,9 +286,6 @@ export default defineConfig({
   // star count instead (theme/GitHubStars.vue, the `nav-bar-content-after` slot).
   themeConfig: {
     logo: '/corein-icon.svg',
-    socialLinks: [
-      { icon: 'discord', link: 'https://discord.gg/bkTySmm28X' },
-    ],
     search: {
       provider: 'local',
       options: {

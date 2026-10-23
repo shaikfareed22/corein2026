@@ -1,9 +1,9 @@
 # Sentinel
 
-Meta describes Muse's safety model as a separate *Sentinel* agent that sits between the model and its tools, approves sensitive actions, keeps credentials out of the model's reach and records what happened. corein implements the same split. The agent never executes a tool itself; it hands the call to `Sentinel.guard()`:
+Meta describes Muse's safety model as a separate *Sentinel* agent that sits between the model and its tools, approves sensitive actions, keeps credentials out of the model's reach and records what happened. corein implements the same split. The agent never executes a tool itself; it hands the call to `Sentinel.guard`:
 
 ```
-agent ──► Sentinel.guard() ──► policy ──► approval (if needed) ──► vault.resolve ──► execute
+agent ──► Sentinel.guard ──► policy ──► approval (if needed) ──► vault.resolve ──► execute
 agent ◄── redact(result)   ◄── taint bookkeeping ◄─────────────────────────────────────┘
 ```
 
@@ -19,7 +19,7 @@ Every tool declares a static `risk`:
 | `moderate` | reaches outside or changes state | `web_fetch`, `python_execute`, `read_emails`, `browser`, `forget`, `phone_act`, `goals`, `reminders` and `triggers` (create: standing work the model takes up later on its own, so `strict` mode asks before it is set up) |
 | `sensitive` | hard to undo or externally visible | `shell`, `send_email`, `skills` (save, remove; a skill is standing instructions the model will follow later, so writing one always asks) |
 
-A tool can raise the level for a particular call in `assess()`: `shell` attaches a warning on patterns such as `rm -rf`, `sudo`, `curl | sh`; `python_execute` is `moderate` for plain computation and files in the workspace (inside a working sandbox; without one, on macOS, Windows or a Linux box without bubblewrap, every script is `sensitive`, since the static check is then the only wall) and `sensitive` with the reason on the card when the code reaches the network, starts other programs, reads environment variables, deletes files or touches paths outside the workspace; `web_fetch` refuses private and loopback addresses outright, on every redirect hop; `phone_act` is `sensitive` with a warning when the `label` of a tap (the operator's words for what is under the finger) contains 确认支付, 转账, 提交订单, 发送, 删除 or another of `[gui] sensitive_words`, or when a step types and submits at once; a tap with no label carries a warning of its own ([gui.md](gui.md)). Tools also declare `reads_private_data` (taints the conversation) and `egress` with an optional `egress_target` (the host a call sends data to; unknown for `shell` and `python_execute`; the app's id for the phone), used by taint tracking.
+A tool can raise the level for a particular call in `assess`: `shell` attaches a warning on patterns such as `rm -rf`, `sudo`, `curl | sh`; `python_execute` is `moderate` for plain computation and files in the workspace (inside a working sandbox; without one, on macOS, Windows or a Linux box without bubblewrap, every script is `sensitive`, since the static check is then the only wall) and `sensitive` with the reason on the card when the code reaches the network, starts other programs, reads environment variables, deletes files or touches paths outside the workspace; `web_fetch` refuses private and loopback addresses outright, on every redirect hop; `phone_act` is `sensitive` with a warning when the `label` of a tap (the operator's words for what is under the finger) contains Confirm payment, Transfer, Submit order, Send, Delete or another of `[gui] sensitive_words`, or when a step types and submits at once; a tap with no label carries a warning of its own ([gui.md](gui.md)). Tools also declare `reads_private_data` (taints the conversation) and `egress` with an optional `egress_target` (the host a call sends data to; unknown for `shell` and `python_execute`; the app's id for the phone), used by taint tracking.
 
 Subprocesses started by `shell` and `python_execute` get a scrubbed environment: variables whose names look like credentials (`*KEY*`, `*TOKEN*`, `*SECRET*`, `*PASSW*`, `*CREDENTIAL*`, `*AUTH*`, `*COOKIE*`, `*SESSION*`), everything under `NANOMUSE_`, `AWS_`, `AZURE_`, `GOOGLE_`, `GH_`, `GITHUB_`, `NPM_`, plus `SSH_AUTH_SOCK`, are removed before the child starts, so code the model wrote cannot read the model's own API key or the vault key out of `os.environ`. Neither tool takes `{{vault:NAME}}` placeholders: a command that carries one is refused with the reason instead of running with the literal text; the vault's values reach only the connectors configured with them. The coding CLIs (`coding_tool`: Codex, Claude Code, Cursor) get the same scrubbed environment plus their own account variables (`OPENAI_*`/`CODEX_*`, `ANTHROPIC_*`/`CLAUDE_*` with the cloud credentials when `CLAUDE_CODE_USE_BEDROCK`/`_VERTEX` says so, `CURSOR_*`), nothing else of the runtime's.
 
@@ -138,7 +138,7 @@ Report anything that contradicts the "covered" list; see [SECURITY.md](../SECURI
 ## Writing a safe tool
 
 - Set an honest `risk`; when in doubt, `moderate`.
-- Set `reads_private_data = True` if the output can contain the user's private data, and `egress = True` (with `egress_target` from `assess()` when the host is known) if the call sends data anywhere.
-- Override `assess()` to raise the level for dangerous argument patterns and to produce a short human-readable `summary`; it is what the approval card shows.
+- Set `reads_private_data = True` if the output can contain the user's private data, and `egress = True` (with `egress_target` from `assess` when the host is known) if the call sends data anywhere.
+- Override `assess` to raise the level for dangerous argument patterns and to produce a short human-readable `summary`; it is what the approval card shows.
 - Never read secrets yourself. A tool that genuinely needs one opts in with `accepts_secrets = True` and lets Sentinel resolve `{{vault:NAME}}` placeholders; the built-in tools do not.
 - Return errors as `ToolResult(error=...)` rather than raising; `safe_execute` catches the rest.

@@ -9,24 +9,17 @@ hero:
       text: Install
       link: /android
     - theme: alt
-      text: Try it in the browser
-      link: https://demo.fomo.corein.in/
-    - theme: alt
       text: Run it yourself
       link: /self-hosting
     - theme: alt
       text: GitHub
       link: https://github.com/shaikfareed22/corein2026
-    - theme: alt
-      text: Paper
-      link: https://arxiv.org/abs/2610.08699
 ---
 
 ## Install
 
 | | |
 |---|---|
-| **Browser** | [demo.fomo.corein.in](https://demo.fomo.corein.in/): a corein on a simulated phone, after a sign-in, with lines to try beside it in English and in Chinese. A demo; the apps below are the real thing |
 | **Android** 8.0+, arm64 | [corein-1.1.0-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-1.1.0-arm64.apk) · [how to install](/android) |
 | **iPhone / iPad** | [TestFlight](https://testflight.apple.com/join/ZHexbDqc): a beta that passed Apple's beta review; the link installs it · [iOS](/ios) |
 | **macOS** 12+ | [Apple Silicon](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-mac-x64.dmg) · [the desktop app](/desktop) |

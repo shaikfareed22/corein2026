@@ -51,7 +51,7 @@ An app update carries a new `rootfs.tar.xz` with a new version stamp; the next s
 
 ## How it is started
 
-`LocalRuntime.command()` builds the PRoot command line:
+`LocalRuntime.command` builds the PRoot command line:
 
 ```
 libproot.so -0 --kill-on-exit --link2symlink
@@ -87,7 +87,7 @@ And the environment (`nanomuse-serve` in the rootfs reads it):
 
 With the screen off, Doze freezes the app's process between maintenance windows, and a Python scheduler that sleeps until 07:30 does not know it slept through 07:30. So the two sides share the schedule instead of both keeping time:
 
-- The Python scheduler naps on an `asyncio.Event`, not a fixed timer, and knows the earliest moment something is due, `Service.next_wake_at()`: the next reminder, the next goal check-in (pushed past the quiet hours), the next background pass when the agent is proactive. It publishes the moment as a `schedule` event on `/ws` whenever it changes and reports it as `next_wake_at` in `GET /api/upcoming`.
+- The Python scheduler naps on an `asyncio.Event`, not a fixed timer, and knows the earliest moment something is due, `Service.next_wake_at`: the next reminder, the next goal check-in (pushed past the quiet hours), the next background pass when the agent is proactive. It publishes the moment as a `schedule` event on `/ws` whenever it changes and reports it as `next_wake_at` in `GET /api/upcoming`.
 - `RuntimeService` reads it (from `/api/upcoming` after the connection comes up, then from each `schedule` event) and sets one alarm for it (`WakeAlarms`): `setExactAndAllowWhileIdle` when the app may schedule exact alarms, `setAndAllowWhileIdle` otherwise. Android 14 denies `SCHEDULE_EXACT_ALARM` to a fresh install, so the inexact path is the common one until the user grants it under *Settings → Keep it running*; inexact means within Android's batching window, a few minutes late at most, never early.
 - When the alarm fires, `WakeReceiver` pokes the service: it takes the wake lock for up to 45 s, calls `POST /api/tick`, and re-arms for whatever the runtime announces next. `tick` sets the event, the scheduler wakes, sees what is due, runs it, and the `status` events from the run keep the wake lock held for as long as the task takes, exactly as when the user started it.
 
@@ -95,15 +95,15 @@ Nothing is due → no alarm, and the runtime idles until the WebView or a notifi
 
 ## The Python side on a phone
 
-`nanomuse.runtime.device()` reads `NANOMUSE_DEVICE*`. With it:
+`nanomuse.runtime.device` reads `NANOMUSE_DEVICE*`. With it:
 
-- The sandbox describes itself honestly: there is no bubblewrap under PRoot, and the app's own root file system *is* the box. `Sandbox.describe()` says so in the system prompt, and the shell runs directly.
+- The sandbox describes itself honestly: there is no bubblewrap under PRoot, and the app's own root file system *is* the box. `Sandbox.describe` says so in the system prompt, and the shell runs directly.
 - `nanomuse serve` adds the app's device capabilities as the MCP server `device` when `NANOMUSE_HOST_URL` is set: the Kotlin side runs a small MCP server on `127.0.0.1` and the tools appear as `device__<name>` (`device__calendar_list`, `device__clipboard_read` …), each with its own Sentinel default. The tools, their permissions and what they ask the user: [device.md](device.md).
 - **The CLI bridge.** Every `shell` and `python_execute` call gets a one-command token (`NANOMUSE_BRIDGE`, `NANOMUSE_BRIDGE_TOKEN`), added after the sandbox has scrubbed all `NANOMUSE_*` from the environment, and revoked when the command ends (30 s of grace for backgrounded children). Three small stdlib-only CLIs in the rootfs use it to call back into the server:
 
   | CLI | Does |
   | --- | --- |
-  | `nanomuse-device <capability> [action] [k=v …]` | A device tool: `clipboard read`, `calendar list from=2026-09-24`, `alarm set hour=7 minute=30 message=Train`, `contacts search query=张`, `notify title=Done body=Booked`, `location`, `photo pick`; `nanomuse-device list` shows what this phone has ([device.md](device.md)) |
+  | `nanomuse-device <capability> [action] [k=v …]` | A device tool: `clipboard read`, `calendar list from=2026-09-24`, `alarm set hour=7 minute=30 message=Train`, `contacts search query=`, `notify title=Done body=Booked`, `location`, `photo pick`; `nanomuse-device list` shows what this phone has ([device.md](device.md)) |
   | `nanomuse-browser <action> [k=v …]` | The `browser` tool: `navigate` / `extract` / `click` / `type` / `key` / `scroll` / `back` / `wait` / `screenshot` / `fetch URL [--post BODY]` (with the browser's cookies) / `profile mobile\|desktop` / `close` ([browser.md](browser.md)) |
   | `nanomuse-open <url>` | Opens the page in the in-app take-over sheet; the rootfs sets it as `BROWSER` |
 
@@ -124,7 +124,7 @@ Nothing is due → no alarm, and the runtime idles until the WebView or a notifi
 
 ```bash
 # the root file system (Docker with QEMU for arm64: docker run --privileged --rm tonistiigi/binfmt --install arm64)
-scripts/rootfs/build.sh                # → dist/rootfs/nanomuse-rootfs-<ver>-aarch64.tar.xz + .json,
+scripts/rootfs/build.sh                # → dist/rootfs/nanomuse-rootfs-<ver>-aarch64.tar.xz +.json,
                                        #   copied to android/app/src/local/assets/rootfs.{tar.xz,json}
 APK_MIRROR=https://mirrors.aliyun.com PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple \
   scripts/rootfs/build.sh              # the same, with mirrors for the build machine only
@@ -135,7 +135,7 @@ ANDROID_NDK_HOME=~/Android/Sdk/ndk/27.2.12479018 android/native/build-proot.sh
                                        # → android/app/src/local/jniLibs/arm64-v8a/libproot{,-loader}.so
 
 # the app
-cd android && ./gradlew assembleLocalDebug assembleConnectDebug   # app/build/outputs/apk/{local,connect}/debug/
+cd android &&./gradlew assembleLocalDebug assembleConnectDebug   # app/build/outputs/apk/{local,connect}/debug/
 ```
 
 `scripts/rootfs/Dockerfile` is the whole recipe: a wheel stage builds `nanomuse` from the checkout, the rootfs stage installs Alpine packages, Python and the wheel into `/opt/nanomuse`, Node when asked, the two helper scripts (`nanomuse-serve`, `nanomuse-mirror`), then trims tests, docs and caches. `/etc/nanomuse-rootfs` stamps what went in. The size gate (`ROOTFS_MAX_MB`, 80) fails the build when the compressed tar outgrows the budget.
@@ -152,7 +152,7 @@ In the Python line's CI a `rootfs.yml` workflow built both and put them into the
 | `…/runtime/TarUnpacker.kt` | A tar reader for the root file system: ustar / PAX / GNU long names, symlinks, hard links, modes; refuses entries that would escape |
 | `…/runtime/RuntimeService.kt` | The foreground service: start, health, restart with backoff, `/ws` → notification text and wake lock, the Stop action |
 | `…/Notifier.kt` | Events → notifications, shared with `NotifyService` (remote mode) |
-| `nanomuse/runtime.py` | `device()`: the phone as the Python side sees it; the `device` MCP server |
+| `nanomuse/runtime.py` | `device`: the phone as the Python side sees it; the `device` MCP server |
 | `nanomuse/bridge/` | Tokens, the server side (`/api/bridge/*`), the three CLIs |
 | `scripts/rootfs/` | Dockerfile, `build.sh`, the two scripts inside the rootfs |
 | `android/native/build-proot.sh` | PRoot + talloc with the NDK |

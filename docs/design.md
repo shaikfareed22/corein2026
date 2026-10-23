@@ -92,7 +92,7 @@ corein opens by asking what to call it, and the name is then everywhere: the hea
 
 ## Choices made on purpose
 
-- **The phone's screen is visible.** corein's phone steps are rows in the chat (`phone_act: tap "发送" …`) and the finger overlay shows on the phone itself, because a user should be able to see what a hand on their phone is doing.
+- **The phone's screen is visible.** corein's phone steps are rows in the chat (`phone_act: tap "Send" …`) and the finger overlay shows on the phone itself, because a user should be able to see what a hand on their phone is doing.
 - **A brake you can reach.** While corein operates the phone, a capsule sits over the app the whole time: the agent's face, the step in progress, and one red **Stop**. One tap, no menu; it ends the step in flight and refuses the next ones, and the agent asks instead of carrying on. A hand on your own phone must be stoppable by the hand's owner. The screen is also the *last* rung: a skill, a fetch or the browser goes first, and the Activity view shows how often the screen was needed.
 - **Approvals name the scope.** A yes / no is not enough; corein's card offers *once*, *this conversation*, *always* (the same middle scope on the phone, the web app and the terminal) and lists the grants under *Permissions*, each with a revoke button.
 - **Everything has a plain-text form.** The same agent runs in a terminal (`nanomuse chat`) with the same approvals, and every screen is backed by a documented REST + WebSocket API, so another front-end can drive it.

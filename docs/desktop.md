@@ -359,7 +359,7 @@ and later (`SCShareableContent` → the main display → `SCContentFilter` →
 `SCScreenshotManager.captureImage`, at the display's pixel size with the cursor in it), with
 `CGDisplayCreateImage` on 12 and 13 (not Chromium's `desktopCapturer`, whose black and
 absent frames were the 0.1.36 trouble), and moves the mouse and types with `CGEvent` (text
-of any script goes in as the characters themselves, so 中文 types without the clipboard).
+of any script goes in as the characters themselves, so Chinese types without the clipboard).
 Why ScreenCaptureKit: on macOS 26 and 27 `CGDisplayCreateImage` returns nothing even with
 Screen Recording granted, which 0.1.39 logged as `helper screenshot failed (no screenshot:
 noImage)` and then covered with a `desktopCapturer` frame that was black or stale. The app
@@ -531,7 +531,7 @@ helper, on the pre-0.1.38 path.
 
 - **The `.deb` is the one to prefer** (Debian, Ubuntu and their derivatives): it installs
   `/opt/corein/nanomuse-desktop`, the icon set and the desktop entry, and the launcher
-  finds it. `sudo apt install ./corein-Desktop-<version>-linux-x64.deb`.
+  finds it. `sudo apt install./corein-Desktop-<version>-linux-x64.deb`.
 - **The AppImage needs FUSE.** It mounts itself at start; when the machine has no
   `libfuse2`, or `fusermount` is not permitted (containers, some corporate images; the log
   says `fusermount: mount failed: Operation not permitted` / `Cannot mount AppImage, please

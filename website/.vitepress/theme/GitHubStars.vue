@@ -8,9 +8,9 @@
 import { onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
 
-const REPO = 'https://github.com/nano-muse/nanoMuse'
-const API = 'https://api.github.com/repos/nano-muse/nanoMuse'
-const KEY = 'nm-stars'
+const REPO = 'https://github.com/shaikfareed22/corein2026'
+const API = 'https://api.github.com/repos/shaikfareed22/corein2026'
+const KEY = 'corein-stars'
 const TTL = 3600000
 
 const { lang } = useData()

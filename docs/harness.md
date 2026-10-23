@@ -116,7 +116,7 @@ the first run through to *Start*; `devices` and `device_files` on Laptop B; `dev
 with the approval card and the result; `delegate` with Laptop B's approval requests
 relayed and answered (allow and reject) and *Stop* ending it; a `notify` from another
 device shown as a toast; the name and emoji set on Laptop B worn by the desktop's brand
-mark and hero within seconds, and "我叫小蓝" when asked.
+mark and hero within seconds, and when asked.
 
 The third slice makes the desktop answer the phone, so Reach runs both ways:
 
@@ -133,8 +133,8 @@ The third slice makes the desktop answer the phone, so Reach runs both ways:
   so the account's device list updates at once. The contract is unchanged: the asking
   device judges a command before sending (Sentinel on the phone and the runtime, the
   approval card here); the target does not ask again.
-- **Every call shows.** What another device did here appears as a toast ("Laptop B 在
-  这里运行了：uname -a", "…看了一眼这里的屏幕") after it actually happened; a refused
+- **Every call shows.** What another device did here appears as a toast ("Laptop B 
+   -a") after it actually happened; a refused
   path is the asker's error to see, not a toast here.
 - **Stop reaches the other side.** Pressing *Stop* on a `delegate` now sends the
   runtime's `stop {call}` for that very call, so the thread it opened for us ends too
@@ -230,7 +230,7 @@ screen in [desktop-muse.md](desktop-muse.md):
   workspace folder, *Change* through the native picker), *Your other devices* → *ready*.
 - **The desktop shell's bridge.** `harness/desktop/src/preload.ts` exposes
   `window.nanomuseHarness` to the page (sandboxed, IPC to the main process):
-  `permissions()`, `requestPermission(kind)` (`systemPreferences`), the System Settings
+  `permissions`, `requestPermission(kind)` (`systemPreferences`), the System Settings
   panes, `openExternal`, `keepAwake` (a power-save blocker while a session runs),
   `setTheme` (the window's base colour follows the page); it marks the document with the
   platform so the bundle adds the macOS clearance and drag handles, since the shell's window

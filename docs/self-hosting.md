@@ -10,7 +10,7 @@ corein is one agent on your own devices, and nothing in it has to go through a s
 
 ## 1. No server, your own key
 
-The free allowance on the community relay runs out. When it does, or before, put a key of your own in the app: Alibaba Model Studio (百炼) inside mainland China, OpenRouter or any OpenAI-compatible endpoint elsewhere. The model requests then go from your device to that provider; the relay only sees the sign-in and the hub frames between your devices. [own-key.md](own-key.md) has the steps for every app. Nothing to install, nothing to keep running.
+The free allowance on the community relay runs out. When it does, or before, put a key of your own in the app: Alibaba Model Studio (Bailian) inside mainland China, OpenRouter or any OpenAI-compatible endpoint elsewhere. The model requests then go from your device to that provider; the relay only sees the sign-in and the hub frames between your devices. [own-key.md](own-key.md) has the steps for every app. Nothing to install, nothing to keep running.
 
 ## 2. Your own relay
 
@@ -37,7 +37,7 @@ bash scripts/self-host.sh --local          # http://127.0.0.1:8787, codes in the
 bash scripts/self-host.sh --local --bind 0.0.0.0   # reachable from the phones on the same network
 ```
 
-By hand instead of the script: `cd cloud && cp .env.example .env`, fill in `CLOUD_DOMAIN`, `PUBLIC_BASE`, `ACME_EMAIL`, `CLOUD_SECRET`, `CLOUD_ADMIN_TOKEN`, `UPSTREAM_KEY` and the sender settings, then `docker compose up -d`; or, without Caddy, `docker compose -f docker-compose.yml -f docker-compose.local.yml up -d`. The relay runs as uid 10001 inside its container, and `cloud/data`, the bind-mounted data directory, must belong to that uid on the host: `mkdir -p data && sudo chown -R 10001:10001 data` before the first start, and once more when upgrading from a relay whose image ran as root (the script does this for you; a relay that cannot write the directory says so at start and stops).
+By hand instead of the script: `cd cloud && cp.env.example.env`, fill in `CLOUD_DOMAIN`, `PUBLIC_BASE`, `ACME_EMAIL`, `CLOUD_SECRET`, `CLOUD_ADMIN_TOKEN`, `UPSTREAM_KEY` and the sender settings, then `docker compose up -d`; or, without Caddy, `docker compose -f docker-compose.yml -f docker-compose.local.yml up -d`. The relay runs as uid 10001 inside its container, and `cloud/data`, the bind-mounted data directory, must belong to that uid on the host: `mkdir -p data && sudo chown -R 10001:10001 data` before the first start, and once more when upgrading from a relay whose image ran as root (the script does this for you; a relay that cannot write the directory says so at start and stops).
 
 ### Sign-in codes
 
@@ -45,7 +45,7 @@ A code goes out every time someone signs in. `CODE_SENDER` says how:
 
 - `log`: printed to the relay's log only (`cd cloud && docker compose logs relay` shows `verification code for …`). Fine for a family: you read the code out. This is what `--local` uses.
 - `smtp`: by e-mail through a mailbox you own (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`). Any mailbox with SMTP works; a free one is enough for a few people.
-- `aliyun`: by SMS to mainland China numbers through Alibaba Cloud: 号码认证服务 by default (`ALIYUN_SMS_API=dypns`, its ready-made templates), or 短信服务 with a signed template of your own (`ALIYUN_SMS_API=dysms`); the variables are in `cloud/.env.example`. `both` uses SMTP for addresses and Aliyun for numbers. SMS reaches mainland numbers only; everyone else signs in by e-mail.
+- `aliyun`: by SMS to mainland China numbers through Alibaba Cloud: phone number verification by default (`ALIYUN_SMS_API=dypns`, its ready-made templates), or  with a signed template of your own (`ALIYUN_SMS_API=dysms`); the variables are in `cloud/.env.example`. `both` uses SMTP for addresses and Aliyun for numbers. SMS reaches mainland numbers only; everyone else signs in by e-mail.
 
 ### The admin page
 
@@ -94,7 +94,7 @@ import os, shutil, sqlite3, sys
 src = sqlite3.connect("/srv/nanomuse-cloud/data/cloud.db")
 dst = sqlite3.connect("/tmp/backup.db")
 src.backup(dst)
-dst.close(); src.close()
+dst.close; src.close
 with open("/tmp/backup.db", "rb") as f:
     shutil.copyfileobj(f, sys.stdout.buffer)
 os.remove("/tmp/backup.db")
@@ -114,7 +114,7 @@ Hashed and encrypted identifiers, per-request counts and prices, the devices on 
 The phone and the desktop carry their own agent. The web app does not; it talks to the Python runtime, which on fomo.corein.in runs in a container per visitor. You can run that runtime on a machine of your own, in Docker, and open the web app on it from any browser:
 
 ```bash
-cp .env.example .env && $EDITOR .env      # a model key, NANOMUSE_SERVER_TOKEN; NANOMUSE_CLOUD_BASE_URL for your own relay
+cp.env.example.env && $EDITOR.env      # a model key, NANOMUSE_SERVER_TOKEN; NANOMUSE_CLOUD_BASE_URL for your own relay
 nanomuse config init                      # or copy config/config.example.toml to config/config.toml
 docker compose up -d app                  # the web app on http://<host>:8787, the URL with its token in the logs
 ```

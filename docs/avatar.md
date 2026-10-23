@@ -4,7 +4,7 @@ The agent's face is the bundled dragon until you ask for another. On the phone s
 0.1.20 and, from 0.1.23, on the web app and the desktop through the runtime
 (`nanomuse/avatar/studio.py`), the studio draws one from a description, in the chat:
 
-1. **Ask.** In the chat: 「换个形象：一只戴圆眼镜的橘猫」, "new avatar: a robot owl",
+1. **Ask.** In the chat:, "new avatar: a robot owl",
    "change your avatar to a small fox with a scarf". Or on the studio screen (the pen on
    the avatar in the profile sheet → *Avatar studio…*, or the studio tile in *Settings*), the
    phone's page: the face at the top with what it is, a description, the seven style chips,
@@ -16,7 +16,7 @@ The agent's face is the bundled dragon until you ask for another. On the phone s
    count, at your provider's prices. *Draw* or *Not now*.
 3. **Four to choose from.** The same subject four times (classic colouring, lighter, darker
    with a small accessory, a playful take), in the studio's 3D toy style, full body on white. Tap
-   one, or say which (「第二个」, "the first one", "top right"); *Redraw* for four more.
+   one, or say which (, "the first one", "top right"); *Redraw* for four more.
 4. **The poses.** The pick is the idle still; four edits of it are the other moods (working
    with headphones at a laptop, waiting with a crystal ball, happy hugging a star, sorry with a
    sweat drop), the set the dragon has. They land in the workspace under

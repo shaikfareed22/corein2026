@@ -11,7 +11,7 @@ Since 0.1.20 the account is where every app starts: the first screen asks for a
 phone number or an e-mail address and sends a six-digit code (or, once you have
 set one, takes your password) and then asks which model answers: the account's
 own (the Cloud) or a key of your own. Codes by SMS reach mainland China numbers
-only (号码认证服务 sends nowhere else); a Hong Kong, Taiwan or overseas number is
+only (phone number verification sends nowhere else); a Hong Kong, Taiwan or overseas number is
 told so at once (`phone_region`) and signs in with an e-mail address instead.
 Signing out brings that screen back
 (self-hosters: `[cloud] required = false` or `NANOMUSE_CLOUD_REQUIRED=0` on the
@@ -262,7 +262,7 @@ A conversation is `{cid, kind: main | side, title, device, device_name,
 created_at, updated_at, deleted, seq}` and a message `{mid, cid, seq, device,
 device_name, role: user | assistant, text, truncated, attachments[{name, mime,
 size}], created_at, deleted}`; `cid` and `mid` are UUIDs the device makes (4–64
-characters of `a-z 0-9 . _ : -`, folded to lower case), times are Unix seconds.
+characters of `a-z 0-9. _ : -`, folded to lower case), times are Unix seconds.
 Every accepted change takes the account's next `seq`; a device keeps the
 highest `cursor` it has pulled and asks for `since=` that. A push is idempotent
 (a known `mid` is left alone unless the new row is a tombstone, a known `cid`
@@ -400,7 +400,7 @@ policy on the admin page (*Settings › Star asks*) without an app update; every
 app keeps the same defaults built in for when the relay cannot be reached. The
 policy says *when* and, if the operator wants, *what*: the words on the card
 are each app's own, in its language, unless the policy carries a sentence:
-`star.text` (English) and `star.text_zh` (简体中文), each at most 200
+`star.text` (English) and `star.text_zh` (Simplified Chinese), each at most 200
 characters, empty by default. An app in Chinese shows `text_zh` when it is
 set, else `text` when it is set, else its own sentence; an app in any other
 language shows `text` when it is set, else its own. Only the sentence on the
@@ -448,7 +448,7 @@ a domain name is enough:
 
 ```bash
 cd cloud
-cp .env.example .env    # domain, secrets, upstream key, how codes are sent
+cp.env.example.env    # domain, secrets, upstream key, how codes are sent
 docker compose up -d    # Caddy fetches the TLS certificate
 ```
 

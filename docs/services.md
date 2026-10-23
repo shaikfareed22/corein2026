@@ -12,10 +12,10 @@ Run inside the rootfs, answered, in the showcase.
 
 | Service | Through | Verified | Needs from the user | Skill |
 |---|---|---|---|---|
-| **12306** (trains) | [12306-mcp](https://github.com/Joooook/12306-mcp), a community MCP server over 12306's public timetable: `npx -y 12306-mcp`, stdio | Installed in the rootfs; a live query for 北京 → 上海 the next morning came back in 1.0 s with trains, seats and prices. Query only: the server cannot book | Nothing: no key, no login | `train-tickets` (searches here; books on the phone only when told to) |
-| **飞书 / Lark** | [lark-cli](https://github.com/larksuite/cli), the official CLI: `npm i -g @larksuite/cli` | Installed and runs in the rootfs (1.0.96); on the build machine a configured install answers `lark-cli auth status` with its identities. Login is the owner's step: `lark-cli config init --new` once, then `lark-cli auth login`, both through a link in a browser | A 飞书 account; the two login steps, once | `feishu` |
-| **高德地图** (maps, weather) | [高德 MCP Server](https://lbs.amap.com/api/mcp-server/summary), official: hosted at `https://mcp.amap.com/mcp?key=…`, or `npx -y @amap/amap-maps-mcp-server` | The package runs in the rootfs and lists its twelve tools; live calls go through the hosted URL with a key. No key was available on the build machine, so the live geocode and route calls are the owner's line in the checklist | A free Web 服务 key from console.amap.com, in the vault as `AMAP_KEY` | `amap` |
-| **腾讯会议** | [tmeet](https://github.com/TencentCloud/tencentmeeting-cli), Tencent's official CLI (a Go binary, `npm i -g @tencentcloud/tmeet`) | Installed and runs in the rootfs (v1.0.18); `tmeet auth status` and `tmeet meeting create --help` answer. Login is an OAuth device flow the owner clicks through once (`tmeet auth login --no-browser` prints the link on the phone) | A 腾讯会议 account; the login, once | `tencent-meeting` |
+| **12306** (trains) | [12306-mcp](https://github.com/Joooook/12306-mcp), a community MCP server over 12306's public timetable: `npx -y 12306-mcp`, stdio | Installed in the rootfs; a live query for Beijing → Shanghai the next morning came back in 1.0 s with trains, seats and prices. Query only: the server cannot book | Nothing: no key, no login | `train-tickets` (searches here; books on the phone only when told to) |
+| **Feishu / Lark** | [lark-cli](https://github.com/larksuite/cli), the official CLI: `npm i -g @larksuite/cli` | Installed and runs in the rootfs (1.0.96); on the build machine a configured install answers `lark-cli auth status` with its identities. Login is the owner's step: `lark-cli config init --new` once, then `lark-cli auth login`, both through a link in a browser | A Feishu account; the two login steps, once | `feishu` |
+| **Amap** (maps, weather) | [Amap MCP Server](https://lbs.amap.com/api/mcp-server/summary), official: hosted at `https://mcp.amap.com/mcp?key=…`, or `npx -y @amap/amap-maps-mcp-server` | The package runs in the rootfs and lists its twelve tools; live calls go through the hosted URL with a key. No key was available on the build machine, so the live geocode and route calls are the owner's line in the checklist | A free Web  key from console.amap.com, in the vault as `AMAP_KEY` | `amap` |
+| **Tencent Meeting** | [tmeet](https://github.com/TencentCloud/tencentmeeting-cli), Tencent's official CLI (a Go binary, `npm i -g @tencentcloud/tmeet`) | Installed and runs in the rootfs (v1.0.18); `tmeet auth status` and `tmeet meeting create --help` answer. Login is an OAuth device flow the owner clicks through once (`tmeet auth login --no-browser` prints the link on the phone) | A Tencent Meeting account; the login, once | `tencent-meeting` |
 
 The `device` MCP server (the phone's own clipboard, calendar, contacts, alarms, location, notifications, photos; [device.md](device.md)) is not a third-party service and is not listed; it is verified with the Android app.
 
@@ -25,14 +25,14 @@ A server exists; it has not run inside the rootfs with a real key, or it has no 
 
 | Service | Through | State | Why not yet |
 |---|---|---|---|
-| **快递100** (parcels) | [快递100 MCP Server](https://github.com/kuaidi100-api/kuaidi100-MCP), official: hosted (`https://api.kuaidi100.com/mcp/streamable?key=…`) or `npx -y @kuaidi100-mcp/kuaidi100-mcp-server` | The package runs in the rootfs and lists its four tools (`query_trace`, `estimate_time`, `estimate_time_with_logistic`, `estimate_price`); the `kuaidi100` skill is written against them. A live query needs an account: paid per tracking number, free trial on sign-up | No key on the build machine. Moves to tier 1 with one traced `query_trace` |
-| **百度地图** | [@baidumap/mcp-server-baidu-map](https://lbsyun.baidu.com/faq/api?title=mcpserver/base), official (1.0.5 on npm) | Not run. Same shape as 高德; a second map only matters where one of them is wrong | Needs a key; 高德 covers the showcase |
-| **腾讯位置服务** | [Official MCP Server](https://lbs.qq.com/service/MCPServer/MCPServerGuide/overview), hosted (`https://mcp.map.qq.com/sse?key=…`, also Streamable HTTP): geocoder, place search, routes, IP location, weather | Not run | Needs a key with WebServiceAPI enabled; same reason as 百度 |
-| **和风天气** | Community servers over the QWeather API (`hefeng-weather-mcp` on PyPI, others); no official server found | Not run. 高德's `maps_weather` gives the showcase its forecast; 和风 is for people who want hourly or air-quality data | Needs a project, a key id and an Ed25519 private key, a heavier setup than the others |
-| **钉钉** | `dingtalk-mcp-server` (community, messages / todos / calendar); DingTalk's own agent platform is not an MCP server | Not run | Enterprise account and app registration; no showcase case needs it |
-| **语雀** | `yuque-mcp-server` (community) over the 语雀 open API | Not run | Personal token; would slot into the `feishu`-style skill pattern in an afternoon |
-| **百度网盘** | Announced MCP support; no package or endpoint we could confirm | Not run | Nothing to run yet |
-| **携程 / 飞猪 / 饿了么** | Servers in the [阿里云百炼 MCP market](https://bailian.console.aliyun.com), hosted behind a 百炼 account | Not run. The showcase's hotel-budget case browses 携程 in the in-app browser instead (the third rung) because that works for anyone without an account with 百炼 | Requires a 百炼 account and the market's per-call billing; worth it for a hosted demo, not for the personal build |
+|  (parcels) | [ MCP Server](https://github.com/kuaidi100-api/kuaidi100-MCP), official: hosted (`https://api.kuaidi100.com/mcp/streamable?key=…`) or `npx -y @kuaidi100-mcp/kuaidi100-mcp-server` | The package runs in the rootfs and lists its four tools (`query_trace`, `estimate_time`, `estimate_time_with_logistic`, `estimate_price`); the `kuaidi100` skill is written against them. A live query needs an account: paid per tracking number, free trial on sign-up | No key on the build machine. Moves to tier 1 with one traced `query_trace` |
+| **Baidu** | [@baidumap/mcp-server-baidu-map](https://lbsyun.baidu.com/faq/api?title=mcpserver/base), official (1.0.5 on npm) | Not run. Same shape as Amap; a second map only matters where one of them is wrong | Needs a key; Amap covers the showcase |
+|  | [Official MCP Server](https://lbs.qq.com/service/MCPServer/MCPServerGuide/overview), hosted (`https://mcp.map.qq.com/sse?key=…`, also Streamable HTTP): geocoder, place search, routes, IP location, weather | Not run | Needs a key with WebServiceAPI enabled; same reason as Baidu |
+|  | Community servers over the QWeather API (`hefeng-weather-mcp` on PyPI, others); no official server found | Not run. Amap's `maps_weather` gives the showcase its forecast;  is for people who want hourly or air-quality data | Needs a project, a key id and an Ed25519 private key, a heavier setup than the others |
+| **DingTalk** | `dingtalk-mcp-server` (community, messages / todos / calendar); DingTalk's own agent platform is not an MCP server | Not run | Enterprise account and app registration; no showcase case needs it |
+|  | `yuque-mcp-server` (community) over the  open API | Not run | Personal token; would slot into the `feishu`-style skill pattern in an afternoon |
+| **Baidu** | Announced MCP support; no package or endpoint we could confirm | Not run | Nothing to run yet |
+| **Ctrip /  / ** | Servers in the [Alibaba Cloud Bailian MCP market](https://bailian.console.aliyun.com), hosted behind a Bailian account | Not run. The showcase's hotel-budget case browses Ctrip in the in-app browser instead (the third rung) because that works for anyone without an account with Bailian | Requires a Bailian account and the market's per-call billing; worth it for a hosted demo, not for the personal build |
 
 ## Tier 3: not recommended
 
@@ -40,14 +40,14 @@ Listed so nobody asks.
 
 | Service | Why |
 |---|---|
-| **微信**: any automation of it, including community "wechat MCP" servers | Against the terms of use; accounts get restricted. The agent reads and replies to 微信 on the phone's screen only when the user asks for exactly that, and none of it appears in public material |
-| **小红书 MCP servers** | Community servers scrape a logged-in session; 小红书 bans the account. The screen does the same job when asked |
-| **支付宝 / 微信支付** MCP servers | They exist for merchants (payments, refunds), not for a person's own account. Paying is the user's; the agent stops before it |
+| **WeChat**: any automation of it, including community "wechat MCP" servers | Against the terms of use; accounts get restricted. The agent reads and replies to WeChat on the phone's screen only when the user asks for exactly that, and none of it appears in public material |
+| **Xiaohongshu MCP servers** | Community servers scrape a logged-in session; Xiaohongshu bans the account. The screen does the same job when asked |
+| **Alipay / WeChat** MCP servers | They exist for merchants (payments, refunds), not for a person's own account. Paying is the user's; the agent stops before it |
 | Anything that needs the user's **password** in a config file | The vault holds keys and tokens; a login the tool cannot do itself with a device flow or a QR code is not a login the agent should hold |
 
 ## Adding one
 
-An MCP server: a `[[mcp.servers]]` block in `config.toml` (or *Connections → MCP servers* in the app), key in the vault as `{{vault:NAME}}`, `risk` and `egress` set honestly, `reads_private_data = true` when the arguments carry the user's data (a tracking number, a phone number). A CLI: install it in the rootfs or share it with the sandbox on a computer (`sandbox.share_read_only` for the program, `share` for its login), then a skill that says which commands to run and what to ask before writes. `config/config.example.toml` has the blocks for 高德, 12306 and 快递100; [configuration.md](configuration.md#mcp-servers) explains the fields.
+An MCP server: a `[[mcp.servers]]` block in `config.toml` (or *Connections → MCP servers* in the app), key in the vault as `{{vault:NAME}}`, `risk` and `egress` set honestly, `reads_private_data = true` when the arguments carry the user's data (a tracking number, a phone number). A CLI: install it in the rootfs or share it with the sandbox on a computer (`sandbox.share_read_only` for the program, `share` for its login), then a skill that says which commands to run and what to ask before writes. `config/config.example.toml` has the blocks for Amap, 12306 and ; [configuration.md](configuration.md#mcp-servers) explains the fields.
 
 When it has run inside the rootfs and answered once, add the transcript below and move it up a tier.
 
@@ -65,12 +65,12 @@ connected in 15.5s · 8 tools
   get-current-date, get-stations-code-in-city, get-station-code-of-citys, get-station-code-by-names,
   get-station-by-telecode, get-tickets, get-interline-tickets, get-train-route-stations
 $ get-current-date {}                                        (0.1s) → 2026-09-24
-$ get-station-code-of-citys {"citys": "北京|上海"}            (0.1s) → {"北京":{"station_code":"BJP",…},"上海":{"station_code":"SHH",…}}
-$ get-tickets {"date":"2026-09-25","fromStation":"北京","toStation":"上海","trainFilterFlags":"G",
+$ get-station-code-of-citys {"citys": "Beijing|Shanghai"}            (0.1s) → {"Beijing":{"station_code":"BJP",…},"Shanghai":{"station_code":"SHH",…}}
+$ get-tickets {"date":"2026-09-25","fromStation":"Beijing","toStation":"Shanghai","trainFilterFlags":"G",
                "earliestStartTime":7,"latestStartTime":9,"sortFlag":"startTime","limitedNum":3}   (1.0s)
-G565 北京南 -> 上海虹桥 07:07 -> 13:12 历时：06:05   商务座: 无票 2156元 · 一等座: 无票 967元 · 二等座: 无票 576元
-G549 北京南 -> 上海虹桥 07:13 -> 13:03 历时：05:50   商务座: 剩余16张票 2315元 · 一等座: 无票 967元 · 二等座: 无票 598元
-G5   北京   -> 上海     07:40 -> 12:32 历时：04:52   商务座: 无票 2350元 · 一等座: 无票 1075元 · 二等座: 无票 672元 · 无座: 剩余19张票
+G565 Beijing -> Shanghai 07:07 -> 13:12 :05   :  2156 · :  967 · :  576
+G549 Beijing -> Shanghai 07:13 -> 13:03 :50   :  2315 · :  967 · :  598
+G5   Beijing   -> Shanghai     07:40 -> 12:32 :52   :  2350 · :  1075 · :  672 · : 
 
 == lark-cli
 lark-cli version 1.0.96

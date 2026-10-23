@@ -25,7 +25,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 - [ ] Routines and goals keep moving with the app closed; approvals arrive as notifications
 - [ ] With the phone-operator switch off, the agent is complete
 - [ ] Compressed APK ≤ 80 MB; cold start (rootfs installed) ≤ 5 s; idle battery ≤ 3 % per 24 h
-- [ ] Smoke test on 小米 / 华为 (EMUI) / OPPO / vivo / Samsung / Pixel
+- [ ] Smoke test on Xiaomi / Huawei (EMUI) / OPPO / vivo / Samsung / Pixel
 - [ ] The app, the launcher icon, the README, the site, the film and the demo show the same v2 red panda
 - [ ] Measured from mainland China: first screen of the site < 3 s, APK downloads from `dl.`
 - [ ] (P1) While a task runs in the background and the user is in another app, the floating capsule shows the current command or the browser picture and can stop the run
@@ -61,7 +61,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 - [x] **`LocalRuntime`**: first-run unpack with progress and a version marker (swap-in, old tree kept until the new one is in place); the proot argument set; DNS written from `ConnectivityManager`; `TZ` as the phone's IANA id; system proxy; `UV_LINK_MODE=symlink`; `nanomuse serve --host 127.0.0.1 --port <random> --token <random>`; health check, crash restart with backoff, logs rolled at 2 MB; `home/` survives upgrades
 - [x] **`RuntimeService`**: foreground service of type `specialUse`; `PARTIAL_WAKE_LOCK` only while a task runs; the notification shows the current status `detail` (the §10 `tool_title` replaces it when it lands); subscribes to the local `/ws` event stream and feeds the shared `Notifier`; a Stop action; back after reboot
 - [x] **Mode chooser**: Run on this phone / Connect to my computer; the WebView points at `127.0.0.1`; failure screen with the log tail, Try again, Start over
-- [x] Python detects local mode (`nanomuse.runtime.device()`); the sandbox says so when bubblewrap is unavailable
+- [x] Python detects local mode (`nanomuse.runtime.device`); the sandbox says so when bubblewrap is unavailable
 - [x] **CLI bridge inside the rootfs** (`nanomuse/bridge/`, `/api/bridge/{kind}`, one token per command, nested Sentinel-guarded tool calls, `via: "shell"` on the timeline):
   - `nanomuse-device` (§6: clipboard / calendar / alarm / contacts / location / notifications / photos); the Kotlin side of the tools is §6
   - `nanomuse-browser`: navigate / extract / click / type / fetch / screenshot; the device backend it drives is §4
@@ -82,7 +82,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 - [ ] The same measurement on a real phone (owner: needs a device; Android 8–10 and vendor ROMs)
 - [x] UA / viewport profiles `mobile` / `desktop` / custom, on both backends (`profile` action, `[browser] profile`)
 - [x] Take-over sheet: the same WebView moved into a bottom sheet, no reload; `userControl` mutex; **Take over** / **Done**; the web app sends `handed_back` and the agent gets a fresh frame; verified end to end on the emulator
-- [x] Logged-in `fetch` action (rung two of the ladder), cookies both ways, `CookieManager.flush()`; verified: a cookie set by a page arrives in `fetch`
+- [x] Logged-in `fetch` action (rung two of the ladder), cookies both ways, `CookieManager.flush`; verified: a cookie set by a page arrives in `fetch`
 - [x] Logged-in requests from scripts: `nanomuse-browser fetch URL [--post BODY]`, `nanomuse-browser profile` (§3); exporting a cookie file stays P2
 - [x] Document: Google login does not work inside a WebView; scanning a QR code on the same phone is not possible; passkeys are not portable; [browser.md](browser.md)
 - [x] Unit tests: backend parity, protocol decoding, the Sentinel unchanged; `tests/test_browser.py`, `tests/test_bridge.py`
@@ -95,7 +95,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 - [x] First-run checklist in this order: meet your corein (name it) → add a model → start; done items ticked, locked items greyed; ticks survive a reload (derived from the saved profile); `web/src/screens/Onboarding.tsx`
 - [x] Provider form: grouped by protocol with vendor subtitles; masked key with a reveal toggle; vendor-specific placeholders and a *Get a key* link; Base URL with "/v1 is added when the URL has no path" (`normalize_base_url`, preset hosts kept verbatim); Ollama and custom endpoints may have an empty key; `ModelCard` in `ConnectionsScreen.tsx`, `connections.py`
 - [x] `/api/llm/models`: `/models` then `/v1/models` with the given or vaulted key, fall back to the preset's catalogue (`source` says which), never overwrite a typed model (a model carried over from another provider yields to the live list); verified against a local Ollama
-- [x] Chinese presets: DeepSeek / Kimi / Qwen / GLM / 豆包 / MiniMax, each with a link to get a key (`PROVIDERS`; catalogue names are a fallback: the live list is the source of truth and should be re-checked before release)
+- [x] Chinese presets: DeepSeek / Kimi / Qwen / GLM / Doubao / MiniMax, each with a link to get a key (`PROVIDERS`; catalogue names are a fallback: the live list is the source of truth and should be re-checked before release)
 - [x] No OAuth subscription login (recorded in design.md, "Identity: the name comes first")
 - [ ] P2: several instances, model groups
 
@@ -132,7 +132,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 - [x] `AccessibilityService`: `dispatchGesture`, `takeScreenshot` (API 30+), global actions, a node-tree dump with stable ids (`gui/NodeTree.kt`), `SET_TEXT` with a clipboard fallback, event waits (`awaitIdle`)
 - [x] `screen` / `act` wired into `mobile_use`; the node tree as a second input (`Screen.nodes`, 999-grid lines after the picture; the picture decides)
 - [x] During GUI operation the capsule is in its Stop state (`TYPE_ACCESSIBILITY_OVERLAY`: the red panda + the current step + Stop; hidden for the screenshot); a notice card with *Open* when the agent needs the user (`task begin` / `end` / `notice`, `nanomuse:stop` → `stopped`)
-- [x] Onboarding: enabling the service, Android 13+ restricted settings, recovery after the service is killed; the *This phone* row on the Phone card, live through `accessibilityState()`, and the device re-announces when the service comes or goes
+- [x] Onboarding: enabling the service, Android 13+ restricted settings, recovery after the service is killed; the *This phone* row on the Phone card, live through `accessibilityState`, and the device re-announces when the service comes or goes
 - [x] **The four-rung ladder in the system prompt**: skills / MCP / CLI → logged-in fetch → the in-app browser → the phone's GUI; the GUI only when asked explicitly, when a skill is `gui`, or after the first three rungs failed; announced before entering, `ask_user` first when climbing on its own
 - [x] `channel` in `SKILL.md` (`api` / `cli` / `web` / `browser` / `gui` / `mixed`, `app-only` accepted); the audit log records the channel of every tool call; Activity shows the share of GUI steps
 - [x] Never types passwords or codes (the Android executor refuses password fields outright), never taps pay; sensitive words trigger a per-action ask
@@ -143,8 +143,8 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 
 ## 8. Background and system (P0)
 
-- [x] `setExactAndAllowWhileIdle` with a fallback when the permission is revoked (`runtime/WakeAlarms.kt`: `setAndAllowWhileIdle` when `canScheduleExactAlarms()` is false or the call is refused); the alarm is set for the runtime's `next_wake_at` (`schedule` WS event, `/api/upcoming`) and fires `POST /api/tick`
-- [x] Battery-optimisation guidance plus 小米 / 华为 / OPPO / vivo whitelist instructions; **the overlay permission too** ("display over other apps"; 小米 additionally "background pop-ups"); *Settings → Keep it running* (`KeepRunning.kt`: state of the three permissions, vendor guess, the auto-start activity per vendor with a fallback to the app's details page)
+- [x] `setExactAndAllowWhileIdle` with a fallback when the permission is revoked (`runtime/WakeAlarms.kt`: `setAndAllowWhileIdle` when `canScheduleExactAlarms` is false or the call is refused); the alarm is set for the runtime's `next_wake_at` (`schedule` WS event, `/api/upcoming`) and fires `POST /api/tick`
+- [x] Battery-optimisation guidance plus Xiaomi / Huawei / OPPO / vivo whitelist instructions; **the overlay permission too** ("display over other apps"; Xiaomi additionally "background pop-ups"); *Settings → Keep it running* (`KeepRunning.kt`: state of the three permissions, vendor guess, the auto-start activity per vendor with a fallback to the app's details page)
 - [x] Start on boot (optional; the *Start after a reboot* switch, on by default); local-mode notifications stay in-process
 - [x] Crashes written locally only, no reporting; log export (`Diagnostics.kt`: `files/crashes/`, the last five; *Export logs* → a zip through a `FileProvider` to the share sheet)
 - [ ] **Real phone**: verified on the API 33 emulator (connect build: the section, the battery dialog, the export zip); the alarm path, Android 14's exact-alarm denial and the vendor pages need physical phones (the six-OEM matrix in §13)
@@ -153,20 +153,20 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 
 ## 9. Chinese services and the showcase (P0)
 
-- [x] **`docs/services.md`** in three tiers: verified (lark-cli, the 高德 MCP server, the 腾讯会议 CLI, 12306-mcp for queries) / to be run one by one (快递100: server and skill ready, needs a key; 百度地图, 腾讯位置, 和风, 钉钉, 语雀, 百度网盘, the 携程 / 飞猪 / 饿了么 servers on the 百炼 MCP market) / grey, not recommended (小红书 MCP, anything 微信). Rule: nothing enters the showcase until it has run inside the rootfs and left a trace; the verification log is on the page: all five packages installed in the arm64 rootfs under QEMU (2 min), 12306-mcp answered a live query in 1.0 s, lark-cli 1.0.96 and tmeet v1.0.18 run, the 高德 and 快递100 servers list their tools (live calls need the owner's keys)
-- [x] New skills: `tencent-meeting` (tmeet, flags checked against its command reference); `train-tickets` moved onto 12306-mcp (`mixed`: search through the server, book on the phone only when told to; the screen search kept as a fallback); `kuaidi100` (written against the server's four tools, waits for a key); `config.toml` examples for 12306 / 快递100; the `feishu` skill knows lark-cli's `config init` step; `trip-plan` looks in the 12306 server first
+- [x] **`docs/services.md`** in three tiers: verified (lark-cli, the Amap MCP server, the Tencent Meeting CLI, 12306-mcp for queries) / to be run one by one  / grey, not recommended (Xiaohongshu MCP, anything WeChat). Rule: nothing enters the showcase until it has run inside the rootfs and left a trace; the verification log is on the page: all five packages installed in the arm64 rootfs under QEMU (2 min), 12306-mcp answered a live query in 1.0 s, lark-cli 1.0.96 and tmeet v1.0.18 run, the Amap and  servers list their tools (live calls need the owner's keys)
+- [x] New skills: `tencent-meeting` (tmeet, flags checked against its command reference); `train-tickets` moved onto 12306-mcp (`mixed`: search through the server, book on the phone only when told to; the screen search kept as a fallback); `kuaidi100` (written against the servers `config init` step; `trip-plan` looks in the 12306 server first
 - [x] Found and fixed on the way: MCP calls with no arguments sent none at all and zod-based servers (12306-mcp's `get-current-date`) rejected them, now always an object; Chromium's profile files under `<workspace>/browser-profile/` showed up as artifact cards (92 in one run), skipped now; a `wait` action for the browser (the model asked for one on a single-page app)
 - [ ] **Seven cases run on a phone, with traces**; one half-case so far, on the computer:
-  1. [~] A business trip in one sentence: the 12306 half ran in the web app with the server, [traces/case-1-train.md](traces/case-1-train.md) (every 二等座 before 13:00 sold out; the model said so and offered the nearest alternatives); the 高德 route, the calendar draft and the 飞书 message wait for a 高德 key and a 飞书 login
-  2. [ ] The morning brief: needs the 高德 key, 飞书 and 腾讯会议 logins
-  3. [ ] Where is my 京东 order: needs a 京东 login on the phone (background WebView, one take-over at the login wall)
-  4. [ ] A budget table for 成都 over the holiday: tried on the computer on 2026-09-24: 去哪儿 sends headless desktop Chromium to its homepage and renders only the footer (bot detection); 21 tool calls, stopped. To be run through the phone's WebView, which is the intended backend for it
-  5. [ ] Book a meeting and tell the group: needs the 腾讯会议 and 飞书 logins
+  1. [~] A business trip in one sentence: the 12306 half ran in the web app with the server, [traces/case-1-train.md](traces/case-1-train.md) ; the Amap route, the calendar draft and the Feishu message wait for a Amap key and a Feishu login
+  2. [ ] The morning brief: needs the Amap key, Feishu and Tencent Meeting logins
+  3. [ ] Where is my JD.com order: needs a JD.com login on the phone (background WebView, one take-over at the login wall)
+  4. [ ] A budget table for  over the holiday: tried on the computer on 2026-09-24:  sends headless desktop Chromium to its homepage and renders only the footer (bot detection); 21 tool calls, stopped. To be run through the phone's WebView, which is the intended backend for it
+  5. [ ] Book a meeting and tell the group: needs the Tencent Meeting and Feishu logins
   6. [ ] Clipboard → calendar + alarm: needs the local build on a phone (the device server runs only there)
-  7. [ ] A 美团 order that stops before payment: needs a phone with 美团 (the x86 emulator cannot run it)
-- [x] GUI cases documented only: 交管12123 fines, 滴滴 up to the ride request, a 12306 app order up to submit, 京东 app cart up to checkout
+  7. [ ] A Meituan order that stops before payment: needs a phone with Meituan (the x86 emulator cannot run it)
+- [x] GUI cases documented only:  fines,  up to the ride request, a 12306 app order up to submit, JD.com app cart up to checkout
 - [x] Rewrite `docs/showcase.md`: the seven cases, each with the chain of hands and its trace or what the trace waits for; `docs/traces/` holds the Markdown timelines
-- [x] Never in public material: automating 微信, 支付宝 statements, 医保 / 个税; stated on the page
+- [x] Never in public material: automating WeChat, Alipay statements,  / ; stated on the page
 
 ---
 
@@ -174,7 +174,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 
 - [ ] **P0** `tool_title` drives the red panda's status and the tool-card title (Muse: emoji + task name)
 - [ ] **P1 `StatusCapsule`, a two-level floating window** (matches and goes beyond OpenMinis's `ToolOverlayController`, which is a text-only pill without a stop button)
-  - Collapsed (default): the v2 red panda mark + `tool_title` + one live status line (`$ command` or the browser action, e.g. "Clicked '我的订单'") + a progress ring; a success/failure glyph when done; **Stop** while running; turns amber and opens the approval card while waiting for one
+  - Collapsed (default): the v2 red panda mark + `tool_title` + one live status line (`$ command` or the browser action, e.g. "Clicked") + a progress ring; a success/failure glyph when done; **Stop** while running; turns amber and opens the approval card while waiting for one
   - Expanded (tap the chevron): a card of about 200×140 dp. Shell mode: the last 3–5 commands with exit codes and the last output line, monospace. Browser mode: a thumbnail of the page + the URL. Buttons: Open / Take over / Stop
   - Data: the Kotlin host subscribes to `ws://127.0.0.1:<port>/ws` for `tool` events (with the `args` command preview and the `output` patch), `browser` events (frame ids) and `status`, the same stream the in-app chat renders. The local build draws the WebView bitmap directly at ≤ 2 fps and only while expanded; the connect build uses the `/api/.../browser_frame` JPEGs
   - Behaviour: bottom-left by default, draggable with the position remembered, swipe left to dismiss for this run; collapses after 30 s without interaction; hidden while the app is in the foreground; display only, no touch pass-through
@@ -183,7 +183,7 @@ Decisions this list rests on (see [design.md](design.md) for the reasoning): the
 - [ ] **P1** Name pill overlapping the avatar with an emoji status; confetti on completion
 - [ ] **P1** Two-line tool cards; approval cards aligned with Muse
 - [ ] **P1** The local-mode unpack page uses the animated v2 red panda
-- [ ] **P2** Streaming `shell` stdout: read line by line and `patch` partial output every 500 ms (today `proc.communicate()` returns everything at the end, so a long command only shows "running"); the chat tool card and the capsule both benefit
+- [ ] **P2** Streaming `shell` stdout: read line by line and `patch` partial output every 500 ms (today `proc.communicate` returns everything at the end, so a long command only shows "running"); the chat tool card and the capsule both benefit
 - [ ] **P2** Voice (`/api/transcribe`)
 
 ```mermaid
@@ -193,7 +193,7 @@ flowchart LR
   WebUI -->|"ws://127.0.0.1/ws"| Host["Kotlin RuntimeService"]
   Host --> Capsule["StatusCapsule (collapsed / expanded)"]
   Host --> Notif["Foreground notification (BigPicture fallback)"]
-  WebView["Offscreen WebView"] -->|"draw() bitmap, expanded only"| Capsule
+  WebView["Offscreen WebView"] -->|"draw bitmap, expanded only"| Capsule
 ```
 
 ---
@@ -205,7 +205,7 @@ flowchart LR
 - [ ] Privacy note: what leaves the phone; taint and egress rules for screenshots and screen trees; the capsule thumbnail is shown on this device only; no telemetry
 - [ ] The Meta trademark notice in the APK's About page and the site footer
 - [ ] Accessibility-use disclosure; overlay-use disclosure; the account risk of automating third-party apps
-- [ ] **Promotional material**: third-party interfaces appear only as functional demonstrations; order numbers, phone numbers and addresses always blurred; the 美团 shot stops before payment with "payment is yours"; 12306 queries or books one ticket, never scalps
+- [ ] **Promotional material**: third-party interfaces appear only as functional demonstrations; order numbers, phone numbers and addresses always blurred; the Meituan shot stops before payment with "payment is yours"; 12306 queries or books one ticket, never scalps
 - [ ] `SECURITY.md` reviewed; the Sentinel defaults in `docs/sentinel.md`
 - [ ] Local mode: `127.0.0.1` + a random token; cleartext for localhost only; the bridge CLIs use the same token
 
@@ -245,7 +245,7 @@ flowchart LR
 - [ ] **Apex online**: a `nanomuse.dev` vhost in the Caddyfile (static `/srv/www/site`), `www` 301, the `dl.` mirror; Cloudflare DNS A records (the token is on the server); fixes the current 500
 - [ ] `pages.yml` publishes twice: the Pages mirror (deploy key pushing to the root of `nano-muse.github.io`, with a canonical link) + rsync to the server; retire the `/corein/` path; update the repository homepage field
 - [ ] **Eight sections**, copy written separately in Chinese and English, not translated: Hero (one line + one sentence + Download / GitHub + a quiet "try it in the browser" + a muted looping phone video) / Watch it work / Many hands (four tiles) / A Chinese day (seven case cards with trace links) / It asks first where it matters / Runs on your phone (the local build + what leaves the phone + a row of models) / Install (the three APK steps first, pip / Docker folded) / Footer
-- [ ] Copy rules: headlines ≤ 6 characters / 4 words; one idea per section; numbers over adjectives; banned: 赋能 / 一站式 / 极致 / 丝滑 / seamless / empower; no exclamation marks, no emoji headings; limits stated (Alpha, GUI needs Android 11+, Google login, no payments)
+- [ ] Copy rules: headlines ≤ 6 characters / 4 words; one idea per section; numbers over adjectives; banned:  /  /  /  / seamless / empower; no exclamation marks, no emoji headings; limits stated (Alpha, GUI needs Android 11+, Google login, no payments)
 - [ ] Real screenshots of real apps on one device frame and background; the red panda only in the hero and the ending
 - [ ] Self-hosted fonts: Figtree + a Noto Sans CJK SC subset; no overseas CDN; first screen < 3 MB; measured from the mainland
 - [ ] P2: self-hosted Umami on the same server to count downloads
@@ -254,9 +254,9 @@ flowchart LR
 
 ## 16. The film (P0)
 
-- [ ] Footage: `scrcpy --record` at 60 fps on a real phone; real 飞书 / 高德 / 12306 MCP / 腾讯会议 / 京东 / 携程 / 美团; no more mock-ups
+- [ ] Footage: `scrcpy --record` at 60 fps on a real phone; real Feishu / Amap / 12306 MCP / Tencent Meeting / JD.com / Ctrip / Meituan; no more mock-ups
 - [ ] Assembly: keep `storyboard.html + render.py` with real recordings; or Remotion (licence noted)
-- [ ] Shot list: 0–4 s the red panda + one line → 4–34 s the hero case with no GUI ("if there is an API, it does not tap the screen") → 34–44 s the 京东 login wall → take-over sheet → the run continues → 44–52 s the morning-brief notification + clipboard into the calendar → 52–60 s 美团 stopping before payment, the approval card → 60–66 s "runs on your phone · your key · payment is yours" → end card nanomuse.dev + GitHub; a capsule shot may go into the 4–34 s section (switch to another app, commands scrolling in the capsule)
+- [ ] Shot list: 0–4 s the red panda + one line → 4–34 s the hero case with no GUI ("if there is an API, it does not tap the screen") → 34–44 s the JD.com login wall → take-over sheet → the run continues → 44–52 s the morning-brief notification + clipboard into the calendar → 52–60 s Meituan stopping before payment, the approval card → 60–66 s "runs on your phone · your key · payment is yours" → end card nanomuse.dev + GitHub; a capsule shot may go into the 4–34 s section (switch to another app, commands scrolling in the capsule)
 - [ ] Deliverables: the 16:9 film in Chinese and in English; 9:16 × 3 (the business trip / the morning brief / the phone moving on its own); a 6 s GIF/WebM for the README and the social preview
 - [ ] Sound: CC0 / CC-BY music + light UI sounds, listed in NOTICES; no narration, no TTS; burned-in subtitles
 - [ ] Blur order numbers, phone numbers, addresses; replace `site/media/`
@@ -265,11 +265,11 @@ flowchart LR
 
 ## 17. Aligning the demo site (P1, after the APK)
 
-- [ ] Gateway `/mcp/<name>` streaming reverse proxy; upstreams only 高德 (our key injected), 和风, a self-hosted 12306-mcp; `mcp-12306` in compose on two networks; the sessions network stays `--internal`
+- [ ] Gateway `/mcp/<name>` streaming reverse proxy; upstreams only Amap (our key injected),, a self-hosted 12306-mcp; `mcp-12306` in compose on two networks; the sessions network stays `--internal`
 - [ ] Container default config points at `http://gateway:8000/mcp/{amap,qweather,12306}` with the `amap` / `train-tickets` skills
-- [ ] MCP quotas per session and per day, audited; test first whether 12306 answers from a Hong Kong IP; 高德 quota alerts
-- [ ] Step two: a tinyproxy / squid allowlist forward proxy (`mp.weixin.qq.com`, 携程 search pages, …); Playwright uses the same proxy
-- [ ] Not in the demo: any site that needs a login (京东), any CLI that needs an account (飞书, 腾讯会议)
+- [ ] MCP quotas per session and per day, audited; test first whether 12306 answers from a Hong Kong IP; Amap quota alerts
+- [ ] Step two: a tinyproxy / squid allowlist forward proxy (`mp.weixin.qq.com`, Ctrip search pages, …); Playwright uses the same proxy
+- [ ] Not in the demo: any site that needs a login (JD.com), any CLI that needs an account (Feishu, Tencent Meeting)
 - [ ] `res/icons.tsx` on v2; the site frames the demo as "see how it works, in the browser", below the download button
 - [ ] P2: an online trial running the real APK on a cloud phone
 
@@ -284,8 +284,8 @@ OAuth subscription login · Shizuku / wadb backend · several instances and mode
 **Now (needed during M0–M2)**
 
 - Four decisions (one reply, "as recommended", is enough): version 0.1.0; Muse's missing features / voice / starter quota all after the release; Node preinstalled in the rootfs; `nanomuse.dev` canonical with `nano-muse.github.io` as a mirror
-- An Android 11+ phone with USB debugging, connected to this machine (`adb devices` sees it); ideally a 小米 or 华为 as a second device
-- A 高德 web-service key; one official DeepSeek key; the 腾讯会议 `tmeet` OAuth step clicked in a browser when we get there; a 飞书 "project group" that can be filmed and one or two accounts that can be @-mentioned
+- An Android 11+ phone with USB debugging, connected to this machine (`adb devices` sees it); ideally a Xiaomi or Huawei as a second device
+- A Amap web-service key; one official DeepSeek key; the Tencent Meeting `tmeet` OAuth step clicked in a browser when we get there; a Feishu "project group" that can be filmed and one or two accounts that can be @-mentioned
 - [x] The PyPI pending publisher (verified)
 - Confirm `ghcr.io/nano-muse/nanomuse` is public
 - The four Android signing secrets (`ANDROID_KEYSTORE_B64` / `ANDROID_KEYSTORE_PASSWORD` / `ANDROID_KEY_ALIAS` / `ANDROID_KEY_PASSWORD`; the keystore lives in `~/.openmuse-release/`): added by the owner, or with explicit authorisation
@@ -295,10 +295,10 @@ OAuth subscription login · Shizuku / wadb backend · several instances and mode
 
 **Before filming (M5)**
 
-- Log in to 京东, 美团, 飞书 and 腾讯会议 on the phone; agree that these accounts appear on screen, blurred
+- Log in to JD.com, Meituan, Feishu and Tencent Meeting on the phone; agree that these accounts appear on screen, blurred
 - A native-speaker pass over the eight sections and the subtitles
 - Listen to two or three music candidates
-- Accounts on the channels: 知乎 / V2EX / 小红书 / B站 / 酷安 / 即刻
+- Accounts on the channels: Zhihu / V2EX / Xiaohongshu / B /  / 
 
 **Not needed from the owner**: DNS, the Caddy vhost, the rootfs / proot builds, the mirror repository's contents, the demo gateway, trace generation, the capsule and the CLI bridge.
 

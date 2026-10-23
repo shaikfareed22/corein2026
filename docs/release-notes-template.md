@@ -55,42 +55,42 @@ Based on [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13 (GPL-3.0), mod
 <!-- pull requests -->
 
 <details>
-<summary>简体中文</summary>
+<summary>Simplified Chinese</summary>
 
-🐉 **corein `<version>`「<Codename>」**：<一句话：这个版本是关于什么的>。
+🐉 **corein `<version>`<Codename>**<>
 
-<一两段话：主线，以及另一条线；用平实的话说清对用的人意味着什么。>
+<>
 
-### 亮点
+### 
 
-- **<什么>。** <是什么、在哪里、替代了什么。>
+- **<>** <>
 - …
 
-### 升级说明
+### 
 
-- **Android 覆盖安装 <previous>，数据保留。** `corein-<version>-arm64.apk`（Android 8.0+，arm64；versionCode <n>）和之前每个版本用同一把签名。校验：`sha256sum -c corein-<version>-arm64.apk.sha256`。
-- **桌面安装包没有经过公证。** macOS 第一次在「系统设置 → 隐私与安全性」里点「仍要打开」（或右键 → 「打开」），Windows 点「仍要运行」。安装包会比 APK 晚一点到（CI 从 tag 构建它们）；`SHA256SUMS-desktop.txt` 列出了所有校验值，也包括 Windows 的更新元数据（`latest.yml` 和安装包的 `.exe.blockmap`）。
-- <升级的人必须知道的事：挪了位置的设置、运维者需要的中转版本、需要新构建的平台。>
-- **去哪下载。**
+- **Android  <previous>** `corein-<version>-arm64.apk` 8.0+ <n>`sha256sum -c corein-<version>-arm64.apk.sha256`
+-  macOS   APK `SHA256SUMS-desktop.txt`  Windows 
+- <>
+- 
 
   | | |
   |---|---|
-  | 浏览器 | [demo.fomo.corein.in](https://demo.fomo.corein.in/)：模拟手机里的一个 corein，登录后体验；这是演示，下面的应用才是正式版 |
-  | Android 8.0+，arm64 | `corein-<version>-arm64.apk` |
-  | iPhone、iPad | [TestFlight](https://testflight.apple.com/join/ZHexbDqc)：测试版，公开链接等 Apple 审核；第 <n> 个构建，通过后即可安装 |
-  | Windows 10+ | `corein-Desktop-<version>-win-x64.exe`（桌面 App，基于 DeepSeek Harness） |
-  | macOS 12+ | `corein-Desktop-<version>-mac-arm64.dmg` / `-mac-x64.dmg`（或 `.zip`：解压后拖进「应用程序」） |
-  | Linux x64 | `corein-Desktop-<version>-linux-x64.deb` / `.AppImage`（需要 FUSE；没有就加 `--appimage-extract-and-run`）/ `.tar.gz`（解压到任意位置，运行 `./corein-desktop`）|
-  | 已在用 DeepSeek Harness Desktop | `dsh-nanomuse-<version>.tgz`：`dsh plugin --profile desktop add …`（[怎么装](https://github.com/shaikfareed22/corein2026/blob/main/harness/README.md)） |
+  |  | [demo.fomo.corein.in](https://demo.fomo.corein.in/) corein |
+  | Android 8.0+ | `corein-<version>-arm64.apk` |
+  | iPhone | [TestFlight](https://testflight.apple.com/join/ZHexbDqc) Apple  <n>  |
+  | Windows 10+ | `corein-Desktop-<version>-win-x64.exe` |
+  | macOS 12+ | `corein-Desktop-<version>-mac-arm64.dmg` / `-mac-x64.dmg` |
+  | Linux x64 | `corein-Desktop-<version>-linux-x64.deb` / `.AppImage`/ `.tar.gz`|
+  |  DeepSeek Harness Desktop | `dsh-nanomuse-<version>.tgz``dsh plugin --profile desktop add …`[](https://github.com/shaikfareed22/corein2026/blob/main/harness/README.md) |
 
-  实测从国内直接下 GitHub 也不慢；万一下不动，同样的文件十五分钟内会出现在 [fomo.corein.in/dl/v<version>/](https://fomo.corein.in/dl/v<version>/)。
+   GitHub  [fomo.corein.in/dl/v<version>/](https://fomo.corein.in/dl/v<version>/)
 
-### 社区
+### 
 
-corein 开源、免费、非营利。手机号或邮箱登录后有一份起始额度，钱是开发者出的；剩多少、怎么加，账号页里有数。用完可以换成自己的 key，或者用你已经在付费的套餐登录（[教程](https://github.com/shaikfareed22/corein2026/blob/main/docs/own-key.md)）。登录后，对话文字会保存在 corein Cloud，让你的几台设备看到同样的对话；「数据控制」里一个开关就能关掉并删除；数据不卖（[隐私政策](https://fomo.corein.in/privacy/)）；账号想删就删。
+corein  key[](https://github.com/shaikfareed22/corein2026/blob/main/docs/own-key.md) corein Cloud[](https://fomo.corein.in/privacy/)
 
-稳定版也不是最后一句话：corein 在持续进化，接下来做什么写在[路线图](https://github.com/shaikfareed22/corein2026/blob/main/docs/zh/roadmap.md)里。我们自己每天在用，知道哪些地方还糙；哪里坏了、想要什么，直接提 issue。谢谢每一位装过、试过、报过问题的人。[提 issue](https://github.com/shaikfareed22/corein2026/issues/new/choose) · [发 PR](https://github.com/shaikfareed22/corein2026/blob/main/CONTRIBUTING.md) · [Discussions](https://github.com/shaikfareed22/corein2026/discussions) · [Discord](https://discord.gg/bkTySmm28X) · [点个 Star](https://github.com/shaikfareed22/corein2026)；觉得有用，点个 Star，让更多人看到。
+ [](https://github.com/shaikfareed22/corein2026/blob/main/docs/zh/roadmap.md) issue[ issue](https://github.com/shaikfareed22/corein2026/issues/new/choose) · [ PR](https://github.com/shaikfareed22/corein2026/blob/main/CONTRIBUTING.md) · [Discussions](https://github.com/shaikfareed22/corein2026/discussions) · [Discord](https://discord.gg/bkTySmm28X) · [ Star](https://github.com/shaikfareed22/corein2026) Star
 
-基于 [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13（GPL-3.0），自 2026-09-24 起修改；本版本的完整对应源码是 tag `v<version>` 加子模块 `android/deps/proot`（[nano-muse/proot](https://github.com/nano-muse/proot)）。整个仓库以 GPL-3.0-or-later 发布。corein 桌面版原样携带 DeepSeek Harness 及其许可证文件；名字里的 *harness* 是普通词，不是 DeepSeek 的名字。corein 与 Meta 无关，Muse 是 Meta Platforms, Inc. 的商标。桌面端照着 Muse 应用用起来的样子做，是用过之后写下来的；里面没有 Meta 的任何素材、代码或内容。
+ [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13-3.0 2026-09-24  tag `v<version>`  `android/deps/proot`[nano-muse/proot](https://github.com/nano-muse/proot) GPL-3.0-or-later   DeepSeek Harness  *harness*  DeepSeek   Meta   Meta Platforms, Inc.  Muse  Meta 
 
 </details>

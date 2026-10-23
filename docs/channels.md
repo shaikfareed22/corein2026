@@ -1,7 +1,7 @@
 # Chat apps
 
-Your corein inside the chat apps you already use: Feishu (飞书 / Lark), DingTalk
-(钉钉), WeCom (企业微信) and Telegram. Write to the bot from your phone and the same
+Your corein inside the chat apps you already use: Feishu (Lark), DingTalk
+(DingTalk), WeCom and Telegram. Write to the bot from your phone and the same
 Muse answers: one conversation per chat, the reply typed out as it comes, tool work
 shown as a status line, approvals answered with a word or a button. Chats you mark
 *deliver here* also get what the Muse does on its own: check-ins, reminders, the result
@@ -23,7 +23,7 @@ and leaves the switch alone.
 
 ## Where to find it
 
-* **App**: Settings → *Chat apps* (「聊天入口」). One card per app: the switch, the
+* **App**: Settings → *Chat apps*. One card per app: the switch, the
   credentials, who may talk to it, the paired chats and their *deliver here* switch,
   a *Send a test message* button and the setup steps with a link to the vendor console.
 * **Terminal**: `nanomuse channels status | pending | approve <code> | deny <code> |
@@ -82,9 +82,9 @@ on it. In groups the bot answers when it is @-mentioned.
 
 At <https://open-dev.dingtalk.com/>:
 
-1. *Create app* (企业内部应用) → *Add capability* → **Robot** (机器人).
-2. Message receive mode: **Stream** (Stream 模式). No callback URL.
-3. *Credentials & Basic Info* (凭证与基础信息): copy **Client ID** (AppKey) and
+1. *Create app*  → *Add capability* → **Robot**.
+2. Message receive mode: **Stream**. No callback URL.
+3. *Credentials & Basic Info* : copy **Client ID** (AppKey) and
    **Client Secret** (AppSecret).
 4. *Permissions*: the robot's send-message scope (`qyapi_robot_sendmsg`) so a
    *deliver here* chat can be written to without a message to reply to.
@@ -95,10 +95,10 @@ A robot in a DingTalk group only hears messages that @ it.
 
 ### WeCom
 
-In the WeCom admin console (企业微信管理后台) → *Security & management* → **Intelligent
-robot** (智能机器人):
+In the WeCom admin console  → *Security & management* → **Intelligent
+robot** :
 
-1. *Create robot* → **API mode** (API 模式), connection **long connection** (长连接).
+1. *Create robot* → **API mode**, connection **long connection**.
 2. Copy the **Bot ID** and **Secret** into the app.
 3. Add the robot to the chats where it should listen, or let people find it in the
    address book.
@@ -153,10 +153,10 @@ While the run works:
 
 * text streams into the reply as the model writes (where the vendor allows edits);
 * a running tool shows as a short italic line in the same message ("Searching the
-  web", 正在运行命令) until text replaces it;
-* an **approval** the Sentinel asks for arrives in the chat: a card with 允许 / 拒绝
+  web", ) until text replaces it;
+* an **approval** the Sentinel asks for arrives in the chat: a card with  / 
   buttons on Feishu and Telegram, a message asking for the word on DingTalk and WeCom.
-  `allow`, `yes`, `ok`, `允许`, `同意` approve once; `deny`, `no`, `拒绝`, `不行` refuse.
+  `allow`, `yes`, `ok`, ``, `` approve once; `deny`, `no`, ``, `` refuse.
   The decision is the same as pressing the card in the app;
 * files the run produced (an artifact event) are sent when the run ends;
 * a **question** the Muse asks is delivered, and your next line answers it.

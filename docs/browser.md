@@ -73,7 +73,7 @@ Cookies persist. On the server the Playwright profile is a real Chromium profile
 ### What does not work, and why
 
 - **Google accounts cannot sign in inside a WebView.** Google refuses embedded sign-in (`disallowed_useragent`) for good reasons. The take-over sheet has an arrow that opens the same URL in the system browser, but a login made there stays in Chrome, not in corein's WebView. For Google services use the API path (a calendar's private `.ics` link, an app password for mail) instead of the browser; on the server's Chromium a Google login works but may be challenged as "not secure".
-- **A QR code cannot be scanned on the same phone.** Sites that log in by "scan with our app" (微信, 支付宝, 淘宝 …) show the code where the camera would need to be. On the phone's browser this is a dead end; on the server's Chromium you scan the frame in the chat with the phone, which is the one case where the server's browser is the easier one.
+- **A QR code cannot be scanned on the same phone.** Sites that log in by "scan with our app" (WeChat, Alipay, Taobao …) show the code where the camera would need to be. On the phone's browser this is a dead end; on the server's Chromium you scan the frame in the chat with the phone, which is the one case where the server's browser is the easier one.
 - **Passkeys are not portable.** A passkey created in the phone's Chrome belongs to that browser's credential store; the WebView does not see it, and a headless Chromium on a server has none. Password-and-code logins work everywhere.
 - **Downloads** land in the workspace: `<workspace>/downloads/` on the server (Playwright) and in the local build on the phone (where the agent can read them); in the connect build, whose agent is on the computer, they go to the phone's Downloads folder.
 - One tab. A link that opens a new window opens in the same page instead.
@@ -82,7 +82,7 @@ Cookies persist. On the server the Playwright profile is a real Chromium profile
 
 The WebView must think it is on screen: a hidden WebView throttles `requestAnimationFrame` to nothing and timers to one a second, and many pages never finish loading. The app therefore gives it a screen: a private **virtual display** (an `ImageReader` surface, seen by nobody) with a `Presentation` window on it holding the WebView. Chromium composes frames into that surface at full speed whether or not the app is on screen; the latest frame is what a `screenshot` returns, so video, canvas and WebGL come out as they are. Measured on the emulator with the app in the background: 60 rAF/s, `setInterval(10 ms)` at 100/s, `visibilityState = visible`. On a device that refuses a virtual display the WebView falls back to being measured and drawn by hand.
 
-Taps are injected as touch events at the element's centre, typing goes through the page's own setters plus `input` / `change` events (so frameworks notice), Enter presses the key. The one page is a singleton; the take-over moves that same `WebView` object into the sheet's container and back, so nothing reloads. Cookies, including third-party ones, are on; `CookieManager.flush()` runs after every load and `fetch`.
+Taps are injected as touch events at the element's centre, typing goes through the page's own setters plus `input` / `change` events (so frameworks notice), Enter presses the key. The one page is a singleton; the take-over moves that same `WebView` object into the sheet's container and back, so nothing reloads. Cookies, including third-party ones, are on; `CookieManager.flush` runs after every load and `fetch`.
 
 ### The protocol
 

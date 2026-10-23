@@ -50,11 +50,11 @@ under the tiles says where its key is, how many models it serves and which
 slots answer through it, with *Rename*, *Change key*, *Edit models*, *Ask for
 its models* and *Remove*; the chat model picker lists the endpoint's models,
 and *Save* sets the chat slot by the endpoint's id (`PUT /api/connections/llm
-{"endpoint": "<id>", "model": ...}`), never by retyping its address or key.
+{"endpoint": "<id>", "model":...}`), never by retyping its address or key.
 Renaming, rekeying or moving an endpoint reaches every slot that uses it. The
 *Hands model* picker gains one group per other endpoint of the list; a model
 picked there sends the hands' screenshots through that endpoint with its key
-(`PUT /api/connections/gui {"endpoint": "<id>", "model": ...}`), and the
+(`PUT /api/connections/gui {"endpoint": "<id>", "model":...}`), and the
 *Making pictures* and *Making clips* selects list the endpoints under *Your
 endpoints* the same way (`PUT /api/connections/image` / `/video` with
 `endpoint` and `model`). Removing an endpoint is refused while the chat model
@@ -187,12 +187,12 @@ Every unavailable feature is one sentence, never a raw error, built by
 `unavailableLine(cap, region, locale)` from the region's providers with that
 capability (four at most, in the catalogue's order):
 
-| Capability | English | 中文 |
+| Capability | English | Chinese |
 |---|---|---|
-| `image` | Pictures need a provider with image models: {providers}. | 画图需要一个有图像模型的服务商：{providers}。 |
-| `video` | Clips need a provider with video models: {providers}. | 生成视频需要一个有视频模型的服务商：{providers}。 |
-| `vision` | The hands need a model that sees pictures: {providers}. | 动手需要一个能看图的模型：{providers}。 |
-| `chat` | Chat needs a model: {providers}. | 对话需要一个模型：{providers}。 |
+| `image` | Pictures need a provider with image models: {providers}. | {providers} |
+| `video` | Clips need a provider with video models: {providers}. | {providers} |
+| `vision` | The hands need a model that sees pictures: {providers}. | {providers} |
+| `chat` | Chat needs a model: {providers}. | {providers} |
 
 A *How* link beside each goes to [own-key.md](own-key.md). The provider names
 come from the catalogue in the console's language (`name` / `name_zh`).
@@ -247,7 +247,7 @@ the provider's words), with *Details* under it.
 **Why the Sentinel asks** is written by the runtime from its settings
 (`'shell' is in always_ask_tools`, `risk level is 'sensitive' (mode=ask)`,
 `covered by your 'always' permission for shell:ls`, the taint sentence);
-`localReason()` in `web/src/i18n/index.ts` knows those shapes and renders each
+`localReason` in `web/src/i18n/index.ts` knows those shapes and renders each
 as a sentence in the console's language, keeping the tool, the risk and the
 destination. The same words appear under a denied step in today's record. A
 shape it does not know is shown as it came.

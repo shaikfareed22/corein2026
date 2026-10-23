@@ -45,7 +45,7 @@ jobs:
         run: |
           mkdir -p site/assets/fonts site/assets/screens
           cp web/public/icon.svg web/public/mark.svg web/public/avatars/dragon-*.webp site/assets/
-          cp assets/brand/corein-wordmark.svg assets/brand/corein-mark.svg assets/brand/corein-icon.svg docs/app-icon.png site/assets/ # corein: the landing page's brand files
+          cp assets/brand/corein-wordmark.svg assets/brand/corein-wordmark-white.svg assets/brand/corein-logo-dark.png assets/brand/corein-mark.svg assets/brand/corein-icon.svg docs/app-icon.png site/assets/ # corein: the landing page's brand files
           cp web/public/fonts/figtree-latin.woff2 web/public/fonts/figtree-latin-ext.woff2 web/public/fonts/OFL.txt site/assets/fonts/
           cp docs/screenshots/*.png site/assets/screens/
           cp docs/cover.png site/assets/cover.png

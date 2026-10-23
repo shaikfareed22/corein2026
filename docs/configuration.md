@@ -72,9 +72,9 @@ Provider recipes:
 |---|---|---|---|
 | DeepSeek | `deepseek-flash` | `https://api.deepseek.com` | default |
 | Kimi (Moonshot) | `kimi-k2.6` | `https://api.moonshot.cn/v1` | |
-| 阿里云百炼 (Alibaba Cloud Bailian) | `deepseek-v4.1-flash` | `https://dashscope.aliyuncs.com/compatible-mode/v1` | mainland China; the hands model `qwen3.8-27b` is on the same endpoint |
-| GLM (智谱) | `glm-5.3` | `https://open.bigmodel.cn/api/paas/v4` | |
-| 豆包 (火山方舟) | your endpoint id | `https://ark.cn-beijing.volces.com/api/v3` | models are versioned deployments; the app lists yours |
+| Alibaba Cloud Bailian (Alibaba Cloud Bailian) | `deepseek-v4.1-flash` | `https://dashscope.aliyuncs.com/compatible-mode/v1` | mainland China; the hands model `qwen3.8-27b` is on the same endpoint |
+| GLM (Zhipu) | `glm-5.3` | `https://open.bigmodel.cn/api/paas/v4` | |
+| Doubao  | your endpoint id | `https://ark.cn-beijing.volces.com/api/v3` | models are versioned deployments; the app lists yours |
 | MiniMax | `MiniMax-M3` | `https://api.minimaxi.com/v1` | |
 | OpenAI | `gpt-5.4-mini` | `https://api.openai.com/v1` | `provider = "openai_responses"` also works |
 | OpenRouter | `deepseek/deepseek-v4.1-flash` | `https://openrouter.ai/api/v1` | outside mainland China; the hands model `qwen/qwen3.8-27b` is on the same endpoint |
@@ -163,9 +163,9 @@ The app layer sets the same slots: `PUT /api/connections/image` and `PUT /api/co
 [agent]
 name                 = "corein"      # what the agent calls itself (the app's profile overrides this)
 max_steps            = 30              # tool calls per turn before it must wrap up
-# workspace          = "./workspace"   # the only directory the files tool can touch; default ./workspace if present here, else <data_dir>/workspace
+# workspace          = "./workspace"   # the only directory the files tool can touch; default./workspace if present here, else <data_dir>/workspace
 extra_roots          = []              # directories outside the workspace the files tool may read and write, e.g. ["~/Documents/notes"]; writable inside the sandbox too
-language             = "auto"          # or a fixed language: "English", "中文", ...
+language             = "auto"          # or a fixed language: "English", "Chinese",...
 max_context_messages = 80
 max_context_images   = 4               # screenshots kept in the request: the newest N; 0 keeps all
 show_thinking        = false
@@ -248,7 +248,7 @@ embedding_base_url = ""        # empty → the model's endpoint and key (llm.bas
 embedding_api_key  = ""        # a key of its own, "{{vault:EMBEDDINGS_API_KEY}}" from the app
 ```
 
-Recall is by keyword (rare words weigh more, Chinese is matched by character pairs) and, with an embedding endpoint, by meaning too: every memory is embedded once (the vector is kept in `memory.db` next to a hash of the text, so a changed line is embedded again and a switch back to a model is free), the message is embedded per turn, and the memories closest in meaning are fused with the keyword ranking, so "写邮件给房东" recalls "the landlord is Bob Li" though they share no word. Any OpenAI-compatible `/embeddings` works: OpenAI (`text-embedding-3-small` is the default there and on most gateways), [Ollama](https://ollama.com) with an embedding model pulled (`ollama pull qwen3-embedding:0.6b`, the default on `:11434`, small, reads Chinese and English), OpenRouter (`openai/text-embedding-3-small`). DeepSeek has none, so with it point `embedding_base_url` somewhere that has (Ollama next to DeepSeek is the usual pairing) or leave recall by keyword.
+Recall is by keyword (rare words weigh more, Chinese is matched by character pairs) and, with an embedding endpoint, by meaning too: every memory is embedded once (the vector is kept in `memory.db` next to a hash of the text, so a changed line is embedded again and a switch back to a model is free), the message is embedded per turn, and the memories closest in meaning are fused with the keyword ranking, so recalls "the landlord is Bob Li" though they share no word. Any OpenAI-compatible `/embeddings` works: OpenAI (`text-embedding-3-small` is the default there and on most gateways), [Ollama](https://ollama.com) with an embedding model pulled (`ollama pull qwen3-embedding:0.6b`, the default on `:11434`, small, reads Chinese and English), OpenRouter (`openai/text-embedding-3-small`). DeepSeek has none, so with it point `embedding_base_url` somewhere that has (Ollama next to DeepSeek is the usual pairing) or leave recall by keyword.
 
 `auto` tries the endpoint once per start and falls back to keyword recall when the call fails, saying why in the log: one failed call, not one per turn; an endpoint that was unreachable is tried again after five minutes. `on` insists: recall still falls back, but the failure is a warning and `nanomuse doctor` fails on it. `off` never embeds. `embedding_api_key` empty means the model's own key on its own endpoint; set from the app it is a `{{vault:EMBEDDINGS_API_KEY}}` reference. The gateway headers in `llm.extra_headers` go to the model's endpoint only, not to another one named here. *Connections → Recall by meaning* in the app sets all of this and tests it; `nanomuse memory recall "…"` shows what would be recalled, with each memory's closeness.
 
@@ -261,7 +261,7 @@ dir      = ""                        # your skills; empty → <data_dir>/skills
 disabled = ["inbox-triage"]          # built-in ones to leave out of the model's list
 ```
 
-A skill is a folder with a `SKILL.md` (YAML front matter with `name` and `description`, then the steps in Markdown) in the [Agent Skills](https://agentskills.io) format, so skills written for other agents work here. corein reads one more key, `channel`: which rung of the [ladder](gui.md#the-ladder) the skill works on: `api` (an MCP server or connector), `cli`, `web` (a fetch), `browser`, `gui` (the phone's screen; `app-only` is accepted) or `mixed`. A `gui` skill is marked *on the phone's screen* in the agent's index, so it knows the job needs the phone before it starts; `metadata.channel` works too for skills that must stay strictly in the shared format. Eleven are built in (`weekly-review`, `trip-plan`, `inbox-triage`, `compare-options`, `meeting-prep`; `phone-messages` for the phone's screen; five for Chinese services that need no screen: `feishu` through lark-cli, `tencent-meeting` through tmeet, `amap` through the 高德 MCP server, `kuaidi100` through the 快递100 server, and `train-tickets`, which searches through the 12306 server and books on the phone only when told to; [services.md](services.md) says which have been run where); a folder in `dir` with the same name as a built-in replaces it. The model gets the index (name and description of every enabled skill) in its system prompt and reads a skill's steps with the `skills` tool when a request fits; `/name` at the start of a chat message runs one directly. Saving or removing a skill from chat is a sensitive call: it asks first, whatever the Sentinel mode. Skills switched off in the app are remembered in `app-settings.json`; the list here and that one are merged. Inside the [sandbox](sentinel.md#the-sandbox) a skill's folder (its scripts and reference files) is visible read-only. See [the app → Skills](app.md#skills) and `nanomuse skills` in the [CLI](cli.md#skills).
+A skill is a folder with a `SKILL.md` (YAML front matter with `name` and `description`, then the steps in Markdown) in the [Agent Skills](https://agentskills.io) format, so skills written for other agents work here. corein reads one more key, `channel`: which rung of the [ladder](gui.md#the-ladder) the skill works on: `api` (an MCP server or connector), `cli`, `web` (a fetch), `browser`, `gui` (the phone's screen; `app-only` is accepted) or `mixed`. A `gui` skill is marked *on the phone's screen* in the agent's index, so it knows the job needs the phone before it starts; `metadata.channel` works too for skills that must stay strictly in the shared format. Eleven are built in (`weekly-review`, `trip-plan`, `inbox-triage`, `compare-options`, `meeting-prep`; `phone-messages` for the phones steps with the `skills` tool when a request fits; `/name` at the start of a chat message runs one directly. Saving or removing a skill from chat is a sensitive call: it asks first, whatever the Sentinel mode. Skills switched off in the app are remembered in `app-settings.json`; the list here and that one are merged. Inside the [sandbox](sentinel.md#the-sandbox) a skill's folder (its scripts and reference files) is visible read-only. See [the app → Skills](app.md#skills) and `nanomuse skills` in the [CLI](cli.md#skills).
 
 ## Connectors
 
@@ -382,7 +382,7 @@ The model, the step cap and the sensitive words are `[gui]`'s. Window mode, the 
 
 ### The phone (`[gui]`)
 
-With this on, the agent can look at a connected phone's screen and tap, type and swipe in its apps: the way to reach 12306, 微信 or 支付宝, which have no API. Off by default; the *Phone* card on the Connections screen is the same switch. How it works and what Sentinel does with it: [gui.md](gui.md).
+With this on, the agent can look at a connected phone's screen and tap, type and swipe in its apps: the way to reach 12306, WeChat or Alipay, which have no API. Off by default; the *Phone* card on the Connections screen is the same switch. How it works and what Sentinel does with it: [gui.md](gui.md).
 
 ```toml
 [gui]
@@ -394,7 +394,7 @@ api_key          = "{{vault:GUI_API_KEY}}"
 max_steps        = 0                 # the most one phone_task may take; 0 = no cap
 device_timeout_s = 20.0              # how long to wait for the phone to answer
 reconnect_grace_s = 30.0             # how long a running task waits for a phone whose connection dropped; 0 = give up at once
-sensitive_words  = ["确认支付", "立即付款", "转账", "提交订单", "发送", "删除", "pay now", "place order", "send", "delete"]  # a tap on these asks first; a shortened sample, the default has 22 words
+sensitive_words  = ["Confirm payment", "Transfer", "Submit order", "Send", "Delete", "pay now", "place order", "send", "delete"]  # a tap on these asks first; a shortened sample, the default has 22 words
 ```
 
 `base_url` and `api_key` fall back to `[llm]` when empty. An empty `model` follows one order (the Models contract, 0.1.41): with the relay as the chat model, the relay's hands model (`qwen3.8-27b` unless `/v1/models` names another), not the chat model (the chat default reads pictures, but the hands want the model trained to point at things on a screen); with an own provider the catalogue lists with `vision`, that provider's own hands model (`defaults.hands`, `qwen3.8-27b` on Bailian, `glm-4.6v` on Zhipu) on the chat key; with a provider that cannot see (a local server by its catalogue id or host) and an account signed in, the relay's hands model under the account key, the chat model staying where it is; else the chat model, as on a host the catalogue does not list. An explicit `model` always wins. A key is only needed when the operator's `base_url` is a different service. Traces of every phone task go to `<data_dir>/phone-traces/` (the last 200 are kept; `nanomuse phone traces`).
@@ -433,7 +433,7 @@ A command that needs a key takes it through `env`, and the key itself lives in t
 
 A server that does not answer is logged and skipped, and the agent starts without its tools; the line in the log names the server and the transport's error with every URL query value masked (`?key=***`) and the vault's secrets redacted, so a refused key does not end up in `logs/`.
 
-Three Chinese services the built-in skills know come as MCP servers, and `config/config.example.toml` has the block for each: 高德地图 (hosted, `AMAP_KEY` in the vault), 12306 (`npx -y 12306-mcp`, no key; trains, query only) and 快递100 (hosted, `KUAIDI100_KEY`; parcels, paid per tracking number). Which of them have actually been run inside the phone's root file system, and what else is out there: [services.md](services.md).
+Three Chinese services the built-in skills know come as MCP servers, and `config/config.example.toml` has the block for each: Amap (hosted, `AMAP_KEY` in the vault), 12306 (`npx -y 12306-mcp`, no key; trains, query only) and  (hosted, `KUAIDI100_KEY`; parcels, paid per tracking number). Which of them have actually been run inside the phone's root file system, and what else is out there: [services.md](services.md).
 
 ## `[server]`
 
