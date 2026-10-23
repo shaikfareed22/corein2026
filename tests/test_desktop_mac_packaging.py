@@ -50,7 +50,7 @@ PackageTree = tuple[Path, dict[str, str], Path]
 def package_tree(tmp_path: Path) -> PackageTree:
     app_dir = tmp_path / "desktop"
     for folder in ("mac", "mac-arm64"):
-        app = app_dir / "dist" / folder / "fomo.corein.in"
+        app = app_dir / "dist" / folder / "corein.app"
         runtime = app / "Contents/Resources/runtime/nanomuse"
         runtime.parent.mkdir(parents=True)
         runtime.write_bytes(b"fixture native executable")
@@ -96,7 +96,7 @@ def test_only_the_requested_architecture_is_packaged(
     assert result.returncode == 0, result.stdout + result.stderr
     calls = [json.loads(line) for line in trace.read_text(encoding="utf-8").splitlines()]
     archive = next(call for call in calls if call["name"] == "ditto")
-    assert archive["args"][-2] == str(app_dir / "dist" / folder / "fomo.corein.in")
+    assert archive["args"][-2] == str(app_dir / "dist" / folder / "corein.app")
 
 
 @pytest.mark.parametrize("stage", ["sign-inner", "verify-helper", "verify-app", "verify-dmg"])
