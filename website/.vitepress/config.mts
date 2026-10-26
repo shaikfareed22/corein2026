@@ -195,7 +195,7 @@ export default defineConfig({
   srcExclude: ['tasks/**', 'archive/**', 'traces/**', 'briefs/**', 'releases/**', 'readme/**', 'zh/**', 'fork.md', ...notPages],
   cleanUrls: true,
   lastUpdated: false,
-  appearance: 'dark',
+  appearance: 'force-dark',
   // One site, two languages. `root` is English at /, `zh` is 简体中文 at /zh/ with the same
   // file names under docs/zh/. Nav, sidebar, search, footer and the edit link are per
   // locale; the language menu in the nav is VitePress's own.
@@ -204,7 +204,7 @@ export default defineConfig({
       label: 'English',
       lang: 'en',
       themeConfig: {
-        siteTitle: 'corein docs',
+        siteTitle: false,
         // Home and Try it are the project site and the demo, the same two the homepage's bar has.
         nav: [
           { text: 'Home', link: 'https://fomo.corein.in/' },
@@ -285,7 +285,7 @@ export default defineConfig({
   // What both languages share. GitHub is not in socialLinks: the nav shows it with the
   // star count instead (theme/GitHubStars.vue, the `nav-bar-content-after` slot).
   themeConfig: {
-    logo: '/corein-icon.svg',
+    logo: { src: '/corein-logo.png', alt: 'corein' },
     search: {
       provider: 'local',
       options: {
