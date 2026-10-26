@@ -1,6 +1,6 @@
 name: Website
 
-# Publishes site/ to GitHub Pages: https://nano-muse.github.io/corein/
+# Publishes site/ to GitHub Pages at https://fomo.corein.in/ (site/CNAME), the docs under /docs/.
 # Since 0.1.6 the homepage lives in nano-muse/nano-muse.github.io, served at fomo.corein.in; this
 # project page is a redirect to it, with the earlier page kept at legacy.html (its generated parts,
 # the dragon's five moods, icons, fonts, screenshots, are copied from web/ and docs/ below).
@@ -71,7 +71,7 @@ jobs:
       - name: Build the docs site into site/docs/
         working-directory: website
         env:
-          DOCS_BASE: /corein/docs/
+          DOCS_BASE: /docs/
         run: |
           npm ci
           npm run docs:build

@@ -6,7 +6,7 @@
 //   npm run docs:build    # .vitepress/dist, also the dead-link check
 //   DOCS_BASE=/docs/ npm run docs:build   # for fomo.corein.in/docs/
 //
-// DOCS_BASE defaults to /corein/docs/ — the project pages at nano-muse.github.io keep
+// DOCS_BASE defaults to /docs/, where fomo.corein.in serves the docs; the project pages keep
 // site/index.html (the redirect to fomo.corein.in) and site/legacy.html at the root, and the
 // docs sit beside them under /docs/.
 import { posix } from 'node:path'
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig, type DefaultTheme } from 'vitepress'
 
 const REPO = 'https://github.com/shaikfareed22/corein2026'
-const base = process.env.DOCS_BASE ?? '/corein/docs/'
+const base = process.env.DOCS_BASE ?? '/docs/'
 
 // Directories under docs/ that are not pages of the site: task briefs and traces are
 // working notes, the archive is the Python line's record, the release notes and the
