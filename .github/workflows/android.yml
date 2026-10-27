@@ -202,8 +202,8 @@ jobs:
           notes="docs/releases/v$VERSION.md"
           [ -f "$notes" ] || { notes=dist/notes.md; printf 'FOMO %s\n\nSee CHANGELOG.md.\n' "$VERSION" > "$notes"; }
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" dist/corein-*.apk dist/corein-*.sha256 --clobber
+            gh release upload "$GITHUB_REF_NAME" dist/fomo-*.apk dist/fomo-*.sha256 --clobber
           else
-            gh release create "$GITHUB_REF_NAME" dist/corein-*.apk dist/corein-*.sha256 \
+            gh release create "$GITHUB_REF_NAME" dist/fomo-*.apk dist/fomo-*.sha256 \
               --title "FOMO $VERSION" --notes-file "$notes" --latest
           fi

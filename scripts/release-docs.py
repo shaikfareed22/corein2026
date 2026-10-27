@@ -65,7 +65,7 @@ def news_blocks(lines: list[str]) -> list[tuple[int, int]]:
 def move_version(line: str, old: str, new: str, oldname: str, newname: str) -> str:
     """Every mention of the old version in one line becomes the new one."""
     line = line.replace(f"{old} {oldname}", f"{new} {newname}")
-    line = line.replace(f"v{old}", f"v{new}").replace(f"corein-{old}", f"corein-{new}")
+    line = line.replace(f"v{old}", f"v{new}").replace(f"fomo-{old}", f"fomo-{new}")
     return re.sub(rf"(?<![\d.]){re.escape(old)}-", f"{new}-", line)
 
 
