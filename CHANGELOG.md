@@ -1,8 +1,10 @@
 # Changelog
 
-All notable changes to corein (and, before the fork on 2026-10-20, to nanoMuse). The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [Semantic Versioning](https://semver.org/). Unreleased changes are on `main`.
+All notable changes to FOMO (called corein until 1.1.0; before the fork on 2026-10-20, nanoMuse). The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [Semantic Versioning](https://semver.org/). Unreleased changes are on `main`.
 
 ## [Unreleased]
+
+## [1.2.0] - 2026-10-26 · Rise
 
 ## [1.1.0] - 2026-10-23 · Launch
 

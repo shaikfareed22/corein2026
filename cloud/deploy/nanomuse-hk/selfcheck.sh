@@ -96,7 +96,7 @@ if [ -z "$problems" ]; then
 	exit 0
 fi
 
-line="corein Cloud self-check: $problems. $summary"
+line="FOMO Cloud self-check: $problems. $summary"
 logger -t nanomuse-selfcheck -p user.warning "$line"
 if [ -n "$alert" ]; then
 	# the same problem is posted at most once an hour

@@ -57,7 +57,7 @@ import io.github.nanomuse.ui.muse.MuseRowDivider
 import io.github.nanomuse.ui.muse.MuseSectionLabel
 
 /**
- * The account's devices on the hub, under the corein Cloud account: this phone's two
+ * The account's devices on the hub, under the FOMO Cloud account: this phone's two
  * switches (be reachable; be operable), its name, the other devices with an online dot, and
  * the web console's address. Shown only while signed in.
  */
@@ -237,6 +237,6 @@ private fun OnlineDot(online: Boolean) {
 
 private fun copy(context: Context, text: String) {
     val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    cm.setPrimaryClip(ClipData.newPlainText("corein", text))
+    cm.setPrimaryClip(ClipData.newPlainText("FOMO", text))
     Toast.makeText(context, R.string.nm_devices_web_copied, Toast.LENGTH_SHORT).show()
 }

@@ -30,7 +30,7 @@ from nanomuse.ui import UI
 class Incoming:
     """A user message on its way to the agent: the text, what was attached to it, the
     language of the client's screens (a BCP-47 tag, "" when the client did not say), and,
-    for *Use corein Cloud this time*, the model client this one turn runs on (``llm``)
+    for *Use FOMO Cloud this time*, the model client this one turn runs on (``llm``)
     and its id (``model``); None and "" for a turn on the configured model."""
 
     __slots__ = ("files", "language", "llm", "model", "text")
@@ -167,7 +167,7 @@ class MuseAgent:
         if device is None:
             status = (
                 "- GUI operation is on, but no phone is connected right now: the `phone_*` tools "
-                "will fail until the user opens the corein app on the phone (or the MobileGym "
+                "will fail until the user opens the FOMO app on the phone (or the MobileGym "
                 "module). Say so if a step needs the phone."
             )
         else:
@@ -224,7 +224,7 @@ class MuseAgent:
         others = hub.others()
         if not getattr(hub, "client", None) or not hub.client.connected.is_set():
             status = (
-                "- This computer is not connected to the corein hub right now, so the other "
+                "- This computer is not connected to the FOMO hub right now, so the other "
                 "devices cannot be reached; say so if a step needs one."
             )
         elif not others:

@@ -133,7 +133,7 @@ fun BackgroundSettingsScreen(onBack: () -> Unit) {
 
     Scaffold(
         topBar = {
-            io.github.nanomuse.ui.muse.MuseTopAppBar( // corein: Muse's bar (drop-in for TopAppBar)
+            io.github.nanomuse.ui.muse.MuseTopAppBar( // FOMO: Muse's bar (drop-in for TopAppBar)
                 title = { Text(stringResource(R.string.bg_section_header)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {

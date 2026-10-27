@@ -34,7 +34,7 @@ final class OAuthHTTPClient: HTTPClient {
         config.protocolClasses = [OAuthURLProtocol.self]
         config.httpAdditionalHeaders = (config.httpAdditionalHeaders ?? [:]).merging(
             ["X-Minis-OAuth-UUID": rid]) { _, new in new }
-        NanoMuseProxy.apply(to: config) // corein: Settings → Network, the proxy for own providers
+        NanoMuseProxy.apply(to: config) // FOMO: Settings → Network, the proxy for own providers
         let session = URLSession(configuration: config)
         self.underlying = URLSessionHTTPClientAdapter(urlSession: session)
     }

@@ -1,4 +1,4 @@
-# corein configuration
+# FOMO configuration
 # Copy to config/config.toml (or ~/.nanomuse/config.toml) and edit.
 # String values may reference environment variables: "${VAR}" or "${VAR:-default}".
 
@@ -73,12 +73,12 @@ pass_reasoning = false
 # extra_body = { "thinking" = { "type" = "enabled" } }
 # An HTTP(S) or SOCKS proxy for this slot's requests only, when this machine's network
 # cannot reach the provider directly; empty, the environment's HTTPS_PROXY applies.
-# Honoured by the ChatGPT sign-in too; never used for corein Cloud.
+# Honoured by the ChatGPT sign-in too; never used for FOMO Cloud.
 # proxy = "http://127.0.0.1:7890"
 
 # ------------------------------------------------------------------------------
 [agent]
-name = "corein"
+name = "FOMO"
 max_steps = 30
 # workspace = "./workspace"     # the agent's files. Default: ./workspace when the current directory has one, else <data_dir>/workspace
 # Directories outside the workspace the files tool may use. Reads there count as
@@ -335,12 +335,12 @@ start_grace = 4          # seconds the tools/MCP servers/cloud account may take 
 side_chats = false
 
 # ------------------------------------------------------------------------------
-# corein Cloud: the relay this runtime signs in to (docs/cloud.md)
+# FOMO Cloud: the relay this runtime signs in to (docs/cloud.md)
 # ------------------------------------------------------------------------------
 [cloud]
 base_url = "https://cloud.fomo.corein.in"   # a relay you run yourself: its public address (docs/self-hosting.md)
 required = true          # the first run does not finish without an account; false for a runtime with no relay at all
-models = true            # the account's models as a source (the apps' "Use corein Cloud models" switch); false keeps the sign-in for sync and the devices only
+models = true            # the account's models as a source (the apps' "Use FOMO Cloud models" switch); false keeps the sign-in for sync and the devices only
 sync = true              # default for the account-wide Data controls → Sync switch (the person's choice, once made, counts)
 
 # ------------------------------------------------------------------------------

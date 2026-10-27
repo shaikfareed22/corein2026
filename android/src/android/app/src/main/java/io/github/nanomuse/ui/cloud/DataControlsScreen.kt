@@ -46,8 +46,8 @@ import kotlinx.coroutines.launch
 const val ROUTE_DATA_CONTROLS = "nanomuse_data_controls"
 
 /**
- * Settings → Data controls: the one switch over what corein Cloud keeps of this account's
- * chats — "Help improve corein's AI models" —, what exactly that is, how new accounts
+ * Settings → Data controls: the one switch over what FOMO Cloud keeps of this account's
+ * chats — "Help improve FOMO's AI models" —, what exactly that is, how new accounts
  * start, the privacy policy, and the way to delete what was kept; below it, the switch over the
  * conversations synced between the account's devices ([SyncConversationsCard]). The shape of
  * Muse's own page of the same name; nothing here touches the allowance.

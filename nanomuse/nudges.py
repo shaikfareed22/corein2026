@@ -226,7 +226,7 @@ class NudgesPolicy:
             return self.view()
         self.tried_at = self._clock()
         url = self.base_url + "/v1/nudges"
-        headers = {"User-Agent": f"corein/{__version__}", "Accept": "application/json"}
+        headers = {"User-Agent": f"FOMO/{__version__}", "Accept": "application/json"}
         try:
             if self._client is not None:
                 r = await self._client.get(url, headers=headers, timeout=TIMEOUT_S)

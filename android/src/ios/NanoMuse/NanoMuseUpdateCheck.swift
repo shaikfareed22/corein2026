@@ -1,6 +1,6 @@
 //
 //  NanoMuseUpdateCheck.swift
-//  corein
+//  FOMO
 //
 //  The version row in Settings (contract C2): what is installed, what the latest
 //  release is, and a link to it when it is newer. The download index on fomo.corein.in

@@ -1,4 +1,4 @@
-import Combine // corein: NanoMuseStar publishes its pending ask
+import Combine // FOMO: NanoMuseStar publishes its pending ask
 import Foundation
 import UIKit
 
@@ -367,25 +367,25 @@ final class NanoMuseStar: ObservableObject {
     static func builtInWords(for moment: NanoMuseStarMoment) -> String {
         switch moment {
         case .signedIn:
-            return AppLocalized("Welcome. corein is free, open source and non-profit, a personal agent for anyone who runs it. If that is worth something to you, a star on GitHub is how the next person finds it.")
+            return AppLocalized("Welcome. FOMO is free, open source and non-profit, a personal agent for anyone who runs it. If that is worth something to you, a star on GitHub is how the next person finds it.")
         case .tasks(let n) where n == 1:
-            return AppLocalized("One task done. If corein helped, a star on GitHub tells the people building it that it did.")
+            return AppLocalized("One task done. If FOMO helped, a star on GitHub tells the people building it that it did.")
         case .tasks(let n):
-            return String(format: AppLocalized("%d tasks done. If corein is useful, a star on GitHub helps the next person find it."), n)
+            return String(format: AppLocalized("%d tasks done. If FOMO is useful, a star on GitHub helps the next person find it."), n)
         case .newLook:
-            return AppLocalized("A new face, drawn for you. If you like where corein is going, a star on GitHub helps more people find it.")
+            return AppLocalized("A new face, drawn for you. If you like where FOMO is going, a star on GitHub helps more people find it.")
         case .exhausted:
-            return AppLocalized("The free allowance is used up. Thank you for coming this far. If corein has earned it, a star on GitHub keeps the project in view for the next person.")
+            return AppLocalized("The free allowance is used up. Thank you for coming this far. If FOMO has earned it, a star on GitHub keeps the project in view for the next person.")
         case .daysUsed(let n) where n == 1:
-            return AppLocalized("A day with corein. If it helped, a star on GitHub helps the next person find it.")
+            return AppLocalized("A day with FOMO. If it helped, a star on GitHub helps the next person find it.")
         case .daysUsed(let n) where n == 7:
-            return AppLocalized("A week with corein. If it has earned a place in your day, a star on GitHub helps the next person find it.")
+            return AppLocalized("A week with FOMO. If it has earned a place in your day, a star on GitHub helps the next person find it.")
         case .daysUsed(let n) where n == 30:
-            return AppLocalized("A month with corein. If it has become part of your routine, a star on GitHub tells others it is worth a try.")
+            return AppLocalized("A month with FOMO. If it has become part of your routine, a star on GitHub tells others it is worth a try.")
         case .daysUsed(let n):
-            return String(format: AppLocalized("%d days with corein. If it has earned a place in your day, a star on GitHub helps the next person find it."), n)
+            return String(format: AppLocalized("%d days with FOMO. If it has earned a place in your day, a star on GitHub helps the next person find it."), n)
         case .goalDone:
-            return AppLocalized("Goal reached. If corein helped you get there, a star on GitHub tells the people building it.")
+            return AppLocalized("Goal reached. If FOMO helped you get there, a star on GitHub tells the people building it.")
         }
     }
 

@@ -1,26 +1,26 @@
 /* Info.plist permission strings — Français */
 
-"NSLocationWhenInUseUsageDescription" = "corein utilise votre position pour enregistrer le lieu de démarrage des sessions de l'agent dans votre historique.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "corein utilise la localisation en arrière-plan pour maintenir les tâches de l'agent en cours d'exécution. Les données de localisation servent uniquement à enregistrer l'historique des connexions.";
-"NSCalendarsUsageDescription" = "corein accède au calendrier pour que l'agent AI puisse consulter votre emploi du temps, vérifier vos disponibilités et créer des événements en votre nom.";
-"NSCalendarsFullAccessUsageDescription" = "corein accède au calendrier pour que l'agent AI puisse consulter votre emploi du temps, vérifier vos disponibilités et créer des événements en votre nom.";
-"NSRemindersUsageDescription" = "corein accède aux rappels pour que l'agent AI puisse consulter et créer des rappels en votre nom.";
-"NSRemindersFullAccessUsageDescription" = "corein accède aux rappels pour que l'agent AI puisse consulter et créer des rappels en votre nom.";
-"NSCameraUsageDescription" = "corein a besoin de l'accès à l'appareil photo pour prendre des photos destinées aux conversations AI.";
-"NSPhotoLibraryUsageDescription" = "corein a besoin de l'accès à la photothèque pour joindre des images aux conversations AI.";
-"NSPhotoLibraryAddUsageDescription" = "corein a besoin de l'autorisation d'enregistrer des vidéos et images dans votre photothèque.";
-"NSHealthShareUsageDescription" = "corein accède à HealthKit pour que l'agent AI puisse lire vos données de santé telles que les pas, la fréquence cardiaque, le sommeil et les entraînements.";
-"NSHealthUpdateUsageDescription" = "corein accède en écriture à HealthKit pour que l'agent AI puisse enregistrer des données de santé telles que les pas, le poids et l'hydratation.";
-"NSContactsUsageDescription" = "corein accède aux contacts pour que l'agent AI puisse rechercher, consulter et gérer vos contacts en votre nom.";
-"NSAppleMusicUsageDescription" = "corein accède à la bibliothèque multimédia pour que l'agent AI puisse rechercher votre musique et contrôler la lecture.";
-"NSMicrophoneUsageDescription" = "corein a besoin de l'accès au microphone pour la saisie vocale dans le chat.";
-"NSSpeechRecognitionUsageDescription" = "corein utilise la reconnaissance vocale pour convertir votre voix en messages texte.";
-"NSHomeKitUsageDescription" = "corein accède à HomeKit pour que l'agent AI puisse interroger et contrôler vos accessoires domotiques.";
-"NSAlarmKitUsageDescription" = "corein utilise AlarmKit pour que l'agent AI puisse régler des alarmes et des minuteries en votre nom.";
-"NSLocalNetworkUsageDescription" = "corein utilise le réseau local pour le serveur de débogage et pour que l'agent IA puisse joindre les services de votre propre réseau."; /* corein: the app has no VM; the sentence matches Info.plist */
+"NSLocationWhenInUseUsageDescription" = "FOMO utilise votre position pour enregistrer le lieu de démarrage des sessions de l'agent dans votre historique.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "FOMO utilise la localisation en arrière-plan pour maintenir les tâches de l'agent en cours d'exécution. Les données de localisation servent uniquement à enregistrer l'historique des connexions.";
+"NSCalendarsUsageDescription" = "FOMO accède au calendrier pour que l'agent AI puisse consulter votre emploi du temps, vérifier vos disponibilités et créer des événements en votre nom.";
+"NSCalendarsFullAccessUsageDescription" = "FOMO accède au calendrier pour que l'agent AI puisse consulter votre emploi du temps, vérifier vos disponibilités et créer des événements en votre nom.";
+"NSRemindersUsageDescription" = "FOMO accède aux rappels pour que l'agent AI puisse consulter et créer des rappels en votre nom.";
+"NSRemindersFullAccessUsageDescription" = "FOMO accède aux rappels pour que l'agent AI puisse consulter et créer des rappels en votre nom.";
+"NSCameraUsageDescription" = "FOMO a besoin de l'accès à l'appareil photo pour prendre des photos destinées aux conversations AI.";
+"NSPhotoLibraryUsageDescription" = "FOMO a besoin de l'accès à la photothèque pour joindre des images aux conversations AI.";
+"NSPhotoLibraryAddUsageDescription" = "FOMO a besoin de l'autorisation d'enregistrer des vidéos et images dans votre photothèque.";
+"NSHealthShareUsageDescription" = "FOMO accède à HealthKit pour que l'agent AI puisse lire vos données de santé telles que les pas, la fréquence cardiaque, le sommeil et les entraînements.";
+"NSHealthUpdateUsageDescription" = "FOMO accède en écriture à HealthKit pour que l'agent AI puisse enregistrer des données de santé telles que les pas, le poids et l'hydratation.";
+"NSContactsUsageDescription" = "FOMO accède aux contacts pour que l'agent AI puisse rechercher, consulter et gérer vos contacts en votre nom.";
+"NSAppleMusicUsageDescription" = "FOMO accède à la bibliothèque multimédia pour que l'agent AI puisse rechercher votre musique et contrôler la lecture.";
+"NSMicrophoneUsageDescription" = "FOMO a besoin de l'accès au microphone pour la saisie vocale dans le chat.";
+"NSSpeechRecognitionUsageDescription" = "FOMO utilise la reconnaissance vocale pour convertir votre voix en messages texte.";
+"NSHomeKitUsageDescription" = "FOMO accède à HomeKit pour que l'agent AI puisse interroger et contrôler vos accessoires domotiques.";
+"NSAlarmKitUsageDescription" = "FOMO utilise AlarmKit pour que l'agent AI puisse régler des alarmes et des minuteries en votre nom.";
+"NSLocalNetworkUsageDescription" = "FOMO utilise le réseau local pour le serveur de débogage et pour que l'agent IA puisse joindre les services de votre propre réseau."; /* FOMO: the app has no VM; the sentence matches Info.plist */
 
-/* corein: the keys Info.plist declares but this file lacked, so the prompt is in the person's language */
-"NFCReaderUsageDescription" = "corein utilise le NFC pour que l'agent IA puisse lire et écrire des tags NFC en votre nom.";
-"NSBluetoothAlwaysUsageDescription" = "corein utilise le Bluetooth pour que l'agent IA puisse rechercher, connecter et communiquer avec des appareils BLE à proximité en votre nom.";
-"NSBluetoothPeripheralUsageDescription" = "corein utilise le Bluetooth pour que l'agent IA puisse rechercher, connecter et communiquer avec des appareils BLE à proximité en votre nom.";
-"NSFaceIDUsageDescription" = "corein utilise Face ID pour protéger les sessions de discussion verrouillées afin que vous seul puissiez en voir le contenu.";
+/* FOMO: the keys Info.plist declares but this file lacked, so the prompt is in the person's language */
+"NFCReaderUsageDescription" = "FOMO utilise le NFC pour que l'agent IA puisse lire et écrire des tags NFC en votre nom.";
+"NSBluetoothAlwaysUsageDescription" = "FOMO utilise le Bluetooth pour que l'agent IA puisse rechercher, connecter et communiquer avec des appareils BLE à proximité en votre nom.";
+"NSBluetoothPeripheralUsageDescription" = "FOMO utilise le Bluetooth pour que l'agent IA puisse rechercher, connecter et communiquer avec des appareils BLE à proximité en votre nom.";
+"NSFaceIDUsageDescription" = "FOMO utilise Face ID pour protéger les sessions de discussion verrouillées afin que vous seul puissiez en voir le contenu.";

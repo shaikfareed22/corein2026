@@ -1,8 +1,8 @@
 //
 //  NanoMuseProfile.swift
-//  corein
+//  FOMO
 //
-//  The relay side of the agent's look: pictures drawn through corein
+//  The relay side of the agent's look: pictures drawn through FOMO
 //  Cloud (/v1/images/*), what a new face would cost (/v1/estimate), and
 //  the profile the account's devices share (/v1/me/profile). Android:
 //  cloud/ProfileSync.kt, cloud/FaceCost.kt, avatar/ImageGen.kt.
@@ -35,7 +35,7 @@ enum NanoMuseRelayMedia {
     @MainActor
     private static func authorized(_ method: String, _ path: String) throws -> URLRequest {
         guard let key = NanoMuseCloud.apiKey else {
-            throw NanoMuseCloudError(code: "signed_out", message: AppLocalized("Sign in to corein Cloud first."), status: 401)
+            throw NanoMuseCloudError(code: "signed_out", message: AppLocalized("Sign in to FOMO Cloud first."), status: 401)
         }
         guard let url = URL(string: NanoMuseCloud.baseURL + path) else {
             throw NanoMuseCloudError(code: "bad_base", message: "Bad relay address", status: 0)
@@ -80,7 +80,7 @@ enum NanoMuseRelayMedia {
                 return id
             }
         }
-        throw NanoMuseCloudError(code: "model_not_offered", message: AppLocalized("corein Cloud offers no image model right now."), status: 404)
+        throw NanoMuseCloudError(code: "model_not_offered", message: AppLocalized("FOMO Cloud offers no image model right now."), status: 404)
     }
 
     @MainActor
@@ -401,7 +401,7 @@ final class NanoMuseProfileSync: ObservableObject {
                     }
                     if stills[.idle] != nil {
                         store.wear(remote: stills, faceId: full.faceId, description: full.description, style: full.style)
-                        // corein: clips are per device — the old ones went with `wear`; new ones when enabled (contract C3)
+                        // FOMO: clips are per device — the old ones went with `wear`; new ones when enabled (contract C3)
                         NanoMuseAvatarMotion.shared.animateIfEnabled()
                     }
                 } else if head.rev > 0, store.source != .dragon {

@@ -34,10 +34,10 @@ describe("failureDetail", () => {
 
   it("never shows a validation list, a JSON body or the status number", () => {
     const list = failureDetail(422, { detail: [{ loc: ["body", "text"], msg: "field required", type: "missing" }] });
-    expect(list).toBe("Your corein could not do that.");
-    expect(failureDetail(500, undefined)).toBe("Your corein hit a problem; try again in a moment.");
-    expect(failureDetail(502, { error: "upstream" })).toBe("Your corein hit a problem; try again in a moment.");
-    expect(failureDetail(404, { detail: "" })).toBe("Your corein could not do that.");
+    expect(list).toBe("Your FOMO could not do that.");
+    expect(failureDetail(500, undefined)).toBe("Your FOMO hit a problem; try again in a moment.");
+    expect(failureDetail(502, { error: "upstream" })).toBe("Your FOMO hit a problem; try again in a moment.");
+    expect(failureDetail(404, { detail: "" })).toBe("Your FOMO could not do that.");
     for (const text of [list, failureDetail(500, undefined)]) {
       expect(text).not.toMatch(/\d{3}|\[object|\{/);
     }

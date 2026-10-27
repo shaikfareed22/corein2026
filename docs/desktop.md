@@ -1,18 +1,18 @@
-# corein Desktop
+# FOMO Desktop
 
-The computer's Muse, in a window: corein built on
+The computer's Muse, in a window: FOMO built on
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`), laid out
 screen by screen in [desktop-muse.md](desktop-muse.md), with the account, the face,
 Hands on this computer's screen and Reach to every other device of the account as
 plugins ([harness.md](harness.md)). Windows 10+, macOS 12+ and Linux x64; one
-installer each, nothing to install first: the harness, the corein bundle and the
+installer each, nothing to install first: the harness, the FOMO bundle and the
 runtime for the hands are inside.
 
 | | |
 | --- | --- |
-| Windows | `corein-Desktop-<version>-win-x64.exe` (NSIS; no certificate, so SmartScreen asks for *Run anyway*) |
-| macOS | `corein-Desktop-<version>-mac-arm64.dmg` / `-mac-x64.dmg` (and `.zip`); ad-hoc signed unless a release was signed and notarized, then *Open Anyway* once in System Settings → Privacy & Security |
-| Linux | `corein-Desktop-<version>-linux-x64.deb` (preferred) / `.AppImage` / `.tar.gz`; see [Linux notes](#linux-notes) |
+| Windows | `fomo-Desktop-<version>-win-x64.exe` (NSIS; no certificate, so SmartScreen asks for *Run anyway*) |
+| macOS | `fomo-Desktop-<version>-mac-arm64.dmg` / `-mac-x64.dmg` (and `.zip`); ad-hoc signed unless a release was signed and notarized, then *Open Anyway* once in System Settings → Privacy & Security |
+| Linux | `fomo-Desktop-<version>-linux-x64.deb` (preferred) / `.AppImage` / `.tar.gz`; see [Linux notes](#linux-notes) |
 
 Every release carries them (`.github/workflows/desktop-app.yml`; `SHA256SUMS-desktop.txt`
 beside them). Windows releases also carry the update metadata electron-updater reads: `latest.yml`,
@@ -27,7 +27,7 @@ bytes match; until then it serves the previous release. The code is under
 `harness/dsh-nanomuse`, the Electron shell in `harness/desktop`; how to build it yourself is
 in [harness/README.md](../harness/README.md). Up to 0.1.29 the same installers wrapped the
 Python runtime and the web app in an Electron shell of their own (`desktop/app`) and the
-harness build shipped beside them as *corein Harness*; from 0.1.30 there is the one
+harness build shipped beside them as *FOMO Harness*; from 0.1.30 there is the one
 desktop, and it installs over the old one (same application id).
 
 ## Updating on Windows
@@ -80,11 +80,11 @@ and after the run), the profile panel with memory,
 the Settings pages (Connectors, Computer use, File system access, Dictation,
 Permissions, Data controls with export and reset), the full-window first run. The agent
 is dsh's (its agent loop, tools, skills, goals, plan mode, compaction, sub-agents, MCP),
-speaking as corein through the `nanomuse` preset, with:
+speaking as FOMO through the `nanomuse` preset, with:
 
 - **the account**: a phone number or an e-mail and a code (or a password, with a friend's
-  invite code) against [corein Cloud](cloud.md); the key in dsh's credential store; the
-  account's models as the *corein Cloud* provider of the harness's own OpenAI-compatible
+  invite code) against [FOMO Cloud](cloud.md); the key in dsh's credential store; the
+  account's models as the *FOMO Cloud* provider of the harness's own OpenAI-compatible
   adapter (nothing of ours sits in the model path); Settings → Account is the whole account
   as the phone has it (the pool in yuan with the ways on when it runs low, the invite code,
   usage by kind and by model, the password, the devices holding a key, the timeline, deletion),
@@ -96,7 +96,7 @@ speaking as corein through the `nanomuse` preset, with:
   Linux builds do not; a clip the preview cannot play is refused there), previews it in the
   face's round frame, and plays it muted in a loop for every mood;
   it stays on this computer as `$DSH_HOME/nanomuse/avatar/own-clip.mp4`, is never sent to
-  corein Cloud, and *Default face* removes it (the fallback rule is in
+  FOMO Cloud, and *Default face* removes it (the fallback rule is in
   [avatar.md](avatar.md));
 - **Hands** on this computer: `nanomuse mcp` from the bundled runtime over stdio, the
   runtime's `computer_screen` and `computer_act` tools with their approvals, so "what is
@@ -126,11 +126,11 @@ speaking as corein through the `nanomuse` preset, with:
   CLI, the run streams in with its tools, *Stop* ends it) and then the account's other computers',
   over the `coding.*` hub actions this computer announces too; a device card's *Coding
   agents* chip opens the page on that computer ([coding-agents.md](coding-agents.md)).
-- **Network** (Settings → corein Cloud → Network): one proxy for what the app sends out
+- **Network** (Settings → FOMO Cloud → Network): one proxy for what the app sends out
   (`http://host:port`, `https://`, `socks5://` or `socks5h://`, a `user:pass@` allowed and
   shown masked). Everything the dsh Host sends goes through it: your own keys, the ChatGPT
   sign-in's calls, *List models*, the pages the tools read, connectors, the update check,
-  and the hands' runtime (`nanomuse mcp` inherits the same variables). corein Cloud (the relay, the hub's WebSocket, the sync) and loopback never
+  and the hands' runtime (`nanomuse mcp` inherits the same variables). FOMO Cloud (the relay, the hub's WebSocket, the sync) and loopback never
   do. The shell keeps it in `desktop.json` (mode 0600, since the address may carry a
   password) next to *open at login* and puts it on the dsh
   Host's environment at start (`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY` for SOCKS, `NO_PROXY`
@@ -169,7 +169,7 @@ show, under the turn that did not run, in the chat:
 - one sentence (*The free allowance is used up.*) and that your sign-in and your devices
   keep working whichever way you pick;
 - **your own model key**: the provider rows for where you are (the same rows as Settings →
-  corein Cloud, with *Add key* and *Get a key* inline), *Other providers and what each key
+  FOMO Cloud, with *Add key* and *Get a key* inline), *Other providers and what each key
   covers* folded under them, the list the relay sends with the refusal and with `/v1/me`
   (`spend.guidance`, [cloud.md](cloud.md#allowance)), not one written into the app, and
   the *Step-by-step guide* ([own-key.md](own-key.md));
@@ -180,7 +180,7 @@ show, under the turn that did not run, in the chat:
   the app's; its sentence is the app's too unless the relay's policy carries one (`star.text`,
   `star.text_zh`, up to 200 characters; a Chinese UI takes `text_zh`, else `text`;
   [cloud.md](cloud.md));
-- *Open Settings → corein Cloud* and *Try again* (the same words are sent again once a
+- *Open Settings → FOMO Cloud* and *Try again* (the same words are sent again once a
   way on is set up).
 
 The relay's other refusals are one plain sentence each, in the app's language, never the
@@ -190,17 +190,17 @@ status code or the JSON body:
 | --- | --- | --- |
 | `413` (the request is too big for the relay or the model's window) | *That message is too large for the model's window. Shorten it, leave out some attachments, or start a new chat.* | *New chat* |
 | `400 content_rejected` (the provider's content check declined the words; a provider's own `DataInspectionFailed` on your own key reads the same) | *The model provider's content check declined this request. Try different words, or start a new chat if it keeps happening: the words it objects to can be earlier in the conversation.* | *New chat*, *Try again* |
-| `401` (the key was retired elsewhere: a sign-out of every device, a deleted account) | *This sign-in is no longer valid. Sign in again under Settings → corein Cloud.* The desktop signs itself out at the same time, as it does when `/v1/me` answers 401. | *Sign in* |
-| `403` (the account is disabled, or the relay does not take it) | *This account cannot use corein Cloud right now.*, with the relay's own words under it | *Open Settings → corein Cloud* |
+| `401` (the key was retired elsewhere: a sign-out of every device, a deleted account) | *This sign-in is no longer valid. Sign in again under Settings → FOMO Cloud.* The desktop signs itself out at the same time, as it does when `/v1/me` answers 401. | *Sign in* |
+| `403` (the account is disabled, or the relay does not take it) | *This account cannot use FOMO Cloud right now.*, with the relay's own words under it | *Open Settings → FOMO Cloud* |
 | `429` without the allowance code (too many requests at once, the provider busy) | *Too many requests at once. Wait a moment and try again.*, with the relay's `retry_after` when it sent one | *Try again* |
 | `429 daily_cap` (a relay that sets a daily share) | *Today's share of the allowance is used up. It resets tomorrow.*, with the relay's own words under it | *Try again* |
-| `404 model_not_offered` | *corein Cloud does not offer that model any more.* | *Open Settings → corein Cloud* |
-| `5xx`, or no answer at all (connection refused, timeout) | *corein Cloud did not answer.* / *Could not reach corein Cloud. Check the connection and try again.* | *Try again* |
+| `404 model_not_offered` | *FOMO Cloud does not offer that model any more.* | *Open Settings → FOMO Cloud* |
+| `5xx`, or no answer at all (connection refused, timeout) | *FOMO Cloud did not answer.* / *Could not reach FOMO Cloud. Check the connection and try again.* | *Try again* |
 | `429 allowance_exhausted` with `paused: true` (relay 0.22: the operator paused the free allowance, [cloud.md](cloud.md#controls)) | the same allowance card, led by *The free allowance is paused on this relay for now, not used up. Your sign-in, your devices and what is left stay as they are.* | the ways on, *Try again* |
-| `503 service_paused` | *corein Cloud is paused by its operator for now; your sign-in and your data are kept. Try again later.* | *Try again* |
+| `503 service_paused` | *FOMO Cloud is paused by its operator for now; your sign-in and your data are kept. Try again later.* | *Try again* |
 | `503 sync_paused` | *Conversation sync is paused on this relay for now; what is stored is kept and your devices keep working on their own.* | *Try again* |
 | `503 hub_paused` | *The device hub is paused on this relay for now; each device keeps working on its own.* | *Try again* |
-| `403 signup_closed` (at sign-in only) | the relay's own sentence: *New sign-ups are paused on this relay for now; existing accounts keep working.* | *Open Settings → corein Cloud* |
+| `403 signup_closed` (at sign-in only) | the relay's own sentence: *New sign-ups are paused on this relay for now; existing accounts keep working.* | *Open Settings → FOMO Cloud* |
 
 A refusal is not retried: before 0.1.40 the harness took the relay's `429` for a rate
 limit and tried five more times (about twenty seconds) before the raw reply appeared; now
@@ -212,12 +212,12 @@ waterfall and rewrites the failure to `nanomuse/<kind>`) and the chat's `turn-er
 
 The pages outside the chat that talk to the relay (sign-in, the models list, the account
 sheet, the avatar studio, the connectors, the devices) follow the same rule for the common
-cases: the relay out of reach says *corein Cloud could not be reached. Check the connection
-and try again.*, a deadline passed *corein Cloud did not answer in time. Try again in a
+cases: the relay out of reach says *FOMO Cloud could not be reached. Check the connection
+and try again.*, a deadline passed *FOMO Cloud did not answer in time. Try again in a
 moment.*, a `429` *Too many requests just now. Wait a moment and try again.*, a `401` *Not
-signed in to corein Cloud, or the sign-in has expired. Sign in again.*, a `5xx` *corein
+signed in to FOMO Cloud, or the sign-in has expired. Sign in again.*, a `5xx` *FOMO
 Cloud ran into a problem (503). Try again in a minute.* with the status; and when the
-desktop's own host on loopback does not answer at all, *This computer's corein is not
+desktop's own host on loopback does not answer at all, *This computer's FOMO is not
 answering. Restart the app and try again.* Anything else reads *That did not work:* with the
 message as it came (`failureText` in `src/client/api.ts`; the host turns a `fetch failed` or
 a timeout on its side into the codes `unreachable` 503 and `timeout` 504).
@@ -239,12 +239,12 @@ process before removing the check's data directories.
 
 `~/.nanomuse/desktop` (`NANOMUSE_DESKTOP_HOME` moves it) is the app's dsh home: the
 profile under `profiles/nanomuse` (the bundle list, the person's own `cordis.patch.yml`
-where Settings and the sign-in write the `corein Cloud` provider), dsh's credential
+where Settings and the sign-in write the `FOMO Cloud` provider), dsh's credential
 store with the account key, the sessions, `desktop.log` with the shell's and the Host's
 lines, and `port`, the loopback port the Host had last time, tried first on the next
 launch (then 38421, then any free one) so the window's origin, and with it everything
 the browser side keeps in that origin's storage, stays the same from launch to launch. A
-home kept by corein Harness 0.1.28–0.1.29 under `~/.nanomuse/harness`
+home kept by FOMO Harness 0.1.28–0.1.29 under `~/.nanomuse/harness`
 is taken over once. `NANOMUSE_CLOUD_URL` points the account at another relay;
 `NANOMUSE_PY` points the preset at another runtime for the hands. The CLI's own `~/.dsh`
 is not touched. `nanomuse/hands.json` under the home (mode 0600) is the hands model as
@@ -260,9 +260,9 @@ ideas were tried, the library index, memory).
 ## Models
 
 Settings → Models, right after General, is one row per thing a model does: *Chat*,
-*Operating the screen*, *Making pictures*, *Making clips*. Each picker lists corein Cloud
+*Operating the screen*, *Making pictures*, *Making clips*. Each picker lists FOMO Cloud
 first while you are signed in, its recommended model marked, then one group per provider
-you added under Settings → corein Cloud, each group holding only the models that can do
+you added under Settings → FOMO Cloud, each group holding only the models that can do
 that row's job (the screen needs a model that sees images; the hands speak OpenAI's shape,
 so an Anthropic or native Gemini key is named under the row but not listed). A row nothing
 can do shows one sentence naming who could and *Add a provider*.
@@ -277,10 +277,10 @@ and the search live in `harness/dsh-nanomuse/src/client/model-list.ts`, checked 
 `tests/model-list.test.mjs`.
 
 What a row uses when you have not chosen: the provider new chats answer through, when it
-is one of your own and has a model for the job (its catalogue default); else corein
+is one of your own and has a model for the job (its catalogue default); else FOMO
 Cloud while signed in; else the first of your providers that can. The three rows that
 follow this order have *Automatic* as their first entry, with the row saying what it gives
-right now (*Currently corein Cloud · qwen3.8-27b*, say); pick it to drop a choice you
+right now (*Currently FOMO Cloud · qwen3.8-27b*, say); pick it to drop a choice you
 made and let the row follow the order again. A chat pick is the default for new chats and
 moves the main chat with it (*Applies to the main chat and to new chats; a side chat keeps
 its model.*); a side chat keeps the model it was given, and the same pick twice writes
@@ -295,18 +295,18 @@ from Model Studio only, through the account or your own Bailian key.
 
 After you save a key, a small card asks *Use it for* with a toggle per thing the key can
 handle, all on; *Use it* switches those rows to that provider, *Not now* changes nothing.
-When a model of your own fails under a turn, the card offers *Use corein Cloud this
+When a model of your own fails under a turn, the card offers *Use FOMO Cloud this
 time* while signed in: that one message is sent again through the account and the chat
 goes back to its model when the turn ends; the Models page stays as it was. *Use it* with
 chat ticked moves the main chat too. Nothing falls
 back on its own. The same button follows a failed studio round and a failed set of clips.
 
-While signed in, the page starts with one switch, *Use corein Cloud models*. Off, the
+While signed in, the page starts with one switch, *Use FOMO Cloud models*. Off, the
 account's models leave every picker and the automatic order, the harness's side calls (a
 chat's title, a compaction) run on the chat row's own model instead, and a chat that still
 sits on a Cloud model is not sent: a card says so and offers another model, a new chat, or
-*Use corein Cloud this time*, the only thing that spends the allowance while the switch
-is off. You stay signed in; sync, your devices and Settings → corein Cloud keep working.
+*Use FOMO Cloud this time*, the only thing that spends the allowance while the switch
+is off. You stay signed in; sync, your devices and Settings → FOMO Cloud keep working.
 Switching off while the chat row is the account's moves that row to your own chat model
 when you have one; when you have none, the switch is refused with one sentence under it and
 stays on, since nothing else could answer (the same rule on every client). The rule holds the
@@ -316,7 +316,7 @@ sentence; before 1.0.1 the chat fell onto dsh's stock default, which no key serv
 
 The profile's `node_modules/dsh-nanomuse` is a link (a junction on Windows) to the plugin
 inside the installed app, rewritten at every launch whose install folder differs from the
-link's target: an update that moved the app, say from `Programs\corein\nanomuse-desktop`
+link's target: an update that moved the app, say from `Programs\FOMO\nanomuse-desktop`
 to `Programs\nanomuse-desktop`, leaves a link pointing nowhere, and 0.1.39 could not start
 over it (`EEXIST: file already exists, symlink …` in `desktop.log`). Since 0.1.40 the stale
 link is removed as a link and remade; should that still fail, the message names the path to
@@ -340,9 +340,9 @@ should every start stay slow, excluding the install folder from real-time scanni
 
 The hands need two things from macOS: *Screen Recording* for the screenshots and
 *Accessibility* for the mouse and the keyboard. Since 0.1.38 both belong to a small app of
-their own, **corein Computer Use** (`corein.app/Contents/Helpers/corein Computer
+their own, **FOMO Computer Use** (`FOMO.app/Contents/Helpers/FOMO Computer
 Use.app`, bundle id `com.corein.desktop.computer-use`): that is the row you switch
-on in System Settings → Privacy & Security → Screen Recording and → Accessibility. corein
+on in System Settings → Privacy & Security → Screen Recording and → Accessibility. FOMO
 Desktop itself holds neither.
 
 Why a second app. macOS attributes a permission request to the *responsible process*, the
@@ -365,28 +365,28 @@ Screen Recording granted, which 0.1.39 logged as `helper screenshot failed (no s
 noImage)` and then covered with a `desktopCapturer` frame that was black or stale. The app
 starts the helper at launch (to read the grants and to ask for the missing ones) and
 quits it when it quits; the helper also leaves on its own when the app is gone. It has no
-window and no Dock icon; Activity Monitor lists it as *corein Computer Use*.
+window and no Dock icon; Activity Monitor lists it as *FOMO Computer Use*.
 
 What you do, once, on a Mac that has not granted anything yet (checked on macOS 27.0.1,
 Apple silicon):
 
-1. Open corein from the Applications folder (drag it there from the disk image first; see
+1. Open FOMO from the Applications folder (drag it there from the disk image first; see
    *The quarantine flag* below). Settings → Computer use → Permissions, or the first time the
    hands are about to be used: a short dialog of ours says what is being asked and why.
-2. **Screen Recording.** The system's dialog appears (*"corein Computer Use" would like to
+2. **Screen Recording.** The system's dialog appears (*"FOMO Computer Use" would like to
    record this computer's screen and audio*) with *Open System Settings*. The pane (called
-   *Screen & System Audio Recording* on macOS 15 and later) lists **corein Computer Use**;
+   *Screen & System Audio Recording* on macOS 15 and later) lists **FOMO Computer Use**;
    switch it on. macOS may offer to *Quit & Reopen* the helper: either answer is fine, the
    app starts the helper again by itself and the next screenshot is the real screen. Nothing
-   of corein itself restarts; the conversation goes on.
-3. **Accessibility.** The system's dialog again, then the switch next to **corein Computer
+   of FOMO itself restarts; the conversation goes on.
+3. **Accessibility.** The system's dialog again, then the switch next to **FOMO Computer
    Use** in the Accessibility pane; macOS asks for your password or Touch ID to flip it. It
    takes effect at once.
 
 The Permissions page shows both rows live, names the helper as the thing to switch on, and
 its *Try it* buttons take a test screenshot and move the mouse through the real chain (the
 app → the runtime → the helper), so what passes there passes in a chat. Switch a grant off in
-the pane and the hands say so on their next step: *macOS: switch on corein Computer Use
+the pane and the hands say so on their next step: *macOS: switch on FOMO Computer Use
 under System Settings → Privacy & Security → Screen Recording. The helper restarts by itself;
 the app does not need to.* (`403` from the operator; the runtime never falls back to `mss` or
 `screencapture`).
@@ -404,15 +404,15 @@ system's own dialog (`CGRequestScreenCaptureAccess`) plus the deep link to the p
 never takes a `desktopCapturer` frame in the helper's place, since a black or stale picture would
 reach the model as if it were the screen. What the chat and `computer_screen` say instead:
 
-- Screen Recording missing for the helper: *macOS: switch on corein Computer Use under
+- Screen Recording missing for the helper: *macOS: switch on FOMO Computer Use under
   System Settings → Privacy & Security → Screen Recording. The helper restarts by itself; the
   app does not need to.* (the `403`; Settings → Computer use says the same).
-- ScreenCaptureKit failed with the grant in place: *no screenshot: corein Computer Use
+- ScreenCaptureKit failed with the grant in place: *no screenshot: FOMO Computer Use
   could not take the picture: ScreenCaptureKit userDeclined (-3801): …*, the
   SCK error by name and code, followed by the system's text (`noDisplayList`,
   `failedToStart`, `internalError`, …; a reader can look the code up).
 - The helper did not start (quarantine kept, no port, App Translocation): *no screenshot:
-  corein Computer Use did not start (…)* with the reason the `helper:` log lines give;
+  FOMO Computer Use did not start (…)* with the reason the `helper:` log lines give;
   Settings → Computer use shows the same reason as *not available*.
 
 The pre-0.1.38 `desktopCapturer` path remains only for a build without the helper bundle
@@ -420,10 +420,10 @@ The pre-0.1.38 `desktopCapturer` path remains only for a build without the helpe
 
 **Checking it on a Mac.** `~/.nanomuse/desktop/desktop.log` has the chain:
 
-- `helper: corein Computer Use <version> (pid …) at http://127.0.0.1:… — screen granted,
+- `helper: FOMO Computer Use <version> (pid …) at http://127.0.0.1:… — screen granted,
   accessibility true, capture ScreenCaptureKit`: the helper is up and, on macOS 14+, says
   which path takes the picture (`CoreGraphics` on 12 and 13).
-- `permissions: accessibility=granted screen=granted (corein Computer Use <version>,
+- `permissions: accessibility=granted screen=granted (FOMO Computer Use <version>,
   capture ScreenCaptureKit)`: the grants as the app read them at launch; a `screen=denied`
   here with the switch on in the pane carries ScreenCaptureKit's reason after the version.
 - `operator: helper screenshot failed (…) — not falling back to desktopCapturer`: the
@@ -434,19 +434,19 @@ Then Settings → Computer use → *Try it*: the test screenshot is the helper's
 error above.
 
 **The quarantine flag.** The disk image you download carries macOS's quarantine flag, and so
-does every file copied out of it, the helper included. Opening corein settles the flag for
-corein (Gatekeeper's dialog, *Open Anyway*) but not for the helper, which LaunchServices
+does every file copied out of it, the helper included. Opening FOMO settles the flag for
+FOMO (Gatekeeper's dialog, *Open Anyway*) but not for the helper, which LaunchServices
 starts as an app of its own. A quarantined, unapproved helper is started from a *translocated*
 copy (a read-only mount under `/private/var/folders/…/AppTranslocation/<random>/d/` whose
 name changes on every launch), and Gatekeeper's own *could not verify* dialog can come up
 for it as well, with the helper never answering. That is what 0.1.38 did: the helper ran (Activity Monitor showed it),
-Accessibility could be granted, and no *corein Computer Use* row ever appeared in the
+Accessibility could be granted, and no *FOMO Computer Use* row ever appeared in the
 Screen Recording pane, because tccd had recorded a path that no longer existed. Since 0.1.39
 the app removes the flag from the helper before the first launch (`xattr -dr
-com.apple.quarantine` on `Contents/Helpers/corein Computer Use.app`; the log says
+com.apple.quarantine` on `Contents/Helpers/FOMO Computer Use.app`; the log says
 `helper: removed the quarantine flag…`), after which the helper starts in place and its rows
 stay. This needs the bundle to be writable; your own copy in Applications is. Run from the
-disk image or straight from Downloads, corein itself is translocated, the helper cannot be
+disk image or straight from Downloads, FOMO itself is translocated, the helper cannot be
 fixed and is not started; the log says *move it to the Applications folder and open it
 again*, and the hands use the app's own path meanwhile (below).
 
@@ -463,22 +463,22 @@ More to know:
   and takes the window's picture through the helper too (`GET /windows`, `POST /window`;
   ScreenCaptureKit's `SCContentFilter(desktopIndependentWindow:)` on macOS 14+), so the
   helper's Screen Recording row covers it. The events are still posted from the runtime
-  (`CGEventPostToPid`), which macOS attributes to **corein** itself: window mode needs
-  the *corein* row in the Accessibility pane on top of the helper's two, and falls back to
+  (`CGEventPostToPid`), which macOS attributes to **FOMO** itself: window mode needs
+  the *FOMO* row in the Accessibility pane on top of the helper's two, and falls back to
   the whole screen with a notice when it is missing. Without the helper bundle the runtime
   captures windows itself (`CGWindowListCreateImage`; the runtime's log says `window mode:
-  the runtime captures windows itself …`) and needs the *corein* Screen Recording row as
+  the runtime captures windows itself …`) and needs the *FOMO* Screen Recording row as
   well. Settings → Computer use says whether window mode is available.
 - macOS 15 and later asks again from time to time whether an app that captures the screen
-  without the system's picker may go on; answer *Allow* for corein Computer Use.
+  without the system's picker may go on; answer *Allow* for FOMO Computer Use.
 - To start the permission flow over: `tccutil reset ScreenCapture
   com.corein.desktop.computer-use; tccutil reset Accessibility
   com.corein.desktop.computer-use`, then Settings → Computer use → Permissions again.
-  A grant left on *corein Desktop* / *corein* from an earlier version is used by window
+  A grant left on *FOMO Desktop* / *FOMO* from an earlier version is used by window
   mode only (above) and can otherwise be switched off.
 
 Without the helper bundle (a build without it, a development run before `build.sh`) the
-app works as before 0.1.38: the grants are corein Desktop's own
+app works as before 0.1.38: the grants are FOMO Desktop's own
 (`com.corein.desktop`), read through `@computer-use/node-mac-permissions` and
 `@computer-use/mac-screen-capture-permissions`, the picture comes from `desktopCapturer`
 and the input from `@computer-use/nut-js`, and a Screen Recording grant needs the app
@@ -516,7 +516,7 @@ Developer ID Application certificate under the hardened runtime
 staples. The certificate is exported from Keychain Access as a `.p12` and base64-encoded;
 the App Store Connect key is the `.p8`'s text.
 
-The helper, *corein Computer Use.app*, is built on the macOS runner by
+The helper, *FOMO Computer Use.app*, is built on the macOS runner by
 `harness/desktop/mac/computer-use/build.sh` (plain `swiftc`, arm64 and x86_64 joined with
 `lipo`, deployment target macOS 12.3, the first with ScreenCaptureKit, which the binary
 links; the SCK capture runs on 14+, CoreGraphics before) before electron-builder copies it into
@@ -531,14 +531,14 @@ helper, on the pre-0.1.38 path.
 
 - **The `.deb` is the one to prefer** (Debian, Ubuntu and their derivatives): it installs
   `/opt/corein/nanomuse-desktop`, the icon set and the desktop entry, and the launcher
-  finds it. `sudo apt install./corein-Desktop-<version>-linux-x64.deb`.
+  finds it. `sudo apt install./fomo-Desktop-<version>-linux-x64.deb`.
 - **The AppImage needs FUSE.** It mounts itself at start; when the machine has no
   `libfuse2`, or `fusermount` is not permitted (containers, some corporate images; the log
   says `fusermount: mount failed: Operation not permitted` / `Cannot mount AppImage, please
   check your FUSE setup`), run it unpacked instead:
-  `./corein-Desktop-<version>-linux-x64.AppImage --appimage-extract-and-run`, or take the
+  `./fomo-Desktop-<version>-linux-x64.AppImage --appimage-extract-and-run`, or take the
   **`.tar.gz`**, the same app as a plain folder: unpack it anywhere and run
-  `./corein-desktop` from it (no FUSE, no root).
+  `./fomo-desktop` from it (no FUSE, no root).
 - **The icon does nothing.** The app allows one instance at a time: a click on the launcher
   while a copy is already running tells *that* copy to show its window. Up to 0.1.36 a copy
   whose window had been closed stayed alive for the tray and did not answer; the click

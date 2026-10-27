@@ -474,11 +474,11 @@ export default class NanomuseRooms extends Service {
       await this.saveFirstRun()
       return { sessionId: synced }
     }
-    const folder = join(homeDir(), 'corein')
+    const folder = join(homeDir(), 'FOMO')
     await mkdir(folder, { recursive: true })
     let workspaceId: string | undefined
     try {
-      workspaceId = (await (this.ctx.get('workspaceRegistry') as RegistryLike | undefined)?.create(folder, 'corein'))?.id
+      workspaceId = (await (this.ctx.get('workspaceRegistry') as RegistryLike | undefined)?.create(folder, 'FOMO'))?.id
     } catch (error) {
       this.warn('home workspace', error)
     }
@@ -967,7 +967,7 @@ export default class NanomuseRooms extends Service {
     await add(join(home, 'sessions'), 'sessions/')
     const prefs = join(home, 'desktop.json')
     if (await stat(prefs).catch(() => null)) entries.push({ name: 'desktop.json', data: await readFile(prefs), at: new Date() })
-    entries.push({ name: 'README.txt', at: new Date(), data: Buffer.from(['Your corein data, exported ' + new Date().toISOString(), '', 'nanomuse/cloud.json    the account snapshot (no sign-in token)', 'nanomuse/profile.json  the agent’s name and look; faces/ its pictures', 'nanomuse/rooms.json    feed, ideas, goals, the library index and memory', 'sessions/              the chats, as DeepSeek Harness keeps them (zstd-compressed JSON lines)', ''].join('\n'))})
+    entries.push({ name: 'README.txt', at: new Date(), data: Buffer.from(['Your FOMO data, exported ' + new Date().toISOString(), '', 'nanomuse/cloud.json    the account snapshot (no sign-in token)', 'nanomuse/profile.json  the agent’s name and look; faces/ its pictures', 'nanomuse/rooms.json    feed, ideas, goals, the library index and memory', 'sessions/              the chats, as DeepSeek Harness keeps them (zstd-compressed JSON lines)', ''].join('\n'))})
     await writeFile(out, zip(entries), { mode: 0o600 })
     const sc = this.ctx.get('sessionController')
     if (sc) await sc.openWorkspacePath({ path: out, action: 'reveal' }, new AbortController().signal).catch(() => undefined)
@@ -1368,7 +1368,7 @@ export default class NanomuseRooms extends Service {
 
   /** Where the room's own creations go: `~/corein/Library` (`~/corein/构件` in Chinese). */
   libraryFolder(): string {
-    return join(homeDir(), 'corein', this.lang.startsWith('zh') ? '构件' : 'Library')
+    return join(homeDir(), 'FOMO', this.lang.startsWith('zh') ? '构件' : 'Library')
   }
 
   // ---- the agent's sessions -------------------------------------------------------------
@@ -1753,7 +1753,7 @@ export default class NanomuseRooms extends Service {
       ? '给我做一个关于我关心的事的动态。短一点、直接一点，扫一眼就能看完，别搞标题党。'
       : 'Build me a feed about what I care about. Keep it short and direct, easy to skim, no clickbait.')
     return [
-      `[Background job from corein: write the person's feed. Nobody reads this chat; the app parses your final answer.]`,
+      `[Background job from FOMO: write the person's feed. Nobody reads this chat; the app parses your final answer.]`,
       `You are the person's own agent, writing their personal feed: ${n} short posts made just for them, in ${languageName(this.lang)}. Think of a thoughtful friend who knows what they care about: news worth their attention on the topics they follow (use web_search for anything time-sensitive, and link the source inline in Markdown), a nudge on a goal, a small plan for the day, a question worth thinking about. Specific to this person; never generic filler. No greetings, no "as your agent". Do not call feed_post here — the JSON below is how this batch is delivered.`,
       ``,
       `What the person asked to read here:`,

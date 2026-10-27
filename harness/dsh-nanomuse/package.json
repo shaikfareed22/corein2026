@@ -1,7 +1,7 @@
 {
   "name": "dsh-nanomuse",
-  "version": "1.1.0",
-  "description": "corein as a DeepSeek Harness bundle: the account, the face, the persona, Hands and Reach of a Muse-style personal agent, as plugins.",
+  "version": "1.2.0",
+  "description": "FOMO as a DeepSeek Harness bundle: the account, the face, the persona, Hands and Reach of a Muse-style personal agent, as plugins.",
   "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",

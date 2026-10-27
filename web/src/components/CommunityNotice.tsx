@@ -25,7 +25,7 @@ export function CommunityNotice({ compact = false, className }: { compact?: bool
       </a>
       <p className={cx("mt-1.5 leading-relaxed text-fg/85", compact ? "text-[12.5px]" : "text-[13px]")}>
         {t(
-          "corein is a non-profit open-source community project, free forever. Sign in with a phone number or an e-mail and the model comes with a free allowance, paid by the developer; when it is gone, use your own key (Alibaba Cloud Bailian in mainland China, OpenRouter elsewhere). Nothing is sold; what the relay keeps is in the privacy policy, and Settings → Data controls is yours. Delete the account whenever you like.",
+          "FOMO is a non-profit open-source community project, free forever. Sign in with a phone number or an e-mail and the model comes with a free allowance, paid by the developer; when it is gone, use your own key (Alibaba Cloud Bailian in mainland China, OpenRouter elsewhere). Nothing is sold; what the relay keeps is in the privacy policy, and Settings → Data controls is yours. Delete the account whenever you like.",
         )}
       </p>
       <p className={cx("mt-1.5 leading-relaxed text-fg/85", compact ? "text-[12.5px]" : "text-[13px]")}>

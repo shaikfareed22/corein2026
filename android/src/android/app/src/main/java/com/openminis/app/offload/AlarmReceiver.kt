@@ -71,8 +71,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val notification = NotificationCompat.Builder(context, AlarmOffloadManager.CHANNEL_ID)
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
-            .setLargeIcon(io.github.nanomuse.identity.NanoMuseIdentity.face(context)) // corein: the agent is the sender
-            .setContentTitle(io.github.nanomuse.identity.NanoMuseIdentity.name(context)) // corein: the agent set this alarm
+            .setLargeIcon(io.github.nanomuse.identity.NanoMuseIdentity.face(context)) // FOMO: the agent is the sender
+            .setContentTitle(io.github.nanomuse.identity.NanoMuseIdentity.name(context)) // FOMO: the agent set this alarm
             .setContentText(label)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_ALARM)

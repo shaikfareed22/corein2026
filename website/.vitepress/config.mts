@@ -1,4 +1,4 @@
-// The corein docs site: VitePress over ../docs. Nothing is copied — the pages under
+// The FOMO docs site: VitePress over ../docs. Nothing is copied — the pages under
 // docs/ are the source, and this file only says how they are arranged and where the
 // links that leave docs/ go.
 //
@@ -99,10 +99,10 @@ const useIt: DefaultTheme.SidebarItem[] = [
 ]
 
 const runIt: DefaultTheme.SidebarItem[] = [
-  { text: 'Run corein yourself', link: '/self-hosting' },
+  { text: 'Run FOMO yourself', link: '/self-hosting' },
   { text: 'The runtime in Docker', link: '/deployment' },
   { text: 'Configuration', link: '/configuration' },
-  { text: 'corein Cloud, the relay', link: '/cloud' },
+  { text: 'FOMO Cloud, the relay', link: '/cloud' },
 ]
 
 const understandIt: DefaultTheme.SidebarItem[] = [
@@ -112,7 +112,7 @@ const understandIt: DefaultTheme.SidebarItem[] = [
   { text: 'What stays on a phone, and whose it is', link: '/sync' },
   { text: 'The hub', link: '/hub' },
   { text: 'Design: how it looks, and why', link: '/design' },
-  { text: 'corein on DeepSeek Harness', link: '/harness' },
+  { text: 'FOMO on DeepSeek Harness', link: '/harness' },
   { text: 'The phone’s own capabilities', link: '/device' },
   { text: 'The app, as designed', link: '/app' },
   { text: 'The local runtime on the phone', link: '/local-runtime' },
@@ -157,10 +157,10 @@ const zhUseIt: DefaultTheme.SidebarItem[] = [
 ]
 
 const zhRunIt: DefaultTheme.SidebarItem[] = [
-  { text: '自己运行 corein', link: '/zh/self-hosting' },
+  { text: '自己运行 FOMO', link: '/zh/self-hosting' },
   { text: 'Docker 里的运行时', link: '/zh/deployment' },
   { text: '配置', link: '/zh/configuration' },
-  { text: 'corein Cloud：中继', link: '/zh/cloud' },
+  { text: 'FOMO Cloud：中继', link: '/zh/cloud' },
 ]
 
 const zhUnderstandIt: DefaultTheme.SidebarItem[] = [
@@ -170,7 +170,7 @@ const zhUnderstandIt: DefaultTheme.SidebarItem[] = [
   { text: '什么留在手机上，归谁', link: '/zh/sync' },
   { text: 'hub：设备互联', link: '/zh/hub' },
   { text: '设计：长什么样，为什么', link: '/zh/design' },
-  { text: 'DeepSeek Harness 上的 corein', link: '/zh/harness' },
+  { text: 'DeepSeek Harness 上的 FOMO', link: '/zh/harness' },
   { text: '手机自身的能力', link: '/zh/device' },
   { text: '手机 App 的设计', link: '/zh/app' },
   { text: '手机上的本地运行时', link: '/zh/local-runtime' },
@@ -187,7 +187,7 @@ const zhContribute: DefaultTheme.SidebarItem[] = [
 ]
 
 export default defineConfig({
-  title: 'corein',
+  title: 'FOMO',
   description: 'An open-source personal agent for every device you own.',
   lang: 'en',
   base,
@@ -222,8 +222,8 @@ export default defineConfig({
         outline: { level: [2, 3], label: 'On this page' },
         editLink: { pattern: `${REPO}/edit/main/docs/:path`, text: 'Edit this page on GitHub' },
         footer: {
-          message: 'GPL-3.0-or-later. corein is an independent community project, not affiliated with Meta.',
-          copyright: 'The corein contributors',
+          message: 'GPL-3.0-or-later. FOMO is an independent community project, not affiliated with Meta.',
+          copyright: 'The FOMO contributors',
         },
         langMenuLabel: 'Change language',
       },
@@ -237,7 +237,7 @@ export default defineConfig({
     resolve: { alias: [{ find: /^vue(\/.*)?$/, replacement: `${fileURLToPath(new URL('../node_modules/vue', import.meta.url))}$1` }] },
   },
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}corein-icon.svg` }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}fomo-icon.svg` }],
   ],
   // Internal links are checked at build time. The link_open rule below turns every link that
   // leaves docs/ into a GitHub URL, so nothing should remain here; add a pattern only for a
@@ -285,7 +285,7 @@ export default defineConfig({
   // What both languages share. GitHub is not in socialLinks: the nav shows it with the
   // star count instead (theme/GitHubStars.vue, the `nav-bar-content-after` slot).
   themeConfig: {
-    logo: { src: '/corein-logo.png', alt: 'corein' },
+    logo: { src: '/fomo-logo-transparent.png', alt: 'FOMO' },
     search: {
       provider: 'local',
       options: {

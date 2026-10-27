@@ -7,7 +7,7 @@ name: Android
 on:
   push:
     branches: [main]
-    tags: ["v*"] # corein: the release-apk job below
+    tags: ["v*"] # FOMO: the release-apk job below
   pull_request:
   workflow_dispatch:
 
@@ -121,7 +121,7 @@ jobs:
           retention-days: 14
           if-no-files-found: error
 
-  # corein: the release APK, built here on a `v*` tag instead of on a developer machine.
+  # FOMO: the release APK, built here on a `v*` tag instead of on a developer machine.
   # Signed with the keystore in the repository's secrets (docs/fork.md), the debug key refused,
   # named like scripts/release-apk.sh names it, and the GitHub release created with the
   # version's notes so the desktop workflow has a release to attach its installers to.
@@ -191,8 +191,8 @@ jobs:
           certs="$("$bt/apksigner" verify --print-certs "$apk")"
           echo "$certs" | grep -qi "CN=Android Debug" && { echo "signed with the debug key; the keystore secrets are wrong" >&2; exit 1; }
           "$bt/aapt" dump badging "$apk" | grep -E "^package:|application-label:" 
-          mkdir -p dist && cp "$apk" "dist/corein-$VERSION-arm64.apk"
-          ( cd dist && sha256sum "corein-$VERSION-arm64.apk" > "corein-$VERSION-arm64.apk.sha256" && cat "corein-$VERSION-arm64.apk.sha256" )
+          mkdir -p dist && cp "$apk" "dist/fomo-$VERSION-arm64.apk"
+          ( cd dist && sha256sum "fomo-$VERSION-arm64.apk" > "fomo-$VERSION-arm64.apk.sha256" && cat "fomo-$VERSION-arm64.apk.sha256" )
           rm -f android/release.jks android/keystore.properties
 
       - name: Create the release
@@ -200,10 +200,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           notes="docs/releases/v$VERSION.md"
-          [ -f "$notes" ] || { notes=dist/notes.md; printf 'corein %s\n\nSee CHANGELOG.md.\n' "$VERSION" > "$notes"; }
+          [ -f "$notes" ] || { notes=dist/notes.md; printf 'FOMO %s\n\nSee CHANGELOG.md.\n' "$VERSION" > "$notes"; }
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
             gh release upload "$GITHUB_REF_NAME" dist/corein-*.apk dist/corein-*.sha256 --clobber
           else
             gh release create "$GITHUB_REF_NAME" dist/corein-*.apk dist/corein-*.sha256 \
-              --title "corein $VERSION" --notes-file "$notes" --latest
+              --title "FOMO $VERSION" --notes-file "$notes" --latest
           fi

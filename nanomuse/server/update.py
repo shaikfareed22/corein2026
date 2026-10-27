@@ -1,4 +1,4 @@
-"""Is there a newer corein? The download mirror's index first, GitHub Releases second,
+"""Is there a newer FOMO? The download mirror's index first, GitHub Releases second,
 kept for a day, a failed check for an hour (contract C2: every client shows the installed
 and the latest version).
 
@@ -127,7 +127,7 @@ class UpdateCheck:
     async def _check(self) -> None:
         self.checked_at = time.monotonic()
         self.checked_wall = datetime.now(UTC).isoformat(timespec="seconds")
-        headers = {"User-Agent": f"corein/{self.current}"}
+        headers = {"User-Agent": f"FOMO/{self.current}"}
         errors: list[str] = []
         async with httpx.AsyncClient(follow_redirects=True) as client:
             # 1. the download mirror's index (short timeout: it is the quick way, not the only one)

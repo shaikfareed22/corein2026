@@ -75,7 +75,7 @@ internal fun toolIconFor(toolName: String) = when (toolName) {
     else -> Icons.Default.Build
 }
 
-// Helper: tool display name for "corein is using X"
+// Helper: tool display name for "FOMO is using X"
 internal fun toolDisplayName(toolName: String): String = when (toolName) {
     "shell_execute" -> "terminal"
     "file_read" -> "file reader"
@@ -90,36 +90,36 @@ internal fun toolDisplayName(toolName: String): String = when (toolName) {
 }
 
 /**
- * Full "corein is …" label shown in the tool detail sheet's bottom bar.
+ * Full "FOMO is …" label shown in the tool detail sheet's bottom bar.
  * Mirrors iOS ToolLiveSheet.toolTitle so the wording matches per tool.
  */
 internal fun toolTitleLabel(toolName: String): String = when (toolName) {
-    "shell_execute" -> "corein is using Shell"
-    "file_read" -> "corein is reading File"
-    "file_write" -> "corein is using Editor"
-    "file_edit" -> "corein is editing File"
-    "browser_use" -> "corein is using Browser"
-    "read_image" -> "corein is reading Image"
-    "memory_write", "memory_get" -> "corein is using Memory"
-    "web_search" -> "corein is using Search"
-    else -> "corein is using ${toolDisplayName(toolName)}"
+    "shell_execute" -> "FOMO is using Shell"
+    "file_read" -> "FOMO is reading File"
+    "file_write" -> "FOMO is using Editor"
+    "file_edit" -> "FOMO is editing File"
+    "browser_use" -> "FOMO is using Browser"
+    "read_image" -> "FOMO is reading Image"
+    "memory_write", "memory_get" -> "FOMO is using Memory"
+    "web_search" -> "FOMO is using Search"
+    else -> "FOMO is using ${toolDisplayName(toolName)}"
 }
 
-// corein: the same label once the step is over (issue #67 — the sheet's bottom bar
+// FOMO: the same label once the step is over (issue #67 — the sheet's bottom bar
 // kept saying "is using" for a step that had finished long ago). Present tense while it
 // runs; what happened afterwards.
 internal fun toolTitleLabel(toolName: String, status: ToolBlockStatus?): String = when (status) {
     null, ToolBlockStatus.RUNNING, ToolBlockStatus.STREAMING, ToolBlockStatus.PENDING -> toolTitleLabel(toolName)
     ToolBlockStatus.SUCCESS -> when (toolName) {
-        "shell_execute" -> "corein used Shell"
-        "file_read" -> "corein read File"
-        "file_write" -> "corein used Editor"
-        "file_edit" -> "corein edited File"
-        "browser_use" -> "corein used Browser"
-        "read_image" -> "corein read Image"
-        "memory_write", "memory_get" -> "corein used Memory"
-        "web_search" -> "corein used Search"
-        else -> "corein used ${toolDisplayName(toolName)}"
+        "shell_execute" -> "FOMO used Shell"
+        "file_read" -> "FOMO read File"
+        "file_write" -> "FOMO used Editor"
+        "file_edit" -> "FOMO edited File"
+        "browser_use" -> "FOMO used Browser"
+        "read_image" -> "FOMO read Image"
+        "memory_write", "memory_get" -> "FOMO used Memory"
+        "web_search" -> "FOMO used Search"
+        else -> "FOMO used ${toolDisplayName(toolName)}"
     }
     ToolBlockStatus.FAILED -> "${toolDisplayName(toolName).replaceFirstChar { it.uppercase() }} failed"
     ToolBlockStatus.CANCELLED -> "${toolDisplayName(toolName).replaceFirstChar { it.uppercase() }} stopped"

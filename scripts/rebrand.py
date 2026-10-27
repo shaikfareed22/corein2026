@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Turn the OpenMinis tree in android/ into corein. Idempotent; re-run after every
+"""Turn the OpenMinis tree in android/ into FOMO. Idempotent; re-run after every
 upstream pull (CONTRIBUTING.md), then scripts/gen-android-icons.py.
 
 What it changes, and only this:
 
 - Gradle: applicationId, versionCode / versionName (the Kotlin package and namespace stay).
 - The places that hard-code the package id (shortcuts, the accessibility service id).
-- The product name: "Minis" -> "corein" in the 17 strings.xml and in Kotlin string
+- The product name: "Minis" -> "FOMO" in the 17 strings.xml and in Kotlin string
   literals (never in identifiers, paths such as /var/minis, or MinisSkills).
 - The Soul defaults (agent name and header emoji).
 - Links: update source, GitHub repository, issues, privacy policy.
@@ -15,16 +15,16 @@ What it changes, and only this:
   notification also carries the agent's face as its large icon (Muse: the agent
   is the sender).
 - "<name> is browsing": the browser banner string takes the Soul name (%1$s).
-- A handful of first-run / notification strings reworded in corein's voice
+- A handful of first-run / notification strings reworded in FOMO's voice
   (COPY below, en + zh + zh-rTW; the other locales keep the upstream text).
 
 - iOS (android/src/ios, when present): the bundle ids (com.openminis.app* → com.corein.app*,
   including the app group and iCloud container), the display names, MARKETING_VERSION /
-  CURRENT_PROJECT_VERSION, "Minis" -> "corein" in Swift string literals and in
+  CURRENT_PROJECT_VERSION, "Minis" -> "FOMO" in Swift string literals and in
   Localizable.xcstrings (keys renamed, every translation updated), the About links, the
   Soul emoji, the accent colour. Icons: scripts/gen-ios-icons.py.
 
-Anything else is a hand edit marked `// corein:` in the file.
+Anything else is a hand edit marked `// FOMO:` in the file.
 
     python scripts/rebrand.py            # apply, then report what is still upstream's
     python scripts/rebrand.py --check    # report only, write nothing
@@ -47,9 +47,9 @@ RES = MAIN / "res"
 IOS = ROOT / "android" / "src" / "ios"
 
 APP_ID = "com.corein.app"
-NAME = "corein"
-VERSION_NAME = "1.1.0"
-VERSION_CODE = 49
+NAME = "FOMO"
+VERSION_NAME = "1.2.0"
+VERSION_CODE = 50
 REPO = "shaikfareed22/corein2026"
 REPO_URL = f"https://github.com/{REPO}"
 PRIVACY_URL = f"{REPO_URL}/blob/main/docs/privacy.md"
@@ -95,7 +95,7 @@ def package_ids() -> None:
             (
                 r'const val SERVICE_ID = "com\.openminis\.app/\.accessibility\.MinisAccessibilityService"',
                 'val SERVICE_ID = "${BuildConfig.APPLICATION_ID}/com.openminis.app.accessibility.'
-                'MinisAccessibilityService" // corein: the applicationId is not the package',
+                'MinisAccessibilityService" // FOMO: the applicationId is not the package',
             ),
         ],
     )
@@ -138,7 +138,7 @@ def soul_defaults() -> None:
             [
                 (
                     r'^([ \t]*)assertEquals\("Minis", back\.metadata\.name\)$',
-                    r"\1// corein: round-trip the rebranded default name.\n"
+                    r"\1// FOMO: round-trip the rebranded default name.\n"
                     r"\1assertEquals(SoulMetadata.DEFAULT.name, back.metadata.name)",
                 ),
             ],
@@ -249,7 +249,7 @@ def notification_icons() -> None:
             [
                 (
                     r"setSmallIcon\(R\.mipmap\.ic_launcher\)",
-                    "setSmallIcon(R.drawable.ic_stat_nanomuse) // corein: flat status-bar mark",
+                    "setSmallIcon(R.drawable.ic_stat_nanomuse) // FOMO: flat status-bar mark",
                 ),
             ],
         )
@@ -268,7 +268,7 @@ def notification_faces() -> None:
         ctx, indent = m.group(2), m.group(3)
         return (
             f"{m.group(1)}{indent}.setLargeIcon(io.github.nanomuse.identity.NanoMuseIdentity"
-            f".face({ctx})) // corein: the agent is the sender\n"
+            f".face({ctx})) // FOMO: the agent is the sender\n"
         )
 
     for path in sorted(JAVA.rglob("*.kt")):
@@ -279,25 +279,25 @@ def notification_faces() -> None:
             changed.append(str(path.relative_to(ROOT)))
 
 
-# Reworded in corein's voice. Locale dir -> string name -> text.
+# Reworded in FOMO's voice. Locale dir -> string name -> text.
 COPY: dict[str, dict[str, str]] = {
     "values": {
         "sessionlist_welcome_subtitle": "Three steps, and you have an assistant that lives on your phone.",
         "about_minis_tagline": "An open-source personal agent for every device you own. On this phone today; everything runs here, with your own model.",
         "onboarding_welcome_subtitle": "An AI assistant with its own terminal and browser, running on this phone.",
-        "bg_service_notification_title": "corein is working",
+        "bg_service_notification_title": "FOMO is working",
     },
     "values-zh": {
         "sessionlist_welcome_subtitle": "三步之后，你就有一个住在手机里的助理。",
         "about_minis_tagline": "一个开源的个人智能体，面向你的所有设备。目前在这台手机上：一切都在本机运行，模型由你自己带。",
         "onboarding_welcome_subtitle": "有自己的终端和浏览器、能用这台手机的 AI 助理。",
-        "bg_service_notification_title": "corein 正在工作",
+        "bg_service_notification_title": "FOMO 正在工作",
     },
     "values-zh-rTW": {
         "sessionlist_welcome_subtitle": "三步之後，你就有一個住在手機裡的助理。",
         "about_minis_tagline": "一個開源的個人智慧體，面向你的所有裝置。目前在這支手機上：一切都在本機執行，模型由你自己帶。",
         "onboarding_welcome_subtitle": "有自己的終端機和瀏覽器、能用這支手機的 AI 助理。",
-        "bg_service_notification_title": "corein 正在工作",
+        "bg_service_notification_title": "FOMO 正在工作",
     },
 }
 
@@ -443,7 +443,7 @@ def ios_product_name() -> None:
     for key, entry in strings.items():
         new_key = WORD.sub(NAME, key)
         if new_key in renamed and new_key != key:
-            continue  # upstream already has the corein spelling; keep theirs
+            continue  # upstream already has the FOMO spelling; keep theirs
         renamed[new_key] = walk(entry)
     if renamed != strings:
         data["strings"] = renamed
@@ -472,7 +472,7 @@ def ios_links() -> None:
             (r'"https://github\.com/OpenMinis"\)', f'"{REPO_URL}")'),
             (r'"https://github\.com/OpenMinis/OpenMinis/issues"\)', f'"{REPO_URL}/issues")'),
             (
-                r'"(?:(?:Minis|corein) is Your Fully Local, Fully Private On-Device Agent'
+                r'"(?:(?:Minis|FOMO) is Your Fully Local, Fully Private On-Device Agent'
                 r'|A fully open-source, Muse-style personal agent for every device you own)\."',
                 '"An open-source personal agent for every device you own."',
             ),

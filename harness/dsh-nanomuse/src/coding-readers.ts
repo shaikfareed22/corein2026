@@ -39,7 +39,7 @@ export interface AgentSpec {
   process: readonly string[]
 }
 
-/** The agents corein knows how to read and drive. */
+/** The agents FOMO knows how to read and drive. */
 export const AGENTS: Record<AgentId, AgentSpec> = {
   cursor: { name: 'Cursor', bins: ['cursor-agent', 'agent'], process: ['cursor-agent', 'cursor'] },
   codex: { name: 'Codex', bins: ['codex'], process: ['codex'] },

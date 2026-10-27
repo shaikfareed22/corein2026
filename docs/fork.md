@@ -1,20 +1,20 @@
 # Maintaining the fork
 
-corein forks [nanoMuse](https://github.com/nano-muse/nanoMuse). This page is the recipe for
-keeping it that way: taking upstream's fixes, keeping the corein identity, and cutting a
+FOMO forks [nanoMuse](https://github.com/nano-muse/nanoMuse). This page is the recipe for
+keeping it that way: taking upstream's fixes, keeping the FOMO identity, and cutting a
 release. The design record is
 [superpowers/specs/2026-10-20-corein-rebrand-design.md](superpowers/specs/2026-10-20-corein-rebrand-design.md).
 
 ## What the fork changes, and what it keeps
 
-Everything a person sees says corein: names, the ids the systems know the apps by
+Everything a person sees says FOMO: names, the ids the systems know the apps by
 (`com.corein.app`, `com.corein.*`, `corein://`, `com.corein.desktop`), the relay and site
 domains, the repository, the brand files. Everything internal keeps upstream's name: the
 Python package `nanomuse`, `NANOMUSE_*` variables, `~/.nanomuse`, the Kotlin packages, the
 `nm_` string prefix, `dsh-nanomuse`, the Swift `NanoMuse*` types, the `nanomuse-mcp` OAuth
 callback scheme. That split is what lets `git merge upstream/main` keep working.
 
-One script owns the rename, `scripts/rebrand-corein.mjs`. Its constants at the top are the
+One script owns the rename, `scripts/rebrand-fomo.mjs`. Its constants at the top are the
 identity; `--check` fails when any renamed token is still in the tree, and CI should run it.
 
 ## Taking upstream's changes
@@ -22,11 +22,11 @@ identity; `--check` fails when any renamed token is still in the tree, and CI sh
 ```sh
 git fetch upstream                                   # https://github.com/nano-muse/nanoMuse.git
 git merge upstream/main                              # resolve conflicts as usual
-node scripts/rebrand-corein.mjs                      # rename what the merge brought in
-python scripts/rebrand.py                            # upstream's own Android/iOS rebrand, now with corein's constants
+node scripts/rebrand-fomo.mjs                      # rename what the merge brought in
+python scripts/rebrand.py                            # upstream's own Android/iOS rebrand, now with FOMO's constants
 python scripts/gen-android-icons.py && python scripts/gen-ios-icons.py
 node scripts/providers-json.mjs && node scripts/connectors-json.mjs
-node scripts/rebrand-corein.mjs --check && python scripts/rebrand.py --check
+node scripts/rebrand-fomo.mjs --check && python scripts/rebrand.py --check
 ```
 
 Then the checks for whatever the merge touched ([AGENTS.md](../AGENTS.md)). Two things the
@@ -52,7 +52,7 @@ Pushing the tag starts:
 
 - **Android** (`.github/workflows/android.yml`, the *release* job): builds the natives,
   signs `assembleRelease` with the keystore in the repository's secrets, refuses the debug
-  key, names the APK `corein-<version>-arm64.apk` with its `.sha256`, and creates the
+  key, names the APK `fomo-<version>-arm64.apk` with its `.sha256`, and creates the
   GitHub release with `docs/releases/v<version>.md` as the notes.
 - **desktop app**: builds the Windows, macOS and Linux installers and attaches them to that
   release once it exists.
@@ -65,7 +65,7 @@ Actions*:
 |---|---|
 | `ANDROID_KEYSTORE_BASE64` | the release keystore, `base64 -w0 corein-release.jks` |
 | `ANDROID_KEYSTORE_PASSWORD` | its store password |
-| `ANDROID_KEY_ALIAS` | the key alias, `corein` |
+| `ANDROID_KEY_ALIAS` | the key alias, `FOMO` |
 | `ANDROID_KEY_PASSWORD` | the key password |
 
 One keystore for every version: a later APK signed with another key cannot install over an

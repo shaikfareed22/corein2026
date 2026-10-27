@@ -1,4 +1,4 @@
-// corein landing page: language toggle + the live phone mock in the hero.
+// FOMO landing page: language toggle + the live phone mock in the hero.
 (function () {
   "use strict";
 
@@ -11,7 +11,7 @@
     } catch (e) {
       /* private mode */
     }
-    document.title = lang === "zh-CN" ? "corein — 开源的个人 AI 智能体" : "corein — an open-source personal AI agent";
+    document.title = lang === "zh-CN" ? "FOMO — 开源的个人 AI 智能体" : "FOMO — an open-source personal AI agent";
   }
   var saved = null;
   try {

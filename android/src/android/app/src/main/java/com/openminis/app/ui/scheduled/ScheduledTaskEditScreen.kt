@@ -204,7 +204,7 @@ fun ScheduledTaskEditScreen(
 
     Scaffold(
         topBar = {
-            io.github.nanomuse.ui.muse.MuseTopAppBar( // corein: Muse's bar (drop-in for TopAppBar)
+            io.github.nanomuse.ui.muse.MuseTopAppBar( // FOMO: Muse's bar (drop-in for TopAppBar)
                 title = {
                     Text(
                         stringResource(

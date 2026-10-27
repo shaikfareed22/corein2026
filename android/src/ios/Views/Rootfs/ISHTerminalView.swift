@@ -93,7 +93,7 @@ struct ISHTerminalView: View {
             )
         }
         .background(Color.black)
-        .navigationTitle("corein Shell")
+        .navigationTitle("FOMO Shell")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             if showCloseButton {

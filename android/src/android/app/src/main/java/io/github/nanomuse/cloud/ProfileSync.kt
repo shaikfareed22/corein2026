@@ -141,7 +141,7 @@ object ProfileSync {
             // it is the plain default (nothing worth telling the other devices) — and so do
             // its connections, if it has any
             val name = SoulStore.load(context)?.metadata?.name.orEmpty()
-            if (AvatarStore.current.value != null || (name.isNotBlank() && name != "corein") || SharedConnectors.mine(context).length() > 0) push(context)
+            if (AvatarStore.current.value != null || (name.isNotBlank() && name != "FOMO") || SharedConnectors.mine(context).length() > 0) push(context)
             return
         }
         if (rev <= known) {
@@ -239,7 +239,7 @@ object ProfileSync {
 
     private fun push(context: Context) {
         val account = account(context)
-        val name = SoulStore.load(context)?.metadata?.name?.takeIf { it.isNotBlank() } ?: "corein"
+        val name = SoulStore.load(context)?.metadata?.name?.takeIf { it.isNotBlank() } ?: "FOMO"
         val p = prefs(context)
         val stamp = faceStamp()
         // A phone that never pushed or pulled and wears no face has nothing to say about the

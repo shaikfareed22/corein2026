@@ -13,7 +13,7 @@
  *  4. the MP4 is downloaded from the `video_url` the task ends with.
  *
  * `host` is Model Studio itself (`https://dashscope.aliyuncs.com`) with the person's own
- * key, or the corein relay (`https://cloud.fomo.corein.in`), which serves the same
+ * key, or the FOMO relay (`https://cloud.fomo.corein.in`), which serves the same
  * `/api/v1/…` paths next to its OpenAI-shaped `/v1` and pays from the account's allowance.
  *
  * The two model families take different bodies: MiniMax wants `media[first_frame]`,
@@ -36,7 +36,7 @@ export interface VideoEndpoint {
   host: string
   apiKey: string
   model: string
-  /** Where the key is from, for the settings row: `corein Cloud`, a provider's name. */
+  /** Where the key is from, for the settings row: `FOMO Cloud`, a provider's name. */
   label: string
   /** The provider the key belongs to (`nanomuse` for the account). */
   instanceId: string
@@ -332,7 +332,7 @@ export function failureMessage(output: Record<string, unknown>): string {
   return `Video task ${status}`
 }
 
-/** DashScope puts the message at the top; the corein relay answers OpenAI-shaped (`error.message`, e.g. the clip allowance). */
+/** DashScope puts the message at the top; the FOMO relay answers OpenAI-shaped (`error.message`, e.g. the clip allowance). */
 export function apiMessage(text: string): string {
   try {
     const json = JSON.parse(text) as { message?: unknown; error?: { message?: unknown } }

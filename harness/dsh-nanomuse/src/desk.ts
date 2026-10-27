@@ -411,7 +411,7 @@ export interface UpdateInfo {
 
 /**
  * `-1`, `0` or `1` for `a` against `b`; `v` prefixes and pre-release tags (`-rc.1`) are read,
- * and so is a label in front of the number (`dsh-nanomuse 0.1.41`, `corein Desktop 0.1.41`):
+ * and so is a label in front of the number (`dsh-nanomuse 0.1.41`, `FOMO Desktop 0.1.41`):
  * the first dotted number in the string is the version.
  */
 export function compareVersions(a: string, b: string): number {
@@ -464,12 +464,12 @@ function comparePre(a: string, b: string): number {
  */
 export function pickAsset(assets: ReleaseAsset[], platform: string, arch: string, appImage = false): ReleaseAsset | undefined {
   const cpu = arch === 'arm64' ? 'arm64' : 'x64'
-  const linux = [new RegExp(`^corein-Desktop-.*-linux-${cpu}\\.deb$`, 'i'), new RegExp(`^corein-Desktop-.*-linux-${cpu}\\.AppImage$`, 'i')]
+  const linux = [new RegExp(`^fomo-Desktop-.*-linux-${cpu}\\.deb$`, 'i'), new RegExp(`^fomo-Desktop-.*-linux-${cpu}\\.AppImage$`, 'i')]
   const wanted: RegExp[] =
     platform === 'darwin'
-      ? [new RegExp(`^corein-Desktop-.*-mac-${cpu}\\.dmg$`, 'i'), new RegExp(`^corein-Desktop-.*-mac-${cpu}\\.zip$`, 'i')]
+      ? [new RegExp(`^fomo-Desktop-.*-mac-${cpu}\\.dmg$`, 'i'), new RegExp(`^fomo-Desktop-.*-mac-${cpu}\\.zip$`, 'i')]
       : platform === 'win32'
-        ? [/^corein-Desktop-.*-win-x64\.exe$/i]
+        ? [/^fomo-Desktop-.*-win-x64\.exe$/i]
         : appImage
           ? linux.reverse()
           : linux
@@ -496,7 +496,7 @@ export async function checkForUpdate(current: string, fetchImpl: Fetch = fetch a
     const ctl = new AbortController()
     const timer = setTimeout(() => ctl.abort(), timeoutMs)
     try {
-      const res = await fetchImpl(url, { headers: { accept: 'application/json', 'user-agent': 'corein-Desktop' }, signal: ctl.signal })
+      const res = await fetchImpl(url, { headers: { accept: 'application/json', 'user-agent': 'fomo-Desktop' }, signal: ctl.signal })
       if (!res.ok) throw new Error(`${res.status}`)
       return await res.json()
     } finally {

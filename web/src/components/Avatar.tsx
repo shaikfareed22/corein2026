@@ -69,7 +69,7 @@ export function Avatar({
           : "avatar-idle";
   const stillUrl = dragon ? dragonUrl(pose) : studio ? studioUrl(studio, pose) : "";
 
-  const label = t("{name}'s avatar", { name: profile?.name ?? "corein" });
+  const label = t("{name}'s avatar", { name: profile?.name ?? "FOMO" });
   const box = cx("relative inline-block shrink-0 select-none rounded-full", className);
   const face = (
     <>

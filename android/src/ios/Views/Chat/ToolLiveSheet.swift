@@ -217,9 +217,9 @@ struct FloatingToolBar: View {
     @State private var selectedIdx: Int? = nil
     @State private var expanded = false
     @AppStorage("toolPreviewEnabled") private var toolPreviewEnabled: Bool = true
-    // corein: in the Muse shell a glyph inside the bar stands in for the thumbnail (NanoMuseToolBar.swift)
-    private var nmShell: Bool { NanoMuseShellPrefs.shell } // corein:
-    private var showsThumbnail: Bool { toolPreviewEnabled && !nmShell } // corein:
+    // FOMO: in the Muse shell a glyph inside the bar stands in for the thumbnail (NanoMuseToolBar.swift)
+    private var nmShell: Bool { NanoMuseShellPrefs.shell } // FOMO:
+    private var showsThumbnail: Bool { toolPreviewEnabled && !nmShell } // FOMO:
 
     private var displayedIdx: Int {
         if let idx = selectedIdx, idx < toolBlocks.count { return idx }
@@ -252,11 +252,11 @@ struct FloatingToolBar: View {
                 displayedIdx: displayedIdx,
                 expanded: $expanded,
                 selectedIdx: $selectedIdx,
-                leadingInset: showsThumbnail ? Self.thumbnailWidth + 18 : 0, // corein: showsThumbnail
-                nmShell: nmShell // corein:
+                leadingInset: showsThumbnail ? Self.thumbnailWidth + 18 : 0, // FOMO: showsThumbnail
+                nmShell: nmShell // FOMO:
             )
 
-            if showsThumbnail { // corein: showsThumbnail
+            if showsThumbnail { // FOMO: showsThumbnail
                 ToolPreviewThumbnail(
                     block: displayedBlock,
                     snapshot: displayedSnapshot,
@@ -536,7 +536,7 @@ struct ToolLiveSheet: View {
                 // out to the step pill's trailing column (under the
                 // elapsed-duration "5s" text) so it lives next to where the
                 // user is already scanning timing info.
-                Text("corein Computer")
+                Text("FOMO Computer")
                     .font(.system(size: 15, weight: .semibold))
 
                 Spacer()
@@ -1981,16 +1981,16 @@ struct ToolLiveSheet: View {
 
     private var toolTitle: String {
         switch block.kind {
-        case .shellTool: return "corein is using Shell"
-        case .fileReadTool: return "corein is reading File"
-        case .fileWriteTool: return "corein is using Editor"
-        case .fileEditTool: return "corein is editing File"
-        case .browserTool: return "corein is using Browser"
-        case .readImageTool: return "corein is reading Image"
-        case .memoryTool: return "corein is using Memory"
-        case .info: return "corein"
-        case .text: return "corein"
-        case .thinking: return "corein"
+        case .shellTool: return "FOMO is using Shell"
+        case .fileReadTool: return "FOMO is reading File"
+        case .fileWriteTool: return "FOMO is using Editor"
+        case .fileEditTool: return "FOMO is editing File"
+        case .browserTool: return "FOMO is using Browser"
+        case .readImageTool: return "FOMO is reading Image"
+        case .memoryTool: return "FOMO is using Memory"
+        case .info: return "FOMO"
+        case .text: return "FOMO"
+        case .thinking: return "FOMO"
         }
     }
 
@@ -2413,13 +2413,13 @@ private struct ToolStatusBarSurface: ViewModifier {
     }
 }
 
-// corein: picks the shell's surface or upstream's, which stays private to this file.
-private struct NanoMuseToolStatusSurface: ViewModifier { // corein:
-    var nmShell: Bool // corein:
-    func body(content: Content) -> some View { // corein:
-        if nmShell { content.modifier(NanoMuseToolBarSurface()) } else { content.modifier(ToolStatusBarSurface()) } // corein:
-    } // corein:
-} // corein:
+// FOMO: picks the shell's surface or upstream's, which stays private to this file.
+private struct NanoMuseToolStatusSurface: ViewModifier { // FOMO:
+    var nmShell: Bool // FOMO:
+    func body(content: Content) -> some View { // FOMO:
+        if nmShell { content.modifier(NanoMuseToolBarSurface()) } else { content.modifier(ToolStatusBarSurface()) } // FOMO:
+    } // FOMO:
+} // FOMO:
 
 private struct ToolStatusBar: View {
     @ObservedObject var block: AssistantBlock
@@ -2428,11 +2428,11 @@ private struct ToolStatusBar: View {
     @Binding var expanded: Bool
     @Binding var selectedIdx: Int?
     var leadingInset: CGFloat = 0
-    var nmShell = false // corein: the Muse shell's bar (NanoMuseToolBar.swift)
+    var nmShell = false // FOMO: the Muse shell's bar (NanoMuseToolBar.swift)
 
     var body: some View {
         HStack(spacing: 2) {
-            if nmShell { NanoMuseToolGlyph(block: block).padding(.trailing, 4) } // corein: the kind of step, where the thumbnail stood
+            if nmShell { NanoMuseToolGlyph(block: block).padding(.trailing, 4) } // FOMO: the kind of step, where the thumbnail stood
             statusIcon
 
             // [T-step-timestamp v2 aa8b1128] Inline HH:mm:ss prefix removed
@@ -2487,7 +2487,7 @@ private struct ToolStatusBar: View {
         .padding(.vertical, 5)
         .frame(minHeight: 38)
         .frame(maxWidth: .infinity)
-        .modifier(NanoMuseToolStatusSurface(nmShell: nmShell)) // corein: the composer's fill in the shell, upstream's surface otherwise
+        .modifier(NanoMuseToolStatusSurface(nmShell: nmShell)) // FOMO: the composer's fill in the shell, upstream's surface otherwise
     }
 
     @ViewBuilder

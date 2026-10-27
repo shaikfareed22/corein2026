@@ -1,26 +1,26 @@
 /* Info.plist permission strings — Russian */
 
-"NSLocationWhenInUseUsageDescription" = "corein использует вашу геопозицию, чтобы записывать в истории сессий, где были начаты сессии агента.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "corein использует геопозицию в фоновом режиме, чтобы задачи агента продолжали выполняться, когда приложение свёрнуто. Данные о местоположении используются только для записи истории подключений сессий.";
-"NSCalendarsUsageDescription" = "corein использует доступ к календарю, чтобы ИИ-агент мог просматривать ваше расписание, проверять свободное время и создавать события от вашего имени.";
-"NSCalendarsFullAccessUsageDescription" = "corein использует доступ к календарю, чтобы ИИ-агент мог просматривать ваше расписание, проверять свободное время и создавать события от вашего имени.";
-"NSRemindersUsageDescription" = "corein использует доступ к напоминаниям, чтобы ИИ-агент мог просматривать и создавать их от вашего имени.";
-"NSRemindersFullAccessUsageDescription" = "corein использует доступ к напоминаниям, чтобы ИИ-агент мог просматривать и создавать их от вашего имени.";
-"NSCameraUsageDescription" = "corein требуется доступ к камере, чтобы делать снимки для диалогов с ИИ.";
-"NSPhotoLibraryUsageDescription" = "corein требуется доступ к медиатеке, чтобы прикреплять изображения к диалогам с ИИ.";
-"NSPhotoLibraryAddUsageDescription" = "corein требуется разрешение, чтобы сохранять видео и изображения в вашу медиатеку.";
-"NSHealthShareUsageDescription" = "corein использует доступ к HealthKit, чтобы ИИ-агент мог читать ваши данные о здоровье — шаги, пульс, сон и тренировки — от вашего имени.";
-"NSHealthUpdateUsageDescription" = "corein использует доступ к записи в HealthKit, чтобы ИИ-агент мог сохранять данные о здоровье — шаги, вес и потребление воды — от вашего имени.";
-"NSContactsUsageDescription" = "corein использует доступ к контактам, чтобы ИИ-агент мог искать, просматривать и управлять ими от вашего имени.";
-"NSAppleMusicUsageDescription" = "corein использует доступ к медиатеке, чтобы ИИ-агент мог искать музыку и управлять воспроизведением от вашего имени.";
-"NSMicrophoneUsageDescription" = "corein требуется доступ к микрофону для голосового ввода текста в чате.";
-"NSSpeechRecognitionUsageDescription" = "corein использует распознавание речи, чтобы преобразовывать вашу речь в текстовые сообщения.";
-"NSHomeKitUsageDescription" = "corein использует доступ к HomeKit, чтобы ИИ-агент мог просматривать и управлять аксессуарами вашего умного дома от вашего имени.";
-"NSAlarmKitUsageDescription" = "corein использует AlarmKit, чтобы ИИ-агент мог устанавливать будильники и таймеры от вашего имени.";
-"NSLocalNetworkUsageDescription" = "corein использует локальную сеть для отладочного сервера и чтобы ИИ-агент мог обращаться к сервисам в вашей собственной сети."; /* corein: the app has no VM; the sentence matches Info.plist */
+"NSLocationWhenInUseUsageDescription" = "FOMO использует вашу геопозицию, чтобы записывать в истории сессий, где были начаты сессии агента.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "FOMO использует геопозицию в фоновом режиме, чтобы задачи агента продолжали выполняться, когда приложение свёрнуто. Данные о местоположении используются только для записи истории подключений сессий.";
+"NSCalendarsUsageDescription" = "FOMO использует доступ к календарю, чтобы ИИ-агент мог просматривать ваше расписание, проверять свободное время и создавать события от вашего имени.";
+"NSCalendarsFullAccessUsageDescription" = "FOMO использует доступ к календарю, чтобы ИИ-агент мог просматривать ваше расписание, проверять свободное время и создавать события от вашего имени.";
+"NSRemindersUsageDescription" = "FOMO использует доступ к напоминаниям, чтобы ИИ-агент мог просматривать и создавать их от вашего имени.";
+"NSRemindersFullAccessUsageDescription" = "FOMO использует доступ к напоминаниям, чтобы ИИ-агент мог просматривать и создавать их от вашего имени.";
+"NSCameraUsageDescription" = "FOMO требуется доступ к камере, чтобы делать снимки для диалогов с ИИ.";
+"NSPhotoLibraryUsageDescription" = "FOMO требуется доступ к медиатеке, чтобы прикреплять изображения к диалогам с ИИ.";
+"NSPhotoLibraryAddUsageDescription" = "FOMO требуется разрешение, чтобы сохранять видео и изображения в вашу медиатеку.";
+"NSHealthShareUsageDescription" = "FOMO использует доступ к HealthKit, чтобы ИИ-агент мог читать ваши данные о здоровье — шаги, пульс, сон и тренировки — от вашего имени.";
+"NSHealthUpdateUsageDescription" = "FOMO использует доступ к записи в HealthKit, чтобы ИИ-агент мог сохранять данные о здоровье — шаги, вес и потребление воды — от вашего имени.";
+"NSContactsUsageDescription" = "FOMO использует доступ к контактам, чтобы ИИ-агент мог искать, просматривать и управлять ими от вашего имени.";
+"NSAppleMusicUsageDescription" = "FOMO использует доступ к медиатеке, чтобы ИИ-агент мог искать музыку и управлять воспроизведением от вашего имени.";
+"NSMicrophoneUsageDescription" = "FOMO требуется доступ к микрофону для голосового ввода текста в чате.";
+"NSSpeechRecognitionUsageDescription" = "FOMO использует распознавание речи, чтобы преобразовывать вашу речь в текстовые сообщения.";
+"NSHomeKitUsageDescription" = "FOMO использует доступ к HomeKit, чтобы ИИ-агент мог просматривать и управлять аксессуарами вашего умного дома от вашего имени.";
+"NSAlarmKitUsageDescription" = "FOMO использует AlarmKit, чтобы ИИ-агент мог устанавливать будильники и таймеры от вашего имени.";
+"NSLocalNetworkUsageDescription" = "FOMO использует локальную сеть для отладочного сервера и чтобы ИИ-агент мог обращаться к сервисам в вашей собственной сети."; /* FOMO: the app has no VM; the sentence matches Info.plist */
 
-/* corein: the keys Info.plist declares but this file lacked, so the prompt is in the person's language */
-"NFCReaderUsageDescription" = "corein использует NFC, чтобы ИИ-агент мог читать и записывать NFC-метки от вашего имени.";
-"NSBluetoothAlwaysUsageDescription" = "corein использует Bluetooth, чтобы ИИ-агент мог искать ближайшие BLE-устройства, подключаться к ним и обмениваться данными от вашего имени.";
-"NSBluetoothPeripheralUsageDescription" = "corein использует Bluetooth, чтобы ИИ-агент мог искать ближайшие BLE-устройства, подключаться к ним и обмениваться данными от вашего имени.";
-"NSFaceIDUsageDescription" = "corein использует Face ID для защиты заблокированных чатов, чтобы только вы могли видеть их содержимое.";
+/* FOMO: the keys Info.plist declares but this file lacked, so the prompt is in the person's language */
+"NFCReaderUsageDescription" = "FOMO использует NFC, чтобы ИИ-агент мог читать и записывать NFC-метки от вашего имени.";
+"NSBluetoothAlwaysUsageDescription" = "FOMO использует Bluetooth, чтобы ИИ-агент мог искать ближайшие BLE-устройства, подключаться к ним и обмениваться данными от вашего имени.";
+"NSBluetoothPeripheralUsageDescription" = "FOMO использует Bluetooth, чтобы ИИ-агент мог искать ближайшие BLE-устройства, подключаться к ним и обмениваться данными от вашего имени.";
+"NSFaceIDUsageDescription" = "FOMO использует Face ID для защиты заблокированных чатов, чтобы только вы могли видеть их содержимое.";

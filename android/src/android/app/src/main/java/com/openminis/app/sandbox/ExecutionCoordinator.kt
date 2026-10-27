@@ -60,7 +60,7 @@ object ExecutionCoordinator {
         appContext = context.applicationContext
     }
 
-    // corein: test-only view of the per-session registry, so the instrumentation test can
+    // FOMO: test-only view of the per-session registry, so the instrumentation test can
     // observe a shell's lifetime without reflection (the old single mountedSessionId is gone).
     internal fun hasShell(sessionId: String): Boolean = shells.containsKey(sessionId)
 

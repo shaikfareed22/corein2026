@@ -1,4 +1,4 @@
-# corein Cloud on nanomuse-hk
+# FOMO Cloud on nanomuse-hk
 
 The production relay behind `https://cloud.fomo.corein.in` runs on the same Hong
 Kong box as the project site, behind the showcase's Caddy
@@ -36,7 +36,7 @@ ALLOWED_IDENTIFIERS=
 ALLOWANCE_CNY=10
 INVITE_BONUS_CNY=5
 OWN_KEY_DOCS=https://fomo.corein.in/own-key
-# what "Help improve corein's AI models" starts as for new accounts (1 = on
+# what "Help improve FOMO's AI models" starts as for new accounts (1 = on
 # until turned off under Settings → Data controls); say it in PRIVACY_URL
 IMPROVE_DEFAULT=1
 PRIVACY_URL=https://fomo.corein.in/privacy/
@@ -52,7 +52,7 @@ SMTP_HOST=smtpdm.aliyun.com
 SMTP_PORT=465
 SMTP_USER=no-reply@mail.corein.in
 SMTP_PASSWORD=
-SMTP_FROM=corein <no-reply@mail.corein.in>
+SMTP_FROM=FOMO <no-reply@mail.corein.in>
 # the 百炼 key the relay spends (public endpoints; never a private one)
 UPSTREAM_BASE=https://dashscope.aliyuncs.com/compatible-mode/v1
 DASHSCOPE_BASE=https://dashscope.aliyuncs.com/api/v1

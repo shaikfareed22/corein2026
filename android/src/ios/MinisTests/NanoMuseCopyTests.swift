@@ -1,9 +1,9 @@
 import XCTest
 @testable import Minis
 
-/// The words a person reads in the corein layer follow the project's voice: no dashes
+/// The words a person reads in the FOMO layer follow the project's voice: no dashes
 /// (`—`, `–`, `——`) in any of the nine languages, no exclamation marks, and the relay is
-/// "corein Cloud" in every language. Our keys are the ones the Swift files under
+/// "FOMO Cloud" in every language. Our keys are the ones the Swift files under
 /// `NanoMuse/` reference; upstream OpenMinis keys are not ours to rewrite.
 ///
 /// Reads the sources next to this file (Mac only, as all of MinisTests): the catalogue is
@@ -91,7 +91,7 @@ final class NanoMuseCopyTests: XCTestCase {
         var offenders: [String] = []
         for key in cat.ours {
             for (lang, value) in cat.values[key] ?? [:] {
-                for translated in ["corein 云", "corein 雲", "corein クラウド", "corein 클라우드"] where value.contains(translated) {
+                for translated in ["FOMO 云", "FOMO 雲", "FOMO クラウド", "FOMO 클라우드"] where value.contains(translated) {
                     offenders.append("[\(lang)] \(value.prefix(80))")
                 }
             }

@@ -1,5 +1,5 @@
-// Icons used by the corein shell. Monochrome lucide icons, colored with currentColor — except
-// the launcher icon, which is the corein mark in its own colours (res/mark.tsx, the same N the
+// Icons used by the FOMO shell. Monochrome lucide icons, colored with currentColor — except
+// the launcher icon, which is the FOMO mark in its own colours (res/mark.tsx, the same N the
 // Android app's launcher icon has).
 import { AlertTriangle, ChevronLeft, Cloud, Hand, KeyRound, Link2, MessageCircle, Monitor, RefreshCw, Unplug } from 'lucide-react';
 import { NanoMuseMark } from './mark';

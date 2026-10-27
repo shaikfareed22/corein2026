@@ -81,7 +81,7 @@ fun AddModelsToGroupScreen(
 
     Scaffold(
         topBar = {
-            io.github.nanomuse.ui.muse.MuseTopAppBar( // corein: Muse's bar (drop-in for TopAppBar)
+            io.github.nanomuse.ui.muse.MuseTopAppBar( // FOMO: Muse's bar (drop-in for TopAppBar)
                 title = { Text(stringResource(R.string.model_group_detail_add_models), fontWeight = FontWeight.SemiBold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {

@@ -167,8 +167,8 @@ class Providers:
         hub = self.svc.hub
         return {
             "id": CLOUD_ID,
-            "name": "corein Cloud",
-            "name_zh": "corein Cloud",
+            "name": "FOMO Cloud",
+            "name_zh": "FOMO Cloud",
             "protocol": "openai",
             "base_url": model_url(hub.cloud.base_url),
             "base_url_global": "",

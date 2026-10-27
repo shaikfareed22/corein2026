@@ -15,13 +15,13 @@ import java.util.concurrent.TimeUnit
  * The MCP authorization flow's first half, as the desktop host does it (`connectors.ts`): ask
  * the server what it wants with a bare `initialize`; on a 401, follow `WWW-Authenticate` to the
  * protected-resource metadata, from there to the authorization server's metadata (RFC 8414 /
- * OpenID), and register corein as a client there (RFC 7591) — so a person connects without
+ * OpenID), and register FOMO as a client there (RFC 7591) — so a person connects without
  * ever seeing a client id. The result is the same static [MCPOAuthConfig] the upstream PKCE
  * flow ([com.openminis.app.mcp.oauth.MCPOAuthController]) runs with.
  */
 object McpAuthDiscovery {
     private const val TAG = "McpAuthDiscovery"
-    private const val CLIENT_NAME = "corein"
+    private const val CLIENT_NAME = "FOMO"
     private const val CLIENT_URI = "https://fomo.corein.in"
     private const val PROTOCOL = "2025-06-18"
     private const val TIMEOUT_S = 15L
@@ -57,7 +57,7 @@ object McpAuthDiscovery {
         ).toString()
 
     /**
-     * What [url] wants, registering corein at its authorization server when it is OAuth.
+     * What [url] wants, registering FOMO at its authorization server when it is OAuth.
      * [redirectUri] is the loopback the PKCE step listens on. Blocking; call off the main thread.
      * Throws with a readable message when the server misbehaves.
      */
@@ -149,7 +149,7 @@ object McpAuthDiscovery {
             code = again.first
             text = again.second
         }
-        if (code !in 200..299) throw IllegalStateException("The authorization server refused to register corein ($code): ${text.take(200)}")
+        if (code !in 200..299) throw IllegalStateException("The authorization server refused to register FOMO ($code): ${text.take(200)}")
         val reg = JSONObject(text)
         val clientId = reg.optString("client_id", "").ifBlank { throw IllegalStateException("The authorization server returned no client id") }
         AppLogger.info(TAG, "registered at $endpoint (secret=${reg.has("client_secret")})")

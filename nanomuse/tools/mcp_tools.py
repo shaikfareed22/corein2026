@@ -1,4 +1,4 @@
-"""Model Context Protocol client: expose tools of MCP servers as corein tools.
+"""Model Context Protocol client: expose tools of MCP servers as FOMO tools.
 
 Configure in ``config.toml``::
 

@@ -38,14 +38,14 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
-      pages: write # corein: configure-pages enables the site itself
+      pages: write # FOMO: configure-pages enables the site itself
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Assemble site/assets (the dragon, the icons, the fonts, the screenshots)
         run: |
           mkdir -p site/assets/fonts site/assets/screens
           cp web/public/icon.svg web/public/mark.svg web/public/avatars/dragon-*.webp site/assets/
-          cp assets/brand/corein-wordmark.svg assets/brand/corein-wordmark-white.svg assets/brand/corein-logo-dark.png assets/brand/corein-logo.png assets/brand/corein-logo@3x.png assets/brand/corein-mark.svg assets/brand/corein-icon.svg docs/app-icon.png site/assets/ # corein: the landing page's brand files
+          cp assets/brand/fomo-logo.png assets/brand/fomo-logo-transparent.png assets/brand/fomo-mark.svg assets/brand/fomo-icon.svg docs/app-icon.png site/assets/ # FOMO: the landing page's brand files
           cp web/public/fonts/figtree-latin.woff2 web/public/fonts/figtree-latin-ext.woff2 web/public/fonts/OFL.txt site/assets/fonts/
           cp docs/screenshots/*.png site/assets/screens/
           cp docs/cover.png site/assets/cover.png
@@ -80,7 +80,7 @@ jobs:
           cp -R .vitepress/dist/. ../site/docs/
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         with:
-          enablement: true # corein: switch Pages on for a fresh fork (source: GitHub Actions)
+          enablement: true # FOMO: switch Pages on for a fresh fork (source: GitHub Actions)
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: site

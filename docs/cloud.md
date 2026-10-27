@@ -1,7 +1,7 @@
-# corein Cloud
+# FOMO Cloud
 
 The "start now" path: sign up with a phone number (mainland China; the code comes by SMS)
-or an e-mail address, get a free allowance, and use corein without an API key of your own.
+or an e-mail address, get a free allowance, and use FOMO without an API key of your own.
 Bringing your own key still works exactly as before: this is one more
 provider, not a replacement.
 
@@ -18,10 +18,10 @@ Signing out brings that screen back
 runtime). The screen is a door, not a wall: *Use your own API key instead* steps
 past it into setup's own-key path, and with a key of your own the app works
 signed out (chat, hands, pictures, clips); the sign-in waits under
-*Connections* (phones: *Settings → corein Cloud*) for the Cloud models, sync
+*Connections* (phones: *Settings → FOMO Cloud*) for the Cloud models, sync
 and your devices. After the code the app has:
 
-- a provider called **corein Cloud** under *Settings → Providers*, an
+- a provider called **FOMO Cloud** under *Settings → Providers*, an
   ordinary OpenAI-compatible provider whose key is the token the relay issued;
 - the four rows of *Settings → Models* (web console: *Connections*) on the
   account's models when you had chosen none: the recommended chat model, the
@@ -29,12 +29,12 @@ and your devices. After the code the app has:
   a computer; each model on the relay's menu says which of the two it is for),
   the picture model and the clip model. A row you have not set follows one
   order: the chat model's provider when it is a key of yours that can do the
-  job, else corein Cloud while signed in, else the first key of yours that
+  job, else FOMO Cloud while signed in, else the first key of yours that
   can; the *Automatic* entry of the row says what that gives right now, and a
   key you add later asks *Use it for* before any row moves
   ([own-key.md](own-key.md#which-model-does-what)).
 
-*Settings → corein Cloud* (the *Account* screen) shows who is signed in (a
+*Settings → FOMO Cloud* (the *Account* screen) shows who is signed in (a
 masked hint, never the number) and since when; sets, changes or removes the
 **password** (eight characters or more; scrypt on the relay; locked for a while
 after repeated wrong attempts, and a fresh code sign-in opens it again); today's
@@ -133,7 +133,7 @@ and that the same address signing up again is a new, empty account. See
 
 ## Data controls
 
-*Settings → Data controls → Help improve corein's AI models* is a switch each
+*Settings → Data controls → Help improve FOMO's AI models* is a switch each
 person owns, the same on the phone, the web app, the desktop and the console.
 Off, the relay forwards a chat request and keeps nothing of it. On, each turn
 is kept as a training view: what you wrote, what the model answered and the
@@ -285,7 +285,7 @@ so it can skip its own echo).
 
 ## Allowance
 
-corein is a community project and charges nothing. The public relay at
+FOMO is a community project and charges nothing. The public relay at
 `cloud.fomo.corein.in` is paid for by the developer, so each account has a pool
 to draw on, for its lifetime, not by the day (relay 0.5):
 
@@ -323,7 +323,7 @@ or fifty pictures. A new face (four candidates, four poses and four clips)
 comes to about ¥3.5, and the app shows the estimate and what is left before it
 draws.
 
-*Settings → corein Cloud* shows what was used of the pool in ¥ and $, what
+*Settings → FOMO Cloud* shows what was used of the pool in ¥ and $, what
 is left, and how the pool grows. At 80 % the app says so once; when the pool
 is spent the relay refuses with `allowance_exhausted` and the app shows the
 ways on: your own key, a plan you already pay for, or an invitation (+¥5 for
@@ -386,7 +386,7 @@ out, and the route says nothing about whether the number has an account or wheth
 it is off; the person is told `403 account_disabled` when they sign in with a code,
 or with the right password (a wrong one is answered like any wrong password).
 
-corein asks for one thing in return: a star on
+FOMO asks for one thing in return: a star on
 [GitHub](https://github.com/shaikfareed22/corein2026), which is what helps the
 project be found. The moments are the relay's to set, not the app's (0.1.35):
 `GET /v1/nudges` says when an ask is fair: after the third, tenth and

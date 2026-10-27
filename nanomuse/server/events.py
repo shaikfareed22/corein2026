@@ -1,4 +1,4 @@
-"""Chat timeline + real-time event bus for the corein app.
+"""Chat timeline + real-time event bus for the FOMO app.
 
 The mobile app is a messaging surface (think WhatsApp): everything the agent does
 shows up as *events* in a thread's timeline — user bubbles, assistant bubbles,

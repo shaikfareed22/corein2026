@@ -57,7 +57,7 @@ class HandsOperator(private val context: Context) {
         /** A cap on steps for callers that want one; 0 (the default) means the run goes on until the task is done, the person stops it, or the time limit. */
         val maxSteps: Int = DEFAULT_MAX_STEPS,
         val sessionId: String? = null,
-        val agentName: String = "corein",
+        val agentName: String = "FOMO",
         val language: String = "the user's language",
     )
 
@@ -412,7 +412,7 @@ class HandsOperator(private val context: Context) {
         val outcome = runBlocking {
             RiskGate.check(sessionId ?: "hands", GuardKind.SCREEN, assessment, preview = "Tap “$short”", pageUrl = appLabel, elementText = short)
         }
-        // The user may have opened corein to answer; put the operated app back in front.
+        // The user may have opened FOMO to answer; put the operated app back in front.
         val (nowPkg, _) = svc.foregroundPackage()
         if (nowPkg == context.packageName && pkg != null && pkg != context.packageName) {
             HandsApps.launchable(context).firstOrNull { it.packageName == pkg }?.let { HandsApps.open(context, it) }

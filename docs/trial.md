@@ -11,10 +11,10 @@ free pool work is [cloud.md](cloud.md); a relay of your own is [self-hosting.md]
 
 Install the app ([android.md](android.md), [ios.md](ios.md)). The first screen is the
 account: a phone number or an e-mail address and a code, or a password once you have set
-one. That single sign-in sets up the corein Cloud provider, the four rows of *Settings →
+one. That single sign-in sets up the FOMO Cloud provider, the four rows of *Settings →
 Models* and the connection to the other devices.
 
-*Settings → corein Cloud → Devices* is where the phone's side lives: *Reachable from your
+*Settings → FOMO Cloud → Devices* is where the phone's side lives: *Reachable from your
 devices* keeps the phone connected so the others can ask it for things (a quiet
 notification shows while it is on); *Let other devices operate this phone* decides whether
 they may run a shell command, read files, take a screenshot or hand over a task here, and
@@ -27,7 +27,7 @@ shell, files and the screen are not available on iOS.
 
 ## 2. The computer
 
-Install corein Desktop from the [latest release](https://github.com/shaikfareed22/corein2026/releases/latest)
+Install FOMO Desktop from the [latest release](https://github.com/shaikfareed22/corein2026/releases/latest)
 ([desktop.md](desktop.md): one installer per platform, the runtime for the hands inside)
 and sign in with the same account. Within seconds the computer is in the phone's Devices
 list and the phone in the desktop's *Devices* page in the rail. Name the computer in
@@ -78,7 +78,7 @@ each one's *Settings → Models* is its own.
 ## 7. Your own relay
 
 [self-hosting.md](self-hosting.md) runs the same relay on a small VPS. The phones take its
-address under *Use a different server* on the sign-in screen; corein Desktop takes it in
+address under *Use a different server* on the sign-in screen; FOMO Desktop takes it in
 the desktop profile's `cordis.patch.yml`; the console is whatever relay serves it at `/app/`.
 Every device of one account must point at the same relay, since the devices and the
 conversations live there.

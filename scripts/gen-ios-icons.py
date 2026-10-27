@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the corein app icon for android/src/ios from assets/brand/.
+"""Generate the FOMO app icon for android/src/ios from assets/brand/.
 
 Idempotent; re-run after every upstream pull (CONTRIBUTING.md). Writes 1024x1024 PNGs:
 
@@ -13,7 +13,7 @@ Idempotent; re-run after every upstream pull (CONTRIBUTING.md). Writes 1024x1024
   pairing as the Android classic skins).
 
 iOS applies its own corner mask, so the tiles are full squares. The mark sits in the same frame
-as the Android legacy launcher icon (assets/brand/corein-mark.svg is drawn on a 100-unit tile).
+as the Android legacy launcher icon (assets/brand/fomo-mark.svg is drawn on a 100-unit tile).
 Needs Playwright with Chromium (`pip install playwright && playwright install chromium`).
 """
 
@@ -40,19 +40,10 @@ def android_icons():  # noqa: ANN201  (module name has a hyphen)
     return module
 
 
-def tile(d: str, background: str, stroke_start: str, stroke_end: str | None = None) -> str:
-    """A full-square tile with the mark; a gradient when two stroke colours are given."""
-    grad = (
-        f'<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="12.6" y1="50" x2="87.8" y2="50">'
-        f'<stop offset="0" stop-color="{stroke_start}"/><stop offset="1" stop-color="{stroke_end}"/></linearGradient>'
-        if stroke_end
-        else ""
-    )
-    fill = "url(#g)" if stroke_end else stroke_start
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs>{grad}</defs>'
-        f'<rect width="100" height="100" fill="{background}"/><path d="{d}" fill="{fill}"/></svg>'
-    )
+def tile(icons) -> str:  # noqa: ANN001
+    """A full-square tile with the mark in its colours; iOS applies its own corner mask."""
+    primary, accent = icons.mark_paths()
+    return icons.mark_svg(100, primary, accent, icons.OUTLINE, icons.TILE)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -73,16 +64,14 @@ def main(argv: list[str] | None = None) -> int:
     except ImportError:
         sys.exit("playwright not installed: pip install playwright && playwright install chromium")
     icons = android_icons()
-    d = icons.mark_path()
-    light = tile(d, icons.TILE_LIGHT, icons.STROKE_START, icons.STROKE_END)
-    dark = tile(d, icons.TILE_DARK, icons.STROKE_START, icons.STROKE_END)
+    svg = tile(icons)
     jobs = {
-        ICONSET / "Icon-1024.png": light,
-        ICONSET / "Icon-1024-Dark.png": dark,
-        ALTERNATE / "AppIcon-Light.png": light,
-        ALTERNATE / "AppIcon-Dark.png": dark,
-        ALTERNATE / "AppIcon-LegacyLight.png": tile(d, icons.TILE_LIGHT, icons.STROKE_START),
-        ALTERNATE / "AppIcon-LegacyDark.png": tile(d, icons.TILE_DARK, "#FFFFFF"),
+        ICONSET / "Icon-1024.png": svg,
+        ICONSET / "Icon-1024-Dark.png": svg,
+        ALTERNATE / "AppIcon-Light.png": svg,
+        ALTERNATE / "AppIcon-Dark.png": svg,
+        ALTERNATE / "AppIcon-LegacyLight.png": svg,
+        ALTERNATE / "AppIcon-LegacyDark.png": svg,
     }
     with sync_playwright() as p:
         browser = p.chromium.launch()

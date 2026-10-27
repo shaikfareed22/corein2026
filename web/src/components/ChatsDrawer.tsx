@@ -35,7 +35,7 @@ export function ChatsDrawer() {
     }
   }, [open]);
 
-  const name = state.profile?.name || "corein";
+  const name = state.profile?.name || "FOMO";
   const side = useMemo(() => {
     const q = query.trim().toLowerCase();
     return state.threads

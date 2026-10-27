@@ -1,6 +1,6 @@
 //
 //  NanoMuseShell.swift
-//  corein
+//  FOMO
 //
 //  The Muse shell on iPhone and iPad: one main chat pinned to the Chat tab,
 //  a bottom bar for Chat / Feed / Ideas / Goals / Library, and a side
@@ -373,10 +373,10 @@ struct NanoMuseHomeView: View {
     /// Reduce Motion on: the bottom bar fades out for the keyboard instead of sliding down.
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    /// The agent's name from SOUL.md, "corein" until it has one.
+    /// The agent's name from SOUL.md, "FOMO" until it has one.
     static func currentAgentName() -> String {
         let n = SoulStore.cachedMetadata.name
-        return n.isEmpty ? "corein" : n
+        return n.isEmpty ? "FOMO" : n
     }
 
     /// Hidden while the keyboard is up (Android's IME) and while the chat's voice panel is
@@ -735,7 +735,7 @@ struct NanoMuseHomeView: View {
         .accessibilityLabel(Text(AppLocalized("More")))
     }
 
-    /// One of this chat's own menu entries: AIChatView acts on it (see its `// corein:` hook).
+    /// One of this chat's own menu entries: AIChatView acts on it (see its `// FOMO:` hook).
     private func chatAction(_ action: NanoMuseChatAction) {
         guard let id = main.chatId else { return }
         NanoMuseChatAction.post(action, session: main.liveId ?? id)

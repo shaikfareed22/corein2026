@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Stage the harness the desktop app carries: `dsh/` next to this file's parent, with
-// `@deepseek-ai/dsh` (the version the bundle's peer dependencies name) and the corein
+// `@deepseek-ai/dsh` (the version the bundle's peer dependencies name) and the FOMO
 // bundle installed side by side by npm — the Loader finds a bundle linked from the profile
 // to that copy, so no pnpm runs on the person's machine.
 //
@@ -67,7 +67,7 @@ rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 writeFileSync(
   join(out, "package.json"),
-  `${JSON.stringify({ name: "nanomuse-desktop-dsh", private: true, description: "DeepSeek Harness and the corein bundle, as corein Desktop carries them" }, null, 2)}\n`,
+  `${JSON.stringify({ name: "nanomuse-desktop-dsh", private: true, description: "DeepSeek Harness and the FOMO bundle, as FOMO Desktop carries them" }, null, 2)}\n`,
 );
 // No install scripts, whatever the npm version's policy (npm 11 blocks them by default,
 // npm 10 runs them): the harness's dependencies carry prebuilt binaries and their scripts
@@ -152,7 +152,7 @@ rmSync(join(out, "node_modules", ".package-lock.json"), { force: true });
 const runtimeDir = join(appDir, "runtime");
 if (!existsSync(runtimeDir)) {
   mkdirSync(runtimeDir);
-  writeFileSync(join(runtimeDir, "README.txt"), "No runtime for the hands was built into this copy of corein Desktop; `nanomuse` on PATH or NANOMUSE_PY serves them.\n");
+  writeFileSync(join(runtimeDir, "README.txt"), "No runtime for the hands was built into this copy of FOMO Desktop; `nanomuse` on PATH or NANOMUSE_PY serves them.\n");
 }
 
 // ---------------------------------------------------------------- the record

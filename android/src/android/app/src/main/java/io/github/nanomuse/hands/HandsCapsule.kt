@@ -111,7 +111,7 @@ class HandsCapsule(private val context: Context) {
 
     /**
      * A tap waits for approval. [decidable]: Allow once / Deny right here on the capsule — the
-     * person is in the operated app, not in corein. Money is confirmed with the screen lock,
+     * person is in the operated app, not in FOMO. Money is confirmed with the screen lock,
      * which only the card in the chat can do: then the capsule offers Open instead.
      */
     fun approval(what: String, decidable: Boolean = false) = onMain {
@@ -470,7 +470,7 @@ class HandsCapsule(private val context: Context) {
         return if (id > 0) context.resources.getDimensionPixelSize(id) else dp(24)
     }
 
-    /** Brings corein's chat back to the front. */
+    /** Brings FOMO's chat back to the front. */
     fun bringAppToFront(sessionId: String?) {
         try {
             val intent = Intent(context, Class.forName("com.openminis.app.MainActivity")).apply {

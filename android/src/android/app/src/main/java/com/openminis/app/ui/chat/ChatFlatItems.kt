@@ -443,14 +443,14 @@ internal sealed class FlatChatItem {
         override val contentType = "info"
     }
 
-    // corein: the first-conversation name chooser; rendered by
+    // FOMO: the first-conversation name chooser; rendered by
     // io.github.nanomuse.ui.onboarding.NamingCard from the view model's state.
     data class NanoMuseNaming(val messageId: String) : FlatChatItem() {
         override val key = "nm_naming:$messageId"
         override val contentType = "nm_naming"
     }
 
-    // corein: the "change your avatar" options card (live state in AvatarFlow / AvatarStudio)
+    // FOMO: the "change your avatar" options card (live state in AvatarFlow / AvatarStudio)
     // and the share card once the new face is done.
     data class NanoMuseAvatarOptions(val messageId: String) : FlatChatItem() {
         override val key = "nm_avatar_options:$messageId"
@@ -462,13 +462,13 @@ internal sealed class FlatChatItem {
         override val contentType = "nm_avatar_share"
     }
 
-    /** corein: the cost of a new face on the Cloud allowance, asked before drawing (the text is the whole sentence). */
+    /** FOMO: the cost of a new face on the Cloud allowance, asked before drawing (the text is the whole sentence). */
     data class NanoMuseAvatarConfirm(val messageId: String, val text: String) : FlatChatItem() {
         override val key = "nm_avatar_confirm:$messageId"
         override val contentType = "nm_avatar_confirm"
     }
 
-    /** corein: the free allowance is spent — the two ways on (own key, invite). */
+    /** FOMO: the free allowance is spent — the two ways on (own key, invite). */
     data class NanoMuseAllowance(val messageId: String) : FlatChatItem() {
         override val key = "nm_allowance:$messageId"
         override val contentType = "nm_allowance"
@@ -555,7 +555,7 @@ internal fun buildFlatChatItems(
     // prefix so the defensive key-collision suffixing behaves exactly as a
     // single full build would.
     seedKeys: Set<String> = emptySet(),
-    // corein: false leaves the agent's steps out — no tool pills, no
+    // FOMO: false leaves the agent's steps out — no tool pills, no
     // reasoning rows — so the chat keeps only what it said (Settings →
     // Appearance → "Show the agent's steps", off by default). The typing
     // indicator then stays up while a tool runs, since nothing else shows.
@@ -590,11 +590,11 @@ internal fun buildFlatChatItems(
             is FlatChatItem.AssistantThinking -> item.copy(messageId = "${item.messageId}#$n")
             is FlatChatItem.AssistantToolUse -> item.copy(messageId = "${item.messageId}#$n")
             is FlatChatItem.AssistantInfo -> item.copy(messageId = "${item.messageId}#$n")
-            is FlatChatItem.NanoMuseNaming -> item.copy(messageId = "${item.messageId}#$n") // corein
-            is FlatChatItem.NanoMuseAvatarOptions -> item.copy(messageId = "${item.messageId}#$n") // corein
-            is FlatChatItem.NanoMuseAvatarShare -> item.copy(messageId = "${item.messageId}#$n") // corein
-            is FlatChatItem.NanoMuseAvatarConfirm -> item.copy(messageId = "${item.messageId}#$n") // corein
-            is FlatChatItem.NanoMuseAllowance -> item.copy(messageId = "${item.messageId}#$n") // corein
+            is FlatChatItem.NanoMuseNaming -> item.copy(messageId = "${item.messageId}#$n") // FOMO
+            is FlatChatItem.NanoMuseAvatarOptions -> item.copy(messageId = "${item.messageId}#$n") // FOMO
+            is FlatChatItem.NanoMuseAvatarShare -> item.copy(messageId = "${item.messageId}#$n") // FOMO
+            is FlatChatItem.NanoMuseAvatarConfirm -> item.copy(messageId = "${item.messageId}#$n") // FOMO
+            is FlatChatItem.NanoMuseAllowance -> item.copy(messageId = "${item.messageId}#$n") // FOMO
             is FlatChatItem.AssistantTyping -> item.copy(messageId = "${item.messageId}#$n")
             is FlatChatItem.AssistantError -> item.copy(messageId = "${item.messageId}#$n")
             is FlatChatItem.AssistantLegacyContent -> FlatChatItem.AssistantLegacyContent(
@@ -628,7 +628,7 @@ internal fun buildFlatChatItems(
             continue
         }
         // System messages (slash-command notices, compact divider, etc.) render
-        // as horizontal-divider rows — no "corein" attribution, no card. Skip
+        // as horizontal-divider rows — no "FOMO" attribution, no card. Skip
         // the assistant header so each info block stands on its own. Mirrors
         // iOS systemDividerRow / compactDividerRow.
         val isSystem = message.role == "system"
@@ -641,12 +641,12 @@ internal fun buildFlatChatItems(
         // T83: when Resume creates a fresh assistant bubble after the user
         // stopped a streaming turn, the previous (cancelled) assistant
         // message is right before this one in the list. Visually they should
-        // read as one continuous turn — suppress the duplicate "corein"
+        // read as one continuous turn — suppress the duplicate "FOMO"
         // header. Skip system rows when looking back since they render as
         // dividers, not as separate speaker turns. iOS achieves this by
         // reusing the existing ChatMessage in runAgentLoop(resumingAt:);
         // we reach the same end-result at the render layer.
-        // corein: with the steps hidden, a finished turn that was all
+        // FOMO: with the steps hidden, a finished turn that was all
         // steps — no words, no error — would be a face with nothing under
         // it; leave the whole turn out (its steps are still in the history).
         // The look-back below skips such turns too, so the reply that
@@ -679,7 +679,7 @@ internal fun buildFlatChatItems(
                 "text" -> {
                     if (block.content.isNotEmpty()) {
                         val isLastText = index == lastTextIdx
-                        // corein: keep each assistant text block in a single markdown
+                        // FOMO: keep each assistant text block in a single markdown
                         // bubble (matching iOS) so lists, headings, paragraphs, and code
                         // blocks from one turn stay together inside one bubble.
                         out.add(dedupe(FlatChatItem.AssistantMarkdownBlock(
@@ -693,7 +693,7 @@ internal fun buildFlatChatItems(
                         )))
                     }
                 }
-                "thinking" -> if (showSteps) out.add(dedupe(FlatChatItem.AssistantThinking( // corein: a step
+                "thinking" -> if (showSteps) out.add(dedupe(FlatChatItem.AssistantThinking( // FOMO: a step
                     messageId = message.id,
                     block = block,
                     isLast = block.id == lastThinkingId,
@@ -705,12 +705,12 @@ internal fun buildFlatChatItems(
                     messageId = message.id,
                     block = block,
                 )))
-                "nm_naming" -> out.add(dedupe(FlatChatItem.NanoMuseNaming(message.id))) // corein
-                "nm_avatar_options" -> out.add(dedupe(FlatChatItem.NanoMuseAvatarOptions(message.id))) // corein
-                "nm_avatar_share" -> out.add(dedupe(FlatChatItem.NanoMuseAvatarShare(message.id, block.content))) // corein
-                "nm_avatar_confirm" -> out.add(dedupe(FlatChatItem.NanoMuseAvatarConfirm(message.id, block.content))) // corein
-                "nm_allowance" -> out.add(dedupe(FlatChatItem.NanoMuseAllowance(message.id))) // corein
-                else -> if (showSteps) out.add(dedupe(FlatChatItem.AssistantToolUse( // corein: a step
+                "nm_naming" -> out.add(dedupe(FlatChatItem.NanoMuseNaming(message.id))) // FOMO
+                "nm_avatar_options" -> out.add(dedupe(FlatChatItem.NanoMuseAvatarOptions(message.id))) // FOMO
+                "nm_avatar_share" -> out.add(dedupe(FlatChatItem.NanoMuseAvatarShare(message.id, block.content))) // FOMO
+                "nm_avatar_confirm" -> out.add(dedupe(FlatChatItem.NanoMuseAvatarConfirm(message.id, block.content))) // FOMO
+                "nm_allowance" -> out.add(dedupe(FlatChatItem.NanoMuseAllowance(message.id))) // FOMO
+                else -> if (showSteps) out.add(dedupe(FlatChatItem.AssistantToolUse( // FOMO: a step
                     messageId = message.id,
                     block = block,
                     allToolBlocks = toolPillBlocks,
@@ -739,9 +739,9 @@ internal fun buildFlatChatItems(
         val hasVisibleContent = message.content.isNotEmpty() || blocks.any {
             when (it.kind) {
                 "info" -> false
-                "thinking" -> showSteps && (message.thinkingLevel?.isEnabled ?: true) // corein: hidden steps do not count
+                "thinking" -> showSteps && (message.thinkingLevel?.isEnabled ?: true) // FOMO: hidden steps do not count
                 "text" -> it.content.isNotEmpty()
-                "tool_use" -> showSteps // pills render immediately — when the steps are shown (corein)
+                "tool_use" -> showSteps // pills render immediately — when the steps are shown (FOMO)
                 else -> true // the app's own cards
             }
         }
@@ -767,7 +767,7 @@ internal fun buildFlatChatItems(
     return out
 }
 
-/** corein: a finished assistant turn made of steps alone — nothing the chat would show with the steps hidden. */
+/** FOMO: a finished assistant turn made of steps alone — nothing the chat would show with the steps hidden. */
 private fun stepsOnlyTurn(m: ChatMessage): Boolean =
     m.role == "assistant" && !m.isStreaming && m.error == null && m.content.isEmpty() &&
         m.toolBlocks.isNotEmpty() && m.toolBlocks.all {

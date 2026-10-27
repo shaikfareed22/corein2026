@@ -92,9 +92,9 @@ fun AddProviderScreen(
     providerRepository: ProviderRepository,
     onBack: () -> Unit,
     onSaved: () -> Unit,
-    preset: String? = null, // corein: open straight on the form, pre-filled for a known vendor
+    preset: String? = null, // FOMO: open straight on the form, pre-filled for a known vendor
 ) {
-    // corein: a preset (from "use your own key" — a vendor of the own-key catalogue) skips the
+    // FOMO: a preset (from "use your own key" — a vendor of the own-key catalogue) skips the
     // type and credential steps; the form opens with the vendor's name and public endpoint —
     // `<id>:oauth` on its sign-in (OpenAIOAuthManager for a ChatGPT plan, ClaudeOAuthManager,
     // OpenRouterOAuthManager, Kimi's device code), a key with no paste.
@@ -115,7 +115,7 @@ fun AddProviderScreen(
     // Voice Chat Provider template row — preseeds type/base URL/label/appendV1
     // on the configure step (mirrors iOS applyVoiceTemplate).
     var selectedVoiceTemplate by remember {
-        mutableStateOf<com.openminis.app.data.model.VoiceProviderTemplate?>(presetTemplate) // corein: a preset opens on its template
+        mutableStateOf<com.openminis.app.data.model.VoiceProviderTemplate?>(presetTemplate) // FOMO: a preset opens on its template
     }
 
     // Unified back handler: reuse each step's onBack so predictive-back gesture
@@ -128,7 +128,7 @@ fun AddProviderScreen(
                 selectedType = null
             }
             AddProviderStep.CONFIGURE -> {
-                // corein: a preset came straight to the form; back leaves the screen.
+                // FOMO: a preset came straight to the form; back leaves the screen.
                 if (presetTemplate != null && selectedVoiceTemplate === presetTemplate) {
                     onBack()
                 }
@@ -229,7 +229,7 @@ private fun providerIcon(type: ProviderType): Pair<ImageVector, Color> = when (t
 private fun availableCredentials(type: ProviderType): List<ProviderCredential> {
     return when (type) {
         ProviderType.openRouter -> listOf(ProviderCredential.apiKey, ProviderCredential.oauth)
-        // corein: the Claude sign-in only on a build that carries Anthropic's identifier; the
+        // FOMO: the Claude sign-in only on a build that carries Anthropic's identifier; the
         // public build has none, so it offers the API key alone (#373)
         ProviderType.anthropic ->
             if (io.github.nanomuse.cloud.ClaudeSignIn.available) listOf(ProviderCredential.apiKey, ProviderCredential.oauth)
@@ -593,7 +593,7 @@ private fun ColumnScope.ApiKeyConfigSection(
         } else {
             "The URL is used verbatim. Include the full path up to (but not including) the endpoint."
         }
-        // corein: plain http:// only for addresses on the local network (io.github.nanomuse.net.LanOnly)
+        // FOMO: plain http:// only for addresses on the local network (io.github.nanomuse.net.LanOnly)
         val baseUrlProblem = io.github.nanomuse.net.LanOnly.refusedHost(customBaseURL)?.let { stringResource(R.string.nm_lan_only_https, it) }
         SettingsSection(
             header = stringResource(R.string.add_provider_endpoint),
@@ -680,7 +680,7 @@ private fun ColumnScope.ApiKeyConfigSection(
         // (custom base URL filled in) — ollama / LM Studio / LiteLLM /
         // private relays need no key. Official endpoints and OAuth flows
         // keep requiring a credential. Mirrors iOS AddProviderView.
-        // corein: no saving while the endpoint is a plain http:// address off the local network
+        // FOMO: no saving while the endpoint is a plain http:// address off the local network
         enabled = io.github.nanomuse.net.LanOnly.refusedHost(customBaseURL) == null && (
             apiKey.isNotBlank() || (
                 customBaseURL.isNotBlank() &&
@@ -878,7 +878,7 @@ private fun ColumnScope.OAuthConfigSection(
                         Text(signInLabel)
                     }
                 }
-                // corein: a proxy or VPN can swallow the localhost callback; after ten seconds the person can paste the address (#441).
+                // FOMO: a proxy or VPN can swallow the localhost callback; after ten seconds the person can paste the address (#441).
                 io.github.nanomuse.oauth.OAuthCallbackRescue(active = isAuthenticating, providerType = providerType)
                 if (errorMessage != null) {
                     Spacer(Modifier.height(8.dp))
@@ -904,7 +904,7 @@ private fun ColumnScope.OAuthConfigSection(
             ProviderType.antigravity,
             ProviderType.unsupported -> ""
         }
-        // corein: plain http:// only for addresses on the local network
+        // FOMO: plain http:// only for addresses on the local network
         val manualBaseProblem = io.github.nanomuse.net.LanOnly.refusedHost(customBaseURL)?.let { stringResource(R.string.nm_lan_only_https, it) }
         SettingsSection(
             header = stringResource(R.string.add_provider_or_configure_manually),
@@ -958,7 +958,7 @@ private fun ColumnScope.OAuthConfigSection(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            enabled = manualToken.isNotBlank() && manualBaseProblem == null, // corein: LanOnly
+            enabled = manualToken.isNotBlank() && manualBaseProblem == null, // FOMO: LanOnly
         ) {
             Text(stringResource(R.string.provider_list_add_provider))
         }

@@ -117,7 +117,7 @@ test('versions compare numerically, with pre-releases below the release', () => 
   // offered the installed release as an update
   assert.equal(compareVersions('0.1.40', 'dsh-nanomuse 0.1.40'), 0)
   assert.equal(compareVersions('dsh-nanomuse 0.1.41', 'v0.1.40'), 1)
-  assert.equal(compareVersions('corein-Desktop-0.1.40', '0.1.41'), -1)
+  assert.equal(compareVersions('fomo-Desktop-0.1.40', '0.1.41'), -1)
 })
 
 test('the update check compares the bare bundle version, so the installed release is not offered again', async () => {
@@ -138,18 +138,18 @@ test('the update check compares the bare bundle version, so the installed releas
 })
 
 test('the installer for this computer is picked from the release', () => {
-  const assets = ['corein-Desktop-0.1.34-linux-x64.AppImage', 'corein-Desktop-0.1.34-linux-x64.deb', 'corein-Desktop-0.1.34-mac-arm64.dmg', 'corein-Desktop-0.1.34-mac-x64.zip', 'corein-Desktop-0.1.34-win-x64.exe', 'corein-0.1.34-arm64.apk'].map((name) => ({ name, url: `https://x/${name}`, size: 1 }))
-  assert.equal(pickAsset(assets, 'darwin', 'arm64')?.name, 'corein-Desktop-0.1.34-mac-arm64.dmg')
-  assert.equal(pickAsset(assets, 'darwin', 'x64')?.name, 'corein-Desktop-0.1.34-mac-x64.zip')
-  assert.equal(pickAsset(assets, 'win32', 'x64')?.name, 'corein-Desktop-0.1.34-win-x64.exe')
-  assert.equal(pickAsset(assets, 'linux', 'x64')?.name, 'corein-Desktop-0.1.34-linux-x64.deb', 'the .deb is the one the docs prefer')
-  assert.equal(pickAsset(assets, 'linux', 'x64', true)?.name, 'corein-Desktop-0.1.34-linux-x64.AppImage', 'an AppImage install stays an AppImage')
+  const assets = ['fomo-Desktop-0.1.34-linux-x64.AppImage', 'fomo-Desktop-0.1.34-linux-x64.deb', 'fomo-Desktop-0.1.34-mac-arm64.dmg', 'fomo-Desktop-0.1.34-mac-x64.zip', 'fomo-Desktop-0.1.34-win-x64.exe', 'fomo-0.1.34-arm64.apk'].map((name) => ({ name, url: `https://x/${name}`, size: 1 }))
+  assert.equal(pickAsset(assets, 'darwin', 'arm64')?.name, 'fomo-Desktop-0.1.34-mac-arm64.dmg')
+  assert.equal(pickAsset(assets, 'darwin', 'x64')?.name, 'fomo-Desktop-0.1.34-mac-x64.zip')
+  assert.equal(pickAsset(assets, 'win32', 'x64')?.name, 'fomo-Desktop-0.1.34-win-x64.exe')
+  assert.equal(pickAsset(assets, 'linux', 'x64')?.name, 'fomo-Desktop-0.1.34-linux-x64.deb', 'the .deb is the one the docs prefer')
+  assert.equal(pickAsset(assets, 'linux', 'x64', true)?.name, 'fomo-Desktop-0.1.34-linux-x64.AppImage', 'an AppImage install stays an AppImage')
   assert.equal(pickAsset(assets, 'linux', 'arm64'), undefined)
 })
 
 test('the update check reads the fomo.corein.in index first, GitHub second, and never throws (C2)', async () => {
-  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/shaikfareed22/corein2026/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'corein-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
-  const mirror = { repo: 'shaikfareed22/corein2026', releases: [{ tag: 'v0.1.33', assets: [{ name: 'corein-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
+  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/shaikfareed22/corein2026/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'fomo-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
+  const mirror = { repo: 'shaikfareed22/corein2026', releases: [{ tag: 'v0.1.33', assets: [{ name: 'fomo-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
   // both answer: the index wins, and GitHub is not asked at all
   const asked = []
   const both = async (url) => { asked.push(url); return { ok: true, status: 200, json: async () => (url.includes('github') ? github : mirror) } }
@@ -157,7 +157,7 @@ test('the update check reads the fomo.corein.in index first, GitHub second, and 
   assert.equal(a.source, 'fomo.corein.in')
   assert.equal(a.latest, '0.1.33')
   assert.equal(a.newer, false)
-  assert.equal(a.assets[0].url, 'https://github.com/shaikfareed22/corein2026/releases/download/v0.1.33/corein-Desktop-0.1.33-linux-x64.AppImage')
+  assert.equal(a.assets[0].url, 'https://github.com/shaikfareed22/corein2026/releases/download/v0.1.33/fomo-Desktop-0.1.33-linux-x64.AppImage')
   assert.deepEqual(asked, ['https://fomo.corein.in/dl/index.json'])
 
   // the index does not answer: GitHub

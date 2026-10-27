@@ -91,7 +91,7 @@ fun OnboardingModelSelectionScreen(
 
     Scaffold(
         topBar = {
-            io.github.nanomuse.ui.muse.MuseTopAppBar( // corein: Muse's bar (drop-in for TopAppBar)
+            io.github.nanomuse.ui.muse.MuseTopAppBar( // FOMO: Muse's bar (drop-in for TopAppBar)
                 title = { Text(stringResource(R.string.onboarding_select_models_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {

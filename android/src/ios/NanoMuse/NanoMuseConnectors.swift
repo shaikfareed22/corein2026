@@ -1,11 +1,11 @@
 //
 //  NanoMuseConnectors.swift
-//  corein
+//  FOMO
 //
 //  The connectors catalogue: the vendors' own remote MCP servers, each one
 //  tap away. Connecting creates an MCP server entry (MCPStore) and, for
 //  OAuth servers, discovers the authorization server (RFC 9728 / 8414),
-//  registers corein as a client (RFC 7591) and signs in through
+//  registers FOMO as a client (RFC 7591) and signs in through
 //  MCPOAuthController. Android: connectors/*.kt, ui/connectors/*.kt.
 //
 
@@ -109,7 +109,7 @@ enum NanoMuseConnectorsCatalogue {
 /// OAuth sign-in (with the client registered on the spot when the
 /// authorization server allows it).
 enum NanoMuseMcpAuthDiscovery {
-    static let clientName = "corein"
+    static let clientName = "FOMO"
     static let clientURI = "https://fomo.corein.in"
     static let protocolVersion = "2025-06-18"
 
@@ -246,7 +246,7 @@ enum NanoMuseMcpAuthDiscovery {
             (code, text) = try await postJSON(endpoint, body)
         }
         guard (200..<300).contains(code) else {
-            throw Failure(message: "The authorization server refused to register corein (\(code)): \(text.prefix(200))")
+            throw Failure(message: "The authorization server refused to register FOMO (\(code)): \(text.prefix(200))")
         }
         guard let reg = (try? JSONSerialization.jsonObject(with: Data(text.utf8))) as? [String: Any],
               let clientId = reg["client_id"] as? String, !clientId.isEmpty else {
@@ -886,7 +886,7 @@ private struct NanoMuseConnectorSheet: View {
         case .key(_, _, _, let hint):
             return String(format: AppLocalized("Needs a key from the service: %@. It is kept in the MCP entry on this phone only."), hint)
         case .oauth:
-            return String(format: AppLocalized("Signs in with your %@ account in the browser; corein registers itself with the service, so there is nothing to type. The token stays on this phone."), connector.name)
+            return String(format: AppLocalized("Signs in with your %@ account in the browser; FOMO registers itself with the service, so there is nothing to type. The token stays on this phone."), connector.name)
         case .auto:
             return AppLocalized("Checks what the server needs first: nothing, a sign-in, or a key.")
         }

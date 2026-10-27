@@ -24,9 +24,9 @@ struct InlineVoiceInputView: View {
     /// "张山说食堂今天关门" comes back unchanged; with context, "石塘"→"食堂" is caught
     /// immediately. Context is what makes the feature work on day one.
     var conversationContext: (() -> ConversationContext)?
-    /// corein: the keyboard button in the panel's header — the way back to typing. The
+    /// FOMO: the keyboard button in the panel's header — the way back to typing. The
     /// composer owns the switch (it keeps the transcript in the field and focuses it).
-    var onBackToTyping: (() -> Void)? = nil // corein:
+    var onBackToTyping: (() -> Void)? = nil // FOMO:
     /// Tear down voice mode (X button / done).
 
     @FocusState private var editFocused: Bool
@@ -288,10 +288,10 @@ struct InlineVoiceInputView: View {
         // corners in BOTH modes. Leading/trailing insets = 12 to line up with the
         // bottom toolbar's `+` and send buttons (inputBottomRow padding 12).
         .overlay(alignment: .topLeading) {
-            HStack(spacing: 8) { // corein: the keyboard button sits beside the chevron
+            HStack(spacing: 8) { // FOMO: the keyboard button sits beside the chevron
                 expandCollapseButton
-                if let onBackToTyping { backToTypingButton(onBackToTyping) } // corein:
-            } // corein:
+                if let onBackToTyping { backToTypingButton(onBackToTyping) } // FOMO:
+            } // FOMO:
             .padding(.top, 10)
             .padding(.leading, 12)
         }
@@ -732,19 +732,19 @@ struct InlineVoiceInputView: View {
             : Text("Expand voice panel", comment: "Voice panel expand"))
     }
 
-    // corein: back to the keyboard. Works while the transcript is being edited too: the
+    // FOMO: back to the keyboard. Works while the transcript is being edited too: the
     // composer's handler resets the editor (reset(clearTranscript: false)) before it leaves voice mode.
-    private func backToTypingButton(_ action: @escaping () -> Void) -> some View { // corein:
-        Button(action: action) { // corein:
-            Image(systemName: "keyboard") // corein:
-                .font(.system(size: 13, weight: .semibold)) // corein:
-                .foregroundStyle(ChatColors.secondaryText) // corein:
-                .frame(width: 30, height: 30) // corein:
-                .background(Circle().fill(ChatColors.inputIconBg)) // corein:
-                .overlay(Circle().strokeBorder(ChatColors.inputIconBorder, lineWidth: 0.5)) // corein:
-        } // corein:
-        .accessibilityLabel(Text(AppLocalized("Back to typing"))) // corein:
-    } // corein:
+    private func backToTypingButton(_ action: @escaping () -> Void) -> some View { // FOMO:
+        Button(action: action) { // FOMO:
+            Image(systemName: "keyboard") // FOMO:
+                .font(.system(size: 13, weight: .semibold)) // FOMO:
+                .foregroundStyle(ChatColors.secondaryText) // FOMO:
+                .frame(width: 30, height: 30) // FOMO:
+                .background(Circle().fill(ChatColors.inputIconBg)) // FOMO:
+                .overlay(Circle().strokeBorder(ChatColors.inputIconBorder, lineWidth: 0.5)) // FOMO:
+        } // FOMO:
+        .accessibilityLabel(Text(AppLocalized("Back to typing"))) // FOMO:
+    } // FOMO:
 
     // MARK: - Transcript area (display ↔ editable)
 
@@ -874,9 +874,9 @@ struct InlineVoiceInputView: View {
         // menu, 30pt each at x=[12,42]). The panel has 16pt outer horizontal
         // padding; 32pt more → text starts at 48pt, clearing the 42pt button
         // edge by 6pt on each side.
-        // corein: with the keyboard button beside the chevron the left column reaches 80pt,
+        // FOMO: with the keyboard button beside the chevron the left column reaches 80pt,
         // so the inset grows to 72 (text from 88pt) — kept symmetric so the centred text stays centred.
-        .padding(.horizontal, onBackToTyping == nil ? 32 : 72) // corein:
+        .padding(.horizontal, onBackToTyping == nil ? 32 : 72) // FOMO:
     }
 
     // MARK: - Controls
@@ -1006,7 +1006,7 @@ struct InlineVoiceInputView: View {
                 runManualCorrection()
             }
         } message: {
-            Text("corein can store your transcript fixes (original → corrected pairs) and accepted AI corrections in a local on-device database to make future voice corrections smarter. Nothing is uploaded. You can change this or clear the data anytime in Settings → Permissions.",
+            Text("FOMO can store your transcript fixes (original → corrected pairs) and accepted AI corrections in a local on-device database to make future voice corrections smarter. Nothing is uploaded. You can change this or clear the data anytime in Settings → Permissions.",
                  comment: "One-time prompt body: correction data collection")
         }
     }

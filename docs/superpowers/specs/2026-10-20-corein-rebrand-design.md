@@ -1,11 +1,11 @@
 # corein: rebrand, legal frame and release readiness
 
-Decided 2026-10-20. corein is a fork of nanoMuse (GPL-3.0-or-later), itself built on
+Decided 2026-10-20. FOMO is a fork of nanoMuse (GPL-3.0-or-later), itself built on
 OpenMinis (GPL-3.0). This page records what the fork changes, what it keeps, and why.
 
 ## Intent
 
-- One product name, **corein**, on the Android app, the iPhone app, the desktop app, the web
+- One product name, **FOMO**, on the Android app, the iPhone app, the desktop app, the web
   console, the relay and the docs. Lower-case wordmark, as the logo is drawn.
 - A legal frame that lets the owner distribute installers and earn from the product without
   breaking the licences it stands on.
@@ -21,36 +21,36 @@ later be added on the relay (allowance, members, `SIGNUP_OPEN`) without touching
 
 ## What changes
 
-| Thing | nanoMuse | corein |
+| Thing | nanoMuse | FOMO |
 |---|---|---|
-| Product name (every UI string, docs, store copy) | nanoMuse | corein |
-| Relay product name | nanoMuse Cloud | corein Cloud |
-| Desktop product | nanoMuse Desktop | corein Desktop |
+| Product name (every UI string, docs, store copy) | nanoMuse | FOMO |
+| Relay product name | nanoMuse Cloud | FOMO Cloud |
+| Desktop product | nanoMuse Desktop | FOMO Desktop |
 | Android applicationId | io.github.nanomuse.app | com.corein.app |
 | iOS bundle ids | io.github.nanomuse.* | com.corein.* |
 | System URL scheme | nanomuse:// | corein:// |
-| Desktop appId / executable / artifact | io.github.nanomuse.desktop / nanomuse-desktop / nanoMuse-Desktop-* | com.corein.desktop / corein-desktop / corein-Desktop-* |
+| Desktop appId / executable / artifact | io.github.nanomuse.desktop / nanomuse-desktop / nanoMuse-Desktop-* | com.corein.desktop / fomo-desktop / fomo-Desktop-* |
 | Default relay | https://cloud.nanomuse.cn | https://cloud.fomo.corein.in |
 | Site, demo | nanomuse.cn, demo.nanomuse.dev | fomo.corein.in, demo.fomo.corein.in |
 | Repository | github.com/nano-muse/nanoMuse | github.com/shaikfareed22/corein2026 |
-| Brand mark, icon, wordmark, cover | the one-stroke N | the corein circuit-o mark and wordmark |
+| Brand mark, icon, wordmark, cover | the one-stroke N | the FOMO circuit-o mark and wordmark |
 | Upstream badges (stars, trendshift, hits, Discord, TestFlight link) | nanoMuse's | removed; owner adds their own when they exist |
 
-All of these are constants at the top of `scripts/rebrand-corein.mjs`; change one there and
+All of these are constants at the top of `scripts/rebrand-fomo.mjs`; change one there and
 re-run.
 
 ## What stays, on purpose
 
 - **Licence.** GPL-3.0-or-later. LICENSE unchanged. NOTICE credits nanoMuse (commit
   821b7f6, 2026-10-17) and OpenMinis 1.13, and says the complete corresponding source is the
-  tagged commit of the corein repository plus the proot submodule.
+  tagged commit of the FOMO repository plus the proot submodule.
 - **Internal identifiers.** The Python package `nanomuse`, its CLI, the `NANOMUSE_*`
   environment variables, the data directory `~/.nanomuse`, the Kotlin packages
   `com.openminis.*` and `io.github.nanomuse.*`, the `nm_` string prefix, the harness plugin
   package `dsh-nanomuse`, the Swift type names `NanoMuse*`. Renaming them buys nothing a
   person can see and would make every upstream pull a conflict. The same rule nanoMuse
   applies to OpenMinis.
-- **History.** CHANGELOG.md and docs/releases/ keep the nanoMuse name; a corein entry is
+- **History.** CHANGELOG.md and docs/releases/ keep the nanoMuse name; a FOMO entry is
   added on top.
 - **The UI palette.** The brand blue and the theme tokens of docs/brand.md stay; the new mark
   is ink with blue accents, so the apps' colours already match it.
@@ -59,16 +59,16 @@ re-run.
 
 ## Brand assets
 
-Source of truth is `assets/brand/corein-mark.svg`: the circuit-o, a single compound filled
+Source of truth is `assets/brand/fomo-mark.svg`: the circuit-o, a single compound filled
 path on a 100-unit tile, which the icon generators consume unchanged. Derived:
-`corein-wordmark.svg` (the word with the mark as its o), `corein-icon.svg` (white tile +
-mark), `corein-icon-on-dark.svg`, `corein-cover.svg` (README hero). The generators write the
+`fomo-logo.png` (the word with the mark as its o), `fomo-icon.svg` (white tile +
+mark), `fomo-icon.svg`, `fomo-logo.png` (README hero). The generators write the
 Android adaptive icons, the iOS icon set and the desktop icon. docs/brand.md is rewritten.
 
 ## Legal frame
 
-- NOTICE: corein copyright line, derivation from nanoMuse and OpenMinis with commits, source
-  location, trademarks: "nanoMuse" and "OpenMinis" are their authors'; corein uses neither
+- NOTICE: FOMO copyright line, derivation from nanoMuse and OpenMinis with commits, source
+  location, trademarks: "nanoMuse" and "OpenMinis" are their authors'; FOMO uses neither
   name nor logo as its own.
 - THIRD_PARTY_NOTICES.md: a nanoMuse entry at the top.
 - README: an *Origin* section stating the derivation and linking upstream, and the citation
@@ -93,7 +93,7 @@ Android adaptive icons, the iOS icon set and the desktop icon. docs/brand.md is 
 
 ## Testing
 
-- `node scripts/rebrand-corein.mjs --check` exits non-zero when any renamed token is left
+- `node scripts/rebrand-fomo.mjs --check` exits non-zero when any renamed token is left
   outside the excluded history and vendored trees; CI runs it.
 - The existing checks for the area: `pnpm test` in the plugin, `node tests/fences.test.mjs`,
   `node scripts/providers-json.mjs --check`, `node scripts/connectors-json.mjs --check`,

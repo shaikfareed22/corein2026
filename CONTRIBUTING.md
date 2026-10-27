@@ -1,6 +1,6 @@
 # Contributing
 
-Open an issue or send a pull request; either one helps corein get better. Use corein for a real task, report what broke, then pick something focused. For anything larger than a fix, open an issue first so we can agree on the shape. [docs/roadmap.md](docs/roadmap.md) says where help is wanted and where to start in each area. For a quick question or to talk through an idea before writing it up, there is a [Discord](https://discord.gg/bkTySmm28X); decisions still land in issues and pull requests, where they can be found later.
+Open an issue or send a pull request; either one helps FOMO get better. Use FOMO for a real task, report what broke, then pick something focused. For anything larger than a fix, open an issue first so we can agree on the shape. [docs/roadmap.md](docs/roadmap.md) says where help is wanted and where to start in each area. For a quick question or to talk through an idea before writing it up, there is a [Discord](https://discord.gg/bkTySmm28X); decisions still land in issues and pull requests, where they can be found later.
 
 [AGENTS.md](AGENTS.md) is the short version of this file for coding agents and for people in a hurry: the layout, the check commands per area, and the conventions below in one screen. The two must agree; when they do not, fix both.
 
@@ -11,7 +11,7 @@ Open an issue or send a pull request; either one helps corein get better. Use co
 
 ## Licence and sign-off
 
-corein is **GPL-3.0-or-later** ([LICENSE](LICENSE), [NOTICE](NOTICE)). By contributing you agree that your contribution is licensed the same way. Every commit must carry a [Developer Certificate of Origin](https://developercertificate.org) sign-off; `git commit -s` adds the line:
+FOMO is **GPL-3.0-or-later** ([LICENSE](LICENSE), [NOTICE](NOTICE)). By contributing you agree that your contribution is licensed the same way. Every commit must carry a [Developer Certificate of Origin](https://developercertificate.org) sign-off; `git commit -s` adds the line:
 
 ```
 Signed-off-by: Your Name <you@example.com>
@@ -21,7 +21,7 @@ CI checks it. Not accepted, ever:
 
 - code under a licence that cannot be combined with GPL-3.0 (GPL-2.0-*only*, SSPL, BUSL, "source-available", proprietary SDKs);
 - anything obtained by decompiling, unpacking, intercepting or scraping the Meta Muse app (its system prompt included), or the OpenMinis binaries beyond what their source already shows;
-- the OpenMinis or Meta Muse names and logos as part of corein's own identity (attribution in the About screen and NOTICE is required and stays), and Meta's brand screenshots;
+- the OpenMinis or Meta Muse names and logos as part of FOMO's own identity (attribution in the About screen and NOTICE is required and stays), and Meta's brand screenshots;
 - internal planning: budgets, capacity estimates, promotion drafts. The repository holds what runs and what explains it.
 
 ## Working in `android/`
@@ -30,10 +30,10 @@ Upstream is a mirror of a private tree, squashed roughly monthly, and does not t
 
 1. **Do not rename the Kotlin package** `com.openminis.app` or the Gradle `namespace`. Only the `applicationId` (`com.corein.app`) is ours.
 2. **Do not rename sandbox paths or CLI names** inside the root file system (`/var/minis`, `minis-global`, `minis-open`, `minis-mcp-cli`, `android-*`). They are upstream's contract with itself.
-3. **New code goes in new files**: package `io.github.nanomuse.*` or a new file next to the upstream one. When an upstream file must change, add a `// corein:` comment at the spot, and make one change per spot.
+3. **New code goes in new files**: package `io.github.nanomuse.*` or a new file next to the upstream one. When an upstream file must change, add a `// FOMO:` comment at the spot, and make one change per spot.
 4. **Rebranding is a script, not hand edits.** `scripts/rebrand.py` (names, ids, colours, links; Android and iOS), `scripts/gen-android-icons.py` and `scripts/gen-ios-icons.py` (icons) are idempotent; run them after every upstream pull. Do not fix a rebranding miss by hand; fix the script.
 5. **Binary resources** (icon PNGs) are overwritten under the upstream name; on a pull conflict take ours (`git checkout --ours`).
-6. **iOS follows the same rules.** The iOS half of upstream lives at `android/src/ios` (see [docs/ios.md](docs/ios.md)); our Swift goes in `android/src/ios/NanoMuse/`, an edit inside an upstream Swift file carries a `// corein:` comment.
+6. **iOS follows the same rules.** The iOS half of upstream lives at `android/src/ios` (see [docs/ios.md](docs/ios.md)); our Swift goes in `android/src/ios/NanoMuse/`, an edit inside an upstream Swift file carries a `// FOMO:` comment.
 
 Build steps are in [android/BUILDING.md](android/BUILDING.md) (upstream) and, for the toolchain this repository is built with, in `scripts/android/`: JDK 21, SDK CMake 3.22.1, NDK r27c, Go 1.25+, `gomobile`; `android/deps/build_proot.sh` builds proot from the `android/deps/proot` submodule (our fork; portable `awk`, no gawk needed) and must run before `android/scripts/prepare_android_sandbox.sh`.
 
@@ -45,13 +45,13 @@ git subtree pull --prefix=android openminis 1.14 -m "Merge OpenMinis 1.14"
 git checkout --ours -- 'android/src/android/app/src/main/res/mipmap-*' \
     'android/src/ios/Assets.xcassets/AppIcon.appiconset' 'android/src/ios/Resources/AlternateIcons'
 python scripts/rebrand.py && python scripts/gen-android-icons.py && python scripts/gen-ios-icons.py
-# resolve the remaining conflicts at the `// corein:` marks, build, run the smoke list
+# resolve the remaining conflicts at the `// FOMO:` marks, build, run the smoke list
 ```
 
 ## Working in the runtime, the relay and the web console
 
 ```bash
-git clone https://github.com/shaikfareed22/corein2026.git && cd corein
+git clone https://github.com/shaikfareed22/corein2026.git && cd FOMO
 uv venv && source .venv/bin/activate
 uv pip install -e ".[dev]"            # add ",browser" for the Playwright tool
 nanomuse config init                  # config/config.toml is git-ignored
@@ -71,7 +71,7 @@ The desktop app, the Electron shell and the docs site have their own lines in [A
 
 ## Every string in every language
 
-corein is used in more than one country, so a user-visible string is never added in one language. Write it in English first, then in 简体中文, then in every other locale the file already has: `res/values-*/nm_strings.xml` on Android (keys start with `nm_`; upstream's `strings.xml` is not ours to edit), `Localizable.xcstrings` on iOS, `en` and `zh` in `harness/dsh-nanomuse/src/client/locales.ts` on the desktop, the console and e-mail templates in `cloud/`. Dates, numbers and currency use the person's locale. Do not assume a +86 phone number, a Chinese app or Beijing time: SMS codes reach mainland-China numbers only, so a sign-in screen says that and offers e-mail. The voice is the same in every language (plain, specific, no marketing words, no exclamation marks), and Meta's own UI text is never copied verbatim. New text, in the apps and in the docs, has no em or en dashes: a comma, a colon, a pair of parentheses or a full stop does the work; a dash stays only where it is data (a number range in a table, a code sample, a quoted log line). Chinese copy is written as Chinese, not rendered word for word from the English, and does without 颠覆, 王炸, 保姆级, 一键 and 赋能; its terms are the glossary's below.
+FOMO is used in more than one country, so a user-visible string is never added in one language. Write it in English first, then in 简体中文, then in every other locale the file already has: `res/values-*/nm_strings.xml` on Android (keys start with `nm_`; upstream's `strings.xml` is not ours to edit), `Localizable.xcstrings` on iOS, `en` and `zh` in `harness/dsh-nanomuse/src/client/locales.ts` on the desktop, the console and e-mail templates in `cloud/`. Dates, numbers and currency use the person's locale. Do not assume a +86 phone number, a Chinese app or Beijing time: SMS codes reach mainland-China numbers only, so a sign-in screen says that and offers e-mail. The voice is the same in every language (plain, specific, no marketing words, no exclamation marks), and Meta's own UI text is never copied verbatim. New text, in the apps and in the docs, has no em or en dashes: a comma, a colon, a pair of parentheses or a full stop does the work; a dash stays only where it is data (a number range in a table, a code sample, a quoted log line). Chinese copy is written as Chinese, not rendered word for word from the English, and does without 颠覆, 王炸, 保姆级, 一键 and 赋能; its terms are the glossary's below.
 
 ## Translating the docs
 
@@ -88,7 +88,7 @@ Rules for a Chinese page:
 
 | English | 简体中文 | English | 简体中文 |
 |---|---|---|---|
-| agent | 智能体 | the relay / corein Cloud | 中继 / corein Cloud |
+| agent | 智能体 | the relay / FOMO Cloud | 中继 / FOMO Cloud |
 | free, open-source, non-profit | 免费、开源、非营利 | allowance, free allowance | 额度，免费额度 |
 | sign in / sign out | 登录 / 退出登录 | one-time code | 验证码 |
 | your own key | 自己的 key | provider | 服务商 |
@@ -112,7 +112,7 @@ Rules for a Chinese page:
 | avatar / the avatar studio | 形象 / 形象工作室 | moods (idle, working, waiting, happy, error) | 状态（待命、干活中、等你回复、搞定、出了点问题） |
 | picture model / video model | 图像模型 / 视频模型 | skills / MCP server | 技能 / MCP 服务器 |
 | Models (Chat / Operating the screen / Making pictures / Making clips) | 模型（对话 / 操作屏幕 / 生成图片 / 生成视频） | Automatic | 自动 |
-| Use it for | 用它来做什么 | Use corein Cloud this time | 这次改用 corein Cloud |
+| Use it for | 用它来做什么 | Use FOMO Cloud this time | 这次改用 FOMO Cloud |
 | connectors | 连接器 | coding agents | 编程助手 |
 | channels (Feishu, DingTalk, WeCom, Telegram) | 聊天入口 | deliver here | 推送到这里 |
 | the web console / the web app | 网页控制台 / 网页版 | the desktop app | 桌面版 |
@@ -120,7 +120,7 @@ Rules for a Chinese page:
 | the showcase | 展示站 | self-hosting | 自己部署 |
 | quick chat / dictation | 快速唤起 / 听写 | roadmap / changelog / release notes | 路线图 / 更新日志 / 发布说明 |
 
-Two that go wrong most often: 非营利, never 非盈利; and `corein Cloud`, the product's name, which is never translated (not 云, not 云端).
+Two that go wrong most often: 非营利, never 非盈利; and `FOMO Cloud`, the product's name, which is never translated (not 云, not 云端).
 
 ## Facts come from the repository
 
@@ -128,11 +128,11 @@ Every feature, number and count in a README, a docs page or a release note is so
 
 ## The fork
 
-corein is a fork of nanoMuse; [docs/fork.md](docs/fork.md) is the recipe for merging upstream, keeping the identity (`scripts/rebrand-corein.mjs`) and cutting a release from CI.
+FOMO is a fork of nanoMuse; [docs/fork.md](docs/fork.md) is the recipe for merging upstream, keeping the identity (`scripts/rebrand-fomo.mjs`) and cutting a release from CI.
 
 ## The README
 
-`README.md` is the one description of corein. It keeps the same order of sections (install table, what it does, how it works, docs, self-host, contribute, *Origin*, disclaimer, licence) and the *Origin* section is never removed: it is how the fork meets the GPL's notice terms. Translations are welcome under `docs/readme/` once someone keeps them current.
+`README.md` is the one description of FOMO. It keeps the same order of sections (install table, what it does, how it works, docs, self-host, contribute, *Origin*, disclaimer, licence) and the *Origin* section is never removed: it is how the fork meets the GPL's notice terms. Translations are welcome under `docs/readme/` once someone keeps them current.
 
 ## Commits and pull requests
 
@@ -154,7 +154,7 @@ corein is a fork of nanoMuse; [docs/fork.md](docs/fork.md) is the recipe for mer
 
 ## Releasing (maintainers)
 
-A version is a plain number (`0.1.41`, `1.0.0`, …) because the apps' update check compares them; each release also carries a codename, one capitalised English word that no earlier release used (Foundation, Identity, Home, … Helm, Compass; `CHANGELOG.md` has the list), and its title is `corein <version> · <Codename>`. The apps, the runtime, the web console and the desktop app share one version; the relay has its own (`cloud/pyproject.toml`) and moves only when it changed. Versions move in the release commit and nowhere else.
+A version is a plain number (`0.1.41`, `1.0.0`, …) because the apps' update check compares them; each release also carries a codename, one capitalised English word that no earlier release used (Foundation, Identity, Home, … Helm, Compass; `CHANGELOG.md` has the list), and its title is `FOMO <version> · <Codename>`. The apps, the runtime, the web console and the desktop app share one version; the relay has its own (`cloud/pyproject.toml`) and moves only when it changed. Versions move in the release commit and nowhere else.
 
 A release goes out as soon as a fix people are waiting for is on `main` (a crash, a security issue, an app that will not install), and otherwise every few days, when the *Unreleased* block has something worth a version. What ships: the APK, the TestFlight build, the desktop installers for Windows, macOS and Linux, the harness tarball and the Docker image; no terminal builds and no pre-releases, every release is *Latest*. Before tagging, a maintainer installs the build that will ship on a phone and taps through the main flows.
 

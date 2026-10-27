@@ -1,6 +1,6 @@
 //
 //  NanoMuseChatCards.swift
-//  corein
+//  FOMO
 //
 //  Cards in the chat. Two kinds: the *virtual* ones that sit above the
 //  composer while something is in flight (the avatar's price, its four

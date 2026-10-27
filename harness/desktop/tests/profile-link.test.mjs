@@ -32,7 +32,7 @@ test("a fresh link is made and reported", () => {
 
 test("a dangling link from an earlier install is replaced", () => {
   const dir = scratch();
-  const old = join(dir, "Programs", "corein", "nanomuse-desktop", "dsh-nanomuse");
+  const old = join(dir, "Programs", "FOMO", "nanomuse-desktop", "dsh-nanomuse");
   mkdirSync(old, { recursive: true });
   const link = join(dir, "node_modules", "dsh-nanomuse");
   mkdirSync(join(dir, "node_modules"));

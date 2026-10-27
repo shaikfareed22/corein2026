@@ -31,11 +31,11 @@ android {
     // Android 16 behavior changes; the Live Updates path is runtime-gated on
     // Build.VERSION.SDK_INT >= 36 (see DynamicIslandSupport / AgentForegroundService).
     compileSdk = 36
-    // corein: pin the NDK this repository is built and released with (r27c);
+    // FOMO: pin the NDK this repository is built and released with (r27c);
     // deps/build_proot.sh uses the same one through ANDROID_NDK_HOME.
     ndkVersion = "27.2.12479018"
 
-    // corein: release builds are signed with the project key when
+    // FOMO: release builds are signed with the project key when
     // android/keystore.properties exists (storeFile / storePassword / keyAlias /
     // keyPassword; git-ignored) and fall back to the debug key otherwise, so a
     // release APK can be built by anyone. One key for every version.
@@ -57,8 +57,8 @@ android {
         applicationId = "com.corein.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 49
-        versionName = "1.1.0"
+        versionCode = 50
+        versionName = "1.2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -71,7 +71,7 @@ android {
         )
 
         ndk {
-            // corein: `-Pnm.abi=x86_64` builds a chat-only test APK for the x86_64 emulator
+            // FOMO: `-Pnm.abi=x86_64` builds a chat-only test APK for the x86_64 emulator
             // (the proot / rclone / VAD payloads are arm64-only, so the sandbox stays off there).
             abiFilters += listOf((project.findProperty("nm.abi") as String?) ?: "arm64-v8a")
         }
@@ -98,7 +98,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // corein: project key if present, debug key otherwise (see signingConfigs).
+            // FOMO: project key if present, debug key otherwise (see signingConfigs).
             signingConfig = signingConfigs.findByName("nanomuse") ?: signingConfigs.getByName("debug")
         }
     }
@@ -119,7 +119,7 @@ android {
 
     androidResources {
         noCompress += listOf("tar.gz", "proot-aarch64")
-        // corein: a warm arm64 build leaves sandbox payloads in the shared assets directory.
+        // FOMO: a warm arm64 build leaves sandbox payloads in the shared assets directory.
         if (project.findProperty("nm.abi") == "x86_64") {
             // An explicit list replaces AGP's defaults, so retain its normal hidden-file filters.
             ignoreAssetsPatterns += "!.svn:!.git:!.ds_store:!*.scc:.*:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~".split(":")
@@ -212,11 +212,11 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
 
-    // corein: the frosted-glass pill bottom bar: Haze backdrop blur, in the Pixel taskbar's manner.
+    // FOMO: the frosted-glass pill bottom bar: Haze backdrop blur, in the Pixel taskbar's manner.
     // 1.6.10, not 2.x: Haze 1.7.x and 2.x need compileSdk 37, and this module is on 36.
     implementation("dev.chrisbanes.haze:haze-android:1.6.10")
 
-    // corein: the camera on a video call (a JPEG frame a second to the real-time model).
+    // FOMO: the camera on a video call (a JPEG frame a second to the real-time model).
     val cameraX = "1.4.2"
     implementation("androidx.camera:camera-core:$cameraX")
     implementation("androidx.camera:camera-camera2:$cameraX")
@@ -340,7 +340,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
     testImplementation("org.json:json:20231013")
-    // corein: Exercise Android speech factories and dispatch in JVM regression tests.
+    // FOMO: Exercise Android speech factories and dispatch in JVM regression tests.
     testImplementation("org.mockito:mockito-core:5.24.0")
 
     // Testing — Instrumented (on-device) tests

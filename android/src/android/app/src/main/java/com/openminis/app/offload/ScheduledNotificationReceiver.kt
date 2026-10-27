@@ -78,7 +78,7 @@ class ScheduledNotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val id = intent.getStringExtra(EXTRA_ID) ?: "unknown"
-        val title = intent.getStringExtra(EXTRA_TITLE) ?: "corein"
+        val title = intent.getStringExtra(EXTRA_TITLE) ?: "FOMO"
         val body = intent.getStringExtra(EXTRA_BODY) ?: ""
         AppLogger.debug(TAG, "scheduled notification fired: id=$id title='$title'")
 
@@ -91,8 +91,8 @@ class ScheduledNotificationReceiver : BroadcastReceiver() {
 
         val notifId = id.hashCode() and 0x7FFFFFFF
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_stat_nanomuse) // corein: flat status-bar mark
-            .setLargeIcon(io.github.nanomuse.identity.NanoMuseIdentity.face(context)) // corein: the agent is the sender
+            .setSmallIcon(R.drawable.ic_stat_nanomuse) // FOMO: flat status-bar mark
+            .setLargeIcon(io.github.nanomuse.identity.NanoMuseIdentity.face(context)) // FOMO: the agent is the sender
             .setContentTitle(title)
             .setContentText(body)
             .setAutoCancel(true)

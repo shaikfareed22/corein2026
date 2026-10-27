@@ -1,6 +1,6 @@
 //
 //  NanoMuseAgentPage.swift
-//  corein
+//  FOMO
 //
 //  What opens when the face is tapped: the agent's own page. The face,
 //  large, with a pen badge (Change avatar / Edit name / Your own clip… / Avatar studio…),
@@ -46,7 +46,7 @@ struct NanoMuseAgentPage: View {
 
     private var name: String {
         let n = soulName.trimmingCharacters(in: .whitespaces)
-        return n.isEmpty ? "corein" : n
+        return n.isEmpty ? "FOMO" : n
     }
 
     var body: some View {
@@ -593,7 +593,7 @@ struct NanoMuseShareCard: View {
         ZStack {
             palette.background
             VStack(spacing: 0) {
-                Text(String(format: AppLocalized("Hi, I'm %@, a personal AI agent. Meet corein: open source, runs on your phone."), agentName))
+                Text(String(format: AppLocalized("Hi, I'm %@, a personal AI agent. Meet FOMO: open source, runs on your phone."), agentName))
                     .font(.system(size: 42))
                     .foregroundStyle(Color(red: 0.106, green: 0.106, blue: 0.122))
                     .multilineTextAlignment(.center)
@@ -620,7 +620,7 @@ struct NanoMuseShareCard: View {
             }
             VStack(alignment: .leading, spacing: 8) {
                 Spacer()
-                Text("corein").font(.system(size: 40, weight: .bold)).foregroundStyle(palette.accent)
+                Text("FOMO").font(.system(size: 40, weight: .bold)).foregroundStyle(palette.accent)
                 Text(AppLocalized("Your personal AI agent, open source · github.com/shaikfareed22/corein2026"))
                     .font(.system(size: 28)).foregroundStyle(.black.opacity(0.6))
             }
@@ -736,7 +736,7 @@ struct NanoMuseAvatarDoneCard: View {
         .padding(12)
         .background(NanoMuseTones.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .sheet(isPresented: $share) {
-            NanoMuseAvatarShareSheet(agentName: SoulStore.cachedMetadata.name.isEmpty ? "corein" : SoulStore.cachedMetadata.name)
+            NanoMuseAvatarShareSheet(agentName: SoulStore.cachedMetadata.name.isEmpty ? "FOMO" : SoulStore.cachedMetadata.name)
         }
     }
 }

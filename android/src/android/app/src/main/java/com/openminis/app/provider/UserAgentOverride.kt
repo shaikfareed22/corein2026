@@ -64,6 +64,6 @@ object MinisUserAgent {
     val DEFAULT: String by lazy {
         val release = android.os.Build.VERSION.RELEASE ?: "unknown"
         val model = (android.os.Build.MODEL ?: "unknown").trim().ifEmpty { "unknown" }
-        "corein/${BuildConfig.VERSION_NAME} (Android $release; $model)"
+        "FOMO/${BuildConfig.VERSION_NAME} (Android $release; $model)"
     }
 }

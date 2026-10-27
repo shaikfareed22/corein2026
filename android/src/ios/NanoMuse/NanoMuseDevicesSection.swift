@@ -1,4 +1,4 @@
-// corein: the account's devices on the hub, shown under the corein Cloud account —
+// FOMO: the account's devices on the hub, shown under the FOMO Cloud account —
 // this iPhone's two switches (reachable · operable), its name, the other devices with an
 // online dot (tap an offline one to forget it), and the web console's address.
 
@@ -33,7 +33,7 @@ struct NanoMuseDevicesSection: View {
         } header: {
             Text(AppLocalized("Devices"))
         } footer: {
-            Text(AppLocalized("Every device signed in to this account is a Muse: this iPhone, your computers running corein Desktop, the web console. Each can ask the others for things, on any network, through corein Cloud. On iOS the others can open links here and send notifications; the iPhone's own Muse works on the iPhone."))
+            Text(AppLocalized("Every device signed in to this account is a Muse: this iPhone, your computers running FOMO Desktop, the web console. Each can ask the others for things, on any network, through FOMO Cloud. On iOS the others can open links here and send notifications; the iPhone's own Muse works on the iPhone."))
         }
         .alert(AppLocalized("This iPhone's name"), isPresented: $editingName) {
             TextField(AppLocalized("Name"), text: $name)
@@ -43,7 +43,7 @@ struct NanoMuseDevicesSection: View {
 
         Section {
             if hub.others.isEmpty {
-                Text(AppLocalized("No other device yet. On your computer, install corein Desktop and sign in with the same account; it appears here within seconds."))
+                Text(AppLocalized("No other device yet. On your computer, install FOMO Desktop and sign in with the same account; it appears here within seconds."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             } else {

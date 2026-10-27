@@ -62,7 +62,7 @@ body { background: var(--ci-bg); }
 /* header: the logo, a blurred glass bar, links that underline in the gradient */
 .VPNavBar, .VPNavBar.has-sidebar .content-body, .VPNavBar:not(.has-sidebar) { background: var(--vp-nav-bg-color) !important; backdrop-filter: saturate(160%) blur(14px); }
 .VPNavBar .divider-line, .VPNavBar.has-sidebar .divider { background: var(--ci-line) !important; }
-.VPNavBarTitle .logo { height: 40px; width: auto; }
+.VPNavBarTitle .logo { height: 26px; width: auto; }
 .VPNavBarMenuLink { position: relative; font-weight: 600; }
 .VPNavBarMenuLink::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 12px; height: 2px; border-radius: 2px; background: var(--ci-grad); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
 .VPNavBarMenuLink:hover::after, .VPNavBarMenuLink.active::after { transform: scaleX(1); }

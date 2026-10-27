@@ -183,7 +183,7 @@ enum LLMProviderFactory {
         let provider = OpenAIProvider(apiKey: key, model: model, customBaseURL: customBase ?? "https://openrouter.ai/api", appendV1Suffix: customBase == nil)
         provider.extraHeaders = [
             "HTTP-Referer": "https://github.com/OpenMinis/OpenMinis",
-            "X-Title": "corein App",
+            "X-Title": "FOMO App",
         ]
         provider.useOpenRouterCompat = true
         return applyCustomUserAgent(provider, instance: instance)

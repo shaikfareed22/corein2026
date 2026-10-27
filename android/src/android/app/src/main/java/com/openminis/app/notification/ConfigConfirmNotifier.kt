@@ -84,8 +84,8 @@ class ConfigConfirmNotifier(
         )
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_stat_nanomuse) // corein: flat status-bar mark
-            .setLargeIcon(io.github.nanomuse.identity.NanoMuseIdentity.face(context)) // corein: the agent is the sender
+            .setSmallIcon(R.drawable.ic_stat_nanomuse) // FOMO: flat status-bar mark
+            .setLargeIcon(io.github.nanomuse.identity.NanoMuseIdentity.face(context)) // FOMO: the agent is the sender
             .setContentTitle(context.getString(R.string.notif_config_confirm_title))
             .setContentText(body)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))

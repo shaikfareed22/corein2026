@@ -1,5 +1,5 @@
-corein
-Copyright (C) 2026 corein contributors
+FOMO
+Copyright (C) 2026 FOMO contributors
 
 This program is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -13,10 +13,10 @@ Public License in the file LICENSE for more details.
 
 --------------------------------------------------------------------------
 
-corein is a fork of nanoMuse (https://github.com/nano-muse/nanoMuse),
+FOMO is a fork of nanoMuse (https://github.com/nano-muse/nanoMuse),
 Copyright (C) 2026 nanoMuse contributors, released under the GNU General
 Public License version 3 or later. The fork starts at nanoMuse commit
-821b7f6 (2026-10-17, version 1.0.5) and has been modified by the corein
+821b7f6 (2026-10-17, version 1.0.5) and has been modified by the FOMO
 contributors since 2026-10-20. The unchanged upstream tree is in this
 repository's history; every change since is in `git log`.
 
@@ -24,19 +24,19 @@ The Android application in android/ is based on OpenMinis 1.13
 (https://github.com/OpenMinis/OpenMinis, tag 1.13, commit 4ef2900),
 Copyright (C) the OpenMinis authors, released under the GNU General
 Public License version 3, as modified by the nanoMuse contributors since
-2026-09-24 and by the corein contributors since 2026-10-20. Edits inside
-upstream files are marked with a `// corein:` comment (formerly
+2026-09-24 and by the FOMO contributors since 2026-10-20. Edits inside
+upstream files are marked with a `// FOMO:` comment (formerly
 `// nanoMuse:`).
 
-nanoMuse and OpenMinis are the names of their respective projects; corein
+nanoMuse and OpenMinis are the names of their respective projects; FOMO
 does not use either name or logo for its own application, and is not
 affiliated with or endorsed by either project. The complete corresponding
-source of every corein release is the tagged commit on
+source of every FOMO release is the tagged commit on
 https://github.com/shaikfareed22/corein2026 together with the submodule
 android/deps/proot (https://github.com/nano-muse/proot).
 
 Other components and their licences: THIRD_PARTY_NOTICES.md.
 
-corein is not affiliated with, endorsed by, or derived from Meta
+FOMO is not affiliated with, endorsed by, or derived from Meta
 Platforms, Inc. or its Muse product. "Muse" is a trademark of Meta
 Platforms, Inc.

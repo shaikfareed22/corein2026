@@ -882,7 +882,7 @@ internal fun rememberBrowserLiveSnapshot(
             value = next
         }
     }
-    // corein: remember the last live frame so the finished card keeps it.
+    // FOMO: remember the last live frame so the finished card keeps it.
     snapshot?.let { io.github.nanomuse.status.BrowserFrames.remember(block.id, it) }
     return snapshot
 }

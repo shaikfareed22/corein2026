@@ -22,15 +22,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.AutoAwesome
-import androidx.compose.material.icons.outlined.CloudQueue // corein: corein Cloud row
-import androidx.compose.material.icons.outlined.Computer // corein: Computers row
-import androidx.compose.material.icons.outlined.TouchApp // corein: Hands row
-import androidx.compose.material.icons.outlined.Storage // corein: Data controls row
-import androidx.compose.material.icons.outlined.Language // corein: Network row
+import androidx.compose.material.icons.outlined.CloudQueue // FOMO: FOMO Cloud row
+import androidx.compose.material.icons.outlined.Computer // FOMO: Computers row
+import androidx.compose.material.icons.outlined.TouchApp // FOMO: Hands row
+import androidx.compose.material.icons.outlined.Storage // FOMO: Data controls row
+import androidx.compose.material.icons.outlined.Language // FOMO: Network row
 import androidx.compose.material.icons.outlined.BarChart
 import androidx.compose.material.icons.outlined.BatteryFull
 import androidx.compose.material.icons.outlined.BugReport
-import androidx.compose.material.icons.outlined.Link // corein: the Connectors row
+import androidx.compose.material.icons.outlined.Link // FOMO: the Connectors row
 import androidx.compose.material.icons.outlined.Description
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Email
@@ -58,8 +58,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState // corein
-import androidx.compose.runtime.collectAsState // corein: the hub's device list for the Coding row
+import androidx.compose.runtime.collectAsState // FOMO
+import androidx.compose.runtime.collectAsState // FOMO: the hub's device list for the Coding row
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -97,16 +97,16 @@ fun SettingsScreen(
     // Agent Runtime section; default no-op for callers that haven't wired
     // the route yet.
     onSoulClick: () -> Unit = {},
-    onSystemFilesClick: () -> Unit = {}, // corein
-    onAvatarClick: () -> Unit = {}, // corein
-    onModelsClick: () -> Unit = {}, // corein: Settings → Models (the four slots: chat, the screen, pictures, clips)
-    onCloudClick: () -> Unit = {}, // corein: Settings → corein Cloud (the starter allowance)
-    onHandsClick: () -> Unit = {}, // corein: Settings → Hands (the screen as a hand)
-    onDataControlsClick: () -> Unit = {}, // corein: Settings → Data controls (what corein Cloud keeps)
-    onNetworkClick: () -> Unit = {}, // corein: Settings → Network (the proxy for own providers)
-    onComputersClick: () -> Unit = {}, // corein: Settings → Computers (the phone drives a PC)
-    onCodingClick: () -> Unit = {}, // corein: Settings → Coding agents (Cursor/Codex/Claude Code on the account's computers)
-    onConnectorsClick: () -> Unit = {}, // corein: Settings → Connectors (the services the agent can be let into)
+    onSystemFilesClick: () -> Unit = {}, // FOMO
+    onAvatarClick: () -> Unit = {}, // FOMO
+    onModelsClick: () -> Unit = {}, // FOMO: Settings → Models (the four slots: chat, the screen, pictures, clips)
+    onCloudClick: () -> Unit = {}, // FOMO: Settings → FOMO Cloud (the starter allowance)
+    onHandsClick: () -> Unit = {}, // FOMO: Settings → Hands (the screen as a hand)
+    onDataControlsClick: () -> Unit = {}, // FOMO: Settings → Data controls (what FOMO Cloud keeps)
+    onNetworkClick: () -> Unit = {}, // FOMO: Settings → Network (the proxy for own providers)
+    onComputersClick: () -> Unit = {}, // FOMO: Settings → Computers (the phone drives a PC)
+    onCodingClick: () -> Unit = {}, // FOMO: Settings → Coding agents (Cursor/Codex/Claude Code on the account's computers)
+    onConnectorsClick: () -> Unit = {}, // FOMO: Settings → Connectors (the services the agent can be let into)
     onPermissionsClick: () -> Unit = {},
     onUsageClick: () -> Unit = {},
     onAppearanceClick: () -> Unit = {},
@@ -128,7 +128,7 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     var showFeedbackSheet by remember { mutableStateOf(false) }
-    // corein: Muse's settings page — the round back glyph, the title centred,
+    // FOMO: Muse's settings page — the round back glyph, the title centred,
     // white cards of outlined-glyph rows on the grey canvas, no section headers
     // or subtitles. Every OpenMinis entry is kept; they are regrouped the way
     // Muse groups its own (the agent, the data on the phone, the app, about).
@@ -170,7 +170,7 @@ fun SettingsScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable(onClick = onModelsClick) // corein: the Models page, not the model groups
+                        .clickable(onClick = onModelsClick) // FOMO: the Models page, not the model groups
                         .padding(horizontal = 16.dp, vertical = 14.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -195,7 +195,7 @@ fun SettingsScreen(
                     )
                 }
                 io.github.nanomuse.ui.muse.MuseRowDivider(inset = 16.dp)
-                // corein: the relay account — signed in shows what is left of the allowance.
+                // FOMO: the relay account — signed in shows what is left of the allowance.
                 val cloudAccount = io.github.nanomuse.cloud.NanoMuseCloud.account(context)
                 io.github.nanomuse.ui.muse.MuseRow(
                     title = stringResource(R.string.nm_cloud_title),
@@ -218,7 +218,7 @@ fun SettingsScreen(
                     onClick = onProvidersClick,
                 )
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: the image and video models moved into the Models card above (0.1.41).
+                // FOMO: the image and video models moved into the Models card above (0.1.41).
                 io.github.nanomuse.ui.muse.MuseRow(
                     title = stringResource(R.string.settings_token_usage),
                     icon = Icons.Outlined.BarChart,
@@ -239,11 +239,11 @@ fun SettingsScreen(
                 io.github.nanomuse.ui.muse.MuseRowDivider()
                 io.github.nanomuse.ui.muse.MuseRow(title = stringResource(R.string.settings_skills), icon = Icons.Outlined.Extension, onClick = onSkillsClick)
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: one entry for every service the agent can be let into — the connectors
+                // FOMO: one entry for every service the agent can be let into — the connectors
                 // catalogue, with the person's own MCP servers behind it (the MCP page is reached from there).
                 io.github.nanomuse.ui.muse.MuseRow(title = stringResource(R.string.nm_connectors_title), icon = Icons.Outlined.Link, onClick = onConnectorsClick)
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: the phone's screen as a hand — off by default.
+                // FOMO: the phone's screen as a hand — off by default.
                 io.github.nanomuse.ui.muse.MuseRow(
                     title = stringResource(R.string.nm_hands_title),
                     icon = Icons.Outlined.TouchApp,
@@ -251,7 +251,7 @@ fun SettingsScreen(
                     onClick = onHandsClick,
                 )
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: the account's computers, over the hub.
+                // FOMO: the account's computers, over the hub.
                 run {
                     val hubDevices by io.github.nanomuse.hub.Hub.devices.collectAsState()
                     val me = remember { io.github.nanomuse.hub.Hub.deviceId(context) }
@@ -264,7 +264,7 @@ fun SettingsScreen(
                     )
                 }
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: the coding agents on the account's computers, over the hub.
+                // FOMO: the coding agents on the account's computers, over the hub.
                 run {
                     val hubDevices by io.github.nanomuse.hub.Hub.devices.collectAsState()
                     val me = remember { io.github.nanomuse.hub.Hub.deviceId(context) }
@@ -301,10 +301,10 @@ fun SettingsScreen(
             io.github.nanomuse.ui.muse.MuseCard {
                 io.github.nanomuse.ui.muse.MuseRow(title = stringResource(R.string.settings_section_appearance), icon = Icons.Outlined.Palette, onClick = onAppearanceClick)
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: data controls — the one switch over what corein Cloud keeps of the chats.
+                // FOMO: data controls — the one switch over what FOMO Cloud keeps of the chats.
                 io.github.nanomuse.ui.muse.MuseRow(title = stringResource(R.string.nm_data_title), icon = Icons.Outlined.Storage, onClick = onDataControlsClick)
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: network — the HTTP proxy for own providers and the ChatGPT plan.
+                // FOMO: network — the HTTP proxy for own providers and the ChatGPT plan.
                 io.github.nanomuse.ui.muse.MuseRow(title = stringResource(R.string.nm_network_title), icon = Icons.Outlined.Language, onClick = onNetworkClick)
                 io.github.nanomuse.ui.muse.MuseRowDivider()
                 io.github.nanomuse.ui.muse.MuseRow(title = stringResource(R.string.settings_section_logs), icon = Icons.Outlined.Description, onClick = onLogsClick)
@@ -318,19 +318,19 @@ fun SettingsScreen(
                 io.github.nanomuse.ui.muse.MuseRow(
                     title = stringResource(R.string.settings_privacy_policy),
                     icon = Icons.Outlined.FrontHand,
-                    // corein: the policy on the site (docs/privacy.md is its source)
+                    // FOMO: the policy on the site (docs/privacy.md is its source)
                     onClick = { openExternalUrl(context, io.github.nanomuse.cloud.NanoMuseCloud.PRIVACY_URL) },
                 )
                 io.github.nanomuse.ui.muse.MuseRowDivider()
                 io.github.nanomuse.ui.muse.MuseRow(
                     title = stringResource(R.string.settings_feedback),
                     icon = Icons.Outlined.Feedback,
-                    // corein: GitHub Issues is the one feedback channel (no
+                    // FOMO: GitHub Issues is the one feedback channel (no
                     // Telegram group, no mailbox), so skip the chooser sheet.
                     onClick = { openExternalUrl(context, buildBugReportUrl()) },
                 )
                 io.github.nanomuse.ui.muse.MuseRowDivider()
-                // corein: the installed build and the latest release, with Update when one is out.
+                // FOMO: the installed build and the latest release, with Update when one is out.
                 io.github.nanomuse.ui.settings.VersionRow()
             }
 
@@ -439,7 +439,7 @@ private fun buildBugReportUrl(): String {
         |-------|-------|
         | Platform | Android |
         | OS Version | Android $osVersion (API $sdkInt) |
-        | corein Version | $versionName (build $versionCode) |
+        | FOMO Version | $versionName (build $versionCode) |
         | Device Model | $manufacturer $model |
 
         ## 🔁 Steps to Reproduce
@@ -468,7 +468,7 @@ private fun buildBugReportUrl(): String {
     // since URLEncoder turns spaces into '+' which GitHub also accepts but
     // the spec calls for the literal "[Bug] " form.
     val title = java.net.URLEncoder.encode("[Bug] ", "UTF-8")
-    // corein: the repository uses an issue form (app_bug_report.yml), which
+    // FOMO: the repository uses an issue form (app_bug_report.yml), which
     // takes its fields as query parameters; `body` is ignored by forms.
     val version = java.net.URLEncoder.encode("$versionName ($versionCode)", "UTF-8")
     val device = java.net.URLEncoder.encode("Android $osVersion (API $sdkInt), $manufacturer $model", "UTF-8")
@@ -497,7 +497,7 @@ private fun buildFeedbackMailto(): String {
 
         Screenshot (optional): Please attach a screenshot if relevant.
     """.trimIndent()
-    val subject = java.net.URLEncoder.encode("corein Feedback", "UTF-8")
+    val subject = java.net.URLEncoder.encode("FOMO Feedback", "UTF-8")
     val encodedBody = java.net.URLEncoder.encode(body, "UTF-8")
     return "mailto:dev@openminis.app?subject=$subject&body=$encodedBody"
 }

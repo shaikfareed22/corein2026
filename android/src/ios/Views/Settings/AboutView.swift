@@ -43,7 +43,7 @@ struct AboutView: View {
                                     .stroke(Color(UIColor.separator), lineWidth: 0.5)
                             )
                     }
-                    Text("corein")
+                    Text("FOMO")
                         .font(.title2.bold())
                     Text("Version \(appVersion)")
                         .font(.subheadline)
@@ -94,7 +94,7 @@ struct AboutView: View {
                 }
             }
 
-            // corein: where this comes from, and what it is not.
+            // FOMO: where this comes from, and what it is not.
             Section(AppLocalized("Credits")) {
                 Link(destination: URL(string: "https://github.com/OpenMinis/OpenMinis")!) {
                     Label {
@@ -112,7 +112,7 @@ struct AboutView: View {
                 Label {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(AppLocalized("Not affiliated with Meta"))
-                        Text(AppLocalized("Muse is a trademark of Meta Platforms, Inc. corein is an independent free-software project."))
+                        Text(AppLocalized("Muse is a trademark of Meta Platforms, Inc. FOMO is an independent free-software project."))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

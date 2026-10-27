@@ -255,7 +255,7 @@ class ChannelManager(ChannelBus):
 
     @property
     def muse_name(self) -> str:
-        return self.svc.profile.name or "corein"
+        return self.svc.profile.name or "FOMO"
 
     # ------------------------------------------------------------------ inbound
     def _allowed(self, msg: InboundMessage) -> bool:

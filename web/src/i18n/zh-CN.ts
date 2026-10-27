@@ -12,13 +12,13 @@ const zhCN: Record<string, string> = {
   Library: "资源库",
   "Main chat": "主要聊天",
   "Side chat": "旁聊",
-  "Reconnecting to your corein…": "正在重新连接你的 corein…",
+  "Reconnecting to your FOMO…": "正在重新连接你的 FOMO…",
   "This demo has ended.": "这次体验已经结束。",
-  "This corein has stopped. Reload the page once it is running again.": "这个 corein 已停止。等它重新运行后，刷新页面即可。",
+  "This FOMO has stopped. Reload the page once it is running again.": "这个 FOMO 已停止。等它重新运行后，刷新页面即可。",
   "Reconnecting…": "重新连接中…",
-  "Connect to your corein": "连接到你的 corein",
-  "This app talks to the corein server you run yourself. Scan the QR code printed by":
-    "这个应用连接的是你自己运行的 corein 服务器。扫描下面命令打印的二维码",
+  "Connect to your FOMO": "连接到你的 FOMO",
+  "This app talks to the FOMO server you run yourself. Scan the QR code printed by":
+    "这个应用连接的是你自己运行的 FOMO 服务器。扫描下面命令打印的二维码",
   ", or paste the access token below.": "，或在下方粘贴访问令牌。",
   "Access token": "访问令牌",
   Connect: "连接",
@@ -43,26 +43,26 @@ const zhCN: Record<string, string> = {
     "每用一个工具就在对话里多一个小标签。关闭时对话只保留对话本身，名字下方的一行字说明它正在做什么。仅本设备。",
   "On it: {request}": "正在处理：{request}",
   "A star on GitHub helps": "GitHub 上的一颗 Star 帮得上忙",
-  "Welcome. corein is free, open source and non-profit, a personal agent for anyone who runs it. If that is worth something to you, a star on GitHub is how the next person finds it.":
-    "欢迎。corein 免费、开源、非营利，做的是一个属于每个人的个人智能体。如果你认同，GitHub 上的一颗 Star 能让下一个人也找到这里。",
-  "Three tasks done. If corein is useful, a star on GitHub helps the next person find it.":
-    "三个任务完成了。如果 corein 用得上，到 GitHub 点一颗 Star，下一个人也能找到它。",
-  "{n} tasks done. If corein is useful, a star on GitHub helps the next person find it.":
-    "已经完成 {n} 个任务了。如果 corein 用得上，到 GitHub 点一颗 Star，下一个人也能找到它。",
-  "A week with corein. If it has earned a place in your day, a star on GitHub helps the next person find it.":
-    "和 corein 一起一周了。如果它在你的日常里站住了脚，到 GitHub 点一颗 Star，下一个人也能找到它。",
-  "A month with corein. If it has become part of your routine, a star on GitHub tells others it is worth a try.":
-    "和 corein 一起一个月了。如果它成了你习惯的一部分，一颗 Star 会让更多人愿意试一试。",
-  "{n} days with corein. If it has earned a place in your day, a star on GitHub helps the next person find it.":
-    "和 corein 一起 {n} 天了。如果它在你的日常里站住了脚，到 GitHub 点一颗 Star，下一个人也能找到它。",
-  "Goal reached. If corein helped you get there, a star on GitHub tells the people building it that it did.":
-    "目标达成了。如果 corein 帮你走到了这里，到 GitHub 点一颗 Star，做它的人就知道了。",
-  "Ten tasks together. If corein has become part of your day, a star on GitHub tells others it is worth a try.":
-    "已经一起完成十个任务了。如果 corein 成了你日常的一部分，一颗 Star 会让更多人愿意试一试。",
-  "A new face, drawn for you. If you like where corein is going, a star on GitHub helps more people find it.":
-    "一张为你画的新面孔。如果你喜欢 corein 现在的样子，到 GitHub 点一颗 Star，更多人就能遇见它。",
-  "The free allowance is used up. Thank you for coming this far. If corein has earned it, a star on GitHub keeps the project in view for the next person.":
-    "免费额度用完了，谢谢你一路用到这里。如果 corein 值得，到 GitHub 点一颗 Star，下一个人也能找到它。",
+  "Welcome. FOMO is free, open source and non-profit, a personal agent for anyone who runs it. If that is worth something to you, a star on GitHub is how the next person finds it.":
+    "欢迎。FOMO 免费、开源、非营利，做的是一个属于每个人的个人智能体。如果你认同，GitHub 上的一颗 Star 能让下一个人也找到这里。",
+  "Three tasks done. If FOMO is useful, a star on GitHub helps the next person find it.":
+    "三个任务完成了。如果 FOMO 用得上，到 GitHub 点一颗 Star，下一个人也能找到它。",
+  "{n} tasks done. If FOMO is useful, a star on GitHub helps the next person find it.":
+    "已经完成 {n} 个任务了。如果 FOMO 用得上，到 GitHub 点一颗 Star，下一个人也能找到它。",
+  "A week with FOMO. If it has earned a place in your day, a star on GitHub helps the next person find it.":
+    "和 FOMO 一起一周了。如果它在你的日常里站住了脚，到 GitHub 点一颗 Star，下一个人也能找到它。",
+  "A month with FOMO. If it has become part of your routine, a star on GitHub tells others it is worth a try.":
+    "和 FOMO 一起一个月了。如果它成了你习惯的一部分，一颗 Star 会让更多人愿意试一试。",
+  "{n} days with FOMO. If it has earned a place in your day, a star on GitHub helps the next person find it.":
+    "和 FOMO 一起 {n} 天了。如果它在你的日常里站住了脚，到 GitHub 点一颗 Star，下一个人也能找到它。",
+  "Goal reached. If FOMO helped you get there, a star on GitHub tells the people building it that it did.":
+    "目标达成了。如果 FOMO 帮你走到了这里，到 GitHub 点一颗 Star，做它的人就知道了。",
+  "Ten tasks together. If FOMO has become part of your day, a star on GitHub tells others it is worth a try.":
+    "已经一起完成十个任务了。如果 FOMO 成了你日常的一部分，一颗 Star 会让更多人愿意试一试。",
+  "A new face, drawn for you. If you like where FOMO is going, a star on GitHub helps more people find it.":
+    "一张为你画的新面孔。如果你喜欢 FOMO 现在的样子，到 GitHub 点一颗 Star，更多人就能遇见它。",
+  "The free allowance is used up. Thank you for coming this far. If FOMO has earned it, a star on GitHub keeps the project in view for the next person.":
+    "免费额度用完了，谢谢你一路用到这里。如果 FOMO 值得，到 GitHub 点一颗 Star，下一个人也能找到它。",
   "Load earlier messages": "加载更早的消息",
   "New side chat": "新建旁聊",
   "New side chat, e.g. “Trip to Kyoto”": "新建旁聊，例如“京都之旅”",
@@ -108,8 +108,8 @@ const zhCN: Record<string, string> = {
   "24h": "24 小时",
   low: "低",
   "Stopped.": "已停止。",
-  "Use corein Cloud this time": "这次改用 corein Cloud",
-  "Answered by corein Cloud this time ({model})": "这次由 corein Cloud 回答（{model}）",
+  "Use FOMO Cloud this time": "这次改用 FOMO Cloud",
+  "Answered by FOMO Cloud this time ({model})": "这次由 FOMO Cloud 回答（{model}）",
   Deny: "拒绝",
   "Allow once": "允许一次",
   Allow: "允许",
@@ -431,7 +431,7 @@ const zhCN: Record<string, string> = {
   "Pick a card. It goes out through the system share sheet, or saves as a picture where there is none.": "选一张卡片，用系统分享发出去；没有系统分享的浏览器会保存为图片。",
   "Card {n}": "卡片 {n}",
   "{name}'s avatar": "{name} 的形象",
-  "Hi, I'm {name}, a personal AI agent. Meet corein: open source, runs on your phone.": "你好，我是你的个人 AI 智能体 {name}。认识一下 corein：开源，在手机上本地运行。",
+  "Hi, I'm {name}, a personal AI agent. Meet FOMO: open source, runs on your phone.": "你好，我是你的个人 AI 智能体 {name}。认识一下 FOMO：开源，在手机上本地运行。",
   "Your personal AI agent, open source · {repo}": "你的个人 AI 智能体，开源 · {repo}",
   "Later": "以后再说",
   "Share": "分享",
@@ -577,7 +577,7 @@ const zhCN: Record<string, string> = {
   "Let {name} notify this phone": "让 {name} 通知这台手机",
   "The app stays connected to your server in the background. Approvals, questions and finished background work arrive as notifications and open the right chat.":
     "应用在后台保持与服务器的连接。审批、提问和后台完成的工作会以通知送达，并打开对应的对话。",
-  "corein for Android {version}": "corein Android 版 {version}",
+  "FOMO for Android {version}": "FOMO Android 版 {version}",
   "Disconnect from this server": "断开此服务器",
   "This device only": "仅这台设备",
   "1 device subscribed": "1 台设备已订阅",
@@ -611,7 +611,7 @@ const zhCN: Record<string, string> = {
   "Follow the system": "跟随系统",
   About: "关于",
   "{version} is out": "{version} 已发布",
-  "corein {version}": "corein {version}",
+  "FOMO {version}": "FOMO {version}",
   "Tell {name} something to remember": "在对话里告诉 {name} 一件值得记住的事",
   "Write one": "写一个",
   "Latest {version}; you have it": "最新版 {version}，你已经在用了",
@@ -652,12 +652,12 @@ const zhCN: Record<string, string> = {
   "Settings → Calendar → Shared calendars → Publish a calendar → ICS link": "设置 → 日历 → 共享日历 → 发布日历 → ICS 链接",
   "Share Calendar → Public Calendar → copy the webcal:// link": "共享日历 → 公共日历 → 复制 webcal:// 链接",
   "Settings → Calendars → Export → Calendar URL": "设置 → 日历 → 导出 → 日历 URL",
-  "A path on the machine where corein runs, for example ~/calendar.ics": "corein 所在机器上的文件路径，例如 ~/calendar.ics",
+  "A path on the machine where FOMO runs, for example ~/calendar.ics": "FOMO 所在机器上的文件路径，例如 ~/calendar.ics",
   ".ics file": ".ics 文件",
   Work: "工作",
   "Private .ics link or file path": "私密 .ics 链接或文件路径",
   "Stored encrypted in the vault as CALENDAR_{name}.": "加密保存在保险库中，名为 CALENDAR_{name}。",
-  "corein fetches whatever address you put here, from this machine; only paste links you trust.": "corein 会从这台机器上去取你填的任何地址，只粘贴你信任的链接。",
+  "FOMO fetches whatever address you put here, from this machine; only paste links you trust.": "FOMO 会从这台机器上去取你填的任何地址，只粘贴你信任的链接。",
   "Add a calendar": "添加日历",
   "Added, but it could not be read: {error}": "已添加，但读取失败：{error}",
   // contacts
@@ -777,7 +777,7 @@ const zhCN: Record<string, string> = {
 
   // ── Onboarding ────────────────────────────────────────────────────────────────────
   "Skip setup": "跳过设置",
-  "Meet your corein": "认识你的 corein",
+  "Meet your FOMO": "认识你的 FOMO",
   "Your name": "你的名字",
   "The model behind it": "背后的模型",
   "A model is already set up on the server. Keep it, or switch here.": "服务器上已经配置了模型。可以保留，也可以在这里切换。",
@@ -890,7 +890,7 @@ const zhCN: Record<string, string> = {
   "Not yet": "还没开",
   "Not on this Android": "这个安卓版本不支持",
   "Operating the screen needs Android 11 or newer; this phone can still be used for everything else.": "操作屏幕需要 Android 11 或更新；其他功能这台手机都能用。",
-  "Turn on the corein accessibility service; that is how it sees the screen and taps for you, only while a task runs, with a Stop button on screen.": "打开 corein 的无障碍服务，它靠这个看屏幕、替你点击，只在任务进行时工作，屏幕上始终有停止按钮。",
+  "Turn on the FOMO accessibility service; that is how it sees the screen and taps for you, only while a task runs, with a Stop button on screen.": "打开 FOMO 的无障碍服务，它靠这个看屏幕、替你点击，只在任务进行时工作，屏幕上始终有停止按钮。",
   "Open Accessibility settings": "打开无障碍设置",
   "App settings": "应用设置",
   "Greyed out with “Restricted setting”? Android 13+ does that for apps installed from a download: in App settings tap ⋮ → Allow restricted settings, then come back.": "灰色且提示「受限设置」？Android 13+ 对下载安装的应用会这样：在应用设置里点 ⋮ → 允许受限设置，再回来。",
@@ -993,12 +993,12 @@ const zhCN: Record<string, string> = {
   "Crashes are written to a file on this phone and nowhere else. Export bundles them with the runtime's log for someone you choose.": "崩溃只写到这台手机上的文件里，不上报任何地方。导出会把它们和运行时日志打成一个包，发给你选的人。",
   "Export logs": "导出日志",
   "clipboard, notifications, calendar, contacts, location, alarms, photos": "剪贴板、通知、日历、通讯录、位置、闹钟、照片",
-  // ---- devices, the hub, corein Cloud (docs/every-device.md)
+  // ---- devices, the hub, FOMO Cloud (docs/every-device.md)
   "Devices": "设备",
   "Only this one": "只有这一台",
   Idle: "空闲",
   "A chat addressed to a device runs there; you see every step here and answer its approvals.": "对着某台设备的对话在那台设备上执行；每一步都在这里看得到，审批也在这里答。",
-  "corein Cloud": "corein Cloud",
+  "FOMO Cloud": "FOMO Cloud",
   "Free. One account for all your devices, and a model to start with.": "免费。一个账号连起你所有设备，还附带一个可以先用起来的模型。",
   "Signed in": "已登录",
   "Not signed in": "未登录",
@@ -1010,19 +1010,19 @@ const zhCN: Record<string, string> = {
   "Use the Cloud model": "使用 Cloud 模型",
   "The Cloud model is in use.": "已切换到 Cloud 模型。",
   "Sign out": "退出登录",
-  "Sign out of corein Cloud on this device? The hub and the Cloud model stop working here until you sign in again.": "在这台设备上退出 corein Cloud？重新登录之前，这里的中继和 Cloud 模型都会停用。",
+  "Sign out of FOMO Cloud on this device? The hub and the Cloud model stop working here until you sign in again.": "在这台设备上退出 FOMO Cloud？重新登录之前，这里的中继和 Cloud 模型都会停用。",
   "Mainland China phone number or e-mail": "中国大陆手机号或邮箱",
   "138 0000 0000 or you@example.com": "138 0000 0000 或 you@example.com",
   // -- the community notice and the gate (0.1.22) --
-  "One free account. It is what lets your phone and computers work as one and brings a model to start with.": "一个免费账号。有了它，手机和电脑就是同一个 corein，还自带一个可以先用起来的模型。",
+  "One free account. It is what lets your phone and computers work as one and brings a model to start with.": "一个免费账号。有了它，手机和电脑就是同一个 FOMO，还自带一个可以先用起来的模型。",
   "It uses your phone and computers for you": "替你操作手机和电脑",
   "The relay keeps an account id, a masked identifier, usage counts and your agent's name and look; what else, and what is yours to switch off, is in the": "中继保存账号 id、打码后的手机号或邮箱、用量计数和你的智能体的名字与形象；其余保存什么、哪些由你决定，见",
   "privacy policy": "隐私政策",
   "Free, open source, non-profit": "免费、开源、非营利",
-  "corein is a non-profit open-source community project, free forever.": "corein 是非营利的开源社区项目，永久免费。",
+  "FOMO is a non-profit open-source community project, free forever.": "FOMO 是非营利的开源社区项目，永久免费。",
   "Chat apps": "聊天入口",
-  "corein is a non-profit open-source community project, free forever. Sign in with a phone number or an e-mail and the model comes with a free allowance, paid by the developer; when it is gone, use your own key (Alibaba Cloud Bailian in mainland China, OpenRouter elsewhere). Nothing is sold; what the relay keeps is in the privacy policy, and Settings → Data controls is yours. Delete the account whenever you like.":
-    "corein 是非营利的开源社区项目，永久免费。用手机号或邮箱登录，模型自带一份免费额度，费用由开发者承担；用完可以换自己的 key（中国大陆用阿里云百炼，海外用 OpenRouter）。数据不会出售；服务器保存什么写在隐私政策里，「设置 → 数据控制」由你决定。账号随时可以删除。",
+  "FOMO is a non-profit open-source community project, free forever. Sign in with a phone number or an e-mail and the model comes with a free allowance, paid by the developer; when it is gone, use your own key (Alibaba Cloud Bailian in mainland China, OpenRouter elsewhere). Nothing is sold; what the relay keeps is in the privacy policy, and Settings → Data controls is yours. Delete the account whenever you like.":
+    "FOMO 是非营利的开源社区项目，永久免费。用手机号或邮箱登录，模型自带一份免费额度，费用由开发者承担；用完可以换自己的 key（中国大陆用阿里云百炼，海外用 OpenRouter）。数据不会出售；服务器保存什么写在隐私政策里，「设置 → 数据控制」由你决定。账号随时可以删除。",
   "The people building it use it every day. Report a bug, ask for a feature, send a pull request: that is what moves the project. A star on GitHub helps others find it.": "做它的人每天都在用。欢迎反馈问题、提需求、贡献代码，项目就是这样往前走的。在 GitHub 点个 Star，能让更多人找到它。",
   "Star on GitHub": "去 GitHub 点个 Star",
   "Report a bug or ask for a feature": "反馈问题 / 提需求",
@@ -1031,12 +1031,12 @@ const zhCN: Record<string, string> = {
   "Download your agent data": "下载你的智能体数据",
   "A zip of what this runtime keeps about you: the memory, the goals, the reminders, the triggers, the address book and the chats. It never contains the keys themselves.":
     "这个运行时为你保存的内容打成一个 zip：记忆、目标、提醒、触发器、通讯录和聊天记录。里面绝不会有密钥本身。",
-  "Help improve corein's AI models": "帮助改进 corein 的 AI 模型",
-  "While this is on, the text of your chats with the corein Cloud models (what you wrote, what it answered and the tools it chose to call) is kept on the relay to train the community's own open model. Not your memory or SOUL (the system prompt), not what tools returned, not pictures, and never next to who you are. Your own API key never passes through the relay.":
-    "开启后，你与 corein Cloud 模型对话的文字（你写的、它回答的，以及它选择调用的工具）会保存在中继上，用来训练社区自己的开源模型。不保存你的记忆和 SOUL（系统提示）、工具返回的内容和图片，也不和你的身份放在一起。用自己的 API key 时，对话不经过中继。",
+  "Help improve FOMO's AI models": "帮助改进 FOMO 的 AI 模型",
+  "While this is on, the text of your chats with the FOMO Cloud models (what you wrote, what it answered and the tools it chose to call) is kept on the relay to train the community's own open model. Not your memory or SOUL (the system prompt), not what tools returned, not pictures, and never next to who you are. Your own API key never passes through the relay.":
+    "开启后，你与 FOMO Cloud 模型对话的文字（你写的、它回答的，以及它选择调用的工具）会保存在中继上，用来训练社区自己的开源模型。不保存你的记忆和 SOUL（系统提示）、工具返回的内容和图片，也不和你的身份放在一起。用自己的 API key 时，对话不经过中继。",
   "New accounts start with it on.": "新账号默认开启。",
   "New accounts start with it off.": "新账号默认关闭。",
-  "Sign in to corein Cloud to use it.": "登录 corein Cloud 后可用。",
+  "Sign in to FOMO Cloud to use it.": "登录 FOMO Cloud 后可用。",
   "{n} turns kept so far.": "目前已保存 {n} 轮对话。",
   "{n} turns kept so far": "已保存 {n} 轮对话",
   "{n} turns": "{n} 轮",
@@ -1088,7 +1088,7 @@ const zhCN: Record<string, string> = {
     "覆盖对话和动手。画图和生成视频不在其中，那两项需要一个有图像或视频模型的服务商。",
   "OpenAI's terms cover using a ChatGPT plan inside OpenAI's own Codex; other apps have had this access cut off before (OpenCode, January 2026). If it stops working, an API key does.":
     "OpenAI 的条款只允许在它自家的 Codex 里使用 ChatGPT 套餐；其他应用曾被切断过这条路（OpenCode，2026 年 1 月）。哪天它不能用了，API key 仍然可以。",
-  "This corein has no sign-in route yet. In a terminal on this computer, run": "这个 corein 还没有登录接口。在这台电脑的终端里运行",
+  "This FOMO has no sign-in route yet. In a terminal on this computer, run": "这个 FOMO 还没有登录接口。在这台电脑的终端里运行",
   "and reload this page.": "然后刷新本页。",
   "Signed in with {label}.": "已用 {label} 登录。",
   "Use it for the chat": "让它来回答对话",
@@ -1099,7 +1099,7 @@ const zhCN: Record<string, string> = {
   "A page from OpenAI opened in a new tab. Sign in there; when the browser ends on an address that will not load, paste that address below.": "已在新标签页打开 OpenAI 的页面。在那里登录；浏览器最后停在一个打不开的地址时，把那个地址粘贴到下面。",
   "The address the browser ended on": "浏览器最后停在的地址",
   "Use this address": "用这个地址",
-  "This corein runs where the browser cannot reach port 1455, so it cannot pick the sign-in up by itself.": "这个 corein 运行的机器上，浏览器连不到 1455 端口，所以它没法自己接住登录结果。",
+  "This FOMO runs where the browser cannot reach port 1455, so it cannot pick the sign-in up by itself.": "这个 FOMO 运行的机器上，浏览器连不到 1455 端口，所以它没法自己接住登录结果。",
   "That address belongs to another sign-in attempt. Open the page again and paste the address it ends on.": "这个地址属于另一次登录尝试。再次打开页面，粘贴它最后停在的地址。",
   "ChatGPT answers the chat now.": "现在由 ChatGPT 回答对话。",
   // the one sentence for a feature no configured provider covers (contract C11)
@@ -1114,7 +1114,7 @@ const zhCN: Record<string, string> = {
   "Step-by-step guide": "图文教程",
   "Invite a friend: +¥{bonus} for you and +¥{bonus} for them, once a new person who signed up with your link makes their first request.": "邀请朋友：每有一位新用户通过你的链接注册并发出第一次请求，你 +¥{bonus}，对方也 +¥{bonus}。",
   "Your invite link is under Account": "邀请链接在「账号」页",
-  "Try corein with me, a fully open-source personal agent, free to use. Sign up with my link: {link}": "来和我一起用 corein，完全开源的个人智能体，免费使用。用我的链接注册：{link}",
+  "Try FOMO with me, a fully open-source personal agent, free to use. Sign up with my link: {link}": "来和我一起用 FOMO，完全开源的个人智能体，免费使用。用我的链接注册：{link}",
   // -- invitations (relay 0.4/0.5) --
   "Invite code (optional)": "邀请码（选填）",
   "A friend's code counts for a new account: you both get ¥{invite} after your first request.": "朋友的邀请码只对新账号有效：你发出第一次请求后，你和对方的额度各 +¥{invite}。",
@@ -1125,7 +1125,7 @@ const zhCN: Record<string, string> = {
   "Copied": "已复制",
   "Share the link": "分享链接",
   "Copy the link": "复制链接",
-  "Try corein with me, a fully open-source personal agent, free to use. Sign up with my code {code}: {link}": "来和我一起用 corein，完全开源的个人智能体，免费使用。用我的邀请码 {code} 注册：{link}",
+  "Try FOMO with me, a fully open-source personal agent, free to use. Sign up with my code {code}: {link}": "来和我一起用 FOMO，完全开源的个人智能体，免费使用。用我的邀请码 {code} 注册：{link}",
   "{n} friends joined": "已邀请 {n} 位",
   "¥{amount} added by invitations": "邀请带来 ¥{amount}",
   "The code you received": "收到的验证码",
@@ -1133,7 +1133,7 @@ const zhCN: Record<string, string> = {
   "Send me a code": "发送验证码",
   "Sign in": "登录",
   "Sign in and use its model": "登录并使用它的模型",
-  "Signed in to corein Cloud.": "已登录 corein Cloud。",
+  "Signed in to FOMO Cloud.": "已登录 FOMO Cloud。",
   "Or bring your own key": "或者用你自己的密钥",
   "This device": "这台设备",
   "A name your other devices will see": "其他设备看到的名字",
@@ -1170,8 +1170,8 @@ const zhCN: Record<string, string> = {
   "Type @{name} in the chat to hand it work.": "在聊天里输入 @{name}，就能把活交给它。",
   "Add a device": "添加一台设备",
   "No other device yet": "还没有其他设备",
-  "Install corein on your phone, Mac or PC and sign in as {hint}; it appears here on its own.": "在手机、Mac 或 PC 上安装 corein，用 {hint} 登录，它就会自己出现在这里。",
-  "Install corein on your phone, Mac or PC and sign in with the same account; it appears here on its own.": "在手机、Mac 或 PC 上安装 corein，用同一个账号登录，它就会自己出现在这里。",
+  "Install FOMO on your phone, Mac or PC and sign in as {hint}; it appears here on its own.": "在手机、Mac 或 PC 上安装 FOMO，用 {hint} 登录，它就会自己出现在这里。",
+  "Install FOMO on your phone, Mac or PC and sign in with the same account; it appears here on its own.": "在手机、Mac 或 PC 上安装 FOMO，用同一个账号登录，它就会自己出现在这里。",
   "Get the apps": "下载应用",
   "Forget {name}? It can join again by signing in.": "忘掉 {name}？它重新登录后还可以加入。",
   "on {device}": "在 {device} 上",
@@ -1182,8 +1182,8 @@ const zhCN: Record<string, string> = {
   "Hands on this computer": "操作这台电脑",
   "On the screen now": "正在操作屏幕",
   "Nothing can drive this screen yet.": "目前没有能驱动这块屏幕的组件。",
-  "On a Mac, allow corein under System Settings → Privacy & Security → Accessibility and Screen Recording when macOS asks; without them clicks do nothing and the screenshot is black. The first action in each app asks you once (\"Let {name} use Safari?\") and the answer is kept under Permissions.":
-    "Mac 上，macOS 弹窗询问时请在「系统设置 → 隐私与安全性」的「辅助功能」和「屏幕录制」里允许 corein；不允许的话点击没有反应，截图也是黑的。每个应用的第一步会先问你一次（「让 {name} 使用 Safari 吗？」），答复记在「权限」里。",
+  "On a Mac, allow FOMO under System Settings → Privacy & Security → Accessibility and Screen Recording when macOS asks; without them clicks do nothing and the screenshot is black. The first action in each app asks you once (\"Let {name} use Safari?\") and the answer is kept under Permissions.":
+    "Mac 上，macOS 弹窗询问时请在「系统设置 → 隐私与安全性」的「辅助功能」和「屏幕录制」里允许 FOMO；不允许的话点击没有反应，截图也是黑的。每个应用的第一步会先问你一次（「让 {name} 使用 Safari 吗？」），答复记在「权限」里。",
   "Where": "范围",
   "One window": "单个窗口",
   "Whole screen": "整个屏幕",
@@ -1310,10 +1310,10 @@ const zhCN: Record<string, string> = {
   Account: "账号",
   "Account deleted.": "账号已删除。",
   "Account id": "账号 ID",
-  "Sign in to corein Cloud": "登录 corein Cloud",
+  "Sign in to FOMO Cloud": "登录 FOMO Cloud",
   "Sign in to {name}": "登录 {name}",
-  "corein Cloud · one account for all your devices": "corein Cloud · 一个账号，所有设备",
-  "Every device of yours, one corein": "你的每台设备，同一个 corein",
+  "FOMO Cloud · one account for all your devices": "FOMO Cloud · 一个账号，所有设备",
+  "Every device of yours, one FOMO": "你的每台设备，同一个 FOMO",
   "A model with a free allowance, or your own key": "自带免费额度的模型，或用你自己的 key",
   "Keys in your vault; nothing you say is kept on the relay": "key 留在你的保险库里；你说的内容不会留在中继上",
   "Free. One account for all your devices, with a model and ¥{allowance} of use to start; a code the first time, a password afterwards if you like.": "免费。一个账号连起你所有设备，自带模型和 ¥{allowance} 的起始额度；第一次用验证码登录，之后可以设密码。",
@@ -1393,7 +1393,7 @@ const zhCN: Record<string, string> = {
   "{n} min ago": "{n} 分钟前",
   "{n} h ago": "{n} 小时前",
   "{n} d ago": "{n} 天前",
-  "Use the corein Cloud model": "使用 corein Cloud 模型",
+  "Use the FOMO Cloud model": "使用 FOMO Cloud 模型",
   "Signed in as {hint}. A free allowance, nothing to paste. Recommended to start.": "已登录 {hint}。自带免费额度，无需粘贴任何 key，推荐先用它。",
   "Your account brings a model with a free allowance, nothing to set up. Or paste a key of your own; it is stored encrypted in the vault on the server, never shown to the model, and nothing you say passes through the relay.":
     "你的账号自带一个有免费额度的模型，不用再设置什么。也可以粘贴自己的 key：它加密存在服务端的保险库里，不会给模型看到，你说的内容也不经过中继。",
@@ -1421,13 +1421,13 @@ const zhCN: Record<string, string> = {
   "No chats yet.": "还没有对话。",
   "Untitled chat": "未命名对话",
   "{n} messages": "{n} 条消息",
-  "Sent through corein": "经 corein 发送的",
+  "Sent through FOMO": "经 FOMO 发送的",
   stopped: "已停止",
   "Sent to {agent}.": "已发给 {agent}。",
   "{agent} is working…": "{agent} 正在处理…",
   "Tell {agent}…": "对 {agent} 说…",
   "Nothing readable in this chat yet.": "这个对话里还没有可读的内容。",
-  "via corein": "经 corein",
+  "via FOMO": "经 FOMO",
   "Continued as a new chat: the agent could not reopen the old one.": "原来的对话打不开了，已经另起一个新对话接着聊。",
   "Made in the IDE: your message starts a new chat in the same workspace, with the last exchange quoted.": "这是 IDE 里的对话：你的消息会在同一工作区开一个新对话，并带上上一轮的内容。",
   "Continue in a new chat…": "在新对话里接着说…",
@@ -1436,7 +1436,7 @@ const zhCN: Record<string, string> = {
   "Project folder": "项目目录",
   "What to do": "要做什么",
   "Add tests for the parser and run them": "给解析器补上测试并跑一遍",
-  "The agent runs on that computer with its own permissions; corein only carries the message and brings the answer back.": "助手在那台电脑上以它自己的权限运行；corein 只负责传话和带回结果。",
+  "The agent runs on that computer with its own permissions; FOMO only carries the message and brings the answer back.": "助手在那台电脑上以它自己的权限运行；FOMO 只负责传话和带回结果。",
 
   // -- what the server answers a request with, when it shows as a toast or a test line --
   "The file is larger than {n} MB.": "文件超过了 {n} MB。",
@@ -1460,7 +1460,7 @@ const zhCN: Record<string, string> = {
   "fill in the servers, the address and the password first": "先填好服务器、地址和密码",
   "add a calendar link first": "先添加一个日历链接",
   "signed out": "未登录",
-  "Sign in to corein Cloud first.": "请先登录 corein Cloud。",
+  "Sign in to FOMO Cloud first.": "请先登录 FOMO Cloud。",
   "Enter the password.": "请输入密码。",
   "The relay returned no key.": "中继没有返回 key。",
   // -- what a failed run says (nanomuse/server/failures.py) --
@@ -1475,22 +1475,22 @@ const zhCN: Record<string, string> = {
   "The model provider's content check declined this request; try different words.": "模型服务商的内容审核没有放行这次请求，换个说法再试。",
   "The relay's model provider refused its key; the operator has been told. Your own key under Connections works meanwhile.": "中继的模型服务商拒绝了它的 key，运营者已收到通知。这期间可以在「连接」里用你自己的 key。",
   "The model provider does not know this model right now; pick another under Connections.": "模型服务商暂时不认识这个模型，在「连接」里换一个。",
-  "corein Cloud has no model key configured; the operator has been told.": "corein Cloud 还没有配置模型 key，运营者已收到通知。",
-  "This corein Cloud account is disabled.": "这个 corein Cloud 账号已被停用。",
-  "The corein Cloud sign-in is no longer valid; sign in again under Account.": "corein Cloud 的登录已失效，请在「账号」里重新登录。",
-  "That model is not offered by corein Cloud; pick another under Connections.": "corein Cloud 不提供这个模型，在「连接」里换一个。",
+  "FOMO Cloud has no model key configured; the operator has been told.": "FOMO Cloud 还没有配置模型 key，运营者已收到通知。",
+  "This FOMO Cloud account is disabled.": "这个 FOMO Cloud 账号已被停用。",
+  "The FOMO Cloud sign-in is no longer valid; sign in again under Account.": "FOMO Cloud 的登录已失效，请在「账号」里重新登录。",
+  "That model is not offered by FOMO Cloud; pick another under Connections.": "FOMO Cloud 不提供这个模型，在「连接」里换一个。",
   "That message is too large for the model's window. Shorten it, leave out some attachments, or start a new chat.": "这条消息超出了模型的上下文窗口。精简一下、去掉部分附件，或者开一个新对话。",
   "This relay takes new accounts by invitation only; sign in with an invite code under Account.": "这个中继只接受邀请注册；在「账号」里用邀请码登录。",
   "Too many turns are running on this account at once; wait for one to finish and try again.": "这个账号同时进行的对话太多了，等一轮结束后再试。",
   "New sign-ups are paused on this relay for now; existing accounts keep working. Try again later.": "这个中继暂时停止了新注册，已有账号照常使用。稍后再试。",
-  "corein Cloud is paused by its operator for now; your sign-in and your data are kept. Try again later.": "corein Cloud 被运营者暂时停用了，你的登录和数据都保留着。稍后再试。",
+  "FOMO Cloud is paused by its operator for now; your sign-in and your data are kept. Try again later.": "FOMO Cloud 被运营者暂时停用了，你的登录和数据都保留着。稍后再试。",
   "Conversation sync is paused on this relay for now; what is stored is kept and your devices keep working on their own.": "这个中继暂时停止了对话同步，已存的内容保留着，各设备各自继续使用。",
   "The device hub is paused on this relay for now; each device keeps working on its own.": "这个中继暂时停止了设备互联，各设备各自继续使用。",
   "The free allowance is paused on this relay for now, not used up. Your own model key under Connections keeps you going; your sign-in, your devices and what is left stay as they are.": "这个中继暂时停发了免费额度，不是用完了。在「连接」里填上你自己的模型 key 就能继续；你的登录、设备和剩余额度都保持原样。",
-  "This demo Muse has used its share of the model for this visit. Start over for a new one, or install corein and use your own key.":
-    "这个演示 Muse 这一次的模型额度用完了。点「重新开始」再来一个，或者安装 corein，用你自己的 key。",
-  "The showcase has used today's share of the model; it comes back tomorrow. Install corein and use your own key to keep going.":
-    "在线体验今天的模型额度用完了，明天会恢复。安装 corein，用你自己的 key 可以继续。",
+  "This demo Muse has used its share of the model for this visit. Start over for a new one, or install FOMO and use your own key.":
+    "这个演示 Muse 这一次的模型额度用完了。点「重新开始」再来一个，或者安装 FOMO，用你自己的 key。",
+  "The showcase has used today's share of the model; it comes back tomorrow. Install FOMO and use your own key to keep going.":
+    "在线体验今天的模型额度用完了，明天会恢复。安装 FOMO，用你自己的 key 可以继续。",
   "The model provider is having trouble; try again in a moment.": "模型服务商出了点问题，稍后再试。",
   "The model provider refused the API key. Check it under Connections.": "模型服务商拒绝了这个 API key，去「连接」里检查一下。",
   "The endpoint does not know this model. Pick another under Connections.": "这个接口不认识这个模型，在「连接」里换一个。",
@@ -1520,8 +1520,8 @@ const zhCN: Record<string, string> = {
     "免费额度已用完。邀请一位新用户（你和对方的额度都会增加），或者换成自己的 key；无论选哪个，登录和多设备功能都不受影响。",
   "Today's token quota is used up; it comes back tomorrow.": "今天的 token 配额用完了，明天恢复。",
   "The model provider did not answer.": "模型服务商没有响应。",
-  "corein Cloud has no model key configured.": "corein Cloud 还没有配置模型 key。",
-  "corein Cloud cannot be reached.": "连不上 corein Cloud。",
+  "FOMO Cloud has no model key configured.": "FOMO Cloud 还没有配置模型 key。",
+  "FOMO Cloud cannot be reached.": "连不上 FOMO Cloud。",
   "That address and password do not match.": "邮箱与密码不匹配。",
   "This account has no password yet; sign in with a code and set one under Account.": "这个账号还没有设置密码：先用验证码登录，再在「账号」里设置。",
   "Too many wrong passwords; wait a while or sign in with a code.": "密码错误次数太多，等一会儿再试，或者改用验证码登录。",
@@ -1532,11 +1532,11 @@ const zhCN: Record<string, string> = {
   "That sign-in is already gone.": "那个登录已经不存在了。",
 
   // -- reaching the runtime --
-  "Cannot reach your corein right now.": "现在连不上你的 corein。",
-  "Your corein hit a problem; try again in a moment.": "你的 corein 出了点问题，稍后再试。",
-  "Your corein could not do that.": "你的 corein 没能完成这个操作。",
-  "Could not reach your corein.": "连不上你的 corein。",
-  "Connecting to your corein…": "正在连接你的 corein…",
+  "Cannot reach your FOMO right now.": "现在连不上你的 FOMO。",
+  "Your FOMO hit a problem; try again in a moment.": "你的 FOMO 出了点问题，稍后再试。",
+  "Your FOMO could not do that.": "你的 FOMO 没能完成这个操作。",
+  "Could not reach your FOMO.": "连不上你的 FOMO。",
+  "Connecting to your FOMO…": "正在连接你的 FOMO…",
   "Try again": "再试一次",
   "Could not load.": "没能加载出来。",
   "Use /{name}": "使用 /{name}",
@@ -1544,7 +1544,7 @@ const zhCN: Record<string, string> = {
   "Could not load the conversation. Open the chat again to retry.": "对话没能加载出来，重新打开这个对话再试。",
   "Could not load the connections.": "连接信息没能加载出来。",
 
-  // -- corein Cloud as the provider --
+  // -- FOMO Cloud as the provider --
   "Your account": "你的账号",
   "your account's model, with a free allowance": "账号自带的模型，带免费额度",
   "on this machine, no key": "跑在本机，不用 key",
@@ -1609,7 +1609,7 @@ const zhCN: Record<string, string> = {
   "Runtime:": "运行时：",
   "the token is in the server_token file in the data folder": "令牌在数据目录的 server_token 文件里",
   "The command line and the API": "命令行与 API",
-  "corein on DeepSeek Harness": "corein 的 DeepSeek Harness 版",
+  "FOMO on DeepSeek Harness": "FOMO 的 DeepSeek Harness 版",
   "Desktop app": "桌面应用",
   "Start with the computer": "开机自动启动",
   "Opens in the tray at sign-in; the agent's goals and check-ins run from then on.": "登录系统后在托盘里启动；从那时起，它的目标和定时检查就开始跑了。",
@@ -1698,7 +1698,7 @@ const zhCN: Record<string, string> = {
   "Add a provider and pick its models": "添加一个服务商并选择模型",
   "Image & video models": "图像与视频模型",
   "Name & personality": "名字与人格",
-  "About corein": "关于 corein",
+  "About FOMO": "关于 FOMO",
   "Privacy policy": "隐私政策",
   Feedback: "反馈问题",
   none: "无",
@@ -1713,18 +1713,18 @@ const zhCN: Record<string, string> = {
 
   // Conversations synced between the account's devices (contract C7)
   "Sync conversations between my devices": "在我的设备之间同步对话",
-  "The text of your chats is kept on corein Cloud so every device shows the same conversations. Files and images stay on the device they were made on.":
-    "对话文字会保存在 corein Cloud，让每台设备看到同样的对话。文件和图片只留在产生它们的设备上。",
+  "The text of your chats is kept on FOMO Cloud so every device shows the same conversations. Files and images stay on the device they were made on.":
+    "对话文字会保存在 FOMO Cloud，让每台设备看到同样的对话。文件和图片只留在产生它们的设备上。",
   "Paused: sign in again to continue.": "已暂停：重新登录后继续。",
   "{c} chats, {m} messages kept so far.": "目前保存了 {c} 个对话、{m} 条消息。",
   "Delete synced conversations": "删除已同步的对话",
   "{n} chats": "{n} 个对话",
-  "Removes what corein Cloud stores for this account; the chats on each device stay, and the switch stays on. Deleting a chat on one device deletes it on all of them.":
-    "删除 corein Cloud 为这个账号保存的内容；每台设备上的对话保留，开关也保持打开。在一台设备上删除某个对话，会在所有设备上一起删除。",
-  "Off deletes the synced conversations from corein Cloud. The chats on each device stay.": "关闭后会从 corein Cloud 删除已同步的对话。每台设备上的对话保留。",
+  "Removes what FOMO Cloud stores for this account; the chats on each device stay, and the switch stays on. Deleting a chat on one device deletes it on all of them.":
+    "删除 FOMO Cloud 为这个账号保存的内容；每台设备上的对话保留，开关也保持打开。在一台设备上删除某个对话，会在所有设备上一起删除。",
+  "Off deletes the synced conversations from FOMO Cloud. The chats on each device stay.": "关闭后会从 FOMO Cloud 删除已同步的对话。每台设备上的对话保留。",
   "On. Your devices show the same conversations from now on.": "已打开。从现在起，你的设备会看到同样的对话。",
-  "Off. Nothing is kept on corein Cloud any more.": "已关闭。corein Cloud 不再保存任何对话。",
-  "The synced conversations are removed from corein Cloud. The chats on each device stay. This cannot be undone.": "已同步的对话将从 corein Cloud 删除。每台设备上的对话保留。此操作无法撤销。",
+  "Off. Nothing is kept on FOMO Cloud any more.": "已关闭。FOMO Cloud 不再保存任何对话。",
+  "The synced conversations are removed from FOMO Cloud. The chats on each device stay. This cannot be undone.": "已同步的对话将从 FOMO Cloud 删除。每台设备上的对话保留。此操作无法撤销。",
   "Synced conversations deleted.": "已删除已同步的对话。",
   // Main first (contract C9): side chats per device, the working line
   "Also sync side chats": "同时同步旁聊",
@@ -1748,7 +1748,7 @@ const zhCN: Record<string, string> = {
 
   // the own-key model form: the proxy for this provider
   "Proxy (optional)": "代理（可选）",
-  "Only this provider's requests go through it. corein Cloud never does.": "只有这个服务商的请求走代理；corein Cloud 的请求从不经过它。",
+  "Only this provider's requests go through it. FOMO Cloud never does.": "只有这个服务商的请求走代理；FOMO Cloud 的请求从不经过它。",
   // Chat apps (ChannelsScreen.tsx)
   "Talk to your Muse from the chat apps you already use. Nothing needs a public address: each app keeps a long connection open.": "在你已经在用的聊天软件里和 Muse 对话。不需要公网地址：每个应用各自保持一条长连接。",
   "Waiting for a yes": "等待通过",
@@ -1760,7 +1760,7 @@ const zhCN: Record<string, string> = {
   "Error": "出错",
   "Missing": "缺少",
   "Switched on": "已开启",
-  "Install on the computer running corein, then switch it on again:": "在运行 corein 的电脑上安装，再重新开启：",
+  "Install on the computer running FOMO, then switch it on again:": "在运行 FOMO 的电脑上安装，再重新开启：",
   "Saved.": "已保存。",
   "Saving": "保存中",
   "Set; leave blank to keep": "已设置，留空则保持不变",
@@ -1804,11 +1804,11 @@ const zhCN: Record<string, string> = {
   "Direct messages work at once. For a group, add the bot to it; with Group Privacy on it only hears @-mentions and replies.": "私聊立即可用。群聊需要先把机器人拉进群；开着 Group Privacy 时它只听 @ 和回复。",
   "If api.telegram.org is out of reach from this computer, set a proxy below.": "如果这台电脑连不上 api.telegram.org，在下面填一个代理。",
 
-  // ── corein Cloud as a model source ────────────────────────────────────────────
-  "Use corein Cloud models": "使用 corein Cloud 模型",
-  "corein Cloud is one of the sources for the chat, the hands, pictures and clips; what runs on it comes off your allowance.": "corein Cloud 是聊天、双手、图片和短片的来源之一；在它上面运行的内容会消耗你的额度。",
-  "Off: nothing runs on corein Cloud unless you choose it yourself. You stay signed in for sync and your devices.": "关闭后，除非你自己选择，否则不会有任何内容在 corein Cloud 上运行。账号保持登录，用于同步和你的设备。",
-  "Add a provider of your own first; with corein Cloud off, nothing else could answer.": "先添加一个自己的服务商；关掉 corein Cloud 后没有别的模型能回答。",
+  // ── FOMO Cloud as a model source ────────────────────────────────────────────
+  "Use FOMO Cloud models": "使用 FOMO Cloud 模型",
+  "FOMO Cloud is one of the sources for the chat, the hands, pictures and clips; what runs on it comes off your allowance.": "FOMO Cloud 是聊天、双手、图片和短片的来源之一；在它上面运行的内容会消耗你的额度。",
+  "Off: nothing runs on FOMO Cloud unless you choose it yourself. You stay signed in for sync and your devices.": "关闭后，除非你自己选择，否则不会有任何内容在 FOMO Cloud 上运行。账号保持登录，用于同步和你的设备。",
+  "Add a provider of your own first; with FOMO Cloud off, nothing else could answer.": "先添加一个自己的服务商；关掉 FOMO Cloud 后没有别的模型能回答。",
   "Use your own API key instead": "改用自己的 API key",
   "You can sign in later under Connections, for sync and your devices.": "之后可以在「连接」里登录，用于同步和你的设备。",
 
@@ -1854,7 +1854,7 @@ const zhCN: Record<string, string> = {
     "接口没有列出模型（GET /models）；请输入它提供的模型 id，用逗号分隔",
   "the chat model answers through this endpoint; pick another chat model first": "对话模型正通过这个接口回答；请先换一个对话模型",
   "the address must start with http:// or https://": "地址必须以 http:// 或 https:// 开头",
-  "that is corein Cloud; it is the account, not an endpoint": "那是 corein Cloud；它是账号，不是接口",
+  "that is FOMO Cloud; it is the account, not an endpoint": "那是 FOMO Cloud；它是账号，不是接口",
   "a key has no spaces in it": "密钥里不会有空格",
 };
 

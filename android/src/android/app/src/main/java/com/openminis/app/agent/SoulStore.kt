@@ -75,7 +75,7 @@ data class SoulMetadata(
         const val DISPLAY_EMOJI = "🐾"
 
         val DEFAULT = SoulMetadata(
-            name = "corein",
+            name = "FOMO",
             // Default emoji is intentionally empty — UI uses the fixed
             // [displayEmoji] sparkle and [SoulMDParser.serialize] no longer
             // writes the `emoji:` line. The field is kept on the struct only
@@ -318,7 +318,7 @@ object SoulStore {
      * `SoulStore.defaultContent` byte-for-byte (74c0daf).
      */
     val DEFAULT_CONTENT: String = """---
-name: "corein"
+name: "FOMO"
 style: ""
 lang: "auto"
 ---
@@ -377,7 +377,7 @@ lang: "auto"
             tmp.delete()
         }
         _cachedMetadata.value = file.metadata
-        // corein: the agent's name is the account's — the other devices hear of a change
+        // FOMO: the agent's name is the account's — the other devices hear of a change
         io.github.nanomuse.cloud.ProfileSync.changed()
     }
 
@@ -484,7 +484,7 @@ object SystemPromptBuilder {
         val file = SoulStore.load(context)
         val name = (file?.metadata?.name ?: SoulMetadata.DEFAULT.name)
             .trim()
-            .ifEmpty { "corein" }
+            .ifEmpty { "FOMO" }
 
         val style = (file?.metadata?.style ?: "").trim()
 

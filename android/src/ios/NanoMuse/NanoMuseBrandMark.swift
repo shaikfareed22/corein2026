@@ -1,11 +1,11 @@
 //
 //  NanoMuseBrandMark.swift
-//  corein
+//  FOMO
 //
 //  The app icon as a view, for the pages that stand for the app rather than
 //  for the agent (docs/brand.md): the sign-in page of the first run. The
 //  tile is the white squircle with the hairline edge and the N stroke in the
-//  brand gradient — drawn from the same path as `assets/brand/corein-mark.svg`
+//  brand gradient — drawn from the same path as `assets/brand/fomo-mark.svg`
 //  (tile coordinates, viewBox 0 0 100 100), so it needs no asset and matches
 //  the icon on the home screen. The face stays the agent's; it is never used
 //  where the app is meant.
@@ -13,7 +13,7 @@
 
 import SwiftUI
 
-/// The single pen stroke that reads as an N. Path from `corein-mark.svg`, in a 100 × 100 tile.
+/// The single pen stroke that reads as an N. Path from `fomo-mark.svg`, in a 100 × 100 tile.
 struct NanoMuseMarkShape: Shape {
     func path(in rect: CGRect) -> Path {
         let s = min(rect.width, rect.height) / 100
@@ -58,22 +58,15 @@ struct NanoMuseMarkShape: Shape {
 struct NanoMuseBrandMark: View {
     var size: CGFloat = 72
 
-    private var tile: RoundedRectangle {
-        RoundedRectangle(cornerRadius: size * 0.27, style: .continuous)
-    }
-
+    /// The FOMO logo on its own navy (Assets.xcassets/FomoLogo, from assets/brand/fomo-logo.png).
+    /// `size` is the logo's height; it is about two and a half times as wide.
     var body: some View {
-        ZStack {
-            tile.fill(Color.white)
-            NanoMuseMarkShape()
-                .fill(LinearGradient(
-                    colors: [Color(red: 0x01 / 255, green: 0x5C / 255, blue: 0xFB / 255), Color(red: 0x01 / 255, green: 0x86 / 255, blue: 0xFB / 255)],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                ))
-        }
-        .frame(width: size, height: size)
-        .overlay(tile.stroke(Color(red: 0xD9 / 255, green: 0xD9 / 255, blue: 0xDE / 255), lineWidth: 1))
-        .accessibilityHidden(true)
+        Image("FomoLogo")
+            .resizable()
+            .interpolation(.high)
+            .scaledToFit()
+            .frame(width: size * 2.45, height: size)
+            .clipShape(RoundedRectangle(cornerRadius: size * 0.18, style: .continuous))
+            .accessibilityLabel(Text(verbatim: "FOMO"))
     }
 }

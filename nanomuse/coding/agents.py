@@ -39,7 +39,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-# The agents corein knows how to read and drive; `bins` are tried in order.
+# The agents FOMO knows how to read and drive; `bins` are tried in order.
 AGENTS: dict[str, dict[str, Any]] = {
     "cursor": {
         "name": "Cursor",

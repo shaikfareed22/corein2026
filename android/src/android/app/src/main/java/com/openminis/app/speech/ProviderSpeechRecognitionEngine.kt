@@ -310,7 +310,7 @@ class ProviderSpeechRecognitionEngine(private val appContext: Context) : SpeechR
         candidates: List<Pair<com.openminis.app.data.model.ProviderInstance, com.openminis.app.data.model.ModelEntry>>,
         captureListener: SpeechRecognitionEngine.Listener,
     ) {
-        // corein: a session guard and a finishing transcription may race to settle capture.
+        // FOMO: a session guard and a finishing transcription may race to settle capture.
         val terminalDelivered = AtomicBoolean(false)
         val listener = object : SpeechRecognitionEngine.Listener by captureListener {
             override fun onFinal(text: String) {
@@ -375,7 +375,7 @@ class ProviderSpeechRecognitionEngine(private val appContext: Context) : SpeechR
                             val held = WavSegmentMerger.totalSeconds(pendingSegments)
                             Log.i(TAG, "[vad] hold expired at ${"%.2f".format(held)}s — settling")
                             stopVad()
-                            // corein: retire held audio before delivering a terminal callback.
+                            // FOMO: retire held audio before delivering a terminal callback.
                             pendingSegments.clear()
                             if (held > TOO_SHORT_TOAST_FLOOR) {
                                 listener.onError(
@@ -383,7 +383,7 @@ class ProviderSpeechRecognitionEngine(private val appContext: Context) : SpeechR
                                     "Too short — hold the mic and speak.",
                                 )
                             } else {
-                                // corein: silence still completes capture so the panel leaves recording.
+                                // FOMO: silence still completes capture so the panel leaves recording.
                                 listener.onFinal("")
                             }
                         }
@@ -412,7 +412,7 @@ class ProviderSpeechRecognitionEngine(private val appContext: Context) : SpeechR
                 }
 
                 override fun onSessionLimit(limit: SessionLimit) {
-                    // corein: a quiet session must settle the listener as well as the mic;
+                    // FOMO: a quiet session must settle the listener as well as the mic;
                     // an in-flight transcription remains responsible for its own result.
                     if (cancelled.get()) return
                     Log.i(TAG, "[vad] session limit $limit — stopping")
@@ -526,7 +526,7 @@ class ProviderSpeechRecognitionEngine(private val appContext: Context) : SpeechR
     override fun cancel() {
         cancelled.set(true)
         recording.set(false)
-        // corein: the detector runs its capture loop on its own flags, so the engine's
+        // FOMO: the detector runs its capture loop on its own flags, so the engine's
         // flags above do not stop it; cancel it here as stop() does, or the microphone stays
         // open until the detector's own session limit (#356).
         detector?.let { runCatching { it.cancel() } }

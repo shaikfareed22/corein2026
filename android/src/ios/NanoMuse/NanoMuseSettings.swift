@@ -1,6 +1,6 @@
 //
 //  NanoMuseSettings.swift
-//  corein
+//  FOMO
 //
 //  Settings as Muse cards, in Android's order: the model, the agent, the
 //  phone, the app, about. Reached from the drawer, the ••• menus and the
@@ -175,7 +175,7 @@ struct NanoMuseSettingsHomeView: View {
 
     private var aboutCard: some View {
         NanoMuseCard {
-            NanoMuseLinkRow(title: AppLocalized("About corein")) { AboutView() }
+            NanoMuseLinkRow(title: AppLocalized("About FOMO")) { AboutView() }
             NanoMuseRowDivider()
             NanoMuseActionRow(title: AppLocalized("Privacy Policy")) {
                 openURL(NanoMuseLinks.privacy)

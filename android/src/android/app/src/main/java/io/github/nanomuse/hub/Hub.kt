@@ -13,8 +13,8 @@ import org.json.JSONObject
 import java.util.UUID
 
 /**
- * This phone on the corein hub: one outbound socket to the cloud the account is signed in
- * to, so the user's other devices — computers running corein Desktop, other phones, the web
+ * This phone on the FOMO hub: one outbound socket to the cloud the account is signed in
+ * to, so the user's other devices — computers running FOMO Desktop, other phones, the web
  * console — can reach it wherever it is, and it can reach them. What they may do here is
  * decided here ([HubActions]); what this phone asks of them is judged before it is sent
  * (`nanomuse-pc`).
@@ -147,7 +147,7 @@ object Hub {
 
     @Throws(HubException::class)
     fun call(to: String, action: String, args: JSONObject = JSONObject(), timeoutMs: Long = 120_000L, onEvent: ((JSONObject) -> Unit)? = null): JSONObject {
-        val c = client ?: throw HubException("disconnected", "this phone is not on the hub; sign in to corein Cloud and turn on Devices")
+        val c = client ?: throw HubException("disconnected", "this phone is not on the hub; sign in to FOMO Cloud and turn on Devices")
         return c.call(to, action, args, timeoutMs, onEvent)
     }
 

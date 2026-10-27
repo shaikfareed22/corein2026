@@ -23,7 +23,7 @@ class ConsoleUI:
         console: Console | None = None,
         show_thinking: bool = False,
         quiet: bool = False,
-        name: str = "corein",
+        name: str = "FOMO",
         unattended: bool = False,
     ):
         self.console = console or Console()

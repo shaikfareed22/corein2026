@@ -1,4 +1,4 @@
-# cloud.fomo.corein.in — corein Cloud (the sign-in relay and the hub), served by
+# cloud.fomo.corein.in — FOMO Cloud (the sign-in relay and the hub), served by
 # the showcase's Caddy next to fomo.corein.in. Goes into demo/showcase/sites.d/;
 # the relay container (cloud/deploy/nanomuse-hk/docker-compose.yml) is on the
 # same `showcase_edge` network as `nanomuse-relay`. Certificate the ordinary

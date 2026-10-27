@@ -1,4 +1,4 @@
-# electron-builder: the installers of corein Desktop — the desktop built on DeepSeek
+# electron-builder: the installers of FOMO Desktop — the desktop built on DeepSeek
 # Harness. `npm run dist` here after scripts/prepare-dsh.mjs has staged dsh/ (and, for the
 # hands, after scripts/desktop-app/build-runtime.py --target harness/desktop/runtime has put
 # the runtime at runtime/); .github/workflows/desktop-app.yml does all of it per platform.
@@ -9,10 +9,10 @@
 # The appId is the one the previous desktop app (desktop/app, retired in 0.1.30) carried, so
 # this one installs over it and keeps its place in the system's permission lists.
 appId: com.corein.desktop
-productName: corein
-executableName: corein-desktop
-copyright: GPL-3.0-or-later · the corein community · built on DeepSeek Harness (MIT)
-artifactName: corein-Desktop-${version}-${os}-${arch}.${ext}
+productName: FOMO
+executableName: fomo-desktop
+copyright: GPL-3.0-or-later · the FOMO community · built on DeepSeek Harness (MIT)
+artifactName: fomo-Desktop-${version}-${os}-${arch}.${ext}
 directories:
   output: dist
   buildResources: resources
@@ -53,10 +53,10 @@ linux:
       arch: [x64]
     # the same unpacked app as an archive: for machines where the AppImage cannot mount
     # (no FUSE, or fusermount not permitted — `--appimage-extract-and-run` is the other way)
-    # and the .deb does not apply; unpack anywhere and run ./corein-desktop (docs/desktop.md)
+    # and the .deb does not apply; unpack anywhere and run ./fomo-desktop (docs/desktop.md)
     - target: tar.gz
       arch: [x64]
-  artifactName: corein-Desktop-${version}-linux-x64.${ext}
+  artifactName: fomo-Desktop-${version}-linux-x64.${ext}
   category: Utility
   # the icon set, one PNG per size (resources/icons/<n>x<n>.png, made from app-icon.png): the deb
   # installs each under /usr/share/icons/hicolor/<n>x<n>/apps/. A single 1024px PNG landed only in
@@ -65,7 +65,7 @@ linux:
   synopsis: an open-source personal agent for every device you own; the desktop built on DeepSeek Harness
   desktop:
     entry:
-      StartupWMClass: corein-desktop
+      StartupWMClass: fomo-desktop
 deb:
   depends: ["libgtk-3-0", "libnotify4", "libnss3", "libxss1", "libxtst6", "xdg-utils", "libatspi2.0-0", "libuuid1", "libsecret-1-0", "xdotool"]
 win:
@@ -88,7 +88,7 @@ nsis:
   oneClick: false
   perMachine: false
   allowToChangeInstallationDirectory: true
-  shortcutName: corein
+  shortcutName: FOMO
   # electron-builder keeps files with these extensions out of the installer's 7z archive and
   # writes them into the installer one by one instead, and when it does it skips every
   # node_modules folder. The default list has .mp4, so the face's clips under
@@ -109,12 +109,12 @@ mac:
   hardenedRuntime: false
   gatekeeperAssess: false
   identity: null
-  # "corein Computer Use.app" — the helper that holds Screen Recording and Accessibility and
+  # "FOMO Computer Use.app" — the helper that holds Screen Recording and Accessibility and
   # takes the screenshots and moves the mouse (mac/computer-use/, built by its build.sh in the
   # workflow before electron-builder runs). extraFiles land under Contents/; a bundle in
   # Contents/Helpers is nested code, which package-mac.sh signs before the outer app.
   # Nothing is signed here (identity: null), so the helper arrives as build.sh left it.
   extraFiles:
-    - from: mac/computer-use/build/corein Computer Use.app
-      to: Helpers/corein Computer Use.app
+    - from: mac/computer-use/build/FOMO Computer Use.app
+      to: Helpers/FOMO Computer Use.app
       filter: ["**/*"]

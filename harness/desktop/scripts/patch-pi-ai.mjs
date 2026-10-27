@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const file = join(here, "..", "dsh", "node_modules", "@earendil-works", "pi-ai", "dist", "api", "openai-completions.js");
-const MARK = "corein: Gemini thought signature";
+const MARK = "FOMO: Gemini thought signature";
 
 const before = `                    return {
                         id: tc.id,

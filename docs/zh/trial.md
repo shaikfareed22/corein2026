@@ -8,10 +8,10 @@
 ## 1. 手机 {#_1-the-phone}
 
 安装 App（[android.md](android.md)、[ios.md](ios.md)）。第一屏就是账号：手机号或邮箱加一个
-验证码，设过密码后用密码。这一次登录同时配好 corein Cloud 服务商、设置 → 模型的四行，以及
+验证码，设过密码后用密码。这一次登录同时配好 FOMO Cloud 服务商、设置 → 模型的四行，以及
 与其他设备的连接。
 
-手机这一侧在 设置 → corein Cloud → 设备：「让其他设备能找到这台手机」让手机保持连接，
+手机这一侧在 设置 → FOMO Cloud → 设备：「让其他设备能找到这台手机」让手机保持连接，
 其他设备才能找它做事（开着时有一条安静的通知）；「允许其他设备操作这台手机」决定它们能不能在
 这里跑 shell 命令、读文件、截屏或交一个任务过来，关掉后这台手机仍然看得见、也能操作其他设备；
 「这台手机的名字」是你会说出口的词，短一点：「pixel」「小米」。下面的列表是账号下的每台设备，
@@ -22,7 +22,7 @@ iOS 上没有。
 
 ## 2. 电脑 {#_2-the-computer}
 
-从[最新版本](https://github.com/shaikfareed22/corein2026/releases/latest)安装 corein 桌面版
+从[最新版本](https://github.com/shaikfareed22/corein2026/releases/latest)安装 FOMO 桌面版
 （[desktop.md](desktop.md)：每个平台一个安装包，手的运行时在里面），用同一个账号登录。几秒之内
 电脑出现在手机的设备列表里，手机出现在桌面版侧栏的「设备」页里。在 设置 → 设备 给电脑起个名字
 （「mac」「desk」）。
@@ -66,5 +66,5 @@ notification"、"send pixel a notification: build finished"。
 ## 7. 自己的中继 {#_7-your-own-relay}
 
 [self-hosting.md](self-hosting.md) 在一台小 VPS 上跑同一个中继。手机在登录页的「使用其他服务器」
-填它的地址；corein 桌面版在桌面配置的 `cordis.patch.yml` 里填；控制台就是提供它的那个中继的
+填它的地址；FOMO 桌面版在桌面配置的 `cordis.patch.yml` 里填；控制台就是提供它的那个中继的
 `/app/`。同一个账号下的每台设备必须指向同一个中继，因为设备和对话都在那里。

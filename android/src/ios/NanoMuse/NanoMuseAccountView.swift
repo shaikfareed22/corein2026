@@ -109,7 +109,7 @@ struct NanoMuseAccountSections: View {
                 docs: spend.ownKeyDocs ?? (ways.docs.isEmpty ? NanoMuseLinks.ownKeyDocs : ways.docs),
                 compact: false
             ) { pick = $0 }
-            // corein: the policy's gate (NanoMuseStar / contract C1), not a bare "starred" check
+            // FOMO: the policy's gate (NanoMuseStar / contract C1), not a bare "starred" check
             if spend.exhausted && exhaustedAsk {
                 Label {
                     VStack(alignment: .leading, spacing: 4) {
@@ -345,7 +345,7 @@ struct NanoMuseAccountSections: View {
             let next = try await NanoMuseCloud.sheet()
             sheet = next
             account = NanoMuseCloud.account
-            // corein: contract C1 — the policy's gate decides, once per moment
+            // FOMO: contract C1 — the policy's gate decides, once per moment
             if NanoMuseStar.shared.signedIn() { starAsk = true }
             if next.spend?.exhausted == true, NanoMuseStar.shared.due(.exhausted) {
                 NanoMuseStar.shared.markShown(.exhausted)

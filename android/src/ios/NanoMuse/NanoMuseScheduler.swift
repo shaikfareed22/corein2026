@@ -1,6 +1,6 @@
 //
 //  NanoMuseScheduler.swift
-//  corein
+//  FOMO
 //
 //  The iPhone's scheduler primitive: a due-list of routines (the daily
 //  feed, goal check-ins, the routines made from Ideas) kept in a JSON file,
@@ -340,7 +340,7 @@ final class NanoMuseScheduler: ObservableObject {
         } else {
             content.title = r.label.isEmpty ? AppLocalized("Routine") : r.label
         }
-        content.body = AppLocalized("Open corein to run it. The phone cannot run the agent while the app is asleep.")
+        content.body = AppLocalized("Open FOMO to run it. The phone cannot run the agent while the app is asleep.")
         content.sound = .default
         content.categoryIdentifier = Self.notificationCategory
         var info: [String: Any] = ["nanomuse.routine": r.id]

@@ -1,8 +1,8 @@
 ---
 layout: home
-title: corein docs
+title: FOMO docs
 hero:
-  name: corein
+  name: FOMO
   text: An open-source personal agent for every device you own.
   tagline: One agent on your phone, your computer and the web, one account across them. It does things instead of answering questions, keeps going when the app is closed, remembers you in files you can read, and asks before anything you could not undo.
   actions:
@@ -52,10 +52,10 @@ features:
 
 | Platform | Get it | Then read |
 |---|---|---|
-| **Android** 8.0+, 64-bit | [corein-1.1.0-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-1.1.0-arm64.apk) | [Android](/android) |
-| **Windows** 10+ | [corein-Desktop-1.1.0-win-x64.exe](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-win-x64.exe) | [The desktop app](/desktop) |
-| **macOS** 12+ | [Apple Silicon](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-mac-x64.dmg) | [The desktop app](/desktop) |
-| **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.1.0/corein-Desktop-1.1.0-linux-x64.tar.gz) | [The desktop app](/desktop) |
+| **Android** 8.0+, 64-bit | [fomo-1.2.0-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-1.2.0-arm64.apk) | [Android](/android) |
+| **Windows** 10+ | [fomo-Desktop-1.2.0-win-x64.exe](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-win-x64.exe) | [The desktop app](/desktop) |
+| **macOS** 12+ | [Apple Silicon](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-mac-x64.dmg) | [The desktop app](/desktop) |
+| **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.tar.gz) | [The desktop app](/desktop) |
 | **iPhone / iPad** | Build it yourself for now | [iOS](/ios) |
 | **Web and servers** | `bash scripts/self-host.sh --local` for your own relay; `docker compose up -d app` for the web app | [Run it yourself](/self-hosting) |
 
@@ -80,5 +80,5 @@ Every file and its checksum is on the [latest release](https://github.com/shaikf
 | Change the code | [Architecture](/architecture) · [Configuration](/configuration) · [Roadmap](/roadmap) |
 
 ::: info Free software
-corein is GPL-3.0-or-later. The source, the licence and the notices are in the [repository](https://github.com/shaikfareed22/corein2026); every release is a tagged commit you can build yourself. Tell us where it broke for you: [open an issue](https://github.com/shaikfareed22/corein2026/issues/new/choose).
+FOMO is GPL-3.0-or-later. The source, the licence and the notices are in the [repository](https://github.com/shaikfareed22/corein2026); every release is a tagged commit you can build yourself. Tell us where it broke for you: [open an issue](https://github.com/shaikfareed22/corein2026/issues/new/choose).
 :::

@@ -20,7 +20,7 @@ from nanomuse.search import WebSearchProvider
 from nanomuse.tools.base import BaseTool, CallAssessment, int_arg
 
 USER_AGENT = (
-    f"Mozilla/5.0 (X11; Linux x86_64) corein/{__version__} "
+    f"Mozilla/5.0 (X11; Linux x86_64) FOMO/{__version__} "
     "(+https://github.com/shaikfareed22/corein2026)"
 )
 

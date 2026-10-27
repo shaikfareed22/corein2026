@@ -395,7 +395,7 @@ class CodingService:
         if action not in (dev.get("actions") or []):
             raise CodingError(
                 "not_supported",
-                f"{dev.get('name') or device} runs an older corein without coding agents",
+                f"{dev.get('name') or device} runs an older FOMO without coding agents",
             )
         try:
             return await hub.call(

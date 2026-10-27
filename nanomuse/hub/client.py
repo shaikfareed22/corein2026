@@ -228,7 +228,7 @@ class HubClient:
         self._set_state("connecting", self.url)
         headers = {
             "Authorization": f"Bearer {self.api_key}",
-            "User-Agent": f"corein/{__version__} ({platform.system()})",
+            "User-Agent": f"FOMO/{__version__} ({platform.system()})",
         }
         async with connect(
             self.url,

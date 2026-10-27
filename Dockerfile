@@ -1,4 +1,4 @@
-# corein in a container: the agent sees only /data and /workspace.
+# FOMO in a container: the agent sees only /data and /workspace.
 #
 #   docker build -t nanomuse .
 #   docker run -d -p 8787:8787 --env-file .env -v nanomuse-data:/data -v $PWD/workspace:/workspace nanomuse

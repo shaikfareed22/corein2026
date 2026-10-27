@@ -1,6 +1,6 @@
 //
 //  NanoMuseProviderReachCard.swift
-//  corein
+//  FOMO
 //
 //  The card the chat shows for a failed turn when the provider could not be reached (DNS,
 //  connect, TLS, a timeout, an interception page), OpenAI refused the region, the sign-in ran
@@ -24,7 +24,7 @@ struct NanoMuseProviderReachCard: View {
 
     var body: some View {
         if reach.kind == .relay, let refusal = NanoMuseRelayRefusal.fromCanonical(reach.detail) {
-            // corein Cloud refused the turn: its own card (one sentence, the right button)
+            // FOMO Cloud refused the turn: its own card (one sentence, the right button)
             NanoMuseRelayRefusalCard(refusal: refusal, onRetry: onRetry)
         } else {
             card
@@ -125,7 +125,7 @@ struct NanoMuseProviderReachCard: View {
 
     private var explanation: String {
         switch reach.kind {
-        case .unreachable: return String(format: AppLocalized("Nothing answered at %@. This is the path from this phone to the provider; corein's own servers are not involved."), host)
+        case .unreachable: return String(format: AppLocalized("Nothing answered at %@. This is the path from this phone to the provider; FOMO's own servers are not involved."), host)
         case .regionBlocked: return AppLocalized("The request reached OpenAI, which answered that it does not offer the service where this connection comes from.")
         case .signedOut: return plan ? AppLocalized("The token this phone kept has expired or was revoked. Sign in again to go on with the plan.") : AppLocalized("The provider answered that the key is not valid any more. Check it in the provider's settings.")
         case .quota: return plan ? AppLocalized("OpenAI counts the plan's use in windows of a few hours and of a week; this window is used up.") : AppLocalized("The provider answered that this key's quota is used up.")
@@ -151,7 +151,7 @@ struct NanoMuseProviderReachCard: View {
     // MARK: - Actions
 
     /// A key of one's own failed and the relay could take this one turn: the slots stay as
-    /// they are, the retry runs on corein Cloud (NanoMuseCloudOnce). Not for the relay's own failures.
+    /// they are, the retry runs on FOMO Cloud (NanoMuseCloudOnce). Not for the relay's own failures.
     private var cloudOnce: Bool {
         onRetry != nil && reach.kind != .relay && !NanoMuseProxy.isRelayHost(reach.host) && NanoMuseCloudOnce.available
     }
@@ -194,7 +194,7 @@ struct NanoMuseProviderReachCard: View {
     }
 }
 
-// MARK: - "Use corein Cloud this time"
+// MARK: - "Use FOMO Cloud this time"
 
 /// The small action that arms a one-turn fallback to the relay and retries; nothing in
 /// Settings › Models changes.
@@ -206,7 +206,7 @@ struct NanoMuseCloudOnceButton: View {
             NanoMuseCloudOnce.arm()
             onRetry?()
         } label: {
-            Label(AppLocalized("Use corein Cloud this time"), systemImage: "cloud").font(.footnote)
+            Label(AppLocalized("Use FOMO Cloud this time"), systemImage: "cloud").font(.footnote)
         }
         .buttonStyle(.plain).foregroundStyle(NanoMuseTones.action)
     }

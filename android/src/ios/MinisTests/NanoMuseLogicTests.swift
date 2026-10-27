@@ -1,7 +1,7 @@
 import XCTest
 @testable import Minis
 
-/// The pure parts of the corein iPhone layer, pinned so they cannot drift from Android:
+/// The pure parts of the FOMO iPhone layer, pinned so they cannot drift from Android:
 /// the fences the model writes, the words that change the avatar, the goal and feed blocks,
 /// the scheduler's arithmetic, the region rule, the model menu and the first-run gating.
 /// Android: AvatarFlowTest, GoalFlowTest, FencesTest, FirstRunSetupTest, SharedConnectorsTest.
@@ -676,7 +676,7 @@ final class NanoMuseLogicTests: XCTestCase {
         // The index as fomo.corein.in/dl/index.json is written: releases newest first, each with a tag.
         let index: [String: Any] = [
             "repo": "shaikfareed22/corein2026",
-            "releases": [["tag": "v1.0.0", "name": "corein 1.0.0", "assets": [String]()], ["tag": "v0.1.41"]],
+            "releases": [["tag": "v1.0.0", "name": "FOMO 1.0.0", "assets": [String]()], ["tag": "v0.1.41"]],
         ]
         let found = NanoMuseUpdateCheck.parseIndex(index)
         XCTAssertEqual(found?.version, "v1.0.0", "the newest release's tag, as Android reads it")

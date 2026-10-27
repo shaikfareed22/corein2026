@@ -263,7 +263,7 @@ class MainActivity : ComponentActivity() {
                 // onClosed immediately when pendingShareFiles is null, which
                 // is exactly the state after the user dismissed the dialog on
                 // the previous launch — the app would close the instant it was
-                // tapped, reading as "corein won't open at all". The process
+                // tapped, reading as "FOMO won't open at all". The process
                 // still holds a permanently uninitialized Application, so the
                 // only real recovery is a fresh process: tell the user, then
                 // exit hard so the next tap gets a clean init.
@@ -648,7 +648,7 @@ class MainActivity : ComponentActivity() {
         val mode = getAppearancePrefs(this).getInt(KEY_LAUNCH_SESSION, 0)
         if (mode != 2) return
         val nav = navController ?: return
-        // corein: the home shell opens on the main chat by itself and the cold-start resolver
+        // FOMO: the home shell opens on the main chat by itself and the cold-start resolver
         // already steps aside for it; a warm return must not push the upstream chat on top.
         if (io.github.nanomuse.ui.home.HomeShell.active) return
         val newRoute = Routes.chat("__new__${java.util.UUID.randomUUID()}")
@@ -720,7 +720,7 @@ class MainActivity : ComponentActivity() {
                 nav.navigate(Routes.terminal(action.initCommand))
             }
             is DeepLinkAction.OpenSession -> {
-                // corein: in compact windows the home shell shows the chat itself —
+                // FOMO: in compact windows the home shell shows the chat itself —
                 // pushing chat/{sessionId} here put the OpenMinis chat screen on top of it.
                 if (io.github.nanomuse.ui.home.HomeShell.openSession(nav, action.sessionId)) return
                 // T-double-chat-fix (secondary): mirror AppNavigation's
@@ -747,7 +747,7 @@ class MainActivity : ComponentActivity() {
             is DeepLinkAction.OpenPermissionSettings -> {
                 nav.navigate(Routes.PERMISSIONS)
             }
-            // corein: a tab of the home shell (the Feed, from its notification)
+            // FOMO: a tab of the home shell (the Feed, from its notification)
             is DeepLinkAction.OpenHomeTab -> {
                 io.github.nanomuse.ui.home.HomeShell.openTab(nav, action.tab)
             }
@@ -774,7 +774,7 @@ class MainActivity : ComponentActivity() {
                     else -> {}
                 }
                 val newId = "__new__${java.util.UUID.randomUUID()}"
-                // corein: in compact windows the draft opens inside the home shell, whose
+                // FOMO: in compact windows the draft opens inside the home shell, whose
                 // ChatScreen consumes the pending voice / camera action the same way.
                 if (io.github.nanomuse.ui.home.HomeShell.openSession(nav, newId)) return
                 val newRoute = Routes.chat(newId)

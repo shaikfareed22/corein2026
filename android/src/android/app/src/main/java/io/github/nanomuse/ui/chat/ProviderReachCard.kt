@@ -67,7 +67,7 @@ const val NETWORK_DEEP_LINK = "minis://settings/network"
  * region, the sign-in having run out or the plan having nothing left, a card that says what
  * happened and what helps ([ProviderReachCard]); every other error keeps upstream's [banner].
  * [onRetryOnCloud], when given (signed in, and the turn ran on a model of the person's own),
- * adds *Use corein Cloud this time* under either: one turn on the relay, no slot changed.
+ * adds *Use FOMO Cloud this time* under either: one turn on the relay, no slot changed.
  */
 @Composable
 fun NmProviderErrorOrBanner(error: String, onRetry: () -> Unit, onRetryOnCloud: (() -> Unit)? = null, banner: @Composable () -> Unit) {
@@ -88,7 +88,7 @@ fun NmProviderErrorOrBanner(error: String, onRetry: () -> Unit, onRetryOnCloud: 
     }
 }
 
-/** *Use corein Cloud this time*: the text button the rejection cards share. */
+/** *Use FOMO Cloud this time*: the text button the rejection cards share. */
 @Composable
 fun CloudThisTimeButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     TextButton(onClick = onClick, modifier = modifier) {
@@ -259,7 +259,7 @@ fun ProviderReachCard(reach: ProviderReach.Reach, onRetry: () -> Unit, modifier:
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .padding(top = 4.dp)
-                            .combinedClickable(onClick = {}, onLongClick = { clipboard.setPlainText("corein", reach.detail) }),
+                            .combinedClickable(onClick = {}, onLongClick = { clipboard.setPlainText("FOMO", reach.detail) }),
                     )
                 }
             }

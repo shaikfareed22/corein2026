@@ -8,7 +8,7 @@ import org.junit.Test
 import java.io.File
 
 /**
- * The sandbox's offload socket is the app's own, so corein and OpenMinis start side by side
+ * The sandbox's offload socket is the app's own, so FOMO and OpenMinis start side by side
  * (#271), and the server binds that name, not upstream's.
  */
 class OffloadSocketNameTest {

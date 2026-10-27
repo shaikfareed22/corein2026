@@ -106,7 +106,7 @@ fun OffloadPermissionScreen(
             )
         }
 
-        // corein: the approvals the user chose to remember, revocable here.
+        // FOMO: the approvals the user chose to remember, revocable here.
         io.github.nanomuse.ui.guard.GrantsSection()
 
         autoCategories.forEach { (category, tools) ->

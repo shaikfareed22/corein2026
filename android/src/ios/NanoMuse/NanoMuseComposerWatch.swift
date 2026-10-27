@@ -1,6 +1,6 @@
 //
 //  NanoMuseComposerWatch.swift
-//  corein
+//  FOMO
 //
 //  The composer that disappears: the watch behind it, and the evidence for
 //  the next report.

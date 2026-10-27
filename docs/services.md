@@ -32,7 +32,7 @@ A server exists; it has not run inside the rootfs with a real key, or it has no 
 | **DingTalk** | `dingtalk-mcp-server` (community, messages / todos / calendar); DingTalk's own agent platform is not an MCP server | Not run | Enterprise account and app registration; no showcase case needs it |
 |  | `yuque-mcp-server` (community) over the  open API | Not run | Personal token; would slot into the `feishu`-style skill pattern in an afternoon |
 | **Baidu** | Announced MCP support; no package or endpoint we could confirm | Not run | Nothing to run yet |
-| **Ctrip /  / ** | Servers in the [Alibaba Cloud Bailian MCP market](https://bailian.console.aliyun.com), hosted behind a Bailian account | Not run. The showcase's hotel-budget case browses Ctrip in the in-app browser instead (the third rung) because that works for anyone without an account with Bailian | Requires a Bailian account and the market's per-call billing; worth it for a hosted demo, not for the personal build |
+| **Ctrip and other Bailian MCP servers** | Servers in the [Alibaba Cloud Bailian MCP market](https://bailian.console.aliyun.com), hosted behind a Bailian account | Not run. The showcase's hotel-budget case browses Ctrip in the in-app browser instead (the third rung) because that works for anyone without an account with Bailian | Requires a Bailian account and the market's per-call billing; worth it for a hosted demo, not for the personal build |
 
 ## Tier 3: not recommended
 

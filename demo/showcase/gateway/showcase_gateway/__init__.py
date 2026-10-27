@@ -1,7 +1,7 @@
 """The showcase gateway.
 
-The public showcase is MobileGym (a phone in the browser) with the corein app installed.
-Everything a visitor sees runs in their own tab; what the server adds is a *private corein
+The public showcase is MobileGym (a phone in the browser) with the FOMO app installed.
+Everything a visitor sees runs in their own tab; what the server adds is a *private FOMO
 per visitor*: this gateway starts one container for each session, gives the phone its address
 and token, relays the app's HTTP and WebSocket traffic to it, and stands between the container
 and the model providers so that the demo key never leaves the server and every session has a

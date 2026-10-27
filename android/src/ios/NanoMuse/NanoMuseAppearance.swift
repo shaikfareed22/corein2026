@@ -1,6 +1,6 @@
 //
 //  NanoMuseAppearance.swift
-//  corein
+//  FOMO
 //
 //  The Appearance settings: how big the face is in the header (or hidden),
 //  whether the model shows under the name, whether the agent's steps show

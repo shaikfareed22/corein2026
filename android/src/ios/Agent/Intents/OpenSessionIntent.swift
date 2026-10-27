@@ -4,7 +4,7 @@ import Foundation
 /// Opens a specific chat session in the Minis app.
 struct OpenSessionIntent: AppIntent {
     static var title: LocalizedStringResource = "Open Session"
-    static var description = IntentDescription("Opens a corein chat session in the app.")
+    static var description = IntentDescription("Opens a FOMO chat session in the app.")
     static var openAppWhenRun = true
 
     @Parameter(title: "Session")

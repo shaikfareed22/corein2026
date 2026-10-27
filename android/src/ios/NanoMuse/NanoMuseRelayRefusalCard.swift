@@ -1,8 +1,8 @@
 //
 //  NanoMuseRelayRefusalCard.swift
-//  corein
+//  FOMO
 //
-//  A turn corein Cloud refused (docs/parity.md, item 35): one plain sentence from
+//  A turn FOMO Cloud refused (docs/parity.md, item 35): one plain sentence from
 //  `NanoMuseCloud.describe` and the button that fits — *New chat* for a message too large,
 //  *Sign in* for a key the relay no longer takes, *Open Settings* for a model that left the
 //  menu or an account the relay does not take, *Try again* for the rest (busy, the provider
@@ -112,7 +112,7 @@ struct NanoMuseRelayRefusalCard: View {
         }
     }
 
-    /// Settings → corein Cloud is the first row of the corein settings home.
+    /// Settings → FOMO Cloud is the first row of the FOMO settings home.
     private func openSettings() {
         NotificationCenter.default.post(name: .nanoMuseHomeAction, object: "settings")
     }

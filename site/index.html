@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>corein</title>
-  <meta name="description" content="corein is an open-source personal agent for every device you own: it does things, keeps working while the app is closed, remembers you, and asks before anything you could not undo." />
+  <title>FOMO</title>
+  <meta name="description" content="FOMO is an open-source personal agent for every device you own: it does things, keeps working while the app is closed, remembers you, and asks before anything you could not undo." />
   <meta name="theme-color" content="#070B14" />
-  <link rel="icon" href="assets/corein-icon.svg" />
+  <link rel="icon" href="assets/fomo-icon.svg" />
   <link rel="apple-touch-icon" href="assets/app-icon.png" />
-  <meta property="og:title" content="corein" />
+  <meta property="og:title" content="FOMO" />
   <meta property="og:description" content="An open-source personal agent for every device you own." />
   <meta property="og:image" content="https://fomo.corein.in/assets/app-icon.png" />
   <style>
@@ -50,7 +50,7 @@
     /* nav */
     .nav { position: sticky; top: 0; z-index: 10; backdrop-filter: saturate(160%) blur(14px); background: rgba(7,11,20,0.62); border-bottom: 1px solid var(--line); }
     .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-    .brand img { height: 44px; width: auto; display: block; }
+    .brand img { height: 30px; width: auto; display: block; }
     .links { display: flex; gap: 24px; align-items: center; font-weight: 600; font-size: 15px; }
     .links a { color: var(--text); position: relative; }
     .links a:not(.cta)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; border-radius: 2px; }
@@ -136,7 +136,7 @@
     /* footer */
     footer { padding: 48px 0 60px; margin-top: 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); }
     footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; justify-content: space-between; align-items: center; }
-    footer .mark img { height: 36px; width: auto; display: block; opacity: .9; }
+    footer .mark img { height: 26px; width: auto; display: block; opacity: .95; }
     footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
     footer a { color: var(--muted); }
     footer p { max-width: 720px; }
@@ -148,7 +148,7 @@
 
   <header class="nav">
     <div class="wrap">
-      <a class="brand" href="/" aria-label="corein home"><img src="assets/corein-logo@3x.png" alt="corein" /></a>
+      <a class="brand" href="/" aria-label="FOMO home"><img src="assets/fomo-logo-transparent.png" alt="FOMO" /></a>
       <nav class="links">
         <a href="#what">What it does</a>
         <a href="#how">How it works</a>
@@ -200,10 +200,10 @@
         <p class="lead">The phone, the desktop and the web share one account and show the same conversations. Every version installs over the last and keeps your data.</p>
       </div>
       <div class="devices">
-        <div class="device reveal" data-os="android"><span class="name">Android</span><span class="req">8.0 or newer, 64-bit</span><div class="dl"><a data-asset="corein-{v}-arm64.apk" href="#">APK</a></div></div>
-        <div class="device reveal" data-delay="1" data-os="windows"><span class="name">Windows</span><span class="req">10 or 11, 64-bit</span><div class="dl"><a data-asset="corein-Desktop-{v}-win-x64.exe" href="#">Installer</a></div></div>
-        <div class="device reveal" data-delay="2" data-os="mac"><span class="name">macOS</span><span class="req">12 or newer</span><div class="dl"><a data-asset="corein-Desktop-{v}-mac-arm64.dmg" href="#">Apple Silicon</a><a data-asset="corein-Desktop-{v}-mac-x64.dmg" href="#">Intel</a></div></div>
-        <div class="device reveal" data-delay="3" data-os="linux"><span class="name">Linux</span><span class="req">x64</span><div class="dl"><a data-asset="corein-Desktop-{v}-linux-x64.AppImage" href="#">AppImage</a><a data-asset="corein-Desktop-{v}-linux-x64.deb" href="#">.deb</a><a data-asset="corein-Desktop-{v}-linux-x64.tar.gz" href="#">tar.gz</a></div></div>
+        <div class="device reveal" data-os="android"><span class="name">Android</span><span class="req">8.0 or newer, 64-bit</span><div class="dl"><a data-asset="fomo-{v}-arm64.apk" href="#">APK</a></div></div>
+        <div class="device reveal" data-delay="1" data-os="windows"><span class="name">Windows</span><span class="req">10 or 11, 64-bit</span><div class="dl"><a data-asset="fomo-Desktop-{v}-win-x64.exe" href="#">Installer</a></div></div>
+        <div class="device reveal" data-delay="2" data-os="mac"><span class="name">macOS</span><span class="req">12 or newer</span><div class="dl"><a data-asset="fomo-Desktop-{v}-mac-arm64.dmg" href="#">Apple Silicon</a><a data-asset="fomo-Desktop-{v}-mac-x64.dmg" href="#">Intel</a></div></div>
+        <div class="device reveal" data-delay="3" data-os="linux"><span class="name">Linux</span><span class="req">x64</span><div class="dl"><a data-asset="fomo-Desktop-{v}-linux-x64.AppImage" href="#">AppImage</a><a data-asset="fomo-Desktop-{v}-linux-x64.deb" href="#">.deb</a><a data-asset="fomo-Desktop-{v}-linux-x64.tar.gz" href="#">tar.gz</a></div></div>
         <div class="device reveal" data-delay="4" data-os="web"><span class="name">Web and servers</span><span class="req">Docker, any machine</span><div class="dl"><a href="docs/self-hosting">Run it yourself</a></div></div>
       </div>
       <p class="version reveal" id="version-line">Latest release: <a href="https://github.com/shaikfareed22/corein2026/releases/latest">every file and its checksum on GitHub</a>.</p>
@@ -217,7 +217,7 @@
         <h2>Your devices, your key, <span class="shine">your relay.</span></h2>
       </div>
       <div class="steps">
-        <div class="step reveal"><h3>Each device runs its own agent</h3><p>The phone inside the app, with Alpine Linux in a sandbox; the computer inside corein Desktop, with the hands that work its screen. Files and screenshots stay where they were made.</p></div>
+        <div class="step reveal"><h3>Each device runs its own agent</h3><p>The phone inside the app, with Alpine Linux in a sandbox; the computer inside FOMO Desktop, with the hands that work its screen. Files and screenshots stay where they were made.</p></div>
         <div class="step reveal" data-delay="1"><h3>A relay joins them</h3><p>Sign in once and your devices find each other through the relay, which carries the text of conversations so every device shows the same chats. Run your own with one script.</p></div>
         <div class="step reveal" data-delay="2"><h3>Your key goes to your provider</h3><p>Model requests travel from your device straight to the provider you chose. The relay holds no model key and never sees yours.</p></div>
       </div>
@@ -231,13 +231,13 @@
     <div class="box">
       <h2>Ready when you are.</h2>
       <p>Install it on the device in your hand, add a key from a provider you trust, and give it the first thing on your list.</p>
-      <div class="buttons"><a class="btn primary" href="#download">Get corein</a><a class="btn" href="https://github.com/shaikfareed22/corein2026">Star on GitHub</a></div>
+      <div class="buttons"><a class="btn primary" href="#download">Get FOMO</a><a class="btn" href="https://github.com/shaikfareed22/corein2026">Star on GitHub</a></div>
     </div>
   </div>
 
   <footer>
     <div class="wrap">
-      <div class="mark"><img src="assets/corein-logo@3x.png" alt="corein" /></div>
+      <div class="mark"><img src="assets/fomo-logo-transparent.png" alt="FOMO" /></div>
       <nav>
         <a href="docs/">Docs</a>
         <a href="docs/self-hosting">Self-host</a>
@@ -245,14 +245,14 @@
         <a href="https://github.com/shaikfareed22/corein2026">GitHub</a>
         <a href="https://github.com/shaikfareed22/corein2026/issues/new/choose">Report a problem</a>
       </nav>
-      <p>corein is free software under GPL-3.0-or-later; the source, the licence and the notices are on GitHub. corein is not affiliated with Meta; Muse is a trademark of Meta Platforms, Inc.</p>
+      <p>FOMO is free software under GPL-3.0-or-later; the source, the licence and the notices are on GitHub. FOMO is not affiliated with Meta; Muse is a trademark of Meta Platforms, Inc.</p>
     </div>
   </footer>
 
   <script>
     (function () {
       var repo = "shaikfareed22/corein2026";
-      var fallback = "1.1.0";
+      var fallback = "1.2.0";
       function base(v) { return "https://github.com/" + repo + "/releases/download/v" + v + "/"; }
       function os() {
         var ua = navigator.userAgent;
@@ -271,9 +271,9 @@
         var main = document.getElementById("dl-main"), label = document.getElementById("dl-main-label");
         var o = os(), asset = "", text = "Download";
         if (o === "android") { asset = "corein-" + v + "-arm64.apk"; text = "Download for Android"; }
-        else if (o === "windows") { asset = "corein-Desktop-" + v + "-win-x64.exe"; text = "Download for Windows"; }
-        else if (o === "mac") { asset = "corein-Desktop-" + v + "-mac-arm64.dmg"; text = "Download for macOS"; }
-        else if (o === "linux") { asset = "corein-Desktop-" + v + "-linux-x64.AppImage"; text = "Download for Linux"; }
+        else if (o === "windows") { asset = "fomo-Desktop-" + v + "-win-x64.exe"; text = "Download for Windows"; }
+        else if (o === "mac") { asset = "fomo-Desktop-" + v + "-mac-arm64.dmg"; text = "Download for macOS"; }
+        else if (o === "linux") { asset = "fomo-Desktop-" + v + "-linux-x64.AppImage"; text = "Download for Linux"; }
         if (asset) main.href = base(v) + asset;
         label.textContent = text;
         var mine = document.querySelector('.device[data-os="' + o + '"]');

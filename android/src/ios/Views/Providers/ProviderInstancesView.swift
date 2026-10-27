@@ -22,7 +22,7 @@ struct ProviderInstancesView: View {
 
     var body: some View {
         List {
-            // corein: the relay first — a phone number or an e-mail address, no key needed.
+            // FOMO: the relay first — a phone number or an e-mail address, no key needed.
             Section {
                 NavigationLink {
                     NanoMuseCloudView()
@@ -57,7 +57,7 @@ struct ProviderInstancesView: View {
                                 // position for Delete. `allowsFullSwipe: false`
                                 // so a long swipe cannot delete a provider (and
                                 // its keys) without the confirmation below.
-                                // corein: not on the Cloud instance; it is the account (see ProviderInstanceDetailView).
+                                // FOMO: not on the Cloud instance; it is the account (see ProviderInstanceDetailView).
                                 if instance.id != NanoMuseCloud.instance?.id {
                                     Button(role: .destructive) {
                                         pendingDeleteInstance = instance

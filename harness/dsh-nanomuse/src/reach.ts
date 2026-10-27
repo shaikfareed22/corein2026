@@ -49,7 +49,7 @@ export function apply(ctx: Context): void {
   const describe = (d: HubDevice) =>
     `${d.name} (${d.kind}${d.os ? `, ${d.os}` : ''}; id ${d.id}; ${d.online ? 'online' : 'offline'}${d.controllable ? '' : '; cannot be asked to do things'})`
 
-  const offline = () => new Error(cloud.signedIn ? 'This computer is not connected to the hub right now; try again in a moment.' : 'Not signed in to corein Cloud: Settings → corein Cloud.')
+  const offline = () => new Error(cloud.signedIn ? 'This computer is not connected to the hub right now; try again in a moment.' : 'Not signed in to FOMO Cloud: Settings → FOMO Cloud.')
 
   const target = (ref: string | undefined): HubDevice => {
     if (!hub.connected) throw offline()
@@ -82,7 +82,7 @@ export function apply(ctx: Context): void {
       ctx.tools.register(
         defineTool({
           name: 'devices',
-          description: "The person's other devices on corein Cloud (phone, other computers): names, kinds, online or not. Call before the device_* tools when unsure which device is which.",
+          description: "The person's other devices on FOMO Cloud (phone, other computers): names, kinds, online or not. Call before the device_* tools when unsure which device is which.",
           parameters: {},
           output: {
             schema: {
@@ -96,7 +96,7 @@ export function apply(ctx: Context): void {
             },
             render: (_args, value) => {
               const list = (value.devices ?? []) as unknown as HubDevice[]
-              if (!value.connected) return [{ type: 'text', text: cloud.signedIn ? 'Not connected to the hub right now.' : 'Not signed in to corein Cloud.' }]
+              if (!value.connected) return [{ type: 'text', text: cloud.signedIn ? 'Not connected to the hub right now.' : 'Not signed in to FOMO Cloud.' }]
               if (list.length === 0) return [{ type: 'text', text: 'No other device is signed in to this account.' }]
               return [{ type: 'text', text: list.map((d) => `- ${describe(d)}`).join('\n') }]
             },
@@ -380,8 +380,8 @@ export function apply(ctx: Context): void {
               const others = hub.devices.filter((d) => d.id !== hub.deviceId && d.kind !== 'web')
               lines.push(
                 others.length
-                  ? `The person's other devices on corein Cloud, reachable with the devices/device_*/delegate tools: ${others.map((d) => `${d.name} (${d.kind}, ${d.online ? 'online' : 'offline'})`).join('; ')}.`
-                  : 'No other device of the person is signed in to corein Cloud right now.',
+                  ? `The person's other devices on FOMO Cloud, reachable with the devices/device_*/delegate tools: ${others.map((d) => `${d.name} (${d.kind}, ${d.online ? 'online' : 'offline'})`).join('; ')}.`
+                  : 'No other device of the person is signed in to FOMO Cloud right now.',
               )
             }
             return lines.join('\n')

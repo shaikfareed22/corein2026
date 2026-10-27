@@ -391,8 +391,8 @@ function EmptyDevices({ hub, signedIn }: { hub: HubView | undefined; signedIn: b
               : !ready
                 ? hubStateLabel(hub?.state ?? "", t)
                 : hub?.account.hint
-                  ? t("Install corein on your phone, Mac or PC and sign in as {hint}; it appears here on its own.", { hint: hub.account.hint })
-                  : t("Install corein on your phone, Mac or PC and sign in with the same account; it appears here on its own.")}
+                  ? t("Install FOMO on your phone, Mac or PC and sign in as {hint}; it appears here on its own.", { hint: hub.account.hint })
+                  : t("Install FOMO on your phone, Mac or PC and sign in with the same account; it appears here on its own.")}
           </p>
         </div>
       </div>
@@ -409,7 +409,7 @@ function HandsCard({ hands, onChange }: { hands: HandsStatus; onChange: () => vo
   const { dispatch, toast, state } = useStore();
   const t = useT();
   const [busy, setBusy] = useState(false);
-  const museName = state.profile?.name ?? "corein";
+  const museName = state.profile?.name ?? "FOMO";
 
   const set = async (body: { enabled?: boolean; backend?: string; mode?: string }) => {
     setBusy(true);
@@ -488,7 +488,7 @@ function HandsCard({ hands, onChange }: { hands: HandsStatus; onChange: () => vo
         )}
       </MuseCard>
       {hands.enabled && hands.device?.platform === "darwin" && (
-        <MuseCaption>{t("On a Mac, allow corein under System Settings → Privacy & Security → Accessibility and Screen Recording when macOS asks; without them clicks do nothing and the screenshot is black. The first action in each app asks you once (\"Let {name} use Safari?\") and the answer is kept under Permissions.", { name: museName })}</MuseCaption>
+        <MuseCaption>{t("On a Mac, allow FOMO under System Settings → Privacy & Security → Accessibility and Screen Recording when macOS asks; without them clicks do nothing and the screenshot is black. The first action in each app asks you once (\"Let {name} use Safari?\") and the answer is kept under Permissions.", { name: museName })}</MuseCaption>
       )}
     </>
   );

@@ -1,26 +1,26 @@
 /* Info.plist permission strings — Deutsch */
 
-"NSLocationWhenInUseUsageDescription" = "corein verwendet Ihren Standort, um den Startort von Agent-Sitzungen in Ihrem Sitzungsverlauf aufzuzeichnen.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "corein verwendet den Hintergrund-Standort, um Agent-Aufgaben im Hintergrund weiterlaufen zu lassen. Standortdaten werden nur zur Aufzeichnung des Sitzungsverlaufs verwendet.";
-"NSCalendarsUsageDescription" = "corein greift auf den Kalender zu, damit der KI-Agent Ihren Terminplan einsehen, Verfügbarkeiten prüfen und Termine in Ihrem Namen erstellen kann.";
-"NSCalendarsFullAccessUsageDescription" = "corein greift auf den Kalender zu, damit der KI-Agent Ihren Terminplan einsehen, Verfügbarkeiten prüfen und Termine in Ihrem Namen erstellen kann.";
-"NSRemindersUsageDescription" = "corein greift auf Erinnerungen zu, damit der KI-Agent Erinnerungen in Ihrem Namen suchen und erstellen kann.";
-"NSRemindersFullAccessUsageDescription" = "corein greift auf Erinnerungen zu, damit der KI-Agent Erinnerungen in Ihrem Namen suchen und erstellen kann.";
-"NSCameraUsageDescription" = "corein benötigt Kamerazugriff, um Fotos für KI-Unterhaltungen aufzunehmen.";
-"NSPhotoLibraryUsageDescription" = "corein benötigt Zugriff auf die Fotomediathek, um Bilder an KI-Unterhaltungen anzuhängen.";
-"NSPhotoLibraryAddUsageDescription" = "corein benötigt die Berechtigung, Videos und Bilder in Ihrer Fotomediathek zu speichern.";
-"NSHealthShareUsageDescription" = "corein greift auf HealthKit zu, damit der KI-Agent Gesundheitsdaten wie Schritte, Herzfrequenz, Schlaf und Workouts in Ihrem Namen lesen kann.";
-"NSHealthUpdateUsageDescription" = "corein greift schreibend auf HealthKit zu, damit der KI-Agent Gesundheitsdaten wie Schritte, Gewicht und Wasseraufnahme in Ihrem Namen aufzeichnen kann.";
-"NSContactsUsageDescription" = "corein greift auf Kontakte zu, damit der KI-Agent Ihre Kontakte in Ihrem Namen suchen, anzeigen und verwalten kann.";
-"NSAppleMusicUsageDescription" = "corein greift auf die Mediathek zu, damit der KI-Agent Ihre Musikbibliothek durchsuchen und die Wiedergabe steuern kann.";
-"NSMicrophoneUsageDescription" = "corein benötigt Mikrofonzugriff für die Spracheingabe im Chat.";
-"NSSpeechRecognitionUsageDescription" = "corein verwendet Spracherkennung, um Ihre Stimme in Textnachrichten umzuwandeln.";
-"NSHomeKitUsageDescription" = "corein greift auf HomeKit zu, damit der KI-Agent Ihre Smart-Home-Geräte in Ihrem Namen abfragen und steuern kann.";
-"NSAlarmKitUsageDescription" = "corein verwendet AlarmKit, damit der KI-Agent Wecker und Timer in Ihrem Namen stellen kann.";
-"NSLocalNetworkUsageDescription" = "corein nutzt das lokale Netzwerk für den Debug-Server und damit der KI-Agent Dienste in deinem eigenen Netzwerk erreichen kann."; /* corein: the app has no VM; the sentence matches Info.plist */
+"NSLocationWhenInUseUsageDescription" = "FOMO verwendet Ihren Standort, um den Startort von Agent-Sitzungen in Ihrem Sitzungsverlauf aufzuzeichnen.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "FOMO verwendet den Hintergrund-Standort, um Agent-Aufgaben im Hintergrund weiterlaufen zu lassen. Standortdaten werden nur zur Aufzeichnung des Sitzungsverlaufs verwendet.";
+"NSCalendarsUsageDescription" = "FOMO greift auf den Kalender zu, damit der KI-Agent Ihren Terminplan einsehen, Verfügbarkeiten prüfen und Termine in Ihrem Namen erstellen kann.";
+"NSCalendarsFullAccessUsageDescription" = "FOMO greift auf den Kalender zu, damit der KI-Agent Ihren Terminplan einsehen, Verfügbarkeiten prüfen und Termine in Ihrem Namen erstellen kann.";
+"NSRemindersUsageDescription" = "FOMO greift auf Erinnerungen zu, damit der KI-Agent Erinnerungen in Ihrem Namen suchen und erstellen kann.";
+"NSRemindersFullAccessUsageDescription" = "FOMO greift auf Erinnerungen zu, damit der KI-Agent Erinnerungen in Ihrem Namen suchen und erstellen kann.";
+"NSCameraUsageDescription" = "FOMO benötigt Kamerazugriff, um Fotos für KI-Unterhaltungen aufzunehmen.";
+"NSPhotoLibraryUsageDescription" = "FOMO benötigt Zugriff auf die Fotomediathek, um Bilder an KI-Unterhaltungen anzuhängen.";
+"NSPhotoLibraryAddUsageDescription" = "FOMO benötigt die Berechtigung, Videos und Bilder in Ihrer Fotomediathek zu speichern.";
+"NSHealthShareUsageDescription" = "FOMO greift auf HealthKit zu, damit der KI-Agent Gesundheitsdaten wie Schritte, Herzfrequenz, Schlaf und Workouts in Ihrem Namen lesen kann.";
+"NSHealthUpdateUsageDescription" = "FOMO greift schreibend auf HealthKit zu, damit der KI-Agent Gesundheitsdaten wie Schritte, Gewicht und Wasseraufnahme in Ihrem Namen aufzeichnen kann.";
+"NSContactsUsageDescription" = "FOMO greift auf Kontakte zu, damit der KI-Agent Ihre Kontakte in Ihrem Namen suchen, anzeigen und verwalten kann.";
+"NSAppleMusicUsageDescription" = "FOMO greift auf die Mediathek zu, damit der KI-Agent Ihre Musikbibliothek durchsuchen und die Wiedergabe steuern kann.";
+"NSMicrophoneUsageDescription" = "FOMO benötigt Mikrofonzugriff für die Spracheingabe im Chat.";
+"NSSpeechRecognitionUsageDescription" = "FOMO verwendet Spracherkennung, um Ihre Stimme in Textnachrichten umzuwandeln.";
+"NSHomeKitUsageDescription" = "FOMO greift auf HomeKit zu, damit der KI-Agent Ihre Smart-Home-Geräte in Ihrem Namen abfragen und steuern kann.";
+"NSAlarmKitUsageDescription" = "FOMO verwendet AlarmKit, damit der KI-Agent Wecker und Timer in Ihrem Namen stellen kann.";
+"NSLocalNetworkUsageDescription" = "FOMO nutzt das lokale Netzwerk für den Debug-Server und damit der KI-Agent Dienste in deinem eigenen Netzwerk erreichen kann."; /* FOMO: the app has no VM; the sentence matches Info.plist */
 
-/* corein: the keys Info.plist declares but this file lacked, so the prompt is in the person's language */
-"NFCReaderUsageDescription" = "corein nutzt NFC, damit der KI-Agent in deinem Auftrag NFC-Tags lesen und beschreiben kann.";
-"NSBluetoothAlwaysUsageDescription" = "corein nutzt Bluetooth, damit der KI-Agent in deinem Auftrag BLE-Geräte in der Nähe suchen, verbinden und mit ihnen kommunizieren kann.";
-"NSBluetoothPeripheralUsageDescription" = "corein nutzt Bluetooth, damit der KI-Agent in deinem Auftrag BLE-Geräte in der Nähe suchen, verbinden und mit ihnen kommunizieren kann.";
-"NSFaceIDUsageDescription" = "corein nutzt Face ID, um gesperrte Chat-Sitzungen zu schützen, damit nur du ihren Inhalt sehen kannst.";
+/* FOMO: the keys Info.plist declares but this file lacked, so the prompt is in the person's language */
+"NFCReaderUsageDescription" = "FOMO nutzt NFC, damit der KI-Agent in deinem Auftrag NFC-Tags lesen und beschreiben kann.";
+"NSBluetoothAlwaysUsageDescription" = "FOMO nutzt Bluetooth, damit der KI-Agent in deinem Auftrag BLE-Geräte in der Nähe suchen, verbinden und mit ihnen kommunizieren kann.";
+"NSBluetoothPeripheralUsageDescription" = "FOMO nutzt Bluetooth, damit der KI-Agent in deinem Auftrag BLE-Geräte in der Nähe suchen, verbinden und mit ihnen kommunizieren kann.";
+"NSFaceIDUsageDescription" = "FOMO nutzt Face ID, um gesperrte Chat-Sitzungen zu schützen, damit nur du ihren Inhalt sehen kannst.";

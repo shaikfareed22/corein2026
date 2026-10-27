@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight // corein
+import androidx.compose.ui.text.font.FontWeight // FOMO
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -173,7 +173,7 @@ fun MinisTheme(
 private fun TextStyle.scale(factor: Float): TextStyle =
     if (factor == 1f) this else copy(fontSize = fontSize * factor)
 
-// corein: Muse's type, on the system face. Material's scale carries tracking
+// FOMO: Muse's type, on the system face. Material's scale carries tracking
 // (0.1–0.5sp) and small labels (11–12sp) that read as "Android"; Muse sets
 // everything at zero tracking, runs body at 16 and its captions at 13, and
 // weights titles SemiBold. The face stays the device's default so the app
@@ -203,7 +203,7 @@ private fun museTypography(): Typography {
 }
 
 private fun scaledTypography(factor: Float): Typography {
-    val base = museTypography() // corein: was Material's default scale
+    val base = museTypography() // FOMO: was Material's default scale
     return Typography(
         displayLarge = base.displayLarge.scale(factor),
         displayMedium = base.displayMedium.scale(factor),

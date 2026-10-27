@@ -18,7 +18,7 @@ Linux 上的代理（**L**）负责其余一切并统一发布；你负责 **只
 
 ## 0. 项目、现状、分工
 
-**corein** 是一个开源（GPL-3.0-or-later）的个人 agent：手机 app（Android 和 iOS，基于上游
+**FOMO** 是一个开源（GPL-3.0-or-later）的个人 agent：手机 app（Android 和 iOS，基于上游
 OpenMinis 子树 `android/`）、桌面 app（`harness/dsh-nanomuse/` 是 DeepSeek Harness 插件，
 `harness/desktop/` 是 Electron 壳，壳里带 Python 运行时给「手」用）、Python 运行时 `nanomuse/`、
 Web 控制台 `web/`、中继 `cloud/`（登录、模型、hub、会话同步）。先读 [AGENTS.md](../../AGENTS.md)
@@ -47,7 +47,7 @@ Web 控制台 `web/`、中继 `cloud/`（登录、模型、hub、会话同步）
 **仓库约定里和你最相关的几条**（全文在 AGENTS.md）：
 
 - `android/` 是上游子树，要保持可拉取：新代码放新文件（`android/src/ios/NanoMuse/*.swift`），
-  改上游文件时每处带一行 `// corein:` 注释，一处一改；不改 Xcode 工程结构、不改沙盒路径；
+  改上游文件时每处带一行 `// FOMO:` 注释，一处一改；不改 Xcode 工程结构、不改沙盒路径；
   品牌替换只走 `scripts/rebrand.py`（跑完必须输出 `clean`）。
 - 用户可见的字符串先英文、再简体中文、再 `Localizable.xcstrings` 已有的全部 locale；语气平实，
   无感叹号、无营销词；不照抄 Meta 的界面文案。
@@ -69,9 +69,9 @@ iPadOS 26.7.1**，上面装着 TestFlight build 10。是否有 iPhone，问维�
 
 ```bash
 # 1) 找到或建立 clone（上一个会话大概率已经 clone 过；路径不详）
-mdfind "kMDItemFSName == 'corein'" -onlyin ~ 2>/dev/null | head; ls -d ~/corein ~/code/corein ~/src/corein 2>/dev/null
+mdfind "kMDItemFSName == 'FOMO'" -onlyin ~ 2>/dev/null | head; ls -d ~/FOMO ~/code/FOMO ~/src/FOMO 2>/dev/null
 # 有：cd <clone> && git fetch origin && git checkout main && git pull --ff-only && git submodule update --init
-# 没有：git clone --recurse-submodules https://github.com/shaikfareed22/corein2026.git && cd corein
+# 没有：git clone --recurse-submodules https://github.com/shaikfareed22/corein2026.git && cd FOMO
 git log --oneline -1          # 应是 9740986d 或更新
 
 # 2) 腾磁盘：原生依赖 + 一次 Debug 构建要十几 GB
@@ -126,7 +126,7 @@ L 在 Linux 上把壳和胶囊的代码从头读了一遍，没找到能让胶�
 
 ## 3. 代码在哪
 
-- 聊天界面 `Views/Chat/AIChatView.swift`（上游文件，6500 行，我们的改动都带 `// corein:`）：
+- 聊天界面 `Views/Chat/AIChatView.swift`（上游文件，6500 行，我们的改动都带 `// FOMO:`）：
   - `body`（~498 行）：`ZStack { messagesArea.safeAreaInset(edge: .top){…}.modifier(NanoMuseComposerHost(failSafe:stack:)) …; kernelBootOverlay }`。
   - `nmComposerStack` / `nmComposerTree`（~3499 行）：`ZStack(alignment: .bottom) { VStack { NanoMuseChatCardsHost; floatingToolPreview; inputBar }.background(NanoMuseComposerProbe).id(rebuildTick); inputPopupOverlay }`。
   - `inputBar`（~3778 行）：`nmPill` 为真时走 `nmPillRows` → `NanoMuseComposerPill { nmPillField }`；外面 `ComposerSurface(pill:)` 是灰色胶囊；`.onGeometryChange` 给 `inputBarHeight`（消息列表的底部内边距）和 `nmComposer.geometry(height:)`。
@@ -206,7 +206,7 @@ Xcode 的 View Debugger 够用就不必折腾它。
 
 证据到手再动手。几条硬约束：
 
-- 新代码放 `NanoMuse/*.swift`；上游文件里每处改动一行 `// corein:`，一处一改；不加链接到
+- 新代码放 `NanoMuse/*.swift`；上游文件里每处改动一行 `// FOMO:`，一处一改；不加链接到
   `AIChatView.body`（`NanoMuseRound6Tests` 会挡）。
 - 以**用户看得见**为准，不以探针为准：如果结论是 a 或 b，`NanoMuseComposerWatch` 的 fail-safe 根本
   不会触发，别指望它；被证明打偏的看门狗代码可以删，连 `docs/ios.md` 一起改成真相，不要留一段写错的
@@ -237,15 +237,15 @@ gh workflow run "iOS · build check" --repo shaikfareed22/corein2026 --ref mac/i
 ## 7. 顺手的两项验收（证据收集完、等构建的时候做；只报告，发现问题另开 `mac/*` 分支）
 
 1. **Mac 桌面端 0.1.39 的权限助手**（#95 的真机验收，当时只在源码构建上验过）：下载
-   `https://github.com/shaikfareed22/corein2026/releases/download/v0.1.39/corein-Desktop-0.1.39-mac-arm64.dmg`，
+   `https://github.com/shaikfareed22/corein2026/releases/download/v0.1.39/fomo-Desktop-0.1.39-mac-arm64.dmg`，
    拖进「应用程序」，先 `tccutil reset ScreenCapture com.corein.desktop.computer-use` 和
    `tccutil reset Accessibility com.corein.desktop.computer-use`，打开 app（Gatekeeper 说无法验证
    → 系统设置 → 隐私与安全性 → 仍要打开），Settings → Computer use 按它的指引走：两个面板里出现的是不是
-   **corein Computer Use** 那一行、授权后测试截图是不是真实屏幕、`~/.nanomuse/desktop/desktop.log` 里
+   **FOMO Computer Use** 那一行、授权后测试截图是不是真实屏幕、`~/.nanomuse/desktop/desktop.log` 里
    `helper:` 行有没有 `clearQuarantine`/translocation 的报错、退出再打开授权还在不在、一个真实任务
    （「打开计算器，算 12×34」）跑不跑得通。数据目录 `~/.nanomuse/desktop` 是维护者正在用的：想从头来，
    先 `mv ~/.nanomuse/desktop ~/.nanomuse/desktop.bak`（告诉维护者，完了可以 mv 回去），然后用 Finder 或
-   `open -a corein` 启动——不要从终端直接跑 `Contents/MacOS/corein`，那样权限会记在 Terminal 名下，
+   `open -a FOMO` 启动——不要从终端直接跑 `Contents/MacOS/corein`，那样权限会记在 Terminal 名下，
    测的就不是用户看到的流程了。
 2. **iPad 上 build 10 的账号隔离**（#97）：A 登录 → 聊两句 → 退出 → B 登录：列表里没有 A 的会话；
    切回 A，A 的回来。需要维护者的两个账号和验证码；没有第二个账号就跳过并注明。
@@ -270,7 +270,7 @@ L 这边同时在做：拿到你的 PR 后合并、发 0.1.40、TestFlight build
 | 壳 | `NanoMuse/NanoMuseShell.swift`（`NanoMuseHomeView`、`chatLayer`、`NanoMuseBottomBar`） |
 | 日志 | Console.app，`subsystem:com.corein.app`（`nm.composer`、`InputBarLayout`）；`idevicesyslog` |
 | 调试服务（DEBUG） | `Debug/DebugServer.swift`，端口 8321，`iproxy 8321 8321` |
-| 上游改动标记 | `// corein:`；品牌替换 `python scripts/rebrand.py`（必须输出 `clean`） |
+| 上游改动标记 | `// FOMO:`；品牌替换 `python scripts/rebrand.py`（必须输出 `clean`） |
 | Mac 桌面端 | `harness/desktop/mac/computer-use/`、`harness/desktop/src/{mac-helper,mac-permissions}.ts`；数据目录 `~/.nanomuse/desktop`（`desktop.log`） |
 | 已发布的安装包 | `https://github.com/shaikfareed22/corein2026/releases/tag/v0.1.39`；TestFlight build 10 = 0.1.39 |
 | 上一轮的任务单（背景） | [mac-work-0.1.39.md](mac-work-0.1.39.md)、[mac-check-0.1.37.md](mac-check-0.1.37.md) |

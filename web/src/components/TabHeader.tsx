@@ -30,7 +30,7 @@ export function TabHeader({
   const t = useT();
   const [activityOpen, setActivityOpen] = useState(false);
 
-  const name = state.profile?.name || "corein";
+  const name = state.profile?.name || "FOMO";
   const waiting = state.pendingApprovals.length;
   const statusLine =
     waiting > 0 ? (waiting > 1 ? t("{n} approvals waiting for you", { n: waiting }) : t("1 approval waiting for you"))

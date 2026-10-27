@@ -226,7 +226,7 @@ def screen() -> dict[str, Any]:
     }
 
 
-def notify(text: str, title: str = "corein") -> dict[str, Any]:
+def notify(text: str, title: str = "FOMO") -> dict[str, Any]:
     text = (text or "").strip()
     if not text:
         raise ActionError("usage", "text is required")
@@ -250,7 +250,7 @@ def notify(text: str, title: str = "corein") -> dict[str, Any]:
                 f"$x.Item(0).AppendChild($t.CreateTextNode('{_ps(title)}')) | Out-Null;"
                 f"$x.Item(1).AppendChild($t.CreateTextNode('{_ps(text)}')) | Out-Null;"
                 "[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("
-                "'corein').Show([Windows.UI.Notifications.ToastNotification]::new($t))"
+                "'FOMO').Show([Windows.UI.Notifications.ToastNotification]::new($t))"
             )
             ok = (
                 subprocess.run(
@@ -261,7 +261,7 @@ def notify(text: str, title: str = "corein") -> dict[str, Any]:
         elif shutil.which("notify-send"):
             ok = (
                 subprocess.run(
-                    ["notify-send", "-a", "corein", title, text], capture_output=True, timeout=20
+                    ["notify-send", "-a", "FOMO", title, text], capture_output=True, timeout=20
                 ).returncode
                 == 0
             )
@@ -297,7 +297,7 @@ def run(action: str, args: dict[str, Any]) -> dict[str, Any]:
     if action == "screen":
         return screen()
     if action == "notify":
-        return notify(str(args.get("text", "")), str(args.get("title") or "corein"))
+        return notify(str(args.get("text", "")), str(args.get("title") or "FOMO"))
     raise ActionError("unknown_action", f"this computer does not do '{action}'")
 
 

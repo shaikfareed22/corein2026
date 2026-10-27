@@ -423,7 +423,7 @@ class MinisApp : Application(), ImageLoaderFactory {
         database = AppDatabase.getInstance(this)
         chatRepository = ChatRepository(database.chatDao())
         providerRepository = ProviderRepository(this)
-        // corein: Settings → Network — the proxy for own providers and the ChatGPT plan is
+        // FOMO: Settings → Network — the proxy for own providers and the ChatGPT plan is
         // the process's proxy selector, so it must be in place before the first OkHttp client.
         io.github.nanomuse.net.OwnProviderProxy.install(this, providerRepository.config)
         envVarRepository = EnvVarRepository(this)
@@ -435,7 +435,7 @@ class MinisApp : Application(), ImageLoaderFactory {
         // breaks the Application and produces the GH#147 crash loop.
         skillRepository = SkillRepository(this)
         mcpRepository = MCPRepository(this)
-        io.github.nanomuse.connectors.Connectors.refreshStaleAsync(this) // corein: connectors' OAuth tokens near their end → refreshed, headers rewritten
+        io.github.nanomuse.connectors.Connectors.refreshStaleAsync(this) // FOMO: connectors' OAuth tokens near their end → refreshed, headers rewritten
         memoryRepository = MemoryRepository(java.io.File(filesDir, "minis-global/memory"))
         webAppShortcutRepository = WebAppShortcutRepository(database.webAppShortcutDao())
 
@@ -549,13 +549,13 @@ class MinisApp : Application(), ImageLoaderFactory {
         // T323: UI-layer automation backed by MinisAccessibilityService.
         NativeOffloadServer.register("android-a11y-cli", AccessibilityOffloadHandler(this))
         NativeOffloadServer.register("minis-model-use", ModelUseOffloadHandler(this, providerRepository))
-        // corein: nanomuse-media — pictures and clips through the user's image / video models.
+        // FOMO: nanomuse-media — pictures and clips through the user's image / video models.
         NativeOffloadServer.register("nanomuse-media", io.github.nanomuse.media.MediaOffloadHandler(this))
-        // corein: nanomuse-hands — the phone's screen as a hand (screenshot → screen model → gesture).
+        // FOMO: nanomuse-hands — the phone's screen as a hand (screenshot → screen model → gesture).
         NativeOffloadServer.register("nanomuse-hands", io.github.nanomuse.hands.HandsOffloadHandler(this))
-        // corein: nanomuse-pc — the phone drives the user's other devices (shell, files, browser, screen, tasks).
+        // FOMO: nanomuse-pc — the phone drives the user's other devices (shell, files, browser, screen, tasks).
         NativeOffloadServer.register("nanomuse-pc", io.github.nanomuse.reach.ReachOffloadHandler(this))
-        // corein: join the hub, so the user's other devices can reach this phone and it can reach them.
+        // FOMO: join the hub, so the user's other devices can reach this phone and it can reach them.
         io.github.nanomuse.hub.Hub.autoStart(this)
         // T-config: minis-config — agent-facing settings management
         // (read/write registered ConfigFields with audit + revert).
@@ -656,15 +656,15 @@ class MinisApp : Application(), ImageLoaderFactory {
         com.openminis.app.config.confirm.ConfigConfirmationGate.cancelNotification = {
             configConfirmNotifier.cancel(it)
         }
-        // corein: remembered approvals + the approval gate's background notification.
+        // FOMO: remembered approvals + the approval gate's background notification.
         io.github.nanomuse.guard.Grants.init(this)
-        io.github.nanomuse.feed.FeedFlow.init(this) // corein
-        io.github.nanomuse.chat.RoutineWakes.init(this) // corein: which chat rows a routine sent
-        io.github.nanomuse.avatar.AvatarStore.init(this) // corein: the user's own face, if any
-        io.github.nanomuse.cloud.ProfileSync.init(this) // corein: the name and face the account's devices share
-        io.github.nanomuse.account.AccountData.init(this) // corein: whose chat is whose (contract C12)
-        io.github.nanomuse.sync.ConversationSync.init(this) // corein: the conversations, the same on every device
-        io.github.nanomuse.avatar.AvatarStudio.init(this) // corein: the feed's files and its built-in routine
+        io.github.nanomuse.feed.FeedFlow.init(this) // FOMO
+        io.github.nanomuse.chat.RoutineWakes.init(this) // FOMO: which chat rows a routine sent
+        io.github.nanomuse.avatar.AvatarStore.init(this) // FOMO: the user's own face, if any
+        io.github.nanomuse.cloud.ProfileSync.init(this) // FOMO: the name and face the account's devices share
+        io.github.nanomuse.account.AccountData.init(this) // FOMO: whose chat is whose (contract C12)
+        io.github.nanomuse.sync.ConversationSync.init(this) // FOMO: the conversations, the same on every device
+        io.github.nanomuse.avatar.AvatarStudio.init(this) // FOMO: the feed's files and its built-in routine
         val nmRiskNotifier = io.github.nanomuse.guard.RiskApprovalNotifier(this, ::isAppForeground)
         io.github.nanomuse.guard.RiskGate.backgroundNotifier = { nmRiskNotifier.notifyIfBackgrounded(it) }
         io.github.nanomuse.guard.RiskGate.cancelNotification = { nmRiskNotifier.cancel(it) }
@@ -733,7 +733,7 @@ class MinisApp : Application(), ImageLoaderFactory {
                     // while a config-confirm dialog may still be showing — nudge
                     // them so they can come back before the 120s timeout.
                     com.openminis.app.config.confirm.ConfigConfirmationGate.notifyPending()
-                    io.github.nanomuse.guard.RiskGate.notifyPending() // corein
+                    io.github.nanomuse.guard.RiskGate.notifyPending() // FOMO
                 }
             }
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}

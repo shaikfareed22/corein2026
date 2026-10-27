@@ -256,7 +256,7 @@ object FeedFlow {
         val digest = digest(context)
         val recent = FeedStore.posts.value.take(24).map { it.title }
         return buildString {
-            appendLine("## This conversation writes the user's feed (corein)")
+            appendLine("## This conversation writes the user's feed (FOMO)")
             appendLine("The Feed tab shows short posts you write for the user, like Muse's feed. The user's standing instruction for it:")
             appendLine("> " + FeedStore.preferences.value.replace("\n", "\n> "))
             appendLine()

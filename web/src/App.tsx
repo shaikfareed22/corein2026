@@ -59,7 +59,7 @@ export default function App() {
   // The document title follows the agent's name.
   useEffect(() => {
     const name = state.profile?.name?.trim();
-    document.title = name && name.toLowerCase() !== "nanomuse" ? `${name} · corein` : "corein";
+    document.title = name && name.toLowerCase() !== "nanomuse" ? `${name} · FOMO` : "FOMO";
   }, [state.profile?.name]);
 
   // the desktop's quick-chat shortcut: to the chat, with the composer focused
@@ -132,12 +132,12 @@ export default function App() {
       <div className="relative flex min-h-0 min-w-0 flex-1 flex-col">
         {state.gone && (
           <div className="flex items-center justify-center gap-2 bg-surface-2 text-muted text-[12.5px] py-1">
-            <WifiOff size={14} /> {t(state.lite ? "This demo has ended." : "This corein has stopped. Reload the page once it is running again.")}
+            <WifiOff size={14} /> {t(state.lite ? "This demo has ended." : "This FOMO has stopped. Reload the page once it is running again.")}
           </div>
         )}
         {!state.gone && !state.connected && state.loaded && (
           <div className="flex items-center justify-center gap-2 bg-amber-500/15 text-amber-700 dark:text-amber-300 text-[12.5px] py-1">
-            <WifiOff size={14} /> {t("Reconnecting to your corein…")}
+            <WifiOff size={14} /> {t("Reconnecting to your FOMO…")}
           </div>
         )}
         {!state.lite && <DesktopRemoteHint />}
@@ -221,7 +221,7 @@ function Connecting({ error }: { error: string | null }) {
       <BrandMark size={72} />
       {error ? (
         <>
-          <p className="mt-6 text-[15px] font-medium">{t("Could not reach your corein.")}</p>
+          <p className="mt-6 text-[15px] font-medium">{t("Could not reach your FOMO.")}</p>
           <p className="mt-1.5 text-[13px] text-muted">{t(error)}</p>
           <button type="button" onClick={() => window.location.reload()} className="mt-5 rounded-full bg-fg px-5 py-2 text-[14px] font-medium text-bg">
             {t("Try again")}
@@ -229,7 +229,7 @@ function Connecting({ error }: { error: string | null }) {
         </>
       ) : (
         <p className="mt-6 flex items-center gap-2 text-[14px] text-muted">
-          <Loader2 className="animate-spin" size={16} /> {t("Connecting to your corein…")}
+          <Loader2 className="animate-spin" size={16} /> {t("Connecting to your FOMO…")}
         </p>
       )}
     </div>
@@ -242,9 +242,9 @@ function TokenGate() {
   return (
     <div className="mx-auto flex h-[100dvh] max-w-md flex-col items-center justify-center px-6 text-center">
       <BrandMark size={88} />
-      <h1 className="mt-4 text-[22px] font-bold">{t("Connect to your corein")}</h1>
+      <h1 className="mt-4 text-[22px] font-bold">{t("Connect to your FOMO")}</h1>
       <p className="mt-2 text-[14px] text-muted">
-        {t("This app talks to the corein server you run yourself. Scan the QR code printed by")}{" "}
+        {t("This app talks to the FOMO server you run yourself. Scan the QR code printed by")}{" "}
         <code className="rounded bg-surface-2 px-1">nanomuse serve</code>{t(", or paste the access token below.")}
       </p>
       <form

@@ -1,4 +1,4 @@
-# corein on the phone: the local runtime
+# FOMO on the phone: the local runtime
 
 > **Design record of the Python line.** The current Android app runs its agent on the
 > phone through OpenMinis's own Linux sandbox, not through this PRoot + Alpine + Python
@@ -30,7 +30,7 @@ The idea in one sentence: the APK carries a small Alpine Linux root file system 
 
 ## What the user sees
 
-The first screen asks **where your corein should live**: *Run on this phone* or *Connect to my computer*. The first choice unpacks the root file system (about 330 MB on disk, a minute or so) with a progress bar, starts the runtime, waits for its first health check, and opens the app. From then on the app starts the runtime whenever it is opened; a quiet notification (*Running on this phone*, or what the agent is doing right now) shows it is alive, with a **Stop** action. After a reboot the runtime comes back on its own so routines and check-ins keep running.
+The first screen asks **where your FOMO should live**: *Run on this phone* or *Connect to my computer*. The first choice unpacks the root file system (about 330 MB on disk, a minute or so) with a progress bar, starts the runtime, waits for its first health check, and opens the app. From then on the app starts the runtime whenever it is opened; a quiet notification (*Running on this phone*, or what the agent is doing right now) shows it is alive, with a **Stop** action. After a reboot the runtime comes back on its own so routines and check-ins keep running.
 
 Failures land on one screen with the runtime's last log lines, a **Try again** and a **Start over**. Starting over returns to the first screen; it does not delete the phone's data.
 
