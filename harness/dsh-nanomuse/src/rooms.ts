@@ -1087,9 +1087,9 @@ export default class NanomuseRooms extends Service {
 
   // ---- ideas -----------------------------------------------------------------------
 
-  /** The curated list for the person's language (the phone's `Ideas.load`); zh-* reads the zh file. */
+  /** The curated list (the phone's `Ideas.load`). */
   private staticIdeas(): StaticIdea[] {
-    const file = this.lang.toLowerCase().startsWith('zh') ? 'ideas.zh.json' : 'ideas.en.json'
+    const file = 'ideas.en.json'
     if (this.ideasCache?.file === file) return this.ideasCache.items
     let items: StaticIdea[] = []
     try {

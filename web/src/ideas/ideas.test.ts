@@ -9,7 +9,7 @@ const COPIES = import.meta.glob<string>(
 const copy = (suffix: string) => Object.entries(COPIES).find(([k]) => k.endsWith(suffix))?.[1];
 
 describe("the Ideas catalogue", () => {
-  it.each(["en", "zh"])("ideas.%s.json is identical to the Android and harness copies (contract C5)", (lang) => {
+  it.each(["en"])("ideas.%s.json is identical to the Android and harness copies (contract C5)", (lang) => {
     const ours = copy(`/src/ideas/ideas.${lang}.json`) ?? copy(`./ideas.${lang}.json`);
     const android = copy(`/assets/nanomuse/ideas.${lang}.json`);
     const harness = copy(`/dsh-nanomuse/assets/ideas.${lang}.json`);
@@ -20,16 +20,14 @@ describe("the Ideas catalogue", () => {
     expect(ours === harness, `web/src/ideas/ideas.${lang}.json differs from the harness asset`).toBe(true);
   });
 
-  it("has six sections of four ideas in both languages, with the same ids", () => {
+  it("has six sections of four ideas, the same list for every locale", () => {
     const en = catalogue("en");
-    const zh = catalogue("zh-CN");
     expect(en.sections.map((s) => s.id)).toEqual(["travel", "work", "life", "learn", "family", "more"]);
-    expect(zh.sections.map((s) => s.id)).toEqual(en.sections.map((s) => s.id));
-    for (const [i, s] of en.sections.entries()) {
+    for (const s of en.sections) {
       expect(s.ideas).toHaveLength(4);
-      expect(zh.sections[i].ideas.map((x) => x.id)).toEqual(s.ideas.map((x) => x.id));
     }
     expect(catalogue("fr")).toBe(en);
+    expect(catalogue("zh-CN")).toBe(en);
   });
 
   it("turns a catalogue idea into the page's shape", () => {
