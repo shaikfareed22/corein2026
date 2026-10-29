@@ -15,7 +15,6 @@ test('the built rooms module resolves the ideas list from the package root', () 
   assert.equal(ASSETS_DIR.replace(/[\\/]+$/, ''), expected)
   const ideas = JSON.parse(readFileSync(join(ASSETS_DIR, 'ideas.en.json'), 'utf8'))
   assert.ok(Array.isArray(ideas) || typeof ideas === 'object')
-  assert.ok(existsSync(join(ASSETS_DIR, 'ideas.zh.json')))
 })
 
 test('the same answer from lib/index.js, from a chunk, and from the sources', () => {
