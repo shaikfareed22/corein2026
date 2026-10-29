@@ -245,7 +245,6 @@
     <string name="soul_field_style">Styl</string>
     <string name="soul_field_lang">Język</string>
     <string name="soul_lang_auto">Automatycznie</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">English</string>
     <string name="soul_body_placeholder">Opisz, jak Agent ma mówić, myśleć i się zachowywać…</string>
     <string name="soul_length_indicator">%1$d znaków</string>

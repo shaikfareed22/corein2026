@@ -239,9 +239,9 @@ struct NanoMuseCloudView: View {
             }
             .padding(.vertical, 8)
             .listRowBackground(Color.clear)
-            // SMS codes reach mainland-China numbers only: the placeholder says so, and a number
-            // from elsewhere gets the e-mail sentence while it is being typed, before any tap.
-            TextField(AppLocalized("Mainland China phone number or e-mail"), text: $identifier)
+            // Codes go out by e-mail: the placeholder says so, and a phone number gets the
+            // e-mail sentence while it is being typed, before any tap.
+            TextField(AppLocalized("Enter your email"), text: $identifier)
                 .keyboardType(.emailAddress)
                 .textContentType(.username)
                 .textInputAutocapitalization(.never)

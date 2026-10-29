@@ -186,33 +186,10 @@ private val fontScaleMultipliers = listOf(0.88f, 0.94f, 1.0f, 1.06f, 1.12f, 1.21
 private data class LanguageOption(val code: String, val flag: String, val label: String)
 // "System" label is resolved at call-site via stringResource so it follows
 // the user's chosen UI language. The remaining entries are language self-names
-// and stay as literals \u2014 Chinese is always "\u7B80\u4F53\u4E2D\u6587", regardless of UI locale.
+// and stay as literals, regardless of UI locale.
 private val languageOptions = listOf(
     LanguageOption("", "\uD83C\uDF10", ""),
     LanguageOption("en", "\uD83C\uDDFA\uD83C\uDDF8", "English"),
-    LanguageOption("zh", "\uD83C\uDDE8\uD83C\uDDF3", "简体中文"),
-    // zh-Hant: values-zh-rTW has carried a Traditional Chinese translation
-    // all along, but the picker never listed it and locales_config.xml never
-    // declared it, so those users could not select it at all. The tag is
-    // BCP-47 on purpose \u2014 LocaleList.forLanguageTags and
-    // LocaleWrap.parseLocale both resolve it to the zh-rTW resources,
-    // whereas a bare "zh" would land on Simplified.
-    // [T-android-zh-hant-flag] Flag is HK (\uD83C\uDDED\uD83C\uDDF0), matching
-    // iOS ContentView's own zh-Hant entry.
-    //
-    // It was TW (\uD83C\uDDF9\uD83C\uDDFC), which rendered as an EMPTY BOX on a
-    // Huawei MatePad \u2014 Chinese-market ROMs generally ship fonts with that
-    // flag glyph withheld, so the row had no icon at all.
-    //
-    // HK is the same glyph iOS already uses for this row, so it is the smallest
-    // change that also keeps the platforms aligned. If it turns out to be
-    // withheld on the same devices, the answer is to drop the flag for this row
-    // rather than hunt for a third region \u2014 a script is not a country.
-    //
-    // A region flag is a poor label for a script in any case (zh-Hant is used
-    // in TW, HK and MO alike), but keeping the two platforms on the same glyph
-    // beats inventing a third answer here.
-    LanguageOption("zh-Hant", "\uD83C\uDDED\uD83C\uDDF0", "\u7E41\u9AD4\u4E2D\u6587"),
     LanguageOption("ja", "\uD83C\uDDEF\uD83C\uDDF5", "日本語"),
     LanguageOption("ko", "\uD83C\uDDF0\uD83C\uDDF7", "한국어"),
     LanguageOption("fr", "\uD83C\uDDEB\uD83C\uDDF7", "Français"),

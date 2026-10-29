@@ -106,7 +106,7 @@ def compose_notice_mail(sender: str, to: str, subject: str, lines: list[str]) ->
     """A plain note to the operator (0.22: a threshold rule fired). Text only, both
     languages' worth of facts in the lines the caller gives; nothing personal in it."""
     msg = EmailMessage()
-    msg["From"] = sender if "<" in sender else f"FOMO <{sender}>"
+    msg["From"] = sender if "<" in sender else f"corein <{sender}>"
     msg["To"] = to
     msg["Subject"] = f"FOMO Cloud · {subject}"
     msg["Auto-Submitted"] = "auto-generated"
@@ -117,37 +117,31 @@ def compose_notice_mail(sender: str, to: str, subject: str, lines: list[str]) ->
 
 def compose_code_mail(sender: str, to: str, code: str, minutes: int) -> EmailMessage:
     """The verification mail: plain text first (what every client can show),
-    an HTML part on top with the code large enough to read off a phone.
-    Chinese and English in one message — the relay does not know the reader's
-    language, and a code mail should not need a translation either way."""
+    an HTML part on top with the code large enough to read off a phone."""
     msg = EmailMessage()
-    msg["From"] = sender if "<" in sender else f"FOMO <{sender}>"
+    msg["From"] = sender if "<" in sender else f"corein <{sender}>"
     msg["To"] = to
-    msg["Subject"] = f"FOMO 验证码 {code} · Your FOMO code"
+    msg["Subject"] = f"Your FOMO code: {code}"
     msg["Auto-Submitted"] = "auto-generated"
     msg["X-Auto-Response-Suppress"] = "All"
     msg.set_content(
-        f"你的 FOMO 验证码是 {code}，{minutes} 分钟内有效。\n"
-        "在 FOMO App 里填入即可登录；不要把它告诉任何人。\n\n"
         f"Your FOMO code is {code}; it expires in {minutes} minutes.\n"
         "Enter it in the FOMO app to sign in. Do not share it with anyone.\n\n"
-        "如果这不是你本人的操作，忽略这封邮件即可。\n"
         "If you did not ask for this, you can ignore this message.\n\n"
-        "FOMO · https://fomo.corein.in/ · 自动发送，请勿回复 / automated, no reply\n"
+        "FOMO · https://fomo.corein.in/ · automated, no reply\n"
     )
     spaced = " ".join(code)
     html = f"""<!doctype html>
-<html><body style="margin:0;padding:24px;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',Arial,sans-serif;color:#1d1d1f">
+<html><body style="margin:0;padding:24px;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#1d1d1f">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
 <table role="presentation" width="420" cellpadding="0" cellspacing="0" style="max-width:420px;background:#ffffff;border-radius:16px;padding:32px 28px">
 <tr><td style="font-size:15px;font-weight:600;color:#6e6e73;padding-bottom:18px">FOMO</td></tr>
-<tr><td style="font-size:16px;line-height:24px">你的验证码 / Your code</td></tr>
+<tr><td style="font-size:16px;line-height:24px">Your sign-in code</td></tr>
 <tr><td style="font-size:40px;font-weight:700;letter-spacing:6px;padding:14px 0 18px;font-variant-numeric:tabular-nums">{spaced}</td></tr>
-<tr><td style="font-size:14px;line-height:22px;color:#3a3a3c">{minutes} 分钟内有效。在 FOMO App 里填入即可登录；不要把它告诉任何人。</td></tr>
-<tr><td style="font-size:14px;line-height:22px;color:#3a3a3c;padding-top:8px">It expires in {minutes} minutes. Enter it in the FOMO app to sign in; do not share it with anyone.</td></tr>
-<tr><td style="font-size:12px;line-height:18px;color:#8e8e93;padding-top:22px">如果这不是你本人的操作，忽略这封邮件即可。<br>If you did not ask for this, you can ignore this message.</td></tr>
+<tr><td style="font-size:14px;line-height:22px;color:#3a3a3c">It expires in {minutes} minutes. Enter it in the FOMO app to sign in; do not share it with anyone.</td></tr>
+<tr><td style="font-size:12px;line-height:18px;color:#8e8e93;padding-top:22px">If you did not ask for this, you can ignore this message.</td></tr>
 </table>
-<div style="font-size:12px;color:#8e8e93;padding-top:16px">FOMO · <a href="https://fomo.corein.in/" style="color:#8e8e93">fomo.corein.in</a> · 自动发送，请勿回复 / automated, no reply</div>
+<div style="font-size:12px;color:#8e8e93;padding-top:16px">FOMO · <a href="https://fomo.corein.in/" style="color:#8e8e93">fomo.corein.in</a> · automated, no reply</div>
 </td></tr></table>
 </body></html>
 """

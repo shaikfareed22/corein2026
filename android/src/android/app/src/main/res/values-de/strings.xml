@@ -243,7 +243,6 @@
     <string name="soul_field_style">Stil</string>
     <string name="soul_field_lang">Sprache</string>
     <string name="soul_lang_auto">Automatisch</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">English</string>
     <string name="soul_body_placeholder">Beschreiben Sie, wie der Agent sprechen, denken und sich verhalten soll…</string>
     <string name="soul_length_indicator">%1$d Zeichen</string>

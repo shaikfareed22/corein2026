@@ -714,7 +714,6 @@ private fun soulBodyCountTextAndroid(body: String): String {
 private fun LangPicker(lang: String, onLangChange: (String) -> Unit) {
     val options = listOf(
         "auto" to stringResource(R.string.soul_lang_auto),
-        "zh" to stringResource(R.string.soul_lang_zh),
         "en" to stringResource(R.string.soul_lang_en),
     )
     val current = options.firstOrNull { it.first == lang } ?: options.first()

@@ -643,7 +643,7 @@
     <string name="nm_cloud_mode_password">With a password</string>
     <string name="nm_cloud_password">Password</string>
     <string name="nm_cloud_forgot_password">Forgot the password? Sign in with a code</string>
-    <string name="nm_cloud_identifier">Mainland China phone number or e-mail</string>
+    <string name="nm_cloud_identifier">Enter your email</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">Code</string>
     <string name="nm_cloud_send_code">Send code</string>
@@ -667,7 +667,7 @@
     <string name="nm_cloud_server_change">Change</string>
     <string name="nm_cloud_server_change_confirm">This phone\'s key belongs to the current server. Sign out here first, then sign in to the other server from the sign-in screen.</string>
     <!-- Text-message codes: said on the sign-in screen before asking, and for the relay's phone_region answer -->
-    <string name="nm_cloud_sms_region">Text-message codes reach mainland-China numbers only. Use an e-mail address instead.</string>
+    <string name="nm_cloud_sms_region">Codes are sent by e-mail only. Enter an e-mail address.</string>
     <string name="nm_cloud_fine_print">The relay keeps an account id, a masked identifier, usage counts and your agent\'s name and look; what else, and what is yours to switch off, is in the privacy policy.</string>
     <string name="nm_cloud_not_signed_in">Not signed in</string>
     <string name="nm_cloud_not_signed_in_sub">Sign in with a phone number or an e-mail for a free allowance. Your own providers stay as they are.</string>
@@ -780,7 +780,7 @@
     <string name="nm_ways_sub">Two ways on; your sign-in and your devices keep working either way.</string>
     <string name="nm_ways_key_title">Use your own model key</string>
     <string name="nm_ways_key_guide">Step-by-step guide</string>
-    <string name="nm_ways_region_cn">Alibaba Cloud Bailian first: one key covers chat, the screen, pictures and clips, and it signs up accounts from mainland China. Each provider below says what it covers.</string>
+    <string name="nm_ways_region_cn">Alibaba Cloud Bailian first: one key covers chat, the screen, pictures and clips. Each provider below says what it covers.</string>
     <string name="nm_ways_region_global">OpenRouter or OpenAI first: one key, most models, pay as you go. Each provider below says what it covers.</string>
     <string name="nm_ways_add">Add</string>
     <string name="nm_ways_add_named">Add %1$s</string>

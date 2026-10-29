@@ -243,7 +243,6 @@
     <string name="soul_field_style">สไตล์</string>
     <string name="soul_field_lang">ภาษา</string>
     <string name="soul_lang_auto">อัตโนมัติ</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">English</string>
     <string name="soul_body_placeholder">อธิบายว่า Agent ควรพูด คิด และประพฤติอย่างไร…</string>
     <string name="soul_length_indicator">%1$d อักขระ</string>

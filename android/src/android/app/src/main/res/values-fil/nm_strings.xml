@@ -656,7 +656,7 @@
     <string name="nm_cloud_mode_password">Gamit ang password</string>
     <string name="nm_cloud_password">Password</string>
     <string name="nm_cloud_forgot_password">Nakalimutan ang password? Mag-sign in gamit ang code</string>
-    <string name="nm_cloud_identifier">Numero ng telepono sa mainland China o e-mail</string>
+    <string name="nm_cloud_identifier">Ilagay ang iyong e-mail</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">Code</string>
     <string name="nm_cloud_send_code">Ipadala ang code</string>
@@ -681,7 +681,7 @@
     <string name="nm_cloud_server_change_confirm">Ang key ng teleponong ito ay para sa kasalukuyang server. Mag-sign out muna rito, saka mag-sign in sa ibang server mula sa sign-in screen.</string>
 
     <!-- Text-message codes: said on the sign-in screen before asking, and for the relay's phone_region answer -->
-    <string name="nm_cloud_sms_region">Ang mga code sa text message ay umaabot lang sa mga numero sa mainland China. Gumamit na lang ng e-mail address.</string>
+    <string name="nm_cloud_sms_region">Ipinapadala lang ang mga code sa e-mail. Maglagay ng e-mail address.</string>
     <string name="nm_cloud_fine_print">Itinatago ng relay ang isang account id, isang naka-mask na identifier, mga bilang ng paggamit at ang pangalan at itsura ng agent mo; kung ano pa, at ano ang maaari mong i-off, ay nasa patakaran sa privacy.</string>
     <string name="nm_cloud_not_signed_in">Hindi naka-sign in</string>
     <string name="nm_cloud_not_signed_in_sub">Mag-sign in gamit ang numero ng telepono o e-mail para sa libreng allowance. Mananatili kung ano ang mga sarili mong provider.</string>
@@ -795,7 +795,7 @@
     <string name="nm_ways_sub">Dalawang paraan para magpatuloy; gumagana pa rin ang sign-in at mga device mo alinman ang piliin.</string>
     <string name="nm_ways_key_title">Gamitin ang sarili mong model key</string>
     <string name="nm_ways_key_guide">Gabay nang sunod-sunod</string>
-    <string name="nm_ways_region_cn">Alibaba Cloud Bailian muna: isang key para sa chat, screen, mga larawan at mga clip, at tumatanggap ito ng mga account mula sa mainland China. Sinasabi ng bawat provider sa ibaba kung ano ang sakop nito.</string>
+    <string name="nm_ways_region_cn">Alibaba Cloud Bailian muna: isang key para sa chat, screen, mga larawan at mga clip. Sinasabi ng bawat provider sa ibaba kung ano ang sakop nito.</string>
     <string name="nm_ways_region_global">OpenRouter o OpenAI muna: isang key, pinakamaraming modelo, bayad ayon sa gamit. Sinasabi ng bawat provider sa ibaba kung ano ang sakop nito.</string>
     <string name="nm_ways_add">Idagdag</string>
     <string name="nm_ways_add_named">Idagdag ang %1$s</string>

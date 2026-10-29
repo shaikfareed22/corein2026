@@ -245,7 +245,6 @@
     <string name="soul_field_style">Стиль</string>
     <string name="soul_field_lang">Язык</string>
     <string name="soul_lang_auto">Авто</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">English</string>
     <string name="soul_body_placeholder">Опишите, как Agent должен звучать, мыслить и вести себя…</string>
     <string name="soul_length_indicator">%1$d символов</string>

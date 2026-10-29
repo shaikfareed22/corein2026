@@ -243,7 +243,6 @@
     <string name="soul_field_style">Üslup</string>
     <string name="soul_field_lang">Dil</string>
     <string name="soul_lang_auto">Otomatik</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">English</string>
     <string name="soul_body_placeholder">Agent\'ın nasıl konuşması, düşünmesi ve davranması gerektiğini anlatın…</string>
     <string name="soul_length_indicator">%1$d karakter</string>

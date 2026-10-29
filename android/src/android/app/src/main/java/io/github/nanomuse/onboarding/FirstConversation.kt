@@ -176,8 +176,7 @@ class FirstConversation(
                 append("(a) If it says how to address them — a name, a nickname, \"just call me boss\" — confirm it in one short sentence, ")
                 append("ask in one sentence what they would like to call you, and end the reply with exactly this fenced block:\n")
                 append("```$BLOCK\n{\"user_address\": \"<how to address them>\", \"suggest\": [\"<name 1>\", \"<name 2>\"]}\n```\n")
-                append("`suggest` holds two names for yourself the user could pick, in the language they write: two-character Chinese names ")
-                append("in the spirit of 豆丁 or 小满 (warm, a little playful, easy to say) when they write Chinese; short English names like Pip or Wren otherwise. ")
+                append("`suggest` holds two names for yourself the user could pick, in the language they write: short names that are warm, a little playful and easy to say, like Pip or Wren. ")
                 append("Never suggest the name of an existing assistant or product ($TAKEN_NAMES), nor the user's own name. ")
                 append("The app renders the block as a chooser under your reply, so do not list the names in your text.\n")
                 append("(b) If they say they would rather not be called anything in particular, do the same with \"user_address\": null.\n")
@@ -189,7 +188,7 @@ class FirstConversation(
                 val chips = currentSuggestions()
                 append("First conversation. You asked what the user would like to call you; the app is showing a chooser under that question with ")
                 append(chips.joinToString(", ") { "\"$it\"" }).append(" and \"something else\". Decide from their message:\n")
-                append("(a) If it gives you a name — typed on its own, \"call you 豆丁\", \"the first one\" (meaning \"").append(chips.firstOrNull().orEmpty()).append("\") — ")
+                append("(a) If it gives you a name — typed on its own, \"call you Pip\", \"the first one\" (meaning \"").append(chips.firstOrNull().orEmpty()).append("\") — ")
                 append("that is your name from now on. Reply as yourself: one short line about the name, then three bullets with the most useful things you can do ")
                 append("for them right now on this phone (choose from: running commands in your Linux sandbox, browsing websites and filling forms, ")
                 append("reading and organising files and photos they mount, setting reminders and scheduled tasks, searching the web), one concrete line each, no emoji; ")
@@ -246,7 +245,7 @@ class FirstConversation(
         private const val KEY_SESSION = "first_conversation.session"
         private const val KEY_ADDRESS = "first_conversation.address"
         private const val KEY_SUGGESTIONS = "first_conversation.suggestions"
-        private const val TAKEN_NAMES = "Siri, Alexa, Cortana, Jarvis, Muse, Gemini, Copilot, 小爱, 小度, 小艺, 天猫精灵, 豆包, 文心, 通义, 阿福"
+        private const val TAKEN_NAMES = "Siri, Alexa, Cortana, Jarvis, Muse, Gemini, Copilot, Bixby, ChatGPT, Claude"
         private const val MAX_NAME = 16
 
         /**

@@ -79,7 +79,7 @@ object AgentTools {
             "Use wait_for_dom_stable to wait until the page DOM stops changing (useful after navigation or interactions that trigger async data loading — polls every 0.5s, resolves when mutation rate gradient is stable for 3+ intervals, default timeout 10s). " +
             "Use tab_id to target a specific tab (defaults to the most recently used tab). " +
             // FOMO: the page needs the person — hand the browser over instead of describing the login page
-            "When a page needs the person themselves — a login, a password, a verification code, a payment, a CAPTCHA — call hand_over with a short 'reason' in their language (e.g. '登录携程', 'Sign in to GitHub'): the page opens for them in this app, with their session, and the call returns when they are done; then continue on the page as it is. Never type credentials and never end your turn by telling them to log in themselves.",
+            "When a page needs the person themselves — a login, a password, a verification code, a payment, a CAPTCHA — call hand_over with a short 'reason' in their language (e.g. 'Sign in to GitHub', 'Complete the payment'): the page opens for them in this app, with their session, and the call returns when they are done; then continue on the page as it is. Never type credentials and never end your turn by telling them to log in themselves.",
         parameters = mapOf(
             "tool_title" to AgentToolParam("string", "A concise 5-10 word summary of what this tool call does, shown to the user (e.g. 'Open Wikipedia homepage', 'Take screenshot of current page'). Use the same language as the user."),
             "action" to AgentToolParam("string", "The browser action to perform",
@@ -88,7 +88,7 @@ object AgentTools {
             "selector" to AgentToolParam("string", "CSS selector for targeting elements (click, type, get_text, scroll, hover, find_elements). For scroll: specify a scrollable container to scroll (e.g. 'div.timeline'); if omitted, auto-detects the best scrollable element."),
             "text" to AgentToolParam("string", "Text to type (for type action)"),
             // FOMO: for hand_over
-            "reason" to AgentToolParam("string", "For hand_over: what the person has to do on the page, a few words in their language (e.g. '登录携程')."),
+            "reason" to AgentToolParam("string", "For hand_over: what the person has to do on the page, a few words in their language (e.g. 'Sign in to GitHub')."),
             "coordinate_x" to AgentToolParam("integer", "X coordinate for click (alternative to selector)"),
             "coordinate_y" to AgentToolParam("integer", "Y coordinate for click (alternative to selector)"),
             "direction" to AgentToolParam("string", "Scroll direction", enumValues = listOf("up", "down")),

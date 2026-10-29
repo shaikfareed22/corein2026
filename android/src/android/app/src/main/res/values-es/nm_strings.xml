@@ -656,7 +656,7 @@
     <string name="nm_cloud_mode_password">Con una contraseña</string>
     <string name="nm_cloud_password">Contraseña</string>
     <string name="nm_cloud_forgot_password">¿Olvidaste la contraseña? Inicia sesión con un código</string>
-    <string name="nm_cloud_identifier">Número de teléfono de China continental o correo</string>
+    <string name="nm_cloud_identifier">Introduce tu correo</string>
     <string name="nm_cloud_identifier_hint">tu@example.com</string>
     <string name="nm_cloud_code">Código</string>
     <string name="nm_cloud_send_code">Enviar código</string>
@@ -681,7 +681,7 @@
     <string name="nm_cloud_server_change_confirm">La clave de este teléfono pertenece al servidor actual. Cierra sesión aquí primero y luego inicia sesión en el otro servidor desde la pantalla de inicio de sesión.</string>
 
     <!-- Text-message codes: said on the sign-in screen before asking, and for the relay's phone_region answer -->
-    <string name="nm_cloud_sms_region">Los códigos por SMS solo llegan a números de China continental. Usa una dirección de correo en su lugar.</string>
+    <string name="nm_cloud_sms_region">Los códigos solo se envían por correo. Introduce una dirección de correo.</string>
     <string name="nm_cloud_fine_print">El relay guarda un id de cuenta, un identificador enmascarado, recuentos de uso y el nombre y el aspecto de tu agente; qué más, y qué puedes desactivar, está en la política de privacidad.</string>
     <string name="nm_cloud_not_signed_in">Sin sesión iniciada</string>
     <string name="nm_cloud_not_signed_in_sub">Inicia sesión con un número de teléfono o un correo para obtener un saldo gratuito. Tus propios proveedores se quedan como están.</string>
@@ -795,7 +795,7 @@
     <string name="nm_ways_sub">Dos formas de seguir; tu sesión y tus dispositivos siguen funcionando en cualquier caso.</string>
     <string name="nm_ways_key_title">Usa tu propia clave de modelo</string>
     <string name="nm_ways_key_guide">Guía paso a paso</string>
-    <string name="nm_ways_region_cn">Primero Alibaba Cloud Bailian: una clave cubre chat, pantalla, imágenes y clips, y registra cuentas de China continental. Cada proveedor de abajo dice qué cubre.</string>
+    <string name="nm_ways_region_cn">Primero Alibaba Cloud Bailian: una clave cubre chat, pantalla, imágenes y clips. Cada proveedor de abajo dice qué cubre.</string>
     <string name="nm_ways_region_global">Primero OpenRouter u OpenAI: una clave, la mayoría de los modelos, pago por uso. Cada proveedor de abajo dice qué cubre.</string>
     <string name="nm_ways_add">Añadir</string>
     <string name="nm_ways_add_named">Añadir %1$s</string>

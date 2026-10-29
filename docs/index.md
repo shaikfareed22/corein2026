@@ -52,10 +52,10 @@ features:
 
 | Platform | Get it | Then read |
 |---|---|---|
-| **Android** 8.0+, 64-bit | [fomo-1.2.0-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-1.2.0-arm64.apk) | [Android](/android) |
-| **Windows** 10+ | [fomo-Desktop-1.2.0-win-x64.exe](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-win-x64.exe) | [The desktop app](/desktop) |
-| **macOS** 12+ | [Apple Silicon](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-mac-x64.dmg) | [The desktop app](/desktop) |
-| **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.tar.gz) | [The desktop app](/desktop) |
+| **Android** 8.0+, 64-bit | [fomo-1.2.1-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-1.2.1-arm64.apk) | [Android](/android) |
+| **Windows** 10+ | [fomo-Desktop-1.2.1-win-x64.exe](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-win-x64.exe) | [The desktop app](/desktop) |
+| **macOS** 12+ | [Apple Silicon](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-mac-x64.dmg) | [The desktop app](/desktop) |
+| **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-linux-x64.tar.gz) | [The desktop app](/desktop) |
 | **iPhone / iPad** | Build it yourself for now | [iOS](/ios) |
 | **Web and servers** | `bash scripts/self-host.sh --local` for your own relay; `docker compose up -d app` for the web app | [Run it yourself](/self-hosting) |
 

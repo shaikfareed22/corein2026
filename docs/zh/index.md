@@ -27,16 +27,16 @@ hero:
 | | |
 |---|---|
 | **浏览器** | [demo.fomo.corein.in](https://demo.fomo.corein.in/)：登录之后，一台模拟手机里的 FOMO，旁边有中英文各一组可以点的例句。这是演示；下面的 App 才是正式版 |
-| **Android** 8.0 以上，arm64 | [fomo-1.2.0-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-1.2.0-arm64.apk) · [怎么装](/zh/android) |
+| **Android** 8.0 以上，arm64 | [fomo-1.2.1-arm64.apk](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-1.2.1-arm64.apk) · [怎么装](/zh/android) |
 | **iPhone / iPad** | [TestFlight](https://testflight.apple.com/join/ZHexbDqc)：测试版，已通过 Apple 的 beta 审核；从这个链接安装 · [iOS](/zh/ios) |
-| **macOS** 12 以上 | [Apple 芯片](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-mac-x64.dmg) · [桌面版](/zh/desktop) |
-| **Windows** 10 以上 | [fomo-Desktop-1.2.0-win-x64.exe](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-win-x64.exe) |
-| **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.0/fomo-Desktop-1.2.0-linux-x64.tar.gz) |
+| **macOS** 12 以上 | [Apple 芯片](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-mac-arm64.dmg) · [Intel](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-mac-x64.dmg) · [桌面版](/zh/desktop) |
+| **Windows** 10 以上 | [fomo-Desktop-1.2.1-win-x64.exe](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-win-x64.exe) |
+| **Linux** x64 | [AppImage](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-linux-x64.AppImage) · [.deb](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-linux-x64.deb) · [tar.gz](https://github.com/shaikfareed22/corein2026/releases/download/v1.2.1/fomo-Desktop-1.2.1-linux-x64.tar.gz) |
 | **Docker** | `bash scripts/self-host.sh --local` 搭自己的中继；`docker compose up -d app` 跑网页版 · [自己部署](/zh/self-hosting) |
 
 所有下载都在 [最新版本](https://github.com/shaikfareed22/corein2026/releases/latest)；GitHub 下不动的话，同样的文件在 [fomo.corein.in/dl](https://fomo.corein.in/dl/)。
 
-[1.2.0 Rise 改了什么](https://github.com/shaikfareed22/corein2026/releases/tag/v1.2.0) · [每个客户端能做什么](/zh/parity) · [从哪儿开始参与](/zh/roadmap) · [中继保存什么](/zh/privacy) · [什么留在手机上，归谁](/zh/sync)
+[1.2.1 Clear 改了什么](https://github.com/shaikfareed22/corein2026/releases/tag/v1.2.1) · [每个客户端能做什么](/zh/parity) · [从哪儿开始参与](/zh/roadmap) · [中继保存什么](/zh/privacy) · [什么留在手机上，归谁](/zh/sync)
 
 ## 宣传片 {#the-film}
 

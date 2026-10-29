@@ -4,7 +4,6 @@ import io.github.nanomuse.stringOrNull
 import android.content.Context
 import com.openminis.app.logging.AppLogger
 import org.json.JSONObject
-import java.util.Locale
 
 /** What tapping an idea creates: a message in the main chat, a routine, or a goal conversation. */
 enum class IdeaKind { CHAT, ROUTINE, GOAL }
@@ -34,8 +33,7 @@ object Ideas {
     private const val TAG = "Ideas"
 
     fun load(context: Context): List<IdeaSection> {
-        val lang = context.resources.configuration.locales[0]?.language ?: Locale.getDefault().language
-        val name = if (lang == "zh") "nanomuse/ideas.zh.json" else "nanomuse/ideas.en.json"
+        val name = "nanomuse/ideas.en.json"
         return runCatching {
             val text = context.assets.open(name).bufferedReader().use { it.readText() }
             val root = JSONObject(text)

@@ -236,7 +236,7 @@ enum NanoMuseCloud {
 
     /// The sentence for a number that cannot get a code (also `describe("phone_region")`).
     nonisolated static var phoneRegionSentence: String {
-        AppLocalized("Text-message codes reach mainland-China numbers only. Use an e-mail address instead.")
+        AppLocalized("Codes are sent by e-mail only. Enter an e-mail address.")
     }
 
     /// The provider instance the relay is signed in as, if it still exists.

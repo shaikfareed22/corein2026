@@ -1010,7 +1010,7 @@ internal object ConfigBuiltins {
                 // model that doesn't match the wording will otherwise report
                 // the capability as missing.
                 description = "The Soul's identity icon — also called its avatar, its persona image, or its " +
-                    "character image (中文：角色形象 / 图标 / 头像). All of those refer to THIS one setting; " +
+                    "character image. All of those refer to THIS one setting; " +
                     "there is no separate avatar field. Shown beside the assistant name in the chat header " +
                     "and on the Soul settings card.\n" +
                     "\n" +
@@ -1097,8 +1097,8 @@ internal object ConfigBuiltins {
             ClosureField(
                 path = "soul.lang",
                 displayName = "Soul language",
-                description = "Preferred response language: auto / zh / en. Older SOUL.md files missing the field are upgraded on first write.",
-                valueSchema = ConfigSchema.StrEnum(listOf("auto", "zh", "en")),
+                description = "Preferred response language: auto / en. Older SOUL.md files missing the field are upgraded on first write.",
+                valueSchema = ConfigSchema.StrEnum(listOf("auto", "en")),
                 risk = ConfigRisk.SENSITIVE,
                 revertable = true,
                 reader = {

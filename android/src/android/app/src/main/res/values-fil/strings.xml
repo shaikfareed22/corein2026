@@ -243,7 +243,6 @@
     <string name="soul_field_style">Estilo</string>
     <string name="soul_field_lang">Wika</string>
     <string name="soul_lang_auto">Awto</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">English</string>
     <string name="soul_body_placeholder">Ilarawan kung paano dapat magsalita, mag-isip, at kumilos ang Agent…</string>
     <string name="soul_length_indicator">%1$d na karakter</string>

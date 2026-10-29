@@ -243,7 +243,6 @@
     <string name="soul_field_style">Estilo</string>
     <string name="soul_field_lang">Idioma</string>
     <string name="soul_lang_auto">Auto</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">Inglés</string>
     <string name="soul_body_placeholder">Describe cómo debe sonar, pensar y comportarse FOMO Agent…</string>
     <string name="soul_length_indicator">%1$d caracteres</string>

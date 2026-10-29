@@ -16,7 +16,7 @@ What it changes, and only this:
   is the sender).
 - "<name> is browsing": the browser banner string takes the Soul name (%1$s).
 - A handful of first-run / notification strings reworded in FOMO's voice
-  (COPY below, en + zh + zh-rTW; the other locales keep the upstream text).
+  (COPY below, en; the other locales keep the upstream text).
 
 - iOS (android/src/ios, when present): the bundle ids (com.openminis.app* → com.corein.app*,
   including the app group and iCloud container), the display names, MARKETING_VERSION /
@@ -48,8 +48,8 @@ IOS = ROOT / "android" / "src" / "ios"
 
 APP_ID = "com.corein.app"
 NAME = "FOMO"
-VERSION_NAME = "1.2.0"
-VERSION_CODE = 50
+VERSION_NAME = "1.2.1"
+VERSION_CODE = 51
 REPO = "shaikfareed22/corein2026"
 REPO_URL = f"https://github.com/{REPO}"
 PRIVACY_URL = f"{REPO_URL}/blob/main/docs/privacy.md"
@@ -286,18 +286,6 @@ COPY: dict[str, dict[str, str]] = {
         "about_minis_tagline": "An open-source personal agent for every device you own. On this phone today; everything runs here, with your own model.",
         "onboarding_welcome_subtitle": "An AI assistant with its own terminal and browser, running on this phone.",
         "bg_service_notification_title": "FOMO is working",
-    },
-    "values-zh": {
-        "sessionlist_welcome_subtitle": "三步之后，你就有一个住在手机里的助理。",
-        "about_minis_tagline": "一个开源的个人智能体，面向你的所有设备。目前在这台手机上：一切都在本机运行，模型由你自己带。",
-        "onboarding_welcome_subtitle": "有自己的终端和浏览器、能用这台手机的 AI 助理。",
-        "bg_service_notification_title": "FOMO 正在工作",
-    },
-    "values-zh-rTW": {
-        "sessionlist_welcome_subtitle": "三步之後，你就有一個住在手機裡的助理。",
-        "about_minis_tagline": "一個開源的個人智慧體，面向你的所有裝置。目前在這支手機上：一切都在本機執行，模型由你自己帶。",
-        "onboarding_welcome_subtitle": "有自己的終端機和瀏覽器、能用這支手機的 AI 助理。",
-        "bg_service_notification_title": "FOMO 正在工作",
     },
 }
 

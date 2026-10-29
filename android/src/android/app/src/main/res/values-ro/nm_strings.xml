@@ -659,7 +659,7 @@
     <string name="nm_cloud_mode_password">Cu o parolă</string>
     <string name="nm_cloud_password">Parolă</string>
     <string name="nm_cloud_forgot_password">Ai uitat parola? Conectează-te cu un cod</string>
-    <string name="nm_cloud_identifier">Număr de telefon din China continentală sau e-mail</string>
+    <string name="nm_cloud_identifier">Introdu adresa ta de e-mail</string>
     <string name="nm_cloud_identifier_hint">tu@example.com</string>
     <string name="nm_cloud_code">Cod</string>
     <string name="nm_cloud_send_code">Trimite codul</string>
@@ -684,7 +684,7 @@
     <string name="nm_cloud_server_change_confirm">Cheia acestui telefon aparține serverului actual. Deconectează-te mai întâi aici, apoi conectează-te la celălalt server din ecranul de conectare.</string>
 
     <!-- Text-message codes: said on the sign-in screen before asking, and for the relay's phone_region answer -->
-    <string name="nm_cloud_sms_region">Codurile prin SMS ajung doar la numere din China continentală. Folosește în schimb o adresă de e-mail.</string>
+    <string name="nm_cloud_sms_region">Codurile se trimit doar prin e-mail. Introdu o adresă de e-mail.</string>
     <string name="nm_cloud_fine_print">Relay-ul păstrează un id de cont, un identificator mascat, contoare de utilizare și numele și aspectul agentului tău; ce altceva, și ce poți opri tu, e în politica de confidențialitate.</string>
     <string name="nm_cloud_not_signed_in">Neconectat</string>
     <string name="nm_cloud_not_signed_in_sub">Conectează-te cu un număr de telefon sau un e-mail pentru un credit gratuit. Furnizorii tăi rămân așa cum sunt.</string>
@@ -798,7 +798,7 @@
     <string name="nm_ways_sub">Două căi mai departe; conectarea și dispozitivele tale merg oricum.</string>
     <string name="nm_ways_key_title">Folosește propria cheie de model</string>
     <string name="nm_ways_key_guide">Ghid pas cu pas</string>
-    <string name="nm_ways_region_cn">Întâi Alibaba Cloud Bailian: o cheie acoperă chatul, ecranul, imaginile și clipurile și înregistrează conturi din China continentală. Fiecare furnizor de mai jos spune ce acoperă.</string>
+    <string name="nm_ways_region_cn">Întâi Alibaba Cloud Bailian: o cheie acoperă chatul, ecranul, imaginile și clipurile. Fiecare furnizor de mai jos spune ce acoperă.</string>
     <string name="nm_ways_region_global">Întâi OpenRouter sau OpenAI: o cheie, cele mai multe modele, plată după consum. Fiecare furnizor de mai jos spune ce acoperă.</string>
     <string name="nm_ways_add">Adaugă</string>
     <string name="nm_ways_add_named">Adaugă %1$s</string>

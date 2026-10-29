@@ -653,7 +653,7 @@
     <string name="nm_cloud_mode_password">Dengan kata laluan</string>
     <string name="nm_cloud_password">Kata laluan</string>
     <string name="nm_cloud_forgot_password">Lupa kata laluan? Log masuk dengan kod</string>
-    <string name="nm_cloud_identifier">Nombor telefon tanah besar China atau e-mel</string>
+    <string name="nm_cloud_identifier">Masukkan e-mel anda</string>
     <string name="nm_cloud_identifier_hint">anda@example.com</string>
     <string name="nm_cloud_code">Kod</string>
     <string name="nm_cloud_send_code">Hantar kod</string>
@@ -678,7 +678,7 @@
     <string name="nm_cloud_server_change_confirm">Kunci telefon ini milik pelayan semasa. Log keluar di sini dahulu, kemudian log masuk ke pelayan lain dari skrin log masuk.</string>
 
     <!-- Text-message codes: said on the sign-in screen before asking, and for the relay's phone_region answer -->
-    <string name="nm_cloud_sms_region">Kod SMS hanya sampai ke nombor tanah besar China. Guna alamat e-mel sebagai ganti.</string>
+    <string name="nm_cloud_sms_region">Kod dihantar melalui e-mel sahaja. Masukkan alamat e-mel.</string>
     <string name="nm_cloud_fine_print">Relay menyimpan id akaun, pengecam bertopeng, kiraan penggunaan serta nama dan rupa ejen anda; selebihnya, dan apa yang boleh anda matikan, ada dalam dasar privasi.</string>
     <string name="nm_cloud_not_signed_in">Belum log masuk</string>
     <string name="nm_cloud_not_signed_in_sub">Log masuk dengan nombor telefon atau e-mel untuk peruntukan percuma. Penyedia anda sendiri kekal seperti sedia ada.</string>
@@ -792,7 +792,7 @@
     <string name="nm_ways_sub">Dua cara untuk meneruskan; log masuk dan peranti anda terus berfungsi dengan mana-mana cara.</string>
     <string name="nm_ways_key_title">Guna kunci model anda sendiri</string>
     <string name="nm_ways_key_guide">Panduan langkah demi langkah</string>
-    <string name="nm_ways_region_cn">Alibaba Cloud Bailian dahulu: satu kunci merangkumi sembang, skrin, gambar dan klip, dan ia mendaftarkan akaun dari tanah besar China. Setiap penyedia di bawah menyatakan apa yang dirangkuminya.</string>
+    <string name="nm_ways_region_cn">Alibaba Cloud Bailian dahulu: satu kunci merangkumi sembang, skrin, gambar dan klip. Setiap penyedia di bawah menyatakan apa yang dirangkuminya.</string>
     <string name="nm_ways_region_global">OpenRouter atau OpenAI dahulu: satu kunci, paling banyak model, bayar ikut guna. Setiap penyedia di bawah menyatakan apa yang dirangkuminya.</string>
     <string name="nm_ways_add">Tambah</string>
     <string name="nm_ways_add_named">Tambah %1$s</string>

@@ -243,7 +243,6 @@
     <string name="soul_field_style">스타일</string>
     <string name="soul_field_lang">언어</string>
     <string name="soul_lang_auto">자동</string>
-    <string name="soul_lang_zh">中文</string>
     <string name="soul_lang_en">English</string>
     <string name="soul_body_placeholder">Agent가 어떤 말투로 말하고 어떻게 생각하며 행동해야 하는지 설명하세요…</string>
     <string name="soul_length_indicator">%1$d자</string>

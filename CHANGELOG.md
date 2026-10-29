@@ -4,6 +4,28 @@ All notable changes to FOMO (called corein until 1.1.0; before the fork on 2026-
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-10-29 · Clear
+
+The sign-in screen asks for an e-mail address, and the app speaks one language family less: the Chinese translations, the Chinese-only prompts and every mention of a region are gone from the apps, the relay's console and the code e-mail.
+
+### Cloud
+
+- **The sign-in code e-mail is English only** and no longer names a region; its sender name falls back to `corein <address>` when `SMTP_FROM` carries no name. The relay console's sign-in asks for an e-mail address.
+
+### Android
+
+- **The sign-in field says *Enter your email*,** and a phone number gets the sentence *Codes are sent by e-mail only* instead of a note about where text messages reach.
+- **No Chinese translation.** The 简体中文 and 繁體中文 resources, the per-app language entries and the Chinese ideas list are removed; a phone set to Chinese shows the app in English. The Soul's language setting offers *auto* and *English*.
+- **The prompts the app sends the model are English only:** the first conversation's name suggestions, the title-generation directive, the Google sign-in note for the browser tool and the hands' ladder no longer carry Chinese text or Chinese app names.
+
+### iOS
+
+- The sign-in field says *Enter your email*, and the sentence for a phone number says codes go out by e-mail.
+
+### Web / Desktop
+
+- The sign-in field and the first-run screen ask for an e-mail address; the hint under the desktop's field says the code is sent to it.
+
 ## [1.2.0] - 2026-10-26 · Rise
 
 ## [1.1.0] - 2026-10-23 · Launch

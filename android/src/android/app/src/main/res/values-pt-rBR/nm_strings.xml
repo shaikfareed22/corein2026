@@ -657,7 +657,7 @@
     <string name="nm_cloud_mode_password">Com uma senha</string>
     <string name="nm_cloud_password">Senha</string>
     <string name="nm_cloud_forgot_password">Esqueceu a senha? Entre com um código</string>
-    <string name="nm_cloud_identifier">Número de celular da China continental ou e-mail</string>
+    <string name="nm_cloud_identifier">Digite seu e-mail</string>
     <string name="nm_cloud_identifier_hint">voce@example.com</string>
     <string name="nm_cloud_code">Código</string>
     <string name="nm_cloud_send_code">Enviar código</string>
@@ -682,7 +682,7 @@
     <string name="nm_cloud_server_change_confirm">A chave deste telefone pertence ao servidor atual. Saia aqui primeiro e depois entre no outro servidor pela tela de login.</string>
 
     <!-- Text-message codes: said on the sign-in screen before asking, and for the relay's phone_region answer -->
-    <string name="nm_cloud_sms_region">Códigos por SMS só chegam a números da China continental. Use um endereço de e-mail em vez disso.</string>
+    <string name="nm_cloud_sms_region">Os códigos são enviados apenas por e-mail. Digite um endereço de e-mail.</string>
     <string name="nm_cloud_fine_print">O relay guarda um id de conta, um identificador mascarado, contagens de uso e o nome e a aparência do seu agente; o que mais, e o que você pode desligar, está na política de privacidade.</string>
     <string name="nm_cloud_not_signed_in">Não conectado</string>
     <string name="nm_cloud_not_signed_in_sub">Entre com um número de celular ou um e-mail para uma cota gratuita. Seus próprios provedores ficam como estão.</string>
@@ -796,7 +796,7 @@
     <string name="nm_ways_sub">Dois caminhos para seguir; seu login e seus dispositivos continuam funcionando de qualquer forma.</string>
     <string name="nm_ways_key_title">Usar sua própria chave de modelo</string>
     <string name="nm_ways_key_guide">Guia passo a passo</string>
-    <string name="nm_ways_region_cn">Primeiro o Alibaba Cloud Bailian: uma chave cobre chat, tela, imagens e clipes, e ele cadastra contas da China continental. Cada provedor abaixo diz o que cobre.</string>
+    <string name="nm_ways_region_cn">Primeiro o Alibaba Cloud Bailian: uma chave cobre chat, tela, imagens e clipes. Cada provedor abaixo diz o que cobre.</string>
     <string name="nm_ways_region_global">Primeiro OpenRouter ou OpenAI: uma chave, a maioria dos modelos, pagamento por uso. Cada provedor abaixo diz o que cobre.</string>
     <string name="nm_ways_add">Adicionar</string>
     <string name="nm_ways_add_named">Adicionar %1$s</string>

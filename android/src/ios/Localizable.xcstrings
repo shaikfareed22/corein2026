@@ -7251,61 +7251,13 @@
         }
       }
     },
-    "Mainland China phone number or e-mail" : {
+    "Enter your email" : {
       "extractionState" : "manual",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Telefonnummer aus Festlandchina oder E-Mail"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mainland China phone number or e-mail"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Número de teléfono de China continental o correo"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Numéro de Chine continentale ou e-mail"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "中国本土の電話番号またはメールアドレス"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "중국 본토 휴대전화 번호 또는 이메일"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Номер телефона материкового Китая или эл. почта"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "中国大陆手机号或邮箱"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "中國大陸手機號或信箱"
+            "value" : "Enter your email"
           }
         }
       }
@@ -151323,61 +151275,13 @@
         }
       }
     },
-    "Text-message codes reach mainland-China numbers only. Use an e-mail address instead." : {
+    "Codes are sent by e-mail only. Enter an e-mail address." : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Text-message codes reach mainland-China numbers only. Use an e-mail address instead."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "短信验证码只能发到中国大陆号码。请改用电子邮箱。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "簡訊驗證碼只能發到中國大陸號碼。請改用電子郵件。"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los códigos por SMS solo llegan a números de China continental. Usa una dirección de correo electrónico."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SMS の確認コードは中国本土の番号にのみ届きます。代わりにメールアドレスを使ってください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "문자 메시지 인증 코드는 중국 본토 번호로만 전송됩니다. 대신 이메일 주소를 사용하세요."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SMS-Codes erreichen nur Nummern in Festlandchina. Verwende stattdessen eine E-Mail-Adresse."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les codes par SMS n’atteignent que les numéros de Chine continentale. Utilisez plutôt une adresse e-mail."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Коды в СМС приходят только на номера материкового Китая. Используйте адрес электронной почты."
+            "value" : "Codes are sent by e-mail only. Enter an e-mail address."
           }
         }
       }

@@ -159,7 +159,7 @@ export function SignIn({
         <ModeButton active={mode === "password"} onClick={() => setMode("password")} icon={<KeyRound size={14} />} label={t("With a password")} />
       </div>
       <div>
-        <label htmlFor={`${ids}-id`} className="text-[12px] text-muted">{isMainland() ? t("Mainland China phone number or e-mail") : t("E-mail (or a mainland China phone number)")}</label>
+        <label htmlFor={`${ids}-id`} className="text-[12px] text-muted">{t("Enter your email")}</label>
         <input
           id={`${ids}-id`}
           value={identifier}
@@ -170,11 +170,11 @@ export function SignIn({
           inputMode={identifierInputMode(identifier)}
           autoComplete="username"
           autoFocus={autoFocus}
-          placeholder={isMainland() ? t("138 0000 0000 or you@example.com") : "you@example.com"}
+          placeholder="you@example.com"
           className={cx(inputCls, "mt-1")}
         />
         {mode === "code" && !sent && (!isMainland() || looksLikeForeignNumber(identifier)) && (
-          <p className="mt-1.5 text-[12px] text-muted">{t("Text-message codes reach mainland-China numbers only. Use an e-mail address instead.")}</p>
+          <p className="mt-1.5 text-[12px] text-muted">{t("Codes are sent by e-mail only. Enter an e-mail address.")}</p>
         )}
       </div>
       {mode === "password" ? (
