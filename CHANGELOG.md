@@ -4,6 +4,10 @@ All notable changes to FOMO (called corein until 1.1.0; before the fork on 2026-
 
 ## [Unreleased]
 
+### Cloud
+
+- **A deploy kit for an AWS free-tier instance with Google Gemini behind the relay for every account** (`cloud/deploy/aws-gemini/`): one idempotent `bootstrap.sh` (Docker, a 2 GB swap file, a DuckDNS name kept by cron, `cloud/.env` from `env.template` with fresh secrets kept across re-runs, backup and self-check timers, a DNS check before Caddy asks Let's Encrypt, a health wait), a `CLOUD_MODELS` menu of `gemini-3.8-flash` (recommended for chat and for the hands) and `gemini-3.5-flash-lite`, `CHAT_DEFAULTS={}` since Gemini rejects `enable_thinking`, and a README with the AWS console steps and how to point each app at the relay. Pictures and clips stay off (those routes assume DashScope). `tests/test_deploy_aws_gemini.py` checks the menu through the relay's own parser. No change to the relay's code.
+
 ## [1.2.1] - 2026-10-29 · Clear
 
 The sign-in screen asks for an e-mail address, and the app speaks one language family less: the Chinese translations, the Chinese-only prompts and every mention of a region are gone from the apps, the relay's console and the code e-mail.
