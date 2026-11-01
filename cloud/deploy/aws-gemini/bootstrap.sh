@@ -37,7 +37,10 @@ while [ $# -gt 0 ]; do
 		--root) ROOT="$2"; shift ;;
 		--no-start) START=0 ;;
 		--dry-run) DRY=1 ;;
-		-h|--help) sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+		-h|--help)
+			if [ -f "$0" ]; then sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'
+			else echo "flags: --domain NAME --duckdns-token TOKEN [--repo URL] [--branch NAME] [--root DIR] [--no-start] [--dry-run]; see cloud/deploy/aws-gemini/README.md"; fi
+			exit 0 ;;
 		*) echo "unknown option: $1 (try --help)" >&2; exit 2 ;;
 	esac
 	shift
