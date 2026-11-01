@@ -129,6 +129,8 @@ ensure_repo() {
 	fi
 	if [ -d "$ROOT/.git" ]; then
 		say "updating $ROOT"
+		# this script chmods the kit's scripts; a mode change must not block the next pull
+		git -C "$ROOT" config core.fileMode false
 		git -C "$ROOT" fetch -q origin "$BRANCH"
 		git -C "$ROOT" checkout -q "$BRANCH"
 		git -C "$ROOT" pull -q --ff-only origin "$BRANCH"
