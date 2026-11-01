@@ -45,7 +45,8 @@ done
 
 say() { printf '%s\n' "$*"; }
 die() { printf 'bootstrap: %s\n' "$*" >&2; exit 1; }
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# where this script lives; `curl | bash` has no BASH_SOURCE, and then only dry-run needs it
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || pwd)"
 # the first python that runs (on Windows, a `python3` on the PATH may be the Store's stub)
 PY=""
 for c in python3 python; do
