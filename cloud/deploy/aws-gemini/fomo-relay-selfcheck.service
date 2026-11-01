@@ -1,0 +1,8 @@
+[Unit]
+Description=FOMO Cloud: self-check (public door, relay health aggregates, disk, backup age)
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/fomo/cloud/deploy/aws-gemini/selfcheck.sh

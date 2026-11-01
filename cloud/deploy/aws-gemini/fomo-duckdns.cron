@@ -1,0 +1,2 @@
+# Installed by bootstrap.sh as /etc/cron.d/fomo-duckdns: keep the DuckDNS name on this instance.
+*/5 * * * * root /opt/fomo/cloud/deploy/aws-gemini/duckdns.sh >/dev/null 2>&1
