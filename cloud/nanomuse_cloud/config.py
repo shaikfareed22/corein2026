@@ -513,6 +513,13 @@ class Settings:
     # thousand reasoning tokens, so the shipped default turns that off; the app
     # can still ask for it explicitly.
     chat_defaults: dict = field(default_factory=lambda: json.loads(_env("CHAT_DEFAULTS", '{"enable_thinking": false}')))
+    # JSON object of fields removed from every chat request before it goes upstream, for a
+    # provider that refuses what an app sends: `true` drops the field whatever its value, a
+    # list drops it when its value is one of those. Gemini's OpenAI layer rejects
+    # `enable_thinking` and `reasoning_effort: "none"` (both are how an app says "no
+    # thinking"), so a Gemini relay sets
+    # `{"enable_thinking": true, "reasoning_effort": ["none"]}`. Applied after CHAT_DEFAULTS.
+    chat_drop: dict = field(default_factory=lambda: json.loads(_env("CHAT_DROP", "{}")))
 
     # The token grant, the older allowance. SIGNUP_TOKENS=0 (the default since
     # the money cap below took over) means no token ceiling: usage is still

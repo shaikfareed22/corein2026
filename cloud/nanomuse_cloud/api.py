@@ -174,6 +174,21 @@ def apply_chat_defaults(body: dict, defaults: dict) -> None:
         body["reasoning_effort"] = "none"
 
 
+def apply_chat_drops(body: dict, drops: dict) -> None:
+    """The operator's CHAT_DROP: fields the provider refuses, taken out of the request after
+    the defaults went in. `true` drops the field whatever its value; a list drops it only when
+    its value is one of those (`{"reasoning_effort": ["none"]}` keeps a real effort level)."""
+    for key, rule in drops.items():
+        if key not in body:
+            continue
+        if rule is True:
+            body.pop(key)
+        elif isinstance(rule, list):
+            value = body[key]
+            if value in rule or (isinstance(value, str) and value.strip().lower() in rule):
+                body.pop(key)
+
+
 def upstream_detail(kind: str, status: int, model: str, raw: bytes | str) -> str:
     """The line an `upstream.error` event keeps: the kind, the status, the model and the
     provider's own words (its `error.message`, one line, trimmed) — enough to see *why* a
@@ -181,6 +196,9 @@ def upstream_detail(kind: str, status: int, model: str, raw: bytes | str) -> str
     message = ""
     try:
         obj = json.loads(raw.decode("utf-8", "replace") if isinstance(raw, bytes) else raw)
+        # Gemini's OpenAI layer wraps its error in a one-element list
+        if isinstance(obj, list) and obj and isinstance(obj[0], dict):
+            obj = obj[0]
         err = obj.get("error") if isinstance(obj, dict) else None
         if isinstance(err, dict):
             message = str(err.get("message") or err.get("code") or "")
@@ -226,6 +244,8 @@ def relay_error_body(status: int, raw: bytes) -> dict:
     upstream = ""
     try:
         up = json.loads(raw)
+        if isinstance(up, list) and up and isinstance(up[0], dict):
+            up = up[0]  # Gemini's OpenAI layer wraps its error in a one-element list
         if isinstance(up, dict):
             e = up.get("error")
             if isinstance(e, dict) and e.get("message"):
@@ -779,6 +799,7 @@ def create_app(
         cloud.check_budget(caller, request_id=request_id, hold_uy=cloud.chat_reserve_uy(spec), place=client_place(request))
         body["model"] = spec.upstream
         apply_chat_defaults(body, settings.chat_defaults)
+        apply_chat_drops(body, settings.chat_drop)
         stream = bool(body.get("stream"))
         if stream:
             opts = body.get("stream_options") if isinstance(body.get("stream_options"), dict) else {}

@@ -35,6 +35,9 @@ def test_menu_is_gemini_chat_only_with_one_pick_per_lane(monkeypatch):
 def test_env_template_gemini_settings():
     kv = _kv((KIT / "env.template").read_text(encoding="utf-8"))
     assert kv["CHAT_DEFAULTS"] == "{}", "Gemini rejects enable_thinking"
+    assert json.loads(kv["CHAT_DROP"]) == {"enable_thinking": True, "reasoning_effort": ["none"]}, (
+        "the hands say no-thinking; Gemini answers 400 to it"
+    )
     assert kv["UPSTREAM_BASE"] == "https://generativelanguage.googleapis.com/v1beta/openai"
     assert kv["CLOUD_CATALOG"] == "0"
     assert kv["CODE_SENDER"] == "smtp"
