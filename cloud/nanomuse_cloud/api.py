@@ -189,6 +189,34 @@ def apply_chat_drops(body: dict, drops: dict) -> None:
                 body.pop(key)
 
 
+def apply_tool_call_signature(body: dict, signature: str) -> None:
+    """CHAT_TOOL_CALL_SIGNATURE: Gemini 3 wants every assistant tool call in the history to
+    carry the thought signature it came with, and the apps keep none; Google's placeholder
+    goes into each one that lacks it, as `extra_content.google.thought_signature`. A
+    signature already there (an app that does keep them) is left alone."""
+    if not signature:
+        return
+    messages = body.get("messages")
+    if not isinstance(messages, list):
+        return
+    for message in messages:
+        if not isinstance(message, dict) or message.get("role") != "assistant":
+            continue
+        calls = message.get("tool_calls")
+        if not isinstance(calls, list):
+            continue
+        for call in calls:
+            if not isinstance(call, dict):
+                continue
+            extra = call.get("extra_content")
+            if not isinstance(extra, dict):
+                extra = call["extra_content"] = {}
+            google = extra.get("google")
+            if not isinstance(google, dict):
+                google = extra["google"] = {}
+            google.setdefault("thought_signature", signature)
+
+
 def upstream_detail(kind: str, status: int, model: str, raw: bytes | str) -> str:
     """The line an `upstream.error` event keeps: the kind, the status, the model and the
     provider's own words (its `error.message`, one line, trimmed) — enough to see *why* a
@@ -800,6 +828,7 @@ def create_app(
         body["model"] = spec.upstream
         apply_chat_defaults(body, settings.chat_defaults)
         apply_chat_drops(body, settings.chat_drop)
+        apply_tool_call_signature(body, settings.chat_tool_call_signature)
         stream = bool(body.get("stream"))
         if stream:
             opts = body.get("stream_options") if isinstance(body.get("stream_options"), dict) else {}

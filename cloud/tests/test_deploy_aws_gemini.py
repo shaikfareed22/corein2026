@@ -38,6 +38,7 @@ def test_env_template_gemini_settings():
     assert json.loads(kv["CHAT_DROP"]) == {"enable_thinking": True, "reasoning_effort": ["none"]}, (
         "the hands say no-thinking; Gemini answers 400 to it"
     )
+    assert kv["CHAT_TOOL_CALL_SIGNATURE"] == "skip_thought_signature_validator"
     assert kv["UPSTREAM_BASE"] == "https://generativelanguage.googleapis.com/v1beta/openai"
     assert kv["CLOUD_CATALOG"] == "0"
     assert kv["CODE_SENDER"] == "smtp"

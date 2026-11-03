@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 
-from nanomuse_cloud.api import apply_chat_drops, relay_error_body, upstream_detail
+from nanomuse_cloud.api import apply_chat_drops, apply_tool_call_signature, relay_error_body, upstream_detail
 from nanomuse_cloud.config import Settings
 
 GEMINI = {"enable_thinking": True, "reasoning_effort": ["none"]}
@@ -51,3 +51,47 @@ def test_gemini_list_shaped_error_is_read():
     err = relay_error_body(400, GEMINI_400)["error"]
     assert err["code"] == "upstream_400"
     assert "enable_thinking" in err["message"]
+
+
+SIG = "skip_thought_signature_validator"
+
+
+def test_tool_calls_get_the_placeholder_signature():
+    body = {
+        "messages": [
+            {"role": "user", "content": "open whatsapp"},
+            {
+                "role": "assistant",
+                "content": None,
+                "tool_calls": [{"id": "c1", "type": "function", "function": {"name": "phone_task", "arguments": "{}"}}],
+            },
+            {"role": "tool", "tool_call_id": "c1", "content": "done"},
+            {
+                "role": "assistant",
+                "tool_calls": [
+                    {
+                        "id": "c2",
+                        "type": "function",
+                        "function": {"name": "x", "arguments": "{}"},
+                        "extra_content": {"google": {"thought_signature": "real"}},
+                    }
+                ],
+            },
+        ]
+    }
+    apply_tool_call_signature(body, SIG)
+    calls = body["messages"][1]["tool_calls"]
+    assert calls[0]["extra_content"] == {"google": {"thought_signature": SIG}}
+    assert body["messages"][3]["tool_calls"][0]["extra_content"]["google"]["thought_signature"] == "real"
+    assert "tool_calls" not in body["messages"][0] and "extra_content" not in body["messages"][2]
+
+
+def test_no_signature_setting_changes_nothing():
+    body = {"messages": [{"role": "assistant", "tool_calls": [{"id": "c1", "function": {"name": "x", "arguments": "{}"}}]}]}
+    apply_tool_call_signature(body, "")
+    assert body["messages"][0]["tool_calls"][0] == {"id": "c1", "function": {"name": "x", "arguments": "{}"}}
+
+
+def test_signature_setting_from_env(monkeypatch):
+    monkeypatch.setenv("CHAT_TOOL_CALL_SIGNATURE", SIG)
+    assert Settings().chat_tool_call_signature == SIG

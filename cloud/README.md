@@ -166,6 +166,7 @@ for the full list. The ones that matter:
 | `DASHSCOPE_BASE` | Model Studio native | where pictures go (same key) |
 | `IMAGE_CONCURRENCY` / `IMAGE_RETRIES` | 2 / 4 | pictures drawn at once for everyone together (the provider allows an account only a couple), and how often a 429 or 5xx is retried with growing pauses before `429 provider_busy` |
 | `CHAT_DEFAULTS` | `{"enable_thinking": false}` | merged into chat requests for fields the app did not set |
+| `CHAT_TOOL_CALL_SIGNATURE` | empty | Gemini 3 models refuse a conversation whose earlier assistant tool calls come back without the thought signature they were issued with, and the apps keep none; set to Google's placeholder `skip_thought_signature_validator` and every tool call without one gets it (`extra_content.google.thought_signature`) before the request goes upstream |
 | `CHAT_DROP` | `{}` | fields removed from every chat request after the defaults, for a provider that refuses them: `true` drops the field whatever its value, a list drops it when its value is one of those. Gemini's OpenAI layer answers 400 to `enable_thinking` and to `reasoning_effort: "none"`, so a Gemini relay sets `{"enable_thinking": true, "reasoning_effort": ["none"]}` (`deploy/aws-gemini/`) |
 | `SIGNUP_OPEN` | `1` | anyone may sign in; `0` = members only (a private relay). *Runtime setting* — see below |
 | `ALLOWED_IDENTIFIERS` | empty | comma-separated numbers / addresses of the **members**: no spend limit |

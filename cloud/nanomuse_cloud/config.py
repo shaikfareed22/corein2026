@@ -520,6 +520,12 @@ class Settings:
     # thinking"), so a Gemini relay sets
     # `{"enable_thinking": true, "reasoning_effort": ["none"]}`. Applied after CHAT_DEFAULTS.
     chat_drop: dict = field(default_factory=lambda: json.loads(_env("CHAT_DROP", "{}")))
+    # Gemini 3 models refuse a conversation whose earlier assistant tool calls come back
+    # without the "thought signature" the model attached to them ("Function call is missing a
+    # thought_signature"), and the apps keep none. Google accepts a placeholder in that case;
+    # with this set, every assistant tool call without one gets it
+    # (`extra_content.google.thought_signature`). Empty = leave the messages alone.
+    chat_tool_call_signature: str = field(default_factory=lambda: _env("CHAT_TOOL_CALL_SIGNATURE"))
 
     # The token grant, the older allowance. SIGNUP_TOKENS=0 (the default since
     # the money cap below took over) means no token ceiling: usage is still
