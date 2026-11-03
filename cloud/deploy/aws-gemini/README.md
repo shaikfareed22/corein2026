@@ -17,7 +17,7 @@ to AWS and Gemini. It uses the stock `cloud/docker-compose.yml` and `cloud/Caddy
 | containers | `relay` (uid 10001 inside, owns `data/`), `caddy` (ports 80 and 443, Let's Encrypt) |
 | name | a DuckDNS subdomain; `duckdns.sh` keeps it on the instance every 5 minutes (cron) |
 | timers | daily backup 04:10 UTC, 30 days kept; self-check every 10 minutes (`journalctl -t fomo-selfcheck`) |
-| models | `gemini-3.8-flash` (chat and hands, the default in both lanes), `gemini-3.5-flash-lite` (the quick, cheap one) |
+| models | `gemini-3.5-flash-lite` (chat and hands, the default in both lanes: it answers in about a second on a free-tier key), `gemini-3.8-flash` (stronger, but on a free-tier key it can take minutes and the relay's 180 s wait runs out; pick it with a billed key) |
 | off | avatar pictures and clips: the relay's image and video routes assume Alibaba's API, so the menu has none and the apps show those features off |
 
 ## Before the script: the AWS console and DuckDNS
