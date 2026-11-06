@@ -19,6 +19,7 @@ to AWS and Gemini. It uses the stock `cloud/docker-compose.yml` and `cloud/Caddy
 | timers | daily backup 04:10 UTC, 30 days kept; self-check every 10 minutes (`journalctl -t fomo-selfcheck`) |
 | models | `gemini-3.5-flash-lite` (chat and hands, the default in both lanes: it answers in about a second on a free-tier key), `gemini-3.8-flash` (stronger, but on a free-tier key it can take minutes and the relay's 180 s wait runs out; pick it with a billed key) |
 | settings | `CHAT_DEFAULTS={}` and `CHAT_DROP={"enable_thinking": true, "reasoning_effort": ["none"]}`: Gemini answers 400 to both of those "no thinking" fields, and the phone's hands send one on every screenshot step; `CHAT_TOOL_CALL_SIGNATURE=skip_thought_signature_validator`, Google's placeholder for the thought signature Gemini 3 wants on every earlier tool call in a conversation |
+| busy provider | `CHAT_RETRIES=5`, `CHAT_RETRY_MAX_S=20`, `CHAT_FALLBACK=gemini-3.8-flash`: a free-tier key is often answered 503 "high demand" or 429; the relay waits and asks again instead of failing the step, and the last try goes to the other model |
 | off | avatar pictures and clips: the relay's image and video routes assume Alibaba's API, so the menu has none and the apps show those features off |
 
 ## Before the script: the AWS console and DuckDNS

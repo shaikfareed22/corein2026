@@ -526,6 +526,16 @@ class Settings:
     # with this set, every assistant tool call without one gets it
     # (`extra_content.google.thought_signature`). Empty = leave the messages alone.
     chat_tool_call_signature: str = field(default_factory=lambda: _env("CHAT_TOOL_CALL_SIGNATURE"))
+    # A provider that is busy (429, or a 5xx such as Gemini's 503 "high demand" on a free
+    # key) is asked again up to CHAT_RETRIES times before the app hears about it, as long
+    # as nothing of the reply has been sent. The pause is what the provider asks for
+    # (Retry-After, or Gemini's retryDelay) or else 2 s doubling, never above
+    # CHAT_RETRY_MAX_S. With CHAT_FALLBACK (a provider model id) the last try goes to that
+    # model instead: a free key's limits are per model, so another one often still answers.
+    # The turn is charged at the price of the model the app asked for.
+    chat_retries: int = field(default_factory=lambda: _int("CHAT_RETRIES", 0))
+    chat_retry_max_s: float = field(default_factory=lambda: float(_env("CHAT_RETRY_MAX_S", "20")))
+    chat_fallback: str = field(default_factory=lambda: _env("CHAT_FALLBACK"))
 
     # The token grant, the older allowance. SIGNUP_TOKENS=0 (the default since
     # the money cap below took over) means no token ceiling: usage is still

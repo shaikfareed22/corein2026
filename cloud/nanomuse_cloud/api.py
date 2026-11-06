@@ -97,6 +97,7 @@ import base64
 import json
 import logging
 import math
+import re
 import secrets
 import time
 import uuid
@@ -187,6 +188,28 @@ def apply_chat_drops(body: dict, drops: dict) -> None:
             value = body[key]
             if value in rule or (isinstance(value, str) and value.strip().lower() in rule):
                 body.pop(key)
+
+
+CHAT_RETRY_STATUSES = frozenset({429, 500, 502, 503, 504})
+_RETRY_DELAY = re.compile(rb'"retryDelay"\s*:\s*"(\d+(?:\.\d+)?)s"')
+
+
+def chat_retry_pause(attempt: int, retry_after: str | None, raw: bytes, cap: float) -> float:
+    """Seconds to wait before chat try number `attempt + 1`: what the provider asked for
+    (the Retry-After header, or the retryDelay Gemini writes into a 429), else 2 s
+    doubling; never above `cap` (CHAT_RETRY_MAX_S)."""
+    wait: float | None = None
+    try:
+        wait = float(retry_after) if retry_after else None
+    except ValueError:
+        wait = None
+    if wait is None:
+        m = _RETRY_DELAY.search(raw or b"")
+        if m:
+            wait = float(m.group(1))
+    if wait is None:
+        wait = 2.0 * (2**attempt)
+    return max(0.0, min(cap, wait))
 
 
 def apply_tool_call_signature(body: dict, signature: str) -> None:
@@ -853,14 +876,37 @@ def create_app(
             else None
         )
         sample_messages = body.get("messages") if caller.contribute and isinstance(body.get("messages"), list) else []
+        retries = max(0, settings.chat_retries)
+
+        def attempt_payload(attempt: int) -> bytes:
+            # the last try goes to CHAT_FALLBACK, when there is one and it is another model
+            fallback = settings.chat_fallback
+            if fallback and retries and attempt == retries and fallback != spec.upstream:
+                return dumps({**body, "model": fallback}).encode()
+            return dumps(body).encode()
+
+        def retry_pause(attempt: int, status: int, retry_after: str | None, raw: bytes) -> float | None:
+            """The pause before another try, or None when this answer is the one the app gets."""
+            if attempt >= retries or status not in CHAT_RETRY_STATUSES:
+                return None
+            pause = chat_retry_pause(attempt, retry_after, raw, settings.chat_retry_max_s)
+            log.info("upstream chat HTTP %s for %s; again in %.0fs (%d/%d)", status, spec.id, pause, attempt + 1, retries)
+            return pause
 
         if not stream:
             try:
-                try:
-                    r = await http.post(url, headers=headers, content=dumps(body).encode())
-                except httpx.HTTPError as e:
-                    log.warning("upstream error: %s", e)
-                    raise CloudError(502, "upstream", "The model provider did not answer") from e
+                attempt = 0
+                while True:
+                    try:
+                        r = await http.post(url, headers=headers, content=attempt_payload(attempt))
+                    except httpx.HTTPError as e:
+                        log.warning("upstream error: %s", e)
+                        raise CloudError(502, "upstream", "The model provider did not answer") from e
+                    pause = retry_pause(attempt, r.status_code, r.headers.get("retry-after"), r.content)
+                    if pause is None:
+                        break
+                    attempt += 1
+                    await asyncio.sleep(pause)
                 if r.status_code >= 400:
                     cloud.note(
                         caller.account_id,
@@ -896,44 +942,57 @@ def create_app(
             # account nothing; a stream that broke off midway is charged for what arrived.
             failed = False
             try:
-                async with http.stream("POST", url, headers=headers, content=dumps(body).encode()) as r:
-                    if r.status_code >= 400:
-                        raw = await r.aread()
-                        cloud.note(
-                            caller.account_id,
-                            upstream_event_kind(r.status_code, raw),
-                            upstream_detail("chat", r.status_code, spec.id, raw),
-                        )
-                        failed = True
-                        err = relay_error_body(r.status_code, raw)
-                        cloud.db.daily_add("error", str(err["error"]["code"]))  # the 200 has left; count it here
-                        yield f"data: {dumps(err)}\n\n".encode()
-                        yield b"data: [DONE]\n\n"
-                        return
-                    async for line in r.aiter_lines():
-                        if line.startswith("data:"):
-                            payload = line[5:].strip()
-                            if payload and payload != "[DONE]":
-                                try:
-                                    obj = json.loads(payload)
-                                except ValueError:
-                                    obj = None
-                                if isinstance(obj, dict):
-                                    u = usage_from_json(obj)
-                                    if u is not None:
-                                        usage = u
-                                    for ch in obj.get("choices") or []:
-                                        d = ch.get("delta") if isinstance(ch, dict) else None
-                                        if isinstance(d, dict) and isinstance(d.get("content"), str):
-                                            text_len += len(d["content"])
-                                            reply.append(d["content"])
-                                    obj["model"] = spec.id
-                                    payload = dumps(obj)
-                            yield f"data: {payload}\n\n".encode()
-                        elif line == "":
-                            continue
+                attempt = 0
+                while True:
+                    pause: float | None = None
+                    async with http.stream("POST", url, headers=headers, content=attempt_payload(attempt)) as r:
+                        if r.status_code >= 400:
+                            raw = await r.aread()
+                            pause = retry_pause(attempt, r.status_code, r.headers.get("retry-after"), raw)
+                            if pause is None:
+                                cloud.note(
+                                    caller.account_id,
+                                    upstream_event_kind(r.status_code, raw),
+                                    upstream_detail("chat", r.status_code, spec.id, raw),
+                                )
+                                failed = True
+                                err = relay_error_body(r.status_code, raw)
+                                cloud.db.daily_add("error", str(err["error"]["code"]))  # the 200 has left; count it here
+                                yield f"data: {dumps(err)}\n\n".encode()
+                                yield b"data: [DONE]\n\n"
+                                return
                         else:
-                            yield (line + "\n").encode()
+                            async for line in r.aiter_lines():
+                                if line.startswith("data:"):
+                                    payload = line[5:].strip()
+                                    if payload and payload != "[DONE]":
+                                        try:
+                                            obj = json.loads(payload)
+                                        except ValueError:
+                                            obj = None
+                                        if isinstance(obj, dict):
+                                            u = usage_from_json(obj)
+                                            if u is not None:
+                                                usage = u
+                                            for ch in obj.get("choices") or []:
+                                                d = ch.get("delta") if isinstance(ch, dict) else None
+                                                if isinstance(d, dict) and isinstance(d.get("content"), str):
+                                                    text_len += len(d["content"])
+                                                    reply.append(d["content"])
+                                            obj["model"] = spec.id
+                                            payload = dumps(obj)
+                                    yield f"data: {payload}\n\n".encode()
+                                elif line == "":
+                                    continue
+                                else:
+                                    yield (line + "\n").encode()
+                    if pause is None:
+                        break
+                    # the provider is busy and nothing has been sent yet: an SSE comment keeps
+                    # the app's connection awake while the relay waits and asks again
+                    yield b": the provider is busy, trying again\n\n"
+                    attempt += 1
+                    await asyncio.sleep(pause)
             except httpx.HTTPError as e:
                 log.warning("upstream stream error: %s %s", type(e).__name__, e)
                 cloud.note(caller.account_id, "upstream.error", f"chat stream broke {spec.id}: {type(e).__name__}")

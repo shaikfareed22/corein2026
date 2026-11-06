@@ -39,6 +39,8 @@ def test_env_template_gemini_settings():
         "the hands say no-thinking; Gemini answers 400 to it"
     )
     assert kv["CHAT_TOOL_CALL_SIGNATURE"] == "skip_thought_signature_validator"
+    assert int(kv["CHAT_RETRIES"]) >= 3, "a free-tier key is told 'high demand' many times a day"
+    assert kv["CHAT_FALLBACK"] in {m["upstream"] for m in json.loads((KIT / "models.json").read_text(encoding="utf-8"))}
     assert kv["UPSTREAM_BASE"] == "https://generativelanguage.googleapis.com/v1beta/openai"
     assert kv["CLOUD_CATALOG"] == "0"
     assert kv["CODE_SENDER"] == "smtp"
