@@ -66,6 +66,8 @@ object NanoMuseCloud {
     private const val KEY_SPENT_TODAY = "cloud.spent_today_cny"
     private const val KEY_SPENT_TOTAL = "cloud.spent_total_cny"
     private const val KEY_USD_CNY = "cloud.usd_cny"
+    /** The sign of the relay's ledger unit (`spend.currency_symbol`, e.g. "₹"); "¥" when the relay did not say. */
+    private const val KEY_CURRENCY_SYMBOL = "cloud.currency_symbol"
     // 0.1.23: the one pool (relay 0.5)
     private const val KEY_GRANT = "cloud.grant_cny"
     private const val KEY_LEFT = "cloud.left_cny"
@@ -190,8 +192,13 @@ object NanoMuseCloud {
         val allowanceCny: Double = 0.0,
         /** The guide for bringing one's own key; empty on an older relay. */
         val ownKeyDocs: String = "",
-        /** Yuan per dollar, for showing both; 0 when the relay did not say. */
+        /** Ledger units per US dollar, for showing both; 0 when the relay did not say. */
         val usdCny: Double = 0.0,
+        /**
+         * The sign of the relay's ledger unit — every `…Cny` figure is in it, whatever the relay
+         * bills in (`spend.currency_symbol`, relay 0.23); "¥" on an older relay.
+         */
+        val currencySymbol: String = DEFAULT_CURRENCY_SYMBOL,
         /** The relay's opaque id for the account (not the number or address). */
         val accountId: String = "",
         /** When the account was created (UNIX seconds); 0 when unknown. */
@@ -238,6 +245,8 @@ object NanoMuseCloud {
         /** The pool is spent: the relay refuses model calls until it grows or the person brings a key. */
         val exhausted: Boolean get() = limited && leftCny <= 0.0
         fun toUsd(cny: Double): Double = if (usdCny > 0) cny / usdCny else 0.0
+        /** A ledger amount with the relay's sign in front ("₹12.50", "¥5"). */
+        fun money(v: Double): String = currencySymbol + io.github.nanomuse.ui.cloud.money(v)
     }
 
     private val http: OkHttpClient by lazy {
@@ -327,13 +336,42 @@ object NanoMuseCloud {
     }
 
     /**
-     * The invite bonus as the relay states it, for the lines that mention it ("+¥5 for each
-     * of you") — the relay's figure can change from its operator's page at any time, so no
+     * The invite bonus as the relay states it, with its currency sign ("+¥5 for each of you",
+     * "+₹50 …") — the relay's figure can change from its operator's page at any time, so no
      * string carries one of its own. ¥5 only until the first /v1/me.
      */
     fun inviteBonusText(context: Context): String {
         val bonus = account(context)?.inviteBonusCny?.takeIf { it > 0 } ?: 5.0
-        return io.github.nanomuse.ui.cloud.money(bonus)
+        return currencySymbol(context) + io.github.nanomuse.ui.cloud.money(bonus)
+    }
+
+    const val DEFAULT_CURRENCY_SYMBOL = "¥"
+
+    /**
+     * The sign of the relay's ledger unit as the last /v1/me stated it, for the code paths that
+     * have only a Context; "¥" before the first /v1/me and on a relay that does not say.
+     */
+    fun currencySymbol(context: Context): String =
+        prefs(context).getString(KEY_CURRENCY_SYMBOL, null)?.takeIf { it.isNotBlank() } ?: DEFAULT_CURRENCY_SYMBOL
+
+    /** A ledger amount with the relay's sign in front, for the same code paths. */
+    fun moneyText(context: Context, v: Double): String = currencySymbol(context) + io.github.nanomuse.ui.cloud.money(v)
+
+    /**
+     * The relay's `currency_symbol` when it sends one; else the sign of its ISO `currency` code
+     * when that is one we know; else "¥" (an older relay bills in yuan and says neither).
+     */
+    fun currencySymbolOf(symbol: String?, code: String?): String {
+        symbol?.trim()?.takeIf { it.isNotEmpty() }?.let { return it }
+        return when (code?.trim()?.uppercase()) {
+            "CNY" -> "¥"
+            "INR" -> "₹"
+            "USD" -> "$"
+            "EUR" -> "€"
+            "GBP" -> "£"
+            "JPY" -> "¥"
+            else -> DEFAULT_CURRENCY_SYMBOL
+        }
     }
 
     fun account(context: Context): Account? {
@@ -357,6 +395,7 @@ object NanoMuseCloud {
             allowanceCny = p.getFloat(KEY_ALLOWANCE, 0f).toDouble(),
             ownKeyDocs = p.getString(KEY_OWN_KEY_DOCS, "") ?: "",
             usdCny = p.getFloat(KEY_USD_CNY, 0f).toDouble(),
+            currencySymbol = p.getString(KEY_CURRENCY_SYMBOL, null)?.takeIf { it.isNotBlank() } ?: DEFAULT_CURRENCY_SYMBOL,
             accountId = p.getString(KEY_ACCOUNT_ID, "") ?: "",
             createdAt = p.getLong(KEY_CREATED_AT, 0),
             hasPassword = p.getBoolean(KEY_HAS_PASSWORD, false),
@@ -1000,6 +1039,8 @@ object NanoMuseCloud {
             // relay 0.21: the card as data; an older relay sends none and the bundled catalogue is used
             .putString(KEY_GUIDANCE, spend.optJSONObject("guidance")?.toString())
             .putFloat(KEY_USD_CNY, spend.optDouble("usd_cny", 0.0).toFloat())
+            // relay 0.23: what the ledger unit is; an older relay says neither and bills in yuan
+            .putString(KEY_CURRENCY_SYMBOL, currencySymbolOf(spend.optString("currency_symbol", ""), spend.optString("currency", "")))
             .putString(KEY_ACCOUNT_ID, account.optString("id"))
             .putLong(KEY_CREATED_AT, account.optLong("created_at", 0))
             .putBoolean(KEY_HAS_PASSWORD, account.optBoolean("has_password", false))
@@ -1081,7 +1122,7 @@ object NanoMuseCloud {
         prefs(context).edit()
             .remove(KEY_INSTANCE).remove(KEY_CHANNEL).remove(KEY_HINT)
             .remove(KEY_GRANTED).remove(KEY_USED).remove(KEY_USED_TODAY).remove(KEY_DAILY_CAP).remove(KEY_UNLIMITED).remove(KEY_CHECKED_AT)
-            .remove(KEY_MEMBER).remove(KEY_SPENT_TODAY).remove(KEY_SPENT_TOTAL).remove(KEY_USD_CNY)
+            .remove(KEY_MEMBER).remove(KEY_SPENT_TODAY).remove(KEY_SPENT_TOTAL).remove(KEY_USD_CNY).remove(KEY_CURRENCY_SYMBOL)
             .remove(KEY_GRANT).remove(KEY_LEFT).remove(KEY_WARN).remove(KEY_ALLOWANCE).remove(KEY_INVITEE_BONUS)
             .remove(KEY_OWN_KEY_DOCS).remove(KEY_GUIDANCE)
             .remove(KEY_ACCOUNT_ID).remove(KEY_CREATED_AT).remove(KEY_HAS_PASSWORD).remove(KEY_SESSIONS).remove(KEY_VIA).remove(KEY_REGION).remove(KEY_USAGE)

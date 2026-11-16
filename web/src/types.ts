@@ -128,6 +128,9 @@ export interface NoticeEvent extends BaseEvent {
   allowance?: {
     left?: number | null;
     grant?: number;
+    /** what the relay bills in (ISO code) and its sign; older relays: yuan */
+    currency?: string;
+    currency_symbol?: string;
     invite_url?: string;
     invite_bonus_cny?: number;
     invitee_bonus_cny?: number;
@@ -403,7 +406,11 @@ export interface CloudConfig {
   allowance_usd?: number;
   invite_bonus_cny?: number;
   invitee_bonus_cny?: number;
+  /** ledger units per US dollar */
   usd_cny?: number;
+  /** what the relay bills in (ISO code, e.g. "INR"; older relays "CNY") and its sign ("₹"; absent on older relays → ¥) */
+  currency?: string;
+  currency_symbol?: string;
   invite_url?: string;
   own_key_docs?: string;
   privacy_url?: string;
@@ -439,7 +446,10 @@ export interface CloudMe {
    * (`today`, `daily_cap`, …) are still sent for one version.
    */
   spend: {
+    /** ISO code of what the relay bills in ("INR"; older relays "CNY"); every `_cny` field is in these units */
     currency: string;
+    /** its sign ("₹"); absent on older relays → ¥ */
+    currency_symbol?: string;
     today: number;
     total: number;
     grant?: number;

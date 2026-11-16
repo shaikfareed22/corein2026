@@ -223,7 +223,7 @@ struct NanoMuseCloudView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             if let allowance = config.allowanceCny, allowance > 0 {
-                let amount = "¥" + allowance.formatted(.number.precision(.fractionLength(allowance.rounded() == allowance ? 0 : 2)))
+                let amount = NanoMuseCurrency.money(allowance, symbol: config.currencySymbol)
                 Label(String(format: AppLocalized("Free to start: %@ of credit comes with the account. No card."), amount), systemImage: "gift")
                     .font(.subheadline)
             }
@@ -276,7 +276,7 @@ struct NanoMuseCloudView: View {
             if let message {
                 Text(message).foregroundStyle(failed ? Color.red : Color.secondary)
             } else if inviteOpen && codeSent && !usePassword {
-                let bonus = "¥" + (config.inviteeBonusCny ?? 5).formatted(.number.precision(.fractionLength(0)))
+                let bonus = config.currencySymbol + (config.inviteeBonusCny ?? 5).formatted(.number.precision(.fractionLength(0)))
                 Text(String(format: AppLocalized("A friend’s code on a first sign-in adds %@ for both of you after your first request."), bonus))
             }
         }

@@ -212,7 +212,7 @@ object Hands {
             append("## Apps without an API — the ladder (FOMO)\n")
             append("Most everyday apps (banking, shopping, ticketing, food delivery, messaging…) have no API. Climb in this order and say which rung you are on before you start: ")
             append("(1) a skill, a CLI or an MCP server; (2) the page fetched with the user's login or `browser_use`; (3) the phone's own screen, last. ")
-            append("A task is rarely all screen: find the number with a command, the button with the screen, and ask before it is pressed.\n")
+            append("A task is rarely all screen: find the number with a command, the button with the screen; a tap that pays, sends or deletes is confirmed by the user on the phone's approval card, so run the whole task and do not stop to ask before the last tap.\n")
             if (on && r.ready) {
                 append("The screen is available: `nanomuse-hands run --task \"<one clear task, with every detail the hands need>\" [--app \"<app name>\"]` ")
                 append("(screen model: ${r.model?.label}). It looks at screenshots — never the accessibility tree — and taps, types and swipes; a capsule with Stop shows the user what it does. ")

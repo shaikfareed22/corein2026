@@ -59,6 +59,35 @@ final class NanoMuseAccountsTests: XCTestCase {
         XCTAssertEqual(NanoMuseCloud.parseAccount(["account": ["channel": "sms"], "spend": ["grant": 5, "left": -0.4]]).poolLeftCny, 0)
     }
 
+    func testTheMoneyFiguresCarryTheRelaysCurrencySign() throws {
+        // the relay says what it bills in; the figures keep their `_cny` names (ledger units)
+        let rupees: [String: Any] = ["account": ["channel": "email", "hint": "a***@b.com"],
+                                     "spend": ["total": 1.8, "grant": 5, "left": 3.2, "currency": "INR", "currency_symbol": "₹"]]
+        XCTAssertEqual(NanoMuseCloud.parseAccount(rupees).currencySymbol, "₹")
+        XCTAssertEqual(NanoMuseCloud.parseAccount(rupees).leftLine, String(format: AppLocalized("%@ left"), "₹3.20"))
+        XCTAssertEqual(NanoMuseSheet.parse(rupees).spend?.currencySymbol, "₹")
+        XCTAssertEqual(NanoMuseSheet.parse(rupees).currencySymbol, "₹")
+        // a code without a symbol maps; an older relay that says nothing meant yuan
+        let dollars: [String: Any] = ["account": ["channel": "email"], "spend": ["grant": 5, "left": 3, "currency": "USD"]]
+        XCTAssertEqual(NanoMuseCloud.parseAccount(dollars).currencySymbol, "$")
+        XCTAssertEqual(NanoMuseCloud.parseAccount(dollars).leftLine, String(format: AppLocalized("%@ left"), "$3"))
+        let older: [String: Any] = ["account": ["channel": "sms"], "spend": ["grant": 5, "left": 3.2]]
+        XCTAssertEqual(NanoMuseCloud.parseAccount(older).currencySymbol, "¥")
+        XCTAssertEqual(NanoMuseSheet.parse(older).currencySymbol, "¥")
+        XCTAssertEqual(NanoMuseSheet.parse(["account": ["channel": "sms"]]).currencySymbol, "¥", "no spend block at all")
+        // an account cached before the relay said its currency decodes as yuan
+        let cached = Data(#"{"channel":"sms","hint":"138****1234","granted":1,"used":0,"usedToday":0,"dailyCap":0,"checkedAt":0,"grantCny":5,"leftCny":2}"#.utf8)
+        XCTAssertEqual(try JSONDecoder().decode(NanoMuseCloudAccount.self, from: cached).currencySymbol, "¥")
+        // the refusal body: its own sign, else nothing (the reader falls back to the stored one)
+        XCTAssertEqual(NanoMuseRelayRefusal.facts(#"{"error":{"code":"allowance_exhausted","left":0,"grant":5,"currency_symbol":"₹"}}"#).currencySymbol, "₹")
+        XCTAssertNil(NanoMuseRelayRefusal.facts(#"{"error":{"code":"allowance_exhausted","left":0,"grant":5}}"#).currencySymbol)
+        // the formatter: whole numbers without decimals, else two places
+        XCTAssertEqual(NanoMuseCurrency.money(5, symbol: "₹"), "₹5")
+        XCTAssertEqual(NanoMuseCurrency.money(0.375, symbol: "€"), "€0.38")
+        XCTAssertEqual(NanoMuseCurrency.symbol(code: "gbp", symbol: nil), "£")
+        XCTAssertEqual(NanoMuseCurrency.symbol(code: "XYZ", symbol: ""), "¥")
+    }
+
     // MARK: - C12 (0.1.40): a key the relay refuses
 
     func testARefusedKeyKeepsTheAccountsDataAside() {

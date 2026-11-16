@@ -6668,8 +6668,8 @@ class ChatViewModel(
             appendSystemInfo(
                 context.getString(
                     R.string.nm_cloud_warn_line,
-                    io.github.nanomuse.ui.cloud.money(a.leftCny.coerceAtLeast(0.0)),
-                    io.github.nanomuse.ui.cloud.money(a.grantCny),
+                    a.money(a.leftCny.coerceAtLeast(0.0)),
+                    a.money(a.grantCny),
                     io.github.nanomuse.cloud.NanoMuseCloud.inviteBonusText(context),
                 ),
                 "info",

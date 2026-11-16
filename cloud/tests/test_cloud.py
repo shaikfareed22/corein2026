@@ -671,6 +671,7 @@ async def test_open_signup_members_unlimited_everyone_else_has_one_allowance():
     assert guest["account"]["member"] is False
     assert guest["spend"] == {
         "currency": "CNY",
+        "currency_symbol": "¥",
         "total": 0,
         "grant": 0.002,
         "left": 0.002,

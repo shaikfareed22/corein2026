@@ -369,9 +369,9 @@ struct NanoMuseAvatarCostCard: View {
                 if e.unlimited {
                     Text(what + ".").font(.footnote)
                 } else {
-                    Text(String(format: AppLocalized("%@: about ¥%@ from your allowance."), what, NanoMuseFaceCostSheet.money(e.cny))).font(.footnote)
+                    Text(String(format: AppLocalized("%@: about %@ from your allowance."), what, NanoMuseFaceCostSheet.money(e.cny, symbol: e.currencySymbol))).font(.footnote)
                     if let left = e.leftCny {
-                        Text(String(format: AppLocalized("You have ¥%@ of the allowance left."), NanoMuseFaceCostSheet.money(left))).font(.footnote).foregroundStyle(.secondary)
+                        Text(String(format: AppLocalized("You have %@ of the allowance left."), NanoMuseFaceCostSheet.money(left, symbol: e.currencySymbol))).font(.footnote).foregroundStyle(.secondary)
                     }
                     if !e.affordable {
                         Text(AppLocalized("That is more than what is left. Invite a friend for more allowance, or wait for tomorrow's share."))

@@ -545,61 +545,61 @@
         }
       }
     },
-    "%@: about ¥%@ from your allowance." : {
+    "%@: about %@ from your allowance." : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@: etwa ¥%@ von deinem Guthaben."
+            "value" : "%@: etwa %@ von deinem Guthaben."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@: about ¥%@ from your allowance."
+            "value" : "%@: about %@ from your allowance."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@: unos ¥%@ de tu saldo."
+            "value" : "%@: unos %@ de tu saldo."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ : environ ¥%@ de votre crédit."
+            "value" : "%@ : environ %@ de votre crédit."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@: 無料枠から約 ¥%@ を使います。"
+            "value" : "%@: 無料枠から約 %@ を使います。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@: 사용량에서 약 ¥%@."
+            "value" : "%@: 사용량에서 약 %@."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@: примерно ¥%@ из вашего лимита."
+            "value" : "%@: примерно %@ из вашего лимита."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@，大约用掉 ¥%@ 额度。"
+            "value" : "%@，大约用掉 %@ 额度。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@，大約用掉 ¥%@ 額度。"
+            "value" : "%@，大約用掉 %@ 額度。"
           }
         }
       }
@@ -6934,61 +6934,61 @@
         }
       }
     },
-    "Invite a friend: +¥%@ for you and +¥%@ for them, once a new person who signed up with your link makes their first request." : {
+    "Invite a friend: +%@ for you and +%@ for them, once a new person who signed up with your link makes their first request." : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lade jemanden ein: +¥%@ für dich und +¥%@ für die Person, sobald jemand Neues über deinen Link registriert ist und die erste Anfrage stellt."
+            "value" : "Lade jemanden ein: +%@ für dich und +%@ für die Person, sobald jemand Neues über deinen Link registriert ist und die erste Anfrage stellt."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invite a friend: +¥%@ for you and +¥%@ for them, once a new person who signed up with your link makes their first request."
+            "value" : "Invite a friend: +%@ for you and +%@ for them, once a new person who signed up with your link makes their first request."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invita a alguien: +¥%@ para ti y +¥%@ para esa persona, cuando alguien nuevo se registra con tu enlace y hace su primera solicitud."
+            "value" : "Invita a alguien: +%@ para ti y +%@ para esa persona, cuando alguien nuevo se registra con tu enlace y hace su primera solicitud."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invitez quelqu’un : +¥%@ pour vous et +¥%@ pour la personne, dès qu’une nouvelle personne inscrite avec votre lien envoie sa première requête."
+            "value" : "Invitez quelqu’un : +%@ pour vous et +%@ pour la personne, dès qu’une nouvelle personne inscrite avec votre lien envoie sa première requête."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "友だちを招待：あなたのリンクから登録した人が最初のリクエストを送るごとに、あなたに +¥%@、相手に +¥%@。"
+            "value" : "友だちを招待：あなたのリンクから登録した人が最初のリクエストを送るごとに、あなたに +%@、相手に +%@。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "친구 초대: 내 링크로 가입한 사람이 첫 요청을 보낼 때마다 나에게 +¥%@, 상대에게 +¥%@."
+            "value" : "친구 초대: 내 링크로 가입한 사람이 첫 요청을 보낼 때마다 나에게 +%@, 상대에게 +%@."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пригласите друга: +¥%@ вам и +¥%@ ему, как только новый человек, зарегистрировавшийся по вашей ссылке, сделает первый запрос."
+            "value" : "Пригласите друга: +%@ вам и +%@ ему, как только новый человек, зарегистрировавшийся по вашей ссылке, сделает первый запрос."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "邀请朋友：每有一位新用户通过你的链接注册并发出第一次请求，你 +¥%@，对方 +¥%@。"
+            "value" : "邀请朋友：每有一位新用户通过你的链接注册并发出第一次请求，你 +%@，对方 +%@。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "邀請朋友：每有一位新用戶透過你的連結註冊並發出第一次請求，你 +¥%@，對方 +¥%@。"
+            "value" : "邀請朋友：每有一位新用戶透過你的連結註冊並發出第一次請求，你 +%@，對方 +%@。"
           }
         }
       }
@@ -7900,61 +7900,61 @@
         }
       }
     },
-    "Nearly used up: ¥%@ of ¥%@ of the free allowance left. A key of your own or a plan you already pay for keeps you going, under Settings → FOMO Cloud." : {
+    "Nearly used up: %@ of %@ of the free allowance left. A key of your own or a plan you already pay for keeps you going, under Settings → FOMO Cloud." : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fast aufgebraucht: ¥%@ von ¥%@ des kostenlosen Guthabens übrig. Ein eigener Schlüssel oder ein Abo, das du schon bezahlst, führt weiter, unter Einstellungen → FOMO Cloud."
+            "value" : "Fast aufgebraucht: %@ von %@ des kostenlosen Guthabens übrig. Ein eigener Schlüssel oder ein Abo, das du schon bezahlst, führt weiter, unter Einstellungen → FOMO Cloud."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nearly used up: ¥%@ of ¥%@ of the free allowance left. A key of your own or a plan you already pay for keeps you going, under Settings → FOMO Cloud."
+            "value" : "Nearly used up: %@ of %@ of the free allowance left. A key of your own or a plan you already pay for keeps you going, under Settings → FOMO Cloud."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Casi agotado: quedan ¥%@ de ¥%@ del saldo gratuito. Una clave propia o un plan que ya pagas te permite seguir: Ajustes → FOMO Cloud."
+            "value" : "Casi agotado: quedan %@ de %@ del saldo gratuito. Una clave propia o un plan que ya pagas te permite seguir: Ajustes → FOMO Cloud."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Presque épuisé : ¥%@ sur ¥%@ du crédit gratuit restants. Une clé à vous ou un abonnement que vous payez déjà vous permet de continuer, sous Réglages → FOMO Cloud."
+            "value" : "Presque épuisé : %@ sur %@ du crédit gratuit restants. Une clé à vous ou un abonnement que vous payez déjà vous permet de continuer, sous Réglages → FOMO Cloud."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "残りわずか：無料枠は ¥%@ / ¥%@ です。自分のキーか、すでに契約しているプランで続けられます。設定 → FOMO Cloud から。"
+            "value" : "残りわずか：無料枠は %@ / %@ です。自分のキーか、すでに契約しているプランで続けられます。設定 → FOMO Cloud から。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "거의 다 썼습니다: 무료 사용량 ¥%2$@ 중 ¥%1$@ 남았습니다. 직접 추가한 키나 이미 결제 중인 요금제로 계속 쓸 수 있습니다. 설정 → FOMO Cloud에서."
+            "value" : "거의 다 썼습니다: 무료 사용량 %2$@ 중 %1$@ 남았습니다. 직접 추가한 키나 이미 결제 중인 요금제로 계속 쓸 수 있습니다. 설정 → FOMO Cloud에서."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Почти исчерпан: осталось ¥%@ из ¥%@ бесплатного лимита. Свой ключ или подписка, за которую вы уже платите, позволит продолжить: Настройки → FOMO Cloud."
+            "value" : "Почти исчерпан: осталось %@ из %@ бесплатного лимита. Свой ключ или подписка, за которую вы уже платите, позволит продолжить: Настройки → FOMO Cloud."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "快用完了：免费额度还剩 ¥%@（共 ¥%@）。自己的密钥或已付费的订阅都能接着用，在「设置 → FOMO Cloud」里。"
+            "value" : "快用完了：免费额度还剩 %@（共 %@）。自己的密钥或已付费的订阅都能接着用，在「设置 → FOMO Cloud」里。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "快用完了：免費額度還剩 ¥%@（共 ¥%@）。自己的金鑰或已付費的訂閱都能接著用，在「設定 → FOMO Cloud」裡。"
+            "value" : "快用完了：免費額度還剩 %@（共 %@）。自己的金鑰或已付費的訂閱都能接著用，在「設定 → FOMO Cloud」裡。"
           }
         }
       }
@@ -126956,61 +126956,61 @@
         }
       }
     },
-    "You have ¥%@ of the allowance left." : {
+    "You have %@ of the allowance left." : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Du hast noch ¥%@ Guthaben übrig."
+            "value" : "Du hast noch %@ Guthaben übrig."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You have ¥%@ of the allowance left."
+            "value" : "You have %@ of the allowance left."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Te quedan ¥%@ de saldo."
+            "value" : "Te quedan %@ de saldo."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il vous reste ¥%@ de crédit."
+            "value" : "Il vous reste %@ de crédit."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無料枠の残りは ¥%@ です。"
+            "value" : "無料枠の残りは %@ です。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "사용량이 ¥%@ 남아 있습니다."
+            "value" : "사용량이 %@ 남아 있습니다."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "У вас осталось ¥%@ лимита."
+            "value" : "У вас осталось %@ лимита."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "额度还剩 ¥%@。"
+            "value" : "额度还剩 %@。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "額度還剩 ¥%@。"
+            "value" : "額度還剩 %@。"
           }
         }
       }

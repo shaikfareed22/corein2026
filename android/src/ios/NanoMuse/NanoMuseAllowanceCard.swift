@@ -28,6 +28,8 @@ struct NanoMuseWaysList: View {
     var inviteURL: String = ""
     var inviteBonusCny: Double?
     var inviteeBonusCny: Double?
+    /// The sign the relay bills in, for the invite bonus; "¥" when nothing said otherwise.
+    var currencySymbol: String = NanoMuseCurrency.defaultSymbol
     /// On the account page the code and the link are the next section; elsewhere the link is shared from here.
     var inviteBelow: Bool = false
     /// Where the step-by-step guide is (the refusal's `own_key_docs`, the sheet's, the guidance's, the default).
@@ -67,7 +69,7 @@ struct NanoMuseWaysList: View {
             // an invitation
             if let bonus = inviteBonusCny, bonus > 0 {
                 way(symbol: "gift", tint: Color(red: 0.88, green: 0.47, blue: 0.17),
-                    title: String(format: AppLocalized("Invite a friend: +¥%@ for you and +¥%@ for them, once a new person who signed up with your link makes their first request."), NanoMuseAllowance.money(bonus), NanoMuseAllowance.money(inviteeBonusCny ?? bonus)),
+                    title: String(format: AppLocalized("Invite a friend: +%@ for you and +%@ for them, once a new person who signed up with your link makes their first request."), NanoMuseCurrency.money(bonus, symbol: currencySymbol), NanoMuseCurrency.money(inviteeBonusCny ?? bonus, symbol: currencySymbol)),
                     text: inviteBelow ? AppLocalized("Your code and link are just below.") : (inviteURL.isEmpty ? AppLocalized("Your code and link are under Settings → FOMO Cloud.") : AppLocalized("Your link is ready to share.")))
                 if !inviteBelow, !inviteURL.isEmpty, let url = URL(string: inviteURL) {
                     ShareLink(item: url) { Label(AppLocalized("Share the link"), systemImage: "square.and.arrow.up").font(.footnote) }
@@ -172,6 +174,7 @@ struct NanoMuseAllowanceCard: View {
                 inviteURL: refused.facts.inviteURL,
                 inviteBonusCny: refused.facts.inviteBonusCny,
                 inviteeBonusCny: refused.facts.inviteeBonusCny,
+                currencySymbol: refused.facts.currencySymbol ?? NanoMuseCurrency.defaultSymbol,
                 docs: refused.facts.ownKeyDocs.isEmpty ? (ways.docs.isEmpty ? NanoMuseLinks.ownKeyDocs : ways.docs) : refused.facts.ownKeyDocs,
                 compact: true
             ) { pick = $0 }

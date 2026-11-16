@@ -56,9 +56,10 @@ object FaceCost {
         val what = if (job.clips > 0) context.getString(R.string.nm_face_cost_what_clips, job.images, job.clips)
         else context.getString(R.string.nm_face_cost_what, job.images)
         if (est == null) return context.getString(R.string.nm_face_cost_unknown, what)
-        val sb = StringBuilder(context.getString(R.string.nm_face_cost_about, what, money(est.cny)))
+        val symbol = NanoMuseCloud.currencySymbol(context)
+        val sb = StringBuilder(context.getString(R.string.nm_face_cost_about, what, symbol + money(est.cny)))
         val left = est.leftCny
-        if (left != null) sb.append(' ').append(context.getString(R.string.nm_face_cost_left, money(left)))
+        if (left != null) sb.append(' ').append(context.getString(R.string.nm_face_cost_left, symbol + money(left)))
         if (!est.affordable) sb.append(' ').append(context.getString(R.string.nm_face_cost_short, NanoMuseCloud.inviteBonusText(context)))
         return sb.toString()
     }

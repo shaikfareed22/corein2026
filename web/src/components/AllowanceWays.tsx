@@ -5,6 +5,7 @@ import { getLocale, useT } from "../i18n";
 import { useStore } from "../store";
 import { coversLine, OWN_KEY_DOCS_URL, plans, presetFor, providerName, providersFor, regionOf } from "../providers";
 import { ownKeyLine, ownKeyWay } from "../region";
+import { fmtMoney, symbolOf } from "../lib/money";
 import type { Guidance } from "../types";
 import { cx } from "../util";
 import { ChatGptSignIn } from "./ChatGptSignIn";
@@ -20,6 +21,9 @@ import { markStarred, openStar, starText, useCloudConfig, useStarAsk, useStarSen
 export interface AllowanceInfo {
   left?: number | null;
   grant?: number;
+  /** what the relay bills in and its sign; absent on older relays (then the public config's, else ¥) */
+  currency?: string;
+  currency_symbol?: string;
   invite_url?: string;
   /** what an invitation adds to the inviter's pool — and (relay 0.9) to the friend's */
   invite_bonus_cny?: number;
@@ -121,12 +125,14 @@ export function AllowanceWays({
     await copy(text);
   };
   const cfg = useCloudConfig();
+  // the relay's currency sign: the refusal's own, else the public config's, else ¥
+  const sym = symbolOf(info.currency || info.currency_symbol ? info : cfg);
   // the ask for a star among the ways on — when the policy allows it (contract C1)
   const [starAsk, setStarAsk] = useStarAsk("exhausted", exhausted);
   const starLine = useStarSentence(starText(t, "exhausted"));
   const lead = exhausted
     ? t("The free allowance is used up.")
-    : t("Nearly used up: ¥{left} of ¥{grant} left.", { left: (info.left ?? 0).toFixed(2), grant: (info.grant ?? 0).toFixed(0) });
+    : t("Nearly used up: {left} of {grant} left.", { left: fmtMoney(info.left ?? 0, sym), grant: fmtMoney(info.grant ?? 0, sym, 0) });
 
   return (
     <div className={cx("space-y-2.5", !compact && "pt-1")}>
@@ -189,7 +195,7 @@ export function AllowanceWays({
         )}
       </Way>
 
-      <Way icon={<Users size={16} />} tone="bg-violet-500/12 text-violet-600 dark:text-violet-300" title={t("Invite a friend: +¥{bonus} for you and +¥{bonus} for them, once a new person who signed up with your link makes their first request.", { bonus: inviteBonus.toFixed(0) })}>
+      <Way icon={<Users size={16} />} tone="bg-violet-500/12 text-violet-600 dark:text-violet-300" title={t("Invite a friend: +{bonus} for you and +{bonus} for them, once a new person who signed up with your link makes their first request.", { bonus: fmtMoney(inviteBonus, sym, 0) })}>
         {link ? (
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => void share()} className={cx(secondaryBtn, "inline-flex items-center gap-1.5")}>
@@ -244,7 +250,7 @@ const WARNED_KEY = "nm.cloud.warned_grant";
 
 /**
  * The 80 % heads-up, once: after a turn finishes on the account's model, ask the runtime for
- * the account and, when the relay says `warn` (under ¥2 of the pool left) and the strip has
+ * the account and, when the relay says `warn` (under 2 units of the pool left) and the strip has
  * not been shown for this pool size yet, show one dismissible line above the composer that
  * leads to the account page. Never a modal; nothing while the pool is spent (the card in the
  * chat says that) or without limit.
@@ -253,6 +259,7 @@ export function AllowanceHeadsUp() {
   const t = useT();
   const { state, setTab } = useStore();
   const [info, setInfo] = useState<AllowanceInfo | null>(null);
+  const cfg = useCloudConfig();
   const lastCheck = useRef(0);
   const account = state.hub?.account;
   const eligible = !!account?.signed_in && !!account.is_model;
@@ -281,6 +288,8 @@ export function AllowanceHeadsUp() {
         setInfo({
           left,
           grant,
+          currency: s.currency,
+          currency_symbol: s.currency_symbol,
           invite_url: me.invite?.url,
           invite_bonus_cny: s.invite_bonus_cny,
           invitee_bonus_cny: s.invitee_bonus_cny,
@@ -297,6 +306,7 @@ export function AllowanceHeadsUp() {
   }, [eligible, finishedAt, info]);
 
   if (!info) return null;
+  const sym = symbolOf(info.currency || info.currency_symbol ? info : cfg);
   const dismiss = () => {
     try {
       localStorage.setItem(WARNED_KEY, String(info.grant ?? 0));
@@ -309,9 +319,9 @@ export function AllowanceHeadsUp() {
     <div className="rise mx-3 mb-1.5 flex items-start gap-2 rounded-2xl bg-amber-500/12 px-3 py-2 text-[12.5px] leading-snug text-amber-800 dark:text-amber-200">
       <Sparkles size={14} className="mt-0.5 shrink-0" />
       <div className="min-w-0 flex-1">
-        {t("Nearly used up: ¥{left} of ¥{grant} left.", { left: (info.left ?? 0).toFixed(2), grant: (info.grant ?? 0).toFixed(0) })}{" "}
-        {t("Invite a friend (+¥{invite} for each of you) or bring your own key; your sign-in keeps working either way.", {
-          invite: (info.invite_bonus_cny ?? 5).toFixed(0),
+        {t("Nearly used up: {left} of {grant} left.", { left: fmtMoney(info.left ?? 0, sym), grant: fmtMoney(info.grant ?? 0, sym, 0) })}{" "}
+        {t("Invite a friend (+{invite} for each of you) or bring your own key; your sign-in keeps working either way.", {
+          invite: fmtMoney(info.invite_bonus_cny ?? 5, sym, 0),
         })}{" "}
         <button
           type="button"

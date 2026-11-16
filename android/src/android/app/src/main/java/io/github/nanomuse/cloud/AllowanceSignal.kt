@@ -14,7 +14,7 @@ import org.json.JSONObject
  * show the ways on, or one plain sentence, instead of a bare error.
  */
 object AllowanceSignal {
-    /** What the relay said, in yuan. */
+    /** What the relay said, in its ledger unit (see [currencySymbol]). */
     data class Exhausted(
         val leftCny: Double,
         val grantCny: Double,
@@ -29,8 +29,16 @@ object AllowanceSignal {
         val paused: Boolean = false,
         /** Relay 0.21: the ways on as the relay lists them (contract C11); null from an older relay. */
         val guidance: Guidance? = null,
+        /**
+         * The sign of the unit the figures are in, as the refusal stated it (relay 0.23); empty
+         * when it did not say — then [symbol] falls back to the one kept from /v1/me, then "¥".
+         */
+        val currencySymbol: String = "",
         val at: Long = System.currentTimeMillis(),
-    )
+    ) {
+        /** The currency sign to print before [leftCny] and the rest. */
+        fun symbol(context: Context): String = currencySymbol.ifBlank { NanoMuseCloud.currencySymbol(context) }
+    }
 
     @Volatile private var last: Exhausted? = null
     @Volatile private var lastRefusal: RelayRefusal.Refusal? = null
@@ -55,6 +63,7 @@ object AllowanceSignal {
                 inviteeBonusCny = err.optDouble("invitee_bonus_cny", 0.0),
                 ownKeyDocs = err.optString("own_key_docs", ""),
                 guidance = Guidance.parse(err.optJSONObject("guidance")),
+                currencySymbol = err.optString("currency_symbol", "").trim(),
             )
             return
         }
@@ -88,6 +97,7 @@ object AllowanceSignal {
             inviteeBonusCny = a.inviteeBonusCny,
             ownKeyDocs = a.ownKeyDocs,
             guidance = NanoMuseCloud.guidance(context),
+            currencySymbol = a.currencySymbol,
         )
     }
 }

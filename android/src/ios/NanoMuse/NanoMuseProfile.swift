@@ -23,6 +23,8 @@ enum NanoMuseRelayMedia {
         var unlimited: Bool
         var affordable: Bool
         var inviteBonusCny: Double?
+        /// The sign of the currency the relay bills in: the reply's own, else the signed-in account's, else "¥".
+        var currencySymbol: String = NanoMuseCurrency.defaultSymbol
     }
 
     private static let session: URLSession = {
@@ -99,7 +101,8 @@ enum NanoMuseRelayMedia {
             leftCny: unlimited ? nil : num("left_cny"),
             unlimited: unlimited,
             affordable: (reply["affordable"] as? Bool) ?? true,
-            inviteBonusCny: num("invite_bonus_cny")
+            inviteBonusCny: num("invite_bonus_cny"),
+            currencySymbol: NanoMuseCurrency.symbol(in: reply) ?? NanoMuseCloud.account?.currencySymbol ?? NanoMuseCurrency.defaultSymbol
         )
     }
 

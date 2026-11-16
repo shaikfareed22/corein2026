@@ -6,9 +6,10 @@ import { AVATAR_STYLES } from "../components/AvatarPicker";
 import { PageBar } from "../components/BackBar";
 import { MuseRoundButton } from "../components/MuseHeader";
 import { primaryBtn, secondaryBtn } from "../components/Form";
-import { StarNudgeOnce } from "../components/StarNudge";
+import { StarNudgeOnce, useCloudConfig } from "../components/StarNudge";
 import { useMenuKeys } from "../components/useMenuKeys";
 import { getLocale, useT } from "../i18n";
+import { fmtMoney, symbolOf } from "../lib/money";
 import { regionOf, unavailableLine } from "../providers";
 import { useStore } from "../store";
 import type { StudioSession, StudioView } from "../types";
@@ -32,6 +33,7 @@ const DEFAULT_DESCRIPTION = "a round, custard-yellow baby dragon with small oran
 export function AvatarStudioScreen() {
   const { state, setTab, toast, draft, refreshSettings } = useStore();
   const t = useT();
+  const cfg = useCloudConfig();
   const profile = state.profile;
   const name = profile?.name ?? "FOMO";
   const [view, setView] = useState<StudioView | null>(null);
@@ -98,15 +100,18 @@ export function AvatarStudioScreen() {
   const poseErrors = posing ? (session.errors ?? []).filter((e) => !/clip/.test(e)).length : 0;
 
   const cost = session?.cost ?? {};
+  // the account's price is in the relay's currency; the public config says which sign (¥ on older relays)
+  const sym = symbolOf(cfg);
   const what = cost.clips ? t("{n} pictures and {c} clips", { n: cost.pictures ?? 8, c: cost.clips }) : t("{n} pictures", { n: cost.pictures ?? 8 });
   const costLine = (() => {
     if (cost.error) return t("The cost could not be checked: {error}", { error: cost.error });
     if (typeof cost.cny !== "number") return t("Checking the cost…");
-    if (cost.unlimited) return t("About ¥{cny} for {what}; your account has no limit.", { cny: cost.cny.toFixed(2), what });
-    const left = typeof cost.left_cny === "number" ? cost.left_cny.toFixed(2) : "?";
+    const cny = fmtMoney(cost.cny, sym);
+    if (cost.unlimited) return t("About {cny} for {what}; your account has no limit.", { cny, what });
+    const left = typeof cost.left_cny === "number" ? fmtMoney(cost.left_cny, sym) : "?";
     return cost.affordable === false
-      ? t("About ¥{cny} for {what}, more than the ¥{left} left in your allowance.", { cny: cost.cny.toFixed(2), what, left })
-      : t("About ¥{cny} for {what}; ¥{left} left in your allowance.", { cny: cost.cny.toFixed(2), what, left });
+      ? t("About {cny} for {what}, more than the {left} left in your allowance.", { cny, what, left })
+      : t("About {cny} for {what}; {left} left in your allowance.", { cny, what, left });
   })();
 
   const styleLabel = (id: string | null | undefined) => AVATAR_STYLES.find((s) => s.id === id)?.label;

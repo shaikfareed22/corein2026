@@ -51,6 +51,8 @@ final class NanoMuseAllowance: ObservableObject {
         guard refusal.isAllowance else { return }
         var f = facts ?? NanoMuseRelayRefusal.AllowanceFacts()
         if f.guidance == nil { f.guidance = Self.storedGuidance() } else { Self.store(guidance: f.guidance) }
+        // the refusal's own currency sign first, then the one the last `/v1/me` stored, then "¥"
+        if f.currencySymbol == nil { f.currencySymbol = NanoMuseCloud.account?.currencySymbol ?? NanoMuseCurrency.defaultSymbol }
         pending = Refused(kind: refusal.kind, facts: f, at: Date())
         headsUp = nil // the card says more than the line
     }
@@ -94,7 +96,8 @@ final class NanoMuseAllowance: ObservableObject {
             d.removeObject(forKey: Keys.warnHidden)
         }
         guard !d.bool(forKey: Keys.warnHidden) else { headsUp = nil; return }
-        headsUp = String(format: AppLocalized("Nearly used up: ¥%@ of ¥%@ of the free allowance left. A key of your own or a plan you already pay for keeps you going, under Settings → FOMO Cloud."), Self.money(left), Self.money(grant))
+        let symbol = NanoMuseCurrency.symbol(in: spend) ?? NanoMuseCurrency.defaultSymbol
+        headsUp = String(format: AppLocalized("Nearly used up: %@ of %@ of the free allowance left. A key of your own or a plan you already pay for keeps you going, under Settings → FOMO Cloud."), NanoMuseCurrency.money(left, symbol: symbol), NanoMuseCurrency.money(grant, symbol: symbol))
     }
 
     /// The heads-up was waved away: not again for this pool size.
@@ -152,7 +155,4 @@ final class NanoMuseAllowance: ObservableObject {
         if !v.authCapabilities.isEmpty { o["auth_capabilities"] = v.authCapabilities.mapValues { Array($0).sorted() } }
         return o
     }
-
-    /// "5.00" / "0.37": yuan to two places.
-    static func money(_ n: Double) -> String { String(format: "%.2f", n) }
 }

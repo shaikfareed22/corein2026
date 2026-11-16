@@ -310,13 +310,13 @@ fun CloudAccountScreen(
                             // token line, and how the pool grows.
                             Row(Modifier.fillMaxWidth()) {
                                 Text(
-                                    text = if (a.limited) stringResource(R.string.nm_cloud_allowance_used, money(a.spentTotalCny), money(a.toUsd(a.spentTotalCny)))
-                                    else stringResource(R.string.nm_cloud_spent_total, money(a.spentTotalCny), money(a.toUsd(a.spentTotalCny))),
+                                    text = if (a.limited) stringResource(R.string.nm_cloud_allowance_used, a.money(a.spentTotalCny), money(a.toUsd(a.spentTotalCny)))
+                                    else stringResource(R.string.nm_cloud_spent_total, a.money(a.spentTotalCny), money(a.toUsd(a.spentTotalCny))),
                                     style = MaterialTheme.typography.bodyMedium,
                                     modifier = Modifier.weight(1f),
                                 )
                                 Text(
-                                    text = if (a.limited) stringResource(R.string.nm_cloud_allowance_of, money(a.grantCny), money(a.toUsd(a.grantCny)))
+                                    text = if (a.limited) stringResource(R.string.nm_cloud_allowance_of, a.money(a.grantCny), money(a.toUsd(a.grantCny)))
                                     else stringResource(R.string.nm_cloud_spend_member),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -336,7 +336,7 @@ fun CloudAccountScreen(
                                 )
                                 Spacer(Modifier.height(8.dp))
                                 Text(
-                                    text = stringResource(R.string.nm_cloud_allowance_left, money(a.leftCny.coerceAtLeast(0.0)), money(a.toUsd(a.leftCny.coerceAtLeast(0.0)))),
+                                    text = stringResource(R.string.nm_cloud_allowance_left, a.money(a.leftCny.coerceAtLeast(0.0)), money(a.toUsd(a.leftCny.coerceAtLeast(0.0)))),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = if (a.exhausted) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -351,7 +351,7 @@ fun CloudAccountScreen(
                             if (a.limited && a.allowanceCny > 0) {
                                 Spacer(Modifier.height(8.dp))
                                 Text(
-                                    text = stringResource(R.string.nm_cloud_allowance_why, money(a.allowanceCny), money(a.inviteBonusCny)),
+                                    text = stringResource(R.string.nm_cloud_allowance_why, a.money(a.allowanceCny), a.money(a.inviteBonusCny)),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -468,7 +468,7 @@ fun CloudAccountScreen(
                                     } else {
                                         stringResource(R.string.nm_cloud_usage_row_notokens, r.requests)
                                     },
-                                    amount = if (priced) "¥" + money(r.costCny) else numbers.format(r.charged),
+                                    amount = if (priced && a != null) a.money(r.costCny) else numbers.format(r.charged),
                                 )
                             }
                         }
@@ -490,7 +490,7 @@ fun CloudAccountScreen(
                                     } else {
                                         stringResource(R.string.nm_cloud_usage_row_notokens, r.requests)
                                     },
-                                    amount = if (priced) "¥" + money(r.costCny) else numbers.format(r.charged),
+                                    amount = if (priced && a != null) a.money(r.costCny) else numbers.format(r.charged),
                                     compact = true,
                                 )
                             }
@@ -1036,7 +1036,10 @@ private fun eventLabel(kind: String): String = when (kind) {
     else -> kind
 }
 
-/** ¥ / $ amounts: whole numbers above a hundred, cents otherwise, fen-fractions for the tiny ones. */
+/**
+ * Money amounts, bare (no sign): whole numbers above a hundred, cents otherwise, fen-fractions
+ * for the tiny ones. [NanoMuseCloud.Account.money] puts the relay's currency sign in front.
+ */
 internal fun money(v: Double): String = when {
     v >= 100 -> String.format(java.util.Locale.US, "%.0f", v)
     v >= 1 -> String.format(java.util.Locale.US, "%.2f", v)
@@ -1058,7 +1061,7 @@ private fun InviteCard(a: NanoMuseCloud.Account) {
     MuseCard {
         Column(Modifier.padding(16.dp)) {
             Text(
-                text = stringResource(R.string.nm_cloud_invite_why, money(a.inviteBonusCny)),
+                text = stringResource(R.string.nm_cloud_invite_why, a.money(a.inviteBonusCny)),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -1097,7 +1100,7 @@ private fun InviteCard(a: NanoMuseCloud.Account) {
             Spacer(Modifier.height(10.dp))
             val facts = buildList {
                 add(stringResource(R.string.nm_cloud_invite_count, a.invites))
-                if (a.inviteEarnedCny > 0) add(stringResource(R.string.nm_cloud_invite_earned, money(a.inviteEarnedCny)))
+                if (a.inviteEarnedCny > 0) add(stringResource(R.string.nm_cloud_invite_earned, a.money(a.inviteEarnedCny)))
             }
             Text(
                 text = facts.joinToString(" · "),

@@ -2,10 +2,12 @@ import { Check, Loader2, RefreshCw, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import { api, fileUrl } from "../api";
 import { useT } from "../i18n";
+import { fmtMoney, symbolOf } from "../lib/money";
 import { useStore } from "../store";
 import type { AvatarEvent } from "../types";
 import { cx } from "../util";
 import { primaryBtn, secondaryBtn } from "./Form";
+import { useCloudConfig } from "./StarNudge";
 
 const MOOD_ORDER = ["idle", "working", "waiting", "happy", "error"];
 
@@ -21,6 +23,8 @@ export function AvatarOptionsCard({ event, name = "FOMO" }: { event: AvatarEvent
   const { toast } = useStore();
   const [busy, setBusy] = useState<string | null>(null);
   const cost = event.cost ?? {};
+  // the account's price is in the relay's currency; the public config says which sign (¥ on older relays)
+  const sym = symbolOf(useCloudConfig());
   const candidates = event.candidates ?? [null, null, null, null];
   const moods = event.moods ?? {};
   const clips = event.clips ?? {};
@@ -42,11 +46,12 @@ export function AvatarOptionsCard({ event, name = "FOMO" }: { event: AvatarEvent
     if (cost.cloud === false) return t("{what}, made with your own key at your provider's prices.", { what });
     if (cost.error) return t("The cost could not be checked: {error}", { error: cost.error });
     if (typeof cost.cny !== "number") return t("Checking the cost…");
-    if (cost.unlimited) return t("About ¥{cny} for {what}; your account has no limit.", { cny: cost.cny.toFixed(2), what });
-    const left = typeof cost.left_cny === "number" ? cost.left_cny.toFixed(2) : "?";
+    const cny = fmtMoney(cost.cny, sym);
+    if (cost.unlimited) return t("About {cny} for {what}; your account has no limit.", { cny, what });
+    const left = typeof cost.left_cny === "number" ? fmtMoney(cost.left_cny, sym) : "?";
     return cost.affordable === false
-      ? t("About ¥{cny} for {what}, more than the ¥{left} left in your allowance.", { cny: cost.cny.toFixed(2), what, left })
-      : t("About ¥{cny} for {what}; ¥{left} left in your allowance.", { cny: cost.cny.toFixed(2), what, left });
+      ? t("About {cny} for {what}, more than the {left} left in your allowance.", { cny, what, left })
+      : t("About {cny} for {what}; {left} left in your allowance.", { cny, what, left });
   })();
 
   return (

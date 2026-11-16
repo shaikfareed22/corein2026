@@ -485,6 +485,10 @@ def menu_warnings(models: tuple[ModelSpec, ...]) -> list[str]:
     return out
 
 
+# the signs the relay knows; any other code is printed as the code itself
+CURRENCY_SYMBOLS = {"CNY": "¥", "INR": "₹", "USD": "$", "EUR": "€", "GBP": "£", "JPY": "¥", "KRW": "₩", "RUB": "₽", "BRL": "R$", "TRY": "₺"}
+
+
 @dataclass(frozen=True)
 class Settings:
     database: str = field(default_factory=lambda: _env("CLOUD_DB", "./data/cloud.db"))
@@ -595,6 +599,15 @@ class Settings:
     # setting either way. State the default in the relay's privacy policy.
     improve_default: bool = field(default_factory=lambda: _env("IMPROVE_DEFAULT", "0") in ("1", "true", "yes"))
     usd_cny: float = field(default_factory=lambda: float(_env("USD_CNY", "7.1")))
+    # The ledger's currency (0.27). Every amount the relay stores, prices and shows — the
+    # menu's prices per million tokens, ALLOWANCE_CNY, INVITE_BONUS_CNY, the `_cny` fields of
+    # the API — is in this one currency; the `cny` in those names is history, not a
+    # conversion. CURRENCY is its ISO code, CURRENCY_SYMBOL the sign the apps print before
+    # amounts (derived from the code when empty), and USD_CNY is how many of it make a US
+    # dollar, for the dollar figure shown beside each amount. A relay for India sets
+    # CURRENCY=INR, writes its menu prices in rupees and USD_CNY=84.
+    currency: str = field(default_factory=lambda: (_env("CURRENCY", "CNY").strip().upper() or "CNY"))
+    currency_symbol: str = field(default_factory=lambda: _env("CURRENCY_SYMBOL").strip())
     # INVITE_URL is the link the apps offer to share; the code is appended.
     # OWN_KEY_DOCS is the guide the apps open when the allowance is used up and
     # the person wants to bring their own model key.
@@ -829,6 +842,12 @@ class Settings:
         """The start (as a UNIX time) of the local day `t` falls in."""
         off = self.day_offset_h * 3600
         return t - ((t + off) % 86400)
+
+    @property
+    def symbol(self) -> str:
+        """The sign printed before an amount: CURRENCY_SYMBOL, else the one for CURRENCY,
+        else the code itself with a space ("CHF 1.20")."""
+        return self.currency_symbol or CURRENCY_SYMBOLS.get(self.currency, self.currency + " ")
 
     def uy_to_cny(self, uy: int) -> float:
         return round(uy / 1_000_000, 4)

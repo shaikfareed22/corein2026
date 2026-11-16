@@ -86,6 +86,9 @@ enum NanoMuseRelayRefusal {
         var inviteeBonusCny: Double?
         var ownKeyDocs: String = ""
         var guidance: NanoMuseGuidance?
+        /// The sign of the currency the figures are in (`currency_symbol`, else from `currency`);
+        /// nil when the body said neither — the reader falls back to the stored one, then "¥".
+        var currencySymbol: String?
     }
 
     /// The error type the relay stamps on every refusal (`docs/cloud.md` → Protocol).
@@ -188,7 +191,8 @@ enum NanoMuseRelayRefusal {
             inviteBonusCny: num(err["invite_bonus_cny"]),
             inviteeBonusCny: num(err["invitee_bonus_cny"]),
             ownKeyDocs: err["own_key_docs"] as? String ?? "",
-            guidance: NanoMuseGuidance.parse(err["guidance"] as? [String: Any])
+            guidance: NanoMuseGuidance.parse(err["guidance"] as? [String: Any]),
+            currencySymbol: NanoMuseCurrency.symbol(in: err)
         )
     }
 

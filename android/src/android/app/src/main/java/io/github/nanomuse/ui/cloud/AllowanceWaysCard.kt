@@ -98,6 +98,8 @@ fun AllowanceWaysCard(
     val account = remember { NanoMuseCloud.account(context) }
     val inviteBonus = info.inviteBonusCny.takeIf { it > 0 } ?: account?.inviteBonusCny?.takeIf { it > 0 } ?: 5.0
     val inviteeBonus = info.inviteeBonusCny.takeIf { it > 0 } ?: account?.inviteeBonusCny?.takeIf { it > 0 } ?: inviteBonus
+    // the relay's currency sign: the refusal's, else the one kept from /v1/me, else ¥
+    val symbol = remember(info.currencySymbol) { info.symbol(context) }
     var copied by remember { mutableStateOf(false) }
     LaunchedEffect(copied) { if (copied) { kotlinx.coroutines.delay(1500); copied = false } }
     // The star row shows when the policy makes this moment due (StarPrompt: once, past the
@@ -144,7 +146,7 @@ fun AllowanceWaysCard(
                     info.paused -> stringResource(R.string.nm_ways_title_paused)
                     info.dailyCap -> stringResource(R.string.nm_ways_title_day)
                     exhausted -> stringResource(R.string.nm_ways_title_out)
-                    else -> stringResource(R.string.nm_ways_title_warn, money(info.leftCny), money(info.grantCny))
+                    else -> stringResource(R.string.nm_ways_title_warn, symbol + money(info.leftCny), symbol + money(info.grantCny))
                 },
                 fontSize = 15.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -244,7 +246,7 @@ fun AllowanceWaysCard(
             }
 
             // ⑤ an invitation: both sides gain
-            Way(Icons.Outlined.PersonAdd, Color(0xFF7C5CFF), stringResource(R.string.nm_ways_invite_title, money(inviteBonus), money(inviteeBonus)), null) {
+            Way(Icons.Outlined.PersonAdd, Color(0xFF7C5CFF), stringResource(R.string.nm_ways_invite_title, symbol + money(inviteBonus), symbol + money(inviteeBonus)), null) {
                 TextButton(onClick = {
                     val text = context.getString(R.string.nm_cloud_invite_share_text, account?.inviteCode.orEmpty(), link)
                     val send = Intent(Intent.ACTION_SEND).apply { type = "text/plain"; putExtra(Intent.EXTRA_TEXT, text) }

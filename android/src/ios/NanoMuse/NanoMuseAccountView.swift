@@ -105,6 +105,7 @@ struct NanoMuseAccountSections: View {
                 ways: ways,
                 inviteBonusCny: spend.inviteBonusCny ?? sheet?.invite?.bonusCny ?? 5,
                 inviteeBonusCny: spend.inviteeBonusCny,
+                currencySymbol: spend.currencySymbol,
                 inviteBelow: sheet?.invite != nil,
                 docs: spend.ownKeyDocs ?? (ways.docs.isEmpty ? NanoMuseLinks.ownKeyDocs : ways.docs),
                 compact: false
@@ -358,9 +359,13 @@ struct NanoMuseAccountSections: View {
         events = (try? await NanoMuseCloud.events()) ?? []
     }
 
+    /// The sign the relay bills in: the sheet's, else the cached account's, else "¥".
+    private var currencySymbol: String {
+        sheet?.currencySymbol ?? account?.currencySymbol ?? NanoMuseCurrency.defaultSymbol
+    }
+
     private func yuan(_ n: Double) -> String {
-        let whole = n.rounded() == n
-        return "¥" + n.formatted(.number.precision(.fractionLength(whole ? 0 : 2)))
+        NanoMuseCurrency.money(n, symbol: currencySymbol)
     }
 }
 

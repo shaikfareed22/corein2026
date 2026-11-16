@@ -188,7 +188,8 @@ for the full list. The ones that matter:
 | `TRAFFIC_DB` | empty | the site's daily traffic counts (`demo/showcase/mirror/traffic.py`), mounted read-only, for the operator's page; empty = that panel says it is not connected |
 | `WEB_INFO_URL` | empty | FOMO Web's gateway (`http://gateway:8000/api/web/info` on the same docker network) for its account and session counts on the operator's page |
 | `WEB_ADMIN_URL`, `WEB_ADMIN_TOKEN` | empty | the showcase gateway's `/api/demo/admin` and its `SHOWCASE_ADMIN_TOKEN`: who tried the phone in the browser from where and with what, every demo and what it used — a panel on the operator's page and a section in the account drawer (relay 0.10) |
-| `USD_CNY` | 7.1 | for showing dollars next to yuan; display only |
+| `CURRENCY` / `CURRENCY_SYMBOL` | `CNY` / derived | the one currency every amount is in — the menu's prices, `ALLOWANCE_CNY`, `INVITE_BONUS_CNY`, the `_cny` fields of the API (the `cny` in those names is history, not a conversion) — and the sign the apps print before amounts (¥ ₹ $ € £ … from the code when empty). The apps, the console and the admin page read `currency_symbol` from the relay |
+| `USD_CNY` | 7.1 | units of `CURRENCY` to the US dollar, for the dollar figure shown beside each amount; display only |
 | `SIGNUP_TOKENS` | 0 (no ceiling) | starter token grant per account, the older allowance |
 | `DAILY_CAP_TOKENS` | 0 (off) | tokens per account per day |
 | `PER_MINUTE_REQUESTS` | 30 | per account — what stops a runaway loop |

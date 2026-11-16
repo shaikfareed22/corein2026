@@ -34,6 +34,9 @@ struct NanoMuseCloudAccount: Codable, Equatable, Sendable {
     /// nil from an older relay, from the sign-in reply, or when the account has no pool.
     var grantCny: Double? = nil
     var leftCny: Double? = nil
+    /// The sign of the currency the relay bills in (`spend.currency_symbol` of `/v1/me`, e.g. "₹");
+    /// "¥" from an older relay that sends none. The `…Cny` fields are ledger units in that currency.
+    var currencySymbol: String = NanoMuseCurrency.defaultSymbol
 
     var remaining: Int64 { max(granted - used, 0) }
     /// The relay prices in money and this account has a pool to run out of: the Settings row
@@ -54,8 +57,7 @@ struct NanoMuseCloudAccount: Codable, Equatable, Sendable {
     var leftLine: String? {
         if unlimited { return nil }
         if let left = poolLeftCny {
-            let whole = left.rounded() == left
-            return String(format: AppLocalized("%@ left"), "¥" + left.formatted(.number.precision(.fractionLength(whole ? 0 : 2))))
+            return String(format: AppLocalized("%@ left"), NanoMuseCurrency.money(left, symbol: currencySymbol))
         }
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -63,7 +65,7 @@ struct NanoMuseCloudAccount: Codable, Equatable, Sendable {
         return String(format: AppLocalized("%@ left"), left)
     }
 
-    init(channel: String, hint: String, granted: Int64, used: Int64, usedToday: Int64, dailyCap: Int64, checkedAt: Date, unlimited: Bool = false, id: String = "", grantCny: Double? = nil, leftCny: Double? = nil) {
+    init(channel: String, hint: String, granted: Int64, used: Int64, usedToday: Int64, dailyCap: Int64, checkedAt: Date, unlimited: Bool = false, id: String = "", grantCny: Double? = nil, leftCny: Double? = nil, currencySymbol: String = NanoMuseCurrency.defaultSymbol) {
         self.channel = channel
         self.hint = hint
         self.granted = granted
@@ -75,6 +77,7 @@ struct NanoMuseCloudAccount: Codable, Equatable, Sendable {
         self.id = id
         self.grantCny = grantCny
         self.leftCny = leftCny
+        self.currencySymbol = currencySymbol
     }
 
     // `unlimited` and `id` came later; an account cached by an earlier build decodes without them.
@@ -91,6 +94,42 @@ struct NanoMuseCloudAccount: Codable, Equatable, Sendable {
         id = try c.decodeIfPresent(String.self, forKey: .id) ?? ""
         grantCny = try c.decodeIfPresent(Double.self, forKey: .grantCny)
         leftCny = try c.decodeIfPresent(Double.self, forKey: .leftCny)
+        currencySymbol = try c.decodeIfPresent(String.self, forKey: .currencySymbol) ?? NanoMuseCurrency.defaultSymbol
+    }
+}
+
+/// The currency the relay bills in. The relay says which (`currency`, an ISO code, and
+/// `currency_symbol`) on `/v1/me`, the public config and the allowance refusal; an older relay
+/// says nothing and meant yuan. Field names ending `_cny` / `Cny` stay: they are ledger units.
+enum NanoMuseCurrency {
+    static let defaultSymbol = "¥"
+
+    private static let symbols: [String: String] = [
+        "CNY": "¥", "INR": "₹", "USD": "$", "EUR": "€", "GBP": "£", "JPY": "¥",
+    ]
+
+    /// The sign to print: the relay's own symbol when it sent one, else the one for its ISO
+    /// code, else "¥".
+    static func symbol(code: String?, symbol: String?) -> String {
+        if let symbol = symbol?.trimmingCharacters(in: .whitespacesAndNewlines), !symbol.isEmpty { return symbol }
+        if let code = code?.trimmingCharacters(in: .whitespacesAndNewlines).uppercased(), let known = symbols[code] { return known }
+        return defaultSymbol
+    }
+
+    /// The symbol out of a relay object that carries `currency` / `currency_symbol` (the `spend`
+    /// block, the public config, a refusal body); nil when it carries neither.
+    static func symbol(in object: [String: Any]?) -> String? {
+        guard let object else { return nil }
+        let code = object["currency"] as? String
+        let sign = object["currency_symbol"] as? String
+        if (sign ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && (code ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { return nil }
+        return symbol(code: code, symbol: sign)
+    }
+
+    /// "₹5" / "₹0.37": whole numbers without decimals, else two places, the symbol in front.
+    static func money(_ n: Double, symbol: String) -> String {
+        let whole = n.rounded() == n
+        return symbol + n.formatted(.number.precision(.fractionLength(whole ? 0 : 2)))
     }
 }
 
@@ -626,7 +665,8 @@ enum NanoMuseCloud {
             unlimited: (tokens["unlimited"] as? Bool) ?? ((tokens["unlimited"] as? NSNumber)?.boolValue ?? false),
             id: account["id"] as? String ?? "",
             grantCny: money(spend["grant"]),
-            leftCny: money(spend["left"])
+            leftCny: money(spend["left"]),
+            currencySymbol: NanoMuseCurrency.symbol(in: spend) ?? NanoMuseCurrency.defaultSymbol
         )
     }
 

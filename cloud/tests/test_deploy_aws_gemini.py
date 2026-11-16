@@ -39,6 +39,13 @@ def test_env_template_gemini_settings():
         "the hands say no-thinking; Gemini answers 400 to it"
     )
     assert kv["CHAT_TOOL_CALL_SIGNATURE"] == "skip_thought_signature_validator"
+    assert kv["CURRENCY"] == "INR" and float(kv["USD_CNY"]) > 50, "the kit prices in rupees"
+    assert float(kv["ALLOWANCE_CNY"]) >= 50 and float(kv["INVITE_BONUS_CNY"]) > 0
+    menu = json.loads((KIT / "models.json").read_text(encoding="utf-8"))
+    rate = float(kv["USD_CNY"])
+    for m in menu:  # rupee prices: Google's dollar list prices times the rate, within a few percent
+        assert 0.05 * rate <= m["price_in"] <= 0.5 * rate, m["id"]
+        assert 0.3 * rate <= m["price_out"] <= 3 * rate, m["id"]
     assert int(kv["CHAT_RETRIES"]) >= 3, "a free-tier key is told 'high demand' many times a day"
     assert kv["CHAT_FALLBACK"] in {m["upstream"] for m in json.loads((KIT / "models.json").read_text(encoding="utf-8"))}
     assert kv["UPSTREAM_BASE"] == "https://generativelanguage.googleapis.com/v1beta/openai"

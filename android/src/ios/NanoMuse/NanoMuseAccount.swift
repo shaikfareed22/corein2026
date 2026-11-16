@@ -20,6 +20,8 @@ struct NanoMuseSheet: Sendable {
         var ownKeyDocs: String?
         /// Relay 0.21 (contract C11): the ways on for the person's region, as the relay lists them; nil from an older relay.
         var guidance: NanoMuseGuidance?
+        /// The sign of the currency the relay bills in (`currency_symbol`, else from `currency`); "¥" from an older relay.
+        var currencySymbol: String = NanoMuseCurrency.defaultSymbol
 
         /// What is left, from the relay or from the grant and the total.
         var remaining: Double? {
@@ -59,6 +61,8 @@ struct NanoMuseSheet: Sendable {
     var total: [UsageRow]
     var byModel: [UsageRow]
     var invite: Invite?
+    /// The sign every money figure on the page is printed with: the `spend` block's, else "¥".
+    var currencySymbol: String { spend?.currencySymbol ?? NanoMuseCurrency.defaultSymbol }
 
     static func parse(_ reply: [String: Any]) -> NanoMuseSheet {
         let account = reply["account"] as? [String: Any] ?? [:]
@@ -91,7 +95,8 @@ struct NanoMuseSheet: Sendable {
                 inviteBonusCny: num(s["invite_bonus_cny"]),
                 inviteeBonusCny: num(s["invitee_bonus_cny"]),
                 ownKeyDocs: (s["own_key_docs"] as? String).flatMap { $0.isEmpty ? nil : $0 },
-                guidance: NanoMuseGuidance.parse(s["guidance"] as? [String: Any])
+                guidance: NanoMuseGuidance.parse(s["guidance"] as? [String: Any]),
+                currencySymbol: NanoMuseCurrency.symbol(in: s) ?? NanoMuseCurrency.defaultSymbol
             )
         }
         var invite: Invite?
@@ -147,6 +152,8 @@ struct NanoMuseConfig: Sendable {
     var inviteBonusCny: Double?
     var inviteeBonusCny: Double?
     var signupOpen: Bool?
+    /// The sign of the currency the relay bills in (`currency_symbol`, else from `currency`); "¥" from an older relay.
+    var currencySymbol: String = NanoMuseCurrency.defaultSymbol
 }
 
 extension NanoMuseCloud {
@@ -161,7 +168,8 @@ extension NanoMuseCloud {
             allowanceCny: num(reply["allowance_cny"]),
             inviteBonusCny: num(reply["invite_bonus_cny"]),
             inviteeBonusCny: num(reply["invitee_bonus_cny"]),
-            signupOpen: reply["signup_open"] as? Bool
+            signupOpen: reply["signup_open"] as? Bool,
+            currencySymbol: NanoMuseCurrency.symbol(in: reply) ?? NanoMuseCurrency.defaultSymbol
         )
         configCache = (Date(), config)
         return config

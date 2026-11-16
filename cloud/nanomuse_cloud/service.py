@@ -395,7 +395,7 @@ class Cloud:
             log.warning("review sign-in is on for %d address(es): a fixed code, nothing sent", len(self.review_hashes))
         if settings.signup_open:
             log.info(
-                "sign-up is open: %d member(s) without a limit, everyone else ¥%.2f in all (+¥%.2f an invite, to both sides); "
+                f"sign-up is open: %d member(s) without a limit, everyone else {self.s.symbol}%.2f in all (+{self.s.symbol}%.2f an invite, to both sides); "
                 "new accounts start with 'help improve the models' %s",
                 len(self.member_hashes),
                 settings.allowance_cny,
@@ -411,11 +411,11 @@ class Cloud:
             # account the operator set to zero: that one keeps its zero across a restart.
             n = self.db.seed_grants(settings.allowance_uy)
             if n:
-                log.warning("0.5: %d account(s) moved to the lifetime allowance (¥%.2f + what was spent)", n, settings.allowance_cny)
+                log.warning("0.5: %d account(s) moved to the lifetime allowance (%.2f + what was spent)", n, settings.allowance_cny)
         # 0.15: accounts from before the column remember the allowance of the day as theirs.
         n = self.db.seed_allowances(settings.allowance_uy)
         if n:
-            log.info("0.15: %d account(s) marked as given the ¥%.2f allowance", n, settings.allowance_cny)
+            log.info("0.15: %d account(s) marked as given the %.2f allowance", n, settings.allowance_cny)
 
     # -- settings the operator changes while the relay runs (0.15) ------------------------------
 
@@ -499,22 +499,22 @@ class Cloud:
         if self.s.allowance_cny <= 0:
             raise CloudError(400, "bad_request", "There is no allowance to apply (0 = no limit)")
         n = self.db.raise_allowance(self.s.allowance_uy, self.member_hashes)
-        log.warning("allowance ¥%.2f applied to %d existing account(s)", self.s.allowance_cny, n)
-        self.db.add_event("", "allowance.applied", f"¥{self.s.allowance_cny:g} to {n}")
-        self.db.audit_add(actor, "allowance.applied", "", f"¥{self.s.allowance_cny:g} to {n} account(s)")
+        log.warning("allowance %.2f applied to %d existing account(s)", self.s.allowance_cny, n)
+        self.db.add_event("", "allowance.applied", f"{self.s.symbol}{self.s.allowance_cny:g} to {n}")
+        self.db.audit_add(actor, "allowance.applied", "", f"{self.s.symbol}{self.s.allowance_cny:g} to {n} account(s)")
         return {"accounts": n, "allowance_cny": self.s.allowance_cny}
 
     def admin_credit_all(self, cny: float, note: str = "", actor: str = "console") -> dict:
         """The same credit into every limited account's pool at once; negative takes the same
         away from each (0.16), never below zero."""
         if cny == 0 or not -100 <= cny <= 100:
-            raise CloudError(400, "bad_request", "A credit for everyone is between -¥100 and ¥100, not 0")
+            raise CloudError(400, "bad_request", f"A credit for everyone is between -{self.s.symbol}100 and {self.s.symbol}100, not 0")
         if cny < 0:
             return self.admin_set_pool_many({"all": True, "delta_cny": cny, "note": note}, actor=actor)
         n = self.db.credit_all(self.s.cny_to_uy(cny), note=note, exclude_hashes=self.member_hashes)
-        log.warning("¥%.2f credited to %d account(s): %s", cny, n, note)
-        self.db.add_event("", "credit.all", f"¥{cny:g} to {n}: {note}"[:200])
-        self.db.audit_add(actor, "credit.all", "", f"¥{cny:g} to {n} account(s){' · ' + note if note else ''}")
+        log.warning("%.2f credited to %d account(s): %s", cny, n, note)
+        self.db.add_event("", "credit.all", f"{self.s.symbol}{cny:g} to {n}: {note}"[:200])
+        self.db.audit_add(actor, "credit.all", "", f"{self.s.symbol}{cny:g} to {n} account(s){' · ' + note if note else ''}")
         return {"accounts": n, "cny": cny}
 
     # The pool set by the operator (0.16): exactly one of these says how.
@@ -535,17 +535,17 @@ class Cloud:
             raise CloudError(400, "bad_request", f"{mode} is a number")
         if mode == "delta_cny":
             if value == 0 or not -10_000 <= value <= 10_000:
-                raise CloudError(400, "bad_request", "delta_cny is between -¥10000 and ¥10000, not 0")
+                raise CloudError(400, "bad_request", f"delta_cny is between -{self.s.symbol}10000 and {self.s.symbol}10000, not 0")
         elif not 0 <= value <= 10_000:
-            raise CloudError(400, "bad_request", f"{mode} is between ¥0 and ¥10000")
+            raise CloudError(400, "bad_request", f"{mode} is between {self.s.symbol}0 and {self.s.symbol}10000")
         return mode, value
 
     def _pool_words(self, mode: str, value: float) -> str:
         if mode == "left_cny":
-            return f"¥{value:g} left"
+            return f"{self.s.symbol}{value:g} left"
         if mode == "grant_cny":
-            return f"pool ¥{value:g}"
-        return f"{'+' if value > 0 else '−'}¥{abs(value):g}"
+            return f"pool {self.s.symbol}{value:g}"
+        return f"{'+' if value > 0 else '−'}{self.s.symbol}{abs(value):g}"
 
     def admin_set_pool(self, account_id: str, body: dict, actor: str = "console") -> dict:
         """One account's pool set by the operator: to what is left, to a total, or by a
@@ -558,7 +558,7 @@ class Cloud:
         uy = self.s.cny_to_uy(abs(value)) * (-1 if value < 0 else 1)
         new = self.db.set_pool(account_id, **{mode.replace("_cny", "_uy"): uy}, note=note)
         words = self._pool_words(mode, value)
-        log.warning("pool of %s set from the page: %s → ¥%.2f (%s)", account_id[:8], words, self.s.uy_to_cny(new or 0), note)
+        log.warning("pool of %s set from the page: %s → %.2f (%s)", account_id[:8], words, self.s.uy_to_cny(new or 0), note)
         self.db.add_event(account_id, "pool.set", f"{words}{' · ' + note if note else ''}"[:200])
         self.db.audit_add(actor, "pool.set", account_id[:8], f"{words}{' · ' + note if note else ''}")
         a = dict(self.db.account(account_id))  # type: ignore[arg-type]
@@ -607,6 +607,9 @@ class Cloud:
             "signup_open": self.s.signup_open and self.controls.on("signups"),
             # 0.22: which of the operator's switches are off, so a sign-in page can say so
             "paused": [k for k, v in self.controls.paused().items() if v],
+            # 0.27: the currency every `_cny` figure is in, and the sign the apps print
+            "currency": self.s.currency,
+            "currency_symbol": self.s.symbol,
             "allowance_cny": self.s.allowance_cny,
             "allowance_usd": self.s.cny_to_usd(self.s.allowance_cny),
             "invite_bonus_cny": self.s.invite_bonus_cny,
@@ -885,7 +888,7 @@ class Cloud:
         self.db.link_invite(inviter["id"], new_account_id)
         self.db.add_event(inviter["id"], "invite.accepted", new_account_id[:8])
         self.db.add_event(new_account_id, "invite.used", inviter["id"][:8])
-        log.info("invite: %s brought %s (+¥%.2f each at first use)", inviter["id"][:8], new_account_id[:8], self.s.invite_bonus_cny)
+        log.info("invite: %s brought %s (+%.2f each at first use)", inviter["id"][:8], new_account_id[:8], self.s.invite_bonus_cny)
 
     def settle_invite(self, account_id: str) -> bool:
         """Called after every charged request: when the account came through a code and its
@@ -910,7 +913,7 @@ class Cloud:
         if inviter_paid:
             self.db.add_event(inviter_id, "invite.settled", account_id[:8])
         log.info(
-            "invite: %s used the relay, +¥%.2f to %s",
+            f"invite: %s used the relay, +{self.s.symbol}%.2f to %s",
             account_id[:8],
             self.s.invite_bonus_cny,
             "both" if inviter_paid else "the newcomer only",
@@ -1303,8 +1306,8 @@ class Cloud:
         return guidance(region, self.s.own_key_docs)
 
     def _exhausted(self, caller: Caller, a: dict, region: str = "unknown") -> CloudError:
-        grant = f"¥{self.s.uy_to_cny(a['grant_uy']):g}"
-        bonus = f"+¥{self.s.invite_bonus_cny:g} for each of you"
+        grant = f"{self.s.symbol}{self.s.uy_to_cny(a['grant_uy']):g}"
+        bonus = f"+{self.s.symbol}{self.s.invite_bonus_cny:g} for each of you"
         key = exhausted_key_line(region)
         message = (
             f"Your free allowance ({grant}) is used up. Three ways on: {key}, or invite a friend ({bonus}). "
@@ -1323,6 +1326,8 @@ class Cloud:
                 # app can sign in with (contract C11)
                 "guidance": self.guidance(region),
                 "invite_url": (self.s.invite_url + self.invite_code_for(caller)) if self.s.invite_url else "",
+                "currency": self.s.currency,
+                "currency_symbol": self.s.symbol,
                 "invite_bonus_cny": self.s.invite_bonus_cny,
                 "invitee_bonus_cny": self.s.invite_bonus_cny,
                 # 0.5 names, kept for the apps of the time: there is no co-creation bonus any more
@@ -1391,7 +1396,10 @@ class Cloud:
             # against its pool (0 = no limit, which is what members get), what is left, and
             # the rate the apps use to show dollars next to yuan. `warn` turns on at 80 %.
             "spend": {
-                "currency": "CNY",
+                # 0.27: the currency of every figure here, and its sign (older apps read
+                # the code, print ¥, and are right on a CNY relay)
+                "currency": self.s.currency,
+                "currency_symbol": self.s.symbol,
                 "total": self.s.uy_to_cny(spent_uy),
                 "grant": grant_cny,
                 "left": left_cny,
@@ -2196,12 +2204,12 @@ class Cloud:
         if self.db.account(account_id) is None:
             raise CloudError(404, "no_account", "No such account")
         if cny == 0 or not -1000 <= cny <= 1000:
-            raise CloudError(400, "bad_request", "Credit is between -¥1000 and ¥1000, not 0")
+            raise CloudError(400, "bad_request", f"Credit is between -{self.s.symbol}1000 and {self.s.symbol}1000, not 0")
         if cny < 0:  # 0.16: the operator may take back as well as give
             return self.admin_set_pool(account_id, {"delta_cny": cny, "note": note}, actor=actor)
         self.db.add_credit(account_id, self.s.cny_to_uy(cny), note=note)
-        self.db.add_event(account_id, "credit.granted", f"¥{cny:g}")
-        self.db.audit_add(actor, "credit", account_id[:8], f"¥{cny:g}{' · ' + note if note else ''}")
+        self.db.add_event(account_id, "credit.granted", f"{self.s.symbol}{cny:g}")
+        self.db.audit_add(actor, "credit", account_id[:8], f"{self.s.symbol}{cny:g}{' · ' + note if note else ''}")
         a = dict(self.db.account(account_id))  # type: ignore[arg-type]
         a["identifier"] = self.crypto.decrypt(account_id, a.pop("identifier_enc", "")) or ""
         a["member"] = bool(a.get("unlimited")) or a.pop("id_hash", None) in self.member_hashes
@@ -2677,7 +2685,7 @@ class Cloud:
         disabled = bool(row is not None and row["disabled"])
         reclaimed_cny = self.s.uy_to_cny(reclaimed)
         detail = (
-            f"¥{reclaimed_cny:g} reclaimed"
+            f"{self.s.symbol}{reclaimed_cny:g} reclaimed"
             + (", disabled" if disable else "")
             + (f", {deleted} unused invitee(s) deleted, {kept} kept" if delete_unused else "")
         )
@@ -2807,6 +2815,8 @@ class Cloud:
             "daily_cap_tokens": self.s.daily_cap_tokens,
             "per_minute_requests": self.s.per_minute_requests,
             "signup_open": self.s.signup_open,
+            "currency": self.s.currency,
+            "currency_symbol": self.s.symbol,
             "allowance_cny": self.s.allowance_cny,
             "allowance_usd": self.s.cny_to_usd(self.s.allowance_cny),
             "invite_bonus_cny": self.s.invite_bonus_cny,

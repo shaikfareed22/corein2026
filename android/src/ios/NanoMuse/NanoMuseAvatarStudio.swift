@@ -680,9 +680,9 @@ struct NanoMuseFaceCostSheet: View {
                 if e.unlimited {
                     Text(what + ".")
                 } else {
-                    Text(String(format: AppLocalized("%@: about ¥%@ from your allowance."), what, Self.money(e.cny)))
+                    Text(String(format: AppLocalized("%@: about %@ from your allowance."), what, Self.money(e.cny, symbol: e.currencySymbol)))
                     if let left = e.leftCny {
-                        Text(String(format: AppLocalized("You have ¥%@ of the allowance left."), Self.money(left)))
+                        Text(String(format: AppLocalized("You have %@ of the allowance left."), Self.money(left, symbol: e.currencySymbol)))
                             .foregroundStyle(.secondary)
                     }
                     if !e.affordable {
@@ -715,9 +715,9 @@ struct NanoMuseFaceCostSheet: View {
         .padding(22)
     }
 
-    static func money(_ v: Double) -> String {
-        if v == v.rounded() { return String(format: "%.0f", v) }
-        return String(format: "%.2f", v)
+    /// "₹5" / "₹0.37": the relay's currency sign in front; whole numbers without decimals.
+    static func money(_ v: Double, symbol: String) -> String {
+        NanoMuseCurrency.money(v, symbol: symbol)
     }
 }
 
