@@ -39,7 +39,8 @@ class NmStringsParityTest {
         val en = names(enFile) - fixed
         assertTrue(en.size > 800)
         val locales = localeFiles()
-        assertTrue("expected the sixteen locale files, found ${locales.size}", locales.size >= 16)
+        // FOMO 1.2.1 dropped the two Chinese files (232a4637): fourteen locales remain
+        assertTrue("expected the fourteen locale files, found ${locales.size}", locales.size >= 14)
         for (f in locales) {
             val keys = names(f)
             val missing = en - keys
