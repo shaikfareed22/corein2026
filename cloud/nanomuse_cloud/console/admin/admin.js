@@ -72,6 +72,7 @@
     rtAllowance: `每个新账号的免费额度（${SYM}）`, rtBonus: `邀请奖励（${SYM}，双方各得）`, rtSignup: "开放注册", rtSignupOff: "关闭后只有白名单和成员能登录；已登录的人不受影响。",
     rtEnv: (v) => `环境变量：${v}`, rtSet: "页面已设置", rtSave: "保存", rtSaved: "已保存，已生效。", rtApply: (n) => `把当前额度补给 ${n} 个老账号`, rtApplyNone: "所有账号拿到的额度都不低于当前值。",
     rtApplyConfirm: (n, c) => `给 ${n} 个拿到的额度低于 ${SYM}${c} 的账号补齐差额？每个账号的流水会记一笔「额度调整」。`, rtApplied: (n) => `已补给 ${n} 个账号。`,
+    upTitle: "模型提供方（即时生效）", upNote: "所有账号的请求都从这里出去：提供方的地址和你的 API key。key 换了就在这里改，或者把中转指向另一个 OpenAI 格式的提供方；下一条请求就生效，重启后仍然保留。留空恢复环境变量的值。菜单（CLOUD_MODELS）不变：里面的上游模型名必须在新提供方存在。", upBase: "地址", upKey: "API key", upKeyHint: (m) => m ? `当前：${m}` : "没有设置", upTest: "测试", upTesting: "正在问提供方…", upOk: (n, miss) => `提供方回应了：列出 ${n} 个模型` + (miss.length ? `；菜单里这些不在其中：${miss.join("、")}` : ""), upFail: (s, e) => `提供方拒绝了（HTTP ${s || "—"}）：${e}`, upEnvBack: "恢复环境变量",
     rtCreditAll: "给所有人加额度", rtCreditAllPrompt: "给每个受额度限制的账号加多少？负数扣减。（节日、补偿；成员除外）", rtSetAll: "统一设置所有人额度", rtSetAllPrompt: (n) => `给全部 ${n} 个受限账号设置额度。\n写法：=5 → 每人剩余设为 ${SYM}5；总额=20 → 每人总额度设为 ${SYM}20；+3 / -2 → 每人加 ${SYM}3 / 扣 ${SYM}2。`, rtCreditAllConfirm: (c, n) => `给 ${n} 个账号各加 ${SYM}${c}？`, rtCredited: (n) => `已给 ${n} 个账号加额度。`,
     // nudges (relay 0.18): when the apps ask for a star on GitHub
     ndTitle: "Star 提示（即时生效）", ndNote: "客户端什么时候可以请人去 GitHub 点个 star。所有客户端（Android、iPhone、桌面、网页）每天读一次这里的规则，连不上时用内置的默认值。在这里改，不用发版。「不再提醒」也算一次提示；点过「去 GitHub」的设备以后不再提示。",
@@ -211,6 +212,7 @@
     rtAllowance: `Free allowance for each new account (${SYM})`, rtBonus: `Invite bonus (${SYM}, to both sides)`, rtSignup: "Sign-up open", rtSignupOff: "Closed, only members and the list may sign in; whoever is signed in is unaffected.",
     rtEnv: (v) => `environment: ${v}`, rtSet: "set here", rtSave: "Save", rtSaved: "Saved and in force.", rtApply: (n) => `Bring ${n} older account${n === 1 ? "" : "s"} up to the current allowance`, rtApplyNone: "Every account has at least the current allowance.",
     rtApplyConfirm: (n, c) => `Top up the ${n} account(s) that were given less than ${SYM}${c}? Each gets a ledger line saying so.`, rtApplied: (n) => `${n} account(s) topped up.`,
+    upTitle: "Model provider (in force at once)", upNote: "Every account's requests go out with these: the provider's address and your API key. Change the key here when it is rotated, or point the relay at another OpenAI-style provider; the next request uses it and it survives a restart. Empty puts the environment's value back. The menu (CLOUD_MODELS) stays as it is: its upstream names must exist at the new provider.", upBase: "Address", upKey: "API key", upKeyHint: (m) => m ? `in force: ${m}` : "none set", upTest: "Test", upTesting: "asking the provider…", upOk: (n, miss) => `The provider answers: ${n} models listed` + (miss.length ? `; not among them: ${miss.join(", ")}` : ""), upFail: (s, e) => `The provider refused (HTTP ${s || "—"}): ${e}`, upEnvBack: "Back to the environment's",
     rtCreditAll: "Credit everyone", rtCreditAllPrompt: "How much into every limited account's pool? Negative takes away. (a holiday, an apology; members left out)", rtSetAll: "Set everyone's pool", rtSetAllPrompt: (n) => `Set the pool of all ${n} limited accounts.\nWrite: =5 → ${SYM}5 left each; total=20 → a ${SYM}20 pool each; +3 / -2 → ${SYM}3 more / ${SYM}2 less each.`, rtCreditAllConfirm: (c, n) => `${SYM}${c} to each of ${n} accounts?`, rtCredited: (n) => `${n} account(s) credited.`,
     ndTitle: "Star asks (in force at once)", ndNote: "When the apps may ask for a star on GitHub. Every client (Android, iPhone, desktop, web) reads this once a day and falls back to the built-in defaults when the relay cannot be reached. Change it here; no release needed. “Not now” counts as an ask; a device that went to GitHub is never asked again.",
     ndEnabled: "Asks on", ndEnabledOff: "Off: no asks at all; the “Star on GitHub” rows in Settings stay.", ndMoments: "Moments", ndSignedIn: "First time seen signed in (a row on the account page)", ndNewLook: "After a new face is drawn", ndExhausted: "When the free allowance is used up (a row in the ways-on card)", ndGoalDone: "When a goal is marked done",
@@ -1558,12 +1560,47 @@
   let rtMsg = "", rtBusy = false;
   async function rtSave() {
     const body = {};
-    for (const key of ["allowance_cny", "invite_bonus_cny", "signup_open"]) if (key in RT_DRAFT) body[key] = RT_DRAFT[key] === "" ? null : RT_DRAFT[key];
+    for (const key of ["allowance_cny", "invite_bonus_cny", "signup_open", "upstream_base", "upstream_key"]) if (key in RT_DRAFT) body[key] = RT_DRAFT[key] === "" ? null : RT_DRAFT[key];
+    // an emptied key field is "nothing typed", not "back to the environment" (that has its own button)
+    if (body.upstream_key === null) delete body.upstream_key;
     if (!Object.keys(body).length) return;
+    const provider = "upstream_base" in body || "upstream_key" in body;
     rtBusy = true; rtMsg = ""; draw();
     try { await api("POST", "/v1/admin/settings", body); for (const k of Object.keys(RT_DRAFT)) delete RT_DRAFT[k]; rtMsg = T.rtSaved; } catch (e) { rtMsg = e.message; }
+    if (provider) upMsg = rtMsg;
     rtBusy = false;
     await load();
+  }
+  // ── the model provider (relay 0.28): the address and the key, tested before they are saved ──
+  let upMsg = "", upBusy = false;
+  async function upTest() {
+    upBusy = true; upMsg = T.upTesting; draw();
+    const body = {};
+    if (RT_DRAFT.upstream_base) body.base = RT_DRAFT.upstream_base;
+    if (RT_DRAFT.upstream_key) body.key = RT_DRAFT.upstream_key;
+    try { const r = await api("POST", "/v1/admin/settings/upstream-test", body); upMsg = r.ok ? T.upOk(r.models, r.missing || []) : T.upFail(r.status, r.error); } catch (e) { upMsg = e.message; }
+    upBusy = false; draw();
+  }
+  async function upEnvBack() {
+    rtBusy = true; draw();
+    try { await api("POST", "/v1/admin/settings", { upstream_base: null, upstream_key: null }); delete RT_DRAFT.upstream_base; delete RT_DRAFT.upstream_key; upMsg = T.rtSaved; } catch (e) { upMsg = e.message; }
+    rtBusy = false;
+    await load();
+  }
+  function providerPanel() {
+    const rt = settings().runtime || { values: {}, env: {}, overridden: {} };
+    const v = rt.values || {}, env = rt.env || {}, set = rt.overridden || {};
+    const note = (key) => h("span", { class: "fine" }, (set[key] ? T.rtSet + " · " : "") + T.rtEnv(env[key] || "—"));
+    const dirty = ("upstream_base" in RT_DRAFT) || !!RT_DRAFT.upstream_key;
+    return h("div", { class: "panel" }, h("h2", {}, T.upTitle, h("span", { class: "sp" }),
+        h("button", { class: "btn quiet sm", disabled: upBusy ? "" : null, onclick: upTest }, T.upTest), " ",
+        (set.upstream_base || set.upstream_key) ? h("button", { class: "btn quiet sm", disabled: rtBusy ? "" : null, onclick: upEnvBack }, T.upEnvBack) : null, " ",
+        h("button", { class: "btn sm", disabled: dirty && !rtBusy ? null : "", onclick: rtSave }, T.rtSave)),
+      h("div", { class: "fine", style: "padding:12px 16px 0" }, T.upNote),
+      h("div", { class: "kv" },
+        h("b", {}, T.upBase), h("span", { class: "rt" }, h("input", { type: "url", "data-focus": "rt-upstream_base", value: "upstream_base" in RT_DRAFT ? RT_DRAFT.upstream_base : (v.upstream_base || ""), oninput: (e) => { RT_DRAFT.upstream_base = e.target.value; draw(); } }), note("upstream_base")),
+        h("b", {}, T.upKey), h("span", { class: "rt" }, h("input", { type: "password", autocomplete: "new-password", "data-focus": "rt-upstream_key", placeholder: T.upKeyHint(v.upstream_key), value: RT_DRAFT.upstream_key || "", oninput: (e) => { RT_DRAFT.upstream_key = e.target.value; draw(); } }), note("upstream_key"))),
+      upMsg ? h("div", { class: "fine", style: "padding:0 16px 12px" }, upMsg) : null);
   }
   async function rtApply(n, cny) {
     if (!confirm(T.rtApplyConfirm(n, cny))) return;
@@ -1674,6 +1711,7 @@
     const s = settings(), rate = Number(s.usd_cny || 0);
     return [
       runtimePanel(),
+      providerPanel(),
       nudgesPanel(),
       h("div", { class: "panel" }, h("h2", {}, T.config),
         h("div", { class: "kv" },

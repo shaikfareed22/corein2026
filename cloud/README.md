@@ -162,7 +162,7 @@ for the full list. The ones that matter:
 
 | variable | default | |
 |---|---|---|
-| `UPSTREAM_BASE` / `UPSTREAM_KEY` | Model Studio compatible-mode | where chat goes |
+| `UPSTREAM_BASE` / `UPSTREAM_KEY` | Model Studio compatible-mode | where chat goes. *Runtime settings* (0.28): the admin page (Settings → Model provider) changes both without a restart, after a *Test* that asks the provider for its model list; `GET /v1/admin/settings` shows the key by its ends only, `POST /v1/admin/settings/upstream-test` is the test |
 | `DASHSCOPE_BASE` | Model Studio native | where pictures go (same key) |
 | `IMAGE_CONCURRENCY` / `IMAGE_RETRIES` | 2 / 4 | pictures drawn at once for everyone together (the provider allows an account only a couple), and how often a 429 or 5xx is retried with growing pauses before `429 provider_busy` |
 | `CHAT_DEFAULTS` | `{"enable_thinking": false}` | merged into chat requests for fields the app did not set |

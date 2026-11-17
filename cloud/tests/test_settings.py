@@ -41,7 +41,7 @@ async def test_settings_change_at_once_and_reach_older_accounts_only_when_asked(
     # The page reads what is in force, what the environment says, and what it set itself.
     rt = (await client.get("/v1/admin/settings", headers=ADMIN)).json()
     assert rt["values"]["allowance_cny"] == 25 and rt["env"]["allowance_cny"] == 25
-    assert rt["overridden"] == {"allowance_cny": False, "invite_bonus_cny": False, "signup_open": False}
+    assert rt["overridden"] == {k: False for k in ("allowance_cny", "invite_bonus_cny", "signup_open", "upstream_base", "upstream_key")}
     assert rt["below_allowance"] == 0
 
     # Lowered: the next sign-up gets the new figure; the first account keeps its pool.

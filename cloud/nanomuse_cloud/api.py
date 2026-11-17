@@ -479,9 +479,9 @@ def create_app(
         return cloud.authenticate(token)
 
     def upstream_headers() -> dict[str, str]:
-        if not settings.upstream_key:
+        if not cloud.s.upstream_key:
             raise CloudError(503, "upstream_unconfigured", "FOMO Cloud has no model key configured")
-        return {"Authorization": f"Bearer {settings.upstream_key}", "Content-Type": "application/json"}
+        return {"Authorization": f"Bearer {cloud.s.upstream_key}", "Content-Type": "application/json"}
 
     # -- health ----------------------------------------------------------------
 
@@ -793,6 +793,8 @@ def create_app(
         probe_ttl_s=settings.catalog_probe_ttl_s,
         store=cloud.db if settings.catalog_probe else None,
     )
+    # 0.28: a provider set from the page empties the catalog's cache of the old one's models
+    cloud.on_upstream_change = lambda: setattr(catalog, "fetched_at", 0.0)
     app.state.catalog = catalog
 
     @app.get("/v1/models")
@@ -803,7 +805,7 @@ def create_app(
         out = cloud.models_for(caller)
         if not (settings.catalog_enabled and out["nanomuse"].get("any_model")):
             return out
-        entries = await catalog.get(app.state.http, settings.upstream_base, settings.upstream_key)
+        entries = await catalog.get(app.state.http, cloud.s.upstream_base, cloud.s.upstream_key)
         menu = {m["id"] for m in out["data"]}
         added = 0
         for e in entries:
@@ -861,7 +863,7 @@ def create_app(
         # OpenAI request fields are dangerous, but `user` is ours to set so the
         # provider's abuse tooling can tell accounts apart without knowing them.
         body["user"] = caller.account_id[:32]
-        url = settings.upstream_base.rstrip("/") + "/chat/completions"
+        url = cloud.s.upstream_base.rstrip("/") + "/chat/completions"
         fallback_prompt_tokens = math.ceil(prompt_chars(body.get("messages") or []) / 3)
         # For an account that opted in, the turn is kept once it is answered (service.keep_sample)
         # with the platform and language hints from the headers and, since 0.10, the address
@@ -1065,7 +1067,7 @@ def create_app(
             image_url = r.json()["output"]["choices"][0]["message"]["content"][0]["image"]
         except (ValueError, KeyError, IndexError, TypeError) as e:
             raise CloudError(502, "upstream", "The image provider sent no picture") from e
-        own_hosts = tuple((urlsplit(u).hostname or "").lower() for u in (settings.dashscope_base, settings.upstream_base))
+        own_hosts = tuple((urlsplit(u).hostname or "").lower() for u in (settings.dashscope_base, cloud.s.upstream_base))
         if not _provider_url_ok(image_url, own_hosts):
             log.warning("dashscope image URL off the provider's hosts: %s", str(image_url)[:120])
             raise CloudError(502, "upstream", "The image provider sent a picture from somewhere unexpected")
@@ -1267,7 +1269,7 @@ def create_app(
         the row is purged. A SUCCEEDED answer charges the clip exactly once (the same path
         as a poll); FAILED or CANCELED lets the hold go; a task the provider no longer knows
         is marked UNKNOWN. A handful per call. Returns how many tasks were asked about."""
-        if not settings.upstream_key:
+        if not cloud.s.upstream_key:
             return 0
         done = 0
         for task in cloud.db.video_tasks_to_settle(limit):
@@ -1418,7 +1420,7 @@ def create_app(
                 "sign_in_failures": int(hour.get("sign_in.failed", 0)),
             },
             "db": db_health,
-            "upstream_key": bool(settings.upstream_key),
+            "upstream_key": bool(cloud.s.upstream_key),
         }
         problems: list[str] = []
         if upstream_errors >= 20:
@@ -1427,7 +1429,7 @@ def create_app(
             problems.append(f"{hub.flood_closes} hub sockets closed for flooding since start")
         if not db_health["writable"]:
             problems.append("the database is not writable")
-        if not settings.upstream_key:
+        if not cloud.s.upstream_key:
             problems.append("no upstream key")
         # invites being farmed: a code bringing many accounts in a day, or inviters whose
         # people never use anything; each alert is one sentence here and the detail below
@@ -1524,7 +1526,7 @@ def create_app(
         """The models under the key beyond the menu, and what the probes found: which
         answer, which read pictures, which the provider refuses."""
         if settings.catalog_enabled:
-            await catalog.get(app.state.http, settings.upstream_base, settings.upstream_key)
+            await catalog.get(app.state.http, cloud.s.upstream_base, cloud.s.upstream_key)
         return {"enabled": settings.catalog_enabled, "probe": settings.catalog_probe, **catalog.summary()}
 
     @app.get("/v1/admin/data", dependencies=[Depends(admin_dep)])
@@ -1696,9 +1698,39 @@ def create_app(
 
     @app.post("/v1/admin/settings", dependencies=[Depends(admin_dep)])
     async def admin_settings_set(request: Request) -> dict:
-        """{allowance_cny?, invite_bonus_cny?, signup_open?}: set (a value) or clear back to
-        the environment (null). In force at once, kept across restarts."""
+        """{allowance_cny?, invite_bonus_cny?, signup_open?, upstream_base?, upstream_key?}: set
+        (a value) or clear back to the environment (null). In force at once, kept across
+        restarts; the key is never echoed back, only its ends."""
         return cloud.admin_update_settings(await _json(request), actor=_actor(request))
+
+    @app.post("/v1/admin/settings/upstream-test", dependencies=[Depends(admin_dep)])
+    async def admin_upstream_test(request: Request) -> dict:
+        """{base?, key?}: asks the provider for its model list with these (or the ones in force),
+        saving nothing — so a new key is checked before it is put in force. Says how many models
+        the provider lists and which of the menu's upstream names are not among them."""
+        body = await _json(request)
+        base = str(body.get("base") or cloud.s.upstream_base).strip().rstrip("/")
+        key = str(body.get("key") or cloud.s.upstream_key).strip()
+        if not key:
+            return {"ok": False, "status": 0, "models": 0, "missing": [], "error": "no key"}
+        try:
+            r = await http.get(base + "/models", headers={"Authorization": f"Bearer {key}"}, timeout=20.0)
+        except httpx.HTTPError as e:
+            return {"ok": False, "status": 0, "models": 0, "missing": [], "error": str(e)[:200]}
+        ids: list[str] = []
+        if r.status_code == 200:
+            try:
+                ids = [str(m.get("id")) for m in (r.json().get("data") or []) if isinstance(m, dict)]
+            except (ValueError, AttributeError):
+                pass
+        menu = [m.upstream for m in cloud.s.models if m.kind == "chat"]
+        return {
+            "ok": r.status_code == 200,
+            "status": r.status_code,
+            "models": len(ids),
+            "missing": [u for u in menu if ids and u not in ids],
+            "error": "" if r.status_code == 200 else r.text[:200],
+        }
 
     # -- 0.22: the Controls page — switches, thresholds, the audit log -------------------------
 

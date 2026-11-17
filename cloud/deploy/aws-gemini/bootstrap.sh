@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# FOMO Cloud on an AWS free-tier Ubuntu instance, Google Gemini for every account.
+# FOMO Cloud on an AWS free-tier Ubuntu instance, one provider key (M4 Spider) for every account.
 # Run on the instance, once, as a user with sudo; running it again is safe (update,
 # re-ask with the current values as defaults, secrets and accounts kept).
 #
@@ -183,8 +183,8 @@ write_env() {
 	acme=$op_email
 	secret=$(current CLOUD_SECRET); [ -n "$secret" ] || secret=$(openssl rand -hex 32)
 	admin=$(current CLOUD_ADMIN_TOKEN); [ -n "$admin" ] || admin=$(openssl rand -hex 32)
-	ask_secret key "Gemini API key (AIza...)" "$(current UPSTREAM_KEY)"
-	[ -n "$key" ] || die "a Gemini key is needed: https://aistudio.google.com/apikey"
+	ask_secret key "Model provider API key (M4 Spider: sk-spider-...; also changeable on the admin page later)" "$(current UPSTREAM_KEY)"
+	[ -n "$key" ] || die "a provider key is needed: https://admin.m4spider.com (or another OpenAI-style provider, with UPSTREAM_BASE in env.template)"
 	say "Sign-in codes go out by e-mail. Any SMTP mailbox works (Gmail: smtp.gmail.com, 587, an app password)."
 	ask smtp_host "SMTP host" "$(current SMTP_HOST)"
 	ask smtp_port "SMTP port" "$(current SMTP_PORT)"; smtp_port=${smtp_port:-587}

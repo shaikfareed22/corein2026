@@ -16,6 +16,7 @@ import math
 import os
 import re
 import secrets
+from urllib.parse import urlsplit
 import sqlite3
 import time
 from collections.abc import Callable
@@ -353,7 +354,20 @@ RUNTIME_SETTINGS: dict[str, tuple[type, float, float]] = {
     "allowance_cny": (float, 0.0, 1000.0),
     "invite_bonus_cny": (float, 0.0, 100.0),
     "signup_open": (bool, 0.0, 1.0),
+    # 0.28: the model provider — so a key is rotated, or the relay pointed at another
+    # OpenAI-style provider, from the page and without a restart (text: min/max length)
+    "upstream_base": (str, 8, 300),
+    "upstream_key": (str, 8, 512),
 }
+# settings the page never sees in full: the value in force is shown by its ends only
+SECRET_SETTINGS = frozenset({"upstream_key"})
+
+
+def mask_secret(value: str) -> str:
+    """`sk-abc…wxyz` — enough to recognise a key, never enough to use it."""
+    if not value:
+        return ""
+    return value[:6] + "…" + value[-4:] if len(value) > 14 else "•" * len(value)
 
 
 class Cloud:
@@ -366,6 +380,8 @@ class Cloud:
         self.db = db or Database(settings.database)
         self.s = self._with_overrides(settings, self.db.settings_all())
         settings = self.s
+        # 0.28: api.py hangs the catalog's reset here; called when the provider changes from the page
+        self.on_upstream_change = lambda: None
         self.in_flight = InFlight(settings.max_in_flight, ttl_s=settings.upstream_timeout_s + 120)
         self.sender = sender or make_sender(settings)
         if settings.dev_mode and not isinstance(self.sender, LogSender):
@@ -423,6 +439,21 @@ class Cloud:
     def _coerce_setting(key: str, value: Any) -> Any:
         """One override, checked: the right type, within bounds. ValueError says what is wrong."""
         kind, lo, hi = RUNTIME_SETTINGS[key]
+        if kind is str:
+            if not isinstance(value, str):
+                raise ValueError(f"{key} is text")
+            text = value.strip()
+            if any(ch.isspace() for ch in text) or not lo <= len(text) <= hi:
+                raise ValueError(f"{key} is one piece of text, {int(lo)} to {int(hi)} characters")
+            if key == "upstream_base":
+                u = urlsplit(text)
+                # https anywhere; plain http only for a name without dots (a box on the LAN, a test)
+                if u.scheme not in ("https", "http") or not u.hostname or u.query or u.fragment or (
+                    u.scheme == "http" and "." in u.hostname
+                ):
+                    raise ValueError("upstream_base is an https:// address up to the version path, like https://api.example.com/v1")
+                text = text.rstrip("/")
+            return text
         if kind is bool:
             if isinstance(value, bool):
                 return value
@@ -459,8 +490,11 @@ class Cloud:
         stored = self.db.settings_all()
         out: dict[str, Any] = {"values": {}, "env": {}, "overridden": {}}
         for key in RUNTIME_SETTINGS:
-            out["values"][key] = getattr(self.s, key)
-            out["env"][key] = getattr(self.env, key)
+            live, env = getattr(self.s, key), getattr(self.env, key)
+            if key in SECRET_SETTINGS:
+                live, env = mask_secret(live), mask_secret(env)
+            out["values"][key] = live
+            out["env"][key] = env
             out["overridden"][key] = key in stored
         out["below_allowance"] = self.db.below_allowance(self.s.allowance_uy, self.member_hashes) if self.s.allowance_cny > 0 else 0
         return out
@@ -488,7 +522,11 @@ class Cloud:
         for key, value in changes.items():
             self.db.settings_put(key, value)
         self.s = self._with_overrides(self.env, self.db.settings_all())
-        said = ", ".join(f"{k}={'env' if v is None else v}" for k, v in changes.items())
+        if any(k.startswith("upstream_") for k in changes):
+            self.on_upstream_change()  # the model catalog's cache belongs to the old provider
+        said = ", ".join(
+            f"{k}={'env' if v is None else (mask_secret(v) if k in SECRET_SETTINGS else v)}" for k, v in changes.items()
+        )
         log.warning("settings changed from the page: %s", said)
         self.db.add_event("", "settings.changed", said[:200])
         self.db.audit_add(actor, "settings.changed", "", said)

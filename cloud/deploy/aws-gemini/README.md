@@ -1,6 +1,6 @@
-# FOMO Cloud on AWS, Gemini for everyone
+# FOMO Cloud on AWS, one provider key for everyone (M4 Spider)
 
-Your own relay on one AWS free-tier instance, with your Google Gemini key behind it for
+Your own relay on one AWS free-tier instance, with your M4 Spider key behind it for
 every account that signs in. Nothing runs on your laptop: sign-in, the hub the devices meet
 on, conversation sync and the web console all live on the instance, and the phone, the
 desktop app and any browser point at it. Phone hands work out of the box: the menu names a
@@ -20,7 +20,8 @@ to AWS and Gemini. It uses the stock `cloud/docker-compose.yml` and `cloud/Caddy
 | models | `gemini-3.5-flash-lite` (chat and hands, the default in both lanes: it answers in about a second on a free-tier key), `gemini-3.8-flash` (stronger, but on a free-tier key it can take minutes and the relay's 180 s wait runs out; pick it with a billed key) |
 | settings | `CHAT_DEFAULTS={}` and `CHAT_DROP={"enable_thinking": true, "reasoning_effort": ["none"]}`: Gemini answers 400 to both of those "no thinking" fields, and the phone's hands send one on every screenshot step; `CHAT_TOOL_CALL_SIGNATURE=skip_thought_signature_validator`, Google's placeholder for the thought signature Gemini 3 wants on every earlier tool call in a conversation |
 | money | `CURRENCY=INR`, `ALLOWANCE_CNY=100`, `INVITE_BONUS_CNY=50`, `USD_CNY=84`: the menu, the allowance and every figure the apps show are in rupees; the `_CNY` names are the ledger's history |
-| busy provider | `CHAT_RETRIES=5`, `CHAT_RETRY_MAX_S=20`, `CHAT_FALLBACK=gemini-3.8-flash`: a free-tier key is often answered 503 "high demand" or 429; the relay waits and asks again instead of failing the step, and the last try goes to the other model |
+| provider | `UPSTREAM_BASE=https://admin.m4spider.com/v1` and your `sk-spider-…` key. Both are **runtime settings** (relay 0.28): Settings → *Model provider* on the admin page changes them without a restart and has a *Test* button that asks the provider first; the page shows the key by its ends only. Going (back) to Gemini is the same page plus the Gemini lines noted in `env.template` and a Gemini menu. M4 Spider's non-streaming answers lose the tool call (the apps stream), and its plans are request quotas per model per five hours, which the relay's `CHAT_RETRIES` ride out |
+| busy provider | `CHAT_RETRIES=5`, `CHAT_RETRY_MAX_S=20`, `CHAT_FALLBACK=qwen/qwen3.8-flash`: a model over its five-hour quota or busy answers 429 / 5xx; the relay waits and asks again instead of failing the step, and the last try goes to Qwen |
 | off | avatar pictures and clips: the relay's image and video routes assume Alibaba's API, so the menu has none and the apps show those features off |
 
 ## Before the script: the AWS console and DuckDNS
