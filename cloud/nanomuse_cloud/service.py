@@ -16,7 +16,6 @@ import math
 import os
 import re
 import secrets
-from urllib.parse import urlsplit
 import sqlite3
 import time
 from collections.abc import Callable
@@ -24,6 +23,7 @@ from contextlib import closing
 from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from typing import Any
+from urllib.parse import urlsplit
 
 from . import __version__
 from .client import client_version, platform_of
@@ -448,8 +448,12 @@ class Cloud:
             if key == "upstream_base":
                 u = urlsplit(text)
                 # https anywhere; plain http only for a name without dots (a box on the LAN, a test)
-                if u.scheme not in ("https", "http") or not u.hostname or u.query or u.fragment or (
-                    u.scheme == "http" and "." in u.hostname
+                if (
+                    u.scheme not in ("https", "http")
+                    or not u.hostname
+                    or u.query
+                    or u.fragment
+                    or (u.scheme == "http" and "." in u.hostname)
                 ):
                     raise ValueError("upstream_base is an https:// address up to the version path, like https://api.example.com/v1")
                 text = text.rstrip("/")
@@ -524,9 +528,7 @@ class Cloud:
         self.s = self._with_overrides(self.env, self.db.settings_all())
         if any(k.startswith("upstream_") for k in changes):
             self.on_upstream_change()  # the model catalog's cache belongs to the old provider
-        said = ", ".join(
-            f"{k}={'env' if v is None else (mask_secret(v) if k in SECRET_SETTINGS else v)}" for k, v in changes.items()
-        )
+        said = ", ".join(f"{k}={'env' if v is None else (mask_secret(v) if k in SECRET_SETTINGS else v)}" for k, v in changes.items())
         log.warning("settings changed from the page: %s", said)
         self.db.add_event("", "settings.changed", said[:200])
         self.db.audit_add(actor, "settings.changed", "", said)

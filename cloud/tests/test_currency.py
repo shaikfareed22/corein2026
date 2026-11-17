@@ -4,15 +4,13 @@ that carries money says it, and the relay's own words use the sign."""
 from __future__ import annotations
 
 import httpx
-import pytest
+from test_chat_retry import busy_upstream
 
 from nanomuse_cloud.api import create_app
 from nanomuse_cloud.config import ModelSpec, Settings
 from nanomuse_cloud.db import Database
 from nanomuse_cloud.senders import LogSender
 from nanomuse_cloud.service import Cloud
-
-from test_chat_retry import busy_upstream
 
 
 def test_symbol_from_code_or_setting(monkeypatch):
@@ -55,7 +53,6 @@ async def sign_in(client, sender):
     return {"Authorization": f"Bearer {r.json()['api_key']}"}
 
 
-
 async def test_every_money_payload_names_the_currency():
     client, sender = await rupee_stack()
     cfg = (await client.get("/v1/config")).json()
@@ -66,7 +63,6 @@ async def test_every_money_payload_names_the_currency():
     assert me["spend"]["usd_cny"] == 84
     admin = (await client.get("/v1/admin/overview", headers={"X-Admin-Token": "admin"})).json()["settings"]
     assert admin["currency"] == "INR" and admin["currency_symbol"] == "₹"
-
 
 
 async def test_the_refusal_speaks_in_the_relays_currency():

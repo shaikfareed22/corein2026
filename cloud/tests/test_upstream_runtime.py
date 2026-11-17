@@ -76,7 +76,9 @@ async def test_the_page_tests_a_provider_before_saving_it():
     assert "qwen3.8-flash" in out["missing"], "the fake's list lacks the menu's default; the page says so"
     assert up.state.requests[-1][1]["authorization"] == "Bearer sk-upstream"
     # with a key and an address typed but not saved: those are used, nothing is stored
-    r = await client.post("/v1/admin/settings/upstream-test", headers=ADMIN, json={"key": "sk-typed-not-saved-000001", "base": "http://upstream/compat/v1/"})
+    r = await client.post(
+        "/v1/admin/settings/upstream-test", headers=ADMIN, json={"key": "sk-typed-not-saved-000001", "base": "http://upstream/compat/v1/"}
+    )
     assert r.json()["ok"] and up.state.requests[-1][1]["authorization"] == "Bearer sk-typed-not-saved-000001"
     assert cloud.db.settings_all() == {}
     # a wrong address is reported, not raised

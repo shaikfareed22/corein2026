@@ -606,7 +606,7 @@ class Settings:
     # amounts (derived from the code when empty), and USD_CNY is how many of it make a US
     # dollar, for the dollar figure shown beside each amount. A relay for India sets
     # CURRENCY=INR, writes its menu prices in rupees and USD_CNY=84.
-    currency: str = field(default_factory=lambda: (_env("CURRENCY", "CNY").strip().upper() or "CNY"))
+    currency: str = field(default_factory=lambda: _env("CURRENCY", "CNY").strip().upper() or "CNY")
     currency_symbol: str = field(default_factory=lambda: _env("CURRENCY_SYMBOL").strip())
     # INVITE_URL is the link the apps offer to share; the code is appended.
     # OWN_KEY_DOCS is the guide the apps open when the allowance is used up and
