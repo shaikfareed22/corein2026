@@ -11,7 +11,11 @@ ADMIN = {"X-Admin-Token": "admin", "X-Admin-Actor": "fareed"}
 
 async def test_a_report_lands_on_the_admin_page_and_is_marked_handled():
     app, client, sender, up, cloud, settings = make(admin_email="ops@example.com")
-    assert (await client.get("/v1/config")).json()["support_email"] == "ops@example.com"
+    cfg = (await client.get("/v1/config")).json()
+    assert cfg["support_email"] == "ops@example.com", "ADMIN_EMAIL when SUPPORT_EMAIL is empty"
+    assert cfg["terms_url"].startswith("https://")
+    app2, client2, *_ = make(admin_email="ops@example.com", support_email="help@example.com")
+    assert (await client2.get("/v1/config")).json()["support_email"] == "help@example.com"
     acct = await sign_up(client, sender, "13800138000", "pixel")
     headers = auth(acct["api_key"])
 

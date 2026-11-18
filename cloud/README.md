@@ -184,6 +184,8 @@ for the full list. The ones that matter:
 | `SIGNUP_DOMAIN_BLOCK` | empty | comma-separated disposable mail domains blocked from opening new accounts in addition to the built-in blocklist (`DEFAULT_SIGNUP_DOMAIN_BLOCK`); `SIGNUP_DOMAIN_ALLOW` overrides an entry |
 | `REPO_URL` | `https://github.com/shaikfareed22/corein2026` | the repository the apps ask people to star, in `/v1/config` |
 | `IMPROVE_DEFAULT` | `0` | what *Help improve FOMO's AI models* (Data controls) starts as for accounts created from now on: `1` = on until the person turns it off, `0` = off until they turn it on; existing accounts keep their setting. State it in your privacy policy |
+| `TERMS_URL` | `https://fomo.corein.in/docs/terms` | the terms of service, in `/v1/config` as `terms_url` (0.29) |
+| `SUPPORT_EMAIL` | empty (`ADMIN_EMAIL`) | the address in `/v1/config` as `support_email`: where an app without an account sends a *Report this reply* (0.29) |
 | `PRIVACY_URL` | `https://fomo.corein.in/privacy/` | the policy the apps link from Data controls and the sign-in pages — the one that says what this relay keeps and its default |
 | `INVITE_URL` | `https://fomo.corein.in/web/?invite=` | the link the apps offer to share; the code is appended |
 | `OWN_KEY_DOCS` | `https://fomo.corein.in/own-key` | the guide the apps open for bringing one's own key or signing in with a plan (every provider by region, what each covers) |

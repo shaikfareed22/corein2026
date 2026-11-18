@@ -646,7 +646,8 @@ class Cloud:
             "version": __version__,
             "signup_open": self.s.signup_open and self.controls.on("signups"),
             # 0.29: where a report of AI output goes when the app has no account to send it with
-            "support_email": self.s.admin_email,
+            "support_email": self.s.support_email or self.s.admin_email,
+            "terms_url": self.s.terms_url,
             # 0.22: which of the operator's switches are off, so a sign-in page can say so
             "paused": [k for k, v in self.controls.paused().items() if v],
             # 0.27: the currency every `_cny` figure is in, and the sign the apps print

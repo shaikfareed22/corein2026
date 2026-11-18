@@ -109,6 +109,7 @@ const understandIt: DefaultTheme.SidebarItem[] = [
   { text: 'Architecture', link: '/architecture' },
   { text: 'Sentinel', link: '/sentinel' },
   { text: 'Privacy', link: '/privacy' },
+  { text: 'Terms of service', link: '/terms' },
   { text: 'What stays on a phone, and whose it is', link: '/sync' },
   { text: 'The hub', link: '/hub' },
   { text: 'Design: how it looks, and why', link: '/design' },

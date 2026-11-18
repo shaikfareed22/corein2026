@@ -620,6 +620,10 @@ class Settings:
     # PRIVACY_URL is the policy the apps link from Data controls and the sign-in
     # pages — the one that states what this relay keeps and its default above.
     privacy_url: str = field(default_factory=lambda: _env("PRIVACY_URL", "https://fomo.corein.in/privacy/"))
+    # 0.29: the terms the store listing and the sign-in pages link, and the address a report of
+    # AI output goes to when the app has no account to send it with (ADMIN_EMAIL when empty)
+    terms_url: str = field(default_factory=lambda: _env("TERMS_URL", "https://fomo.corein.in/docs/terms"))
+    support_email: str = field(default_factory=lambda: _env("SUPPORT_EMAIL").strip())
     # REPO_URL is the project's repository, which the apps point to when they ask for a
     # star — at the first sign-in, when the allowance is used up, after the first task.
     repo_url: str = field(default_factory=lambda: _env("REPO_URL", "https://github.com/shaikfareed22/corein2026"))

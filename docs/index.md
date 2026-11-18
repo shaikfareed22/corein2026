@@ -75,7 +75,7 @@ Every file and its checksum is on the [latest release](https://github.com/shaikf
 | Let your devices work together | [Every device](/every-device) · [The hub](/hub) |
 | Let it operate a screen | [The screen as a hand](/gui) · [Computer use on the desktop](/desktop-muse) |
 | Connect your tools and chat apps | [Connectors](/channels) · [The browser](/browser) · [Coding agents](/coding-agents) |
-| Understand what it keeps and what it may do | [Privacy](/privacy) · [The Sentinel](/sentinel) |
+| Understand what it keeps and what it may do | [Privacy](/privacy) · [Terms of service](/terms) · [The Sentinel](/sentinel) |
 | Run the relay or the web app on a server | [Run it yourself](/self-hosting) · [The relay](/cloud) · [Deployment](/deployment) |
 | Change the code | [Architecture](/architecture) · [Configuration](/configuration) · [Roadmap](/roadmap) |
 
