@@ -354,6 +354,9 @@ RUNTIME_SETTINGS: dict[str, tuple[type, float, float]] = {
     "allowance_cny": (float, 0.0, 1000.0),
     "invite_bonus_cny": (float, 0.0, 100.0),
     "signup_open": (bool, 0.0, 1.0),
+    # 0.29: tokens per limited account per day (0 = none), so one heavy day cannot empty a
+    # provider's shared quota for everyone; members are not capped
+    "daily_cap_tokens": (int, 0, 50_000_000),
     # 0.28: the model provider — so a key is rotated, or the relay pointed at another
     # OpenAI-style provider, from the page and without a restart (text: min/max length)
     "upstream_base": (str, 8, 300),
@@ -472,6 +475,10 @@ class Cloud:
             raise ValueError(f"{key} is a number") from e
         if number != number or not lo <= number <= hi:  # NaN, or out of bounds
             raise ValueError(f"{key} is between {lo:g} and {hi:g}")
+        if kind is int:
+            if number != int(number):
+                raise ValueError(f"{key} is a whole number")
+            return int(number)
         return round(number, 4)
 
     @classmethod
@@ -1643,7 +1650,11 @@ class Cloud:
             )
         if self.s.per_minute_requests > 0 and self.db.requests_since(caller.account_id, t - 60) >= self.s.per_minute_requests:
             raise CloudError(429, "rate_limited", "Too many requests; slow down a little")
-        if self.s.daily_cap_tokens > 0 and self.db.used_since(caller.account_id, self.s.day_start(t)) >= self.s.daily_cap_tokens:
+        if (
+            self.s.daily_cap_tokens > 0
+            and not caller.member
+            and self.db.used_since(caller.account_id, self.s.day_start(t)) >= self.s.daily_cap_tokens
+        ):
             raise CloudError(429, "daily_cap", "Today's share of the grant is used up; it resets at midnight")
         if self.limited(caller):
             a = self.allowance(caller)

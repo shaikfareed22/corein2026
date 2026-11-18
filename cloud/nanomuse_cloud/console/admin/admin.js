@@ -69,6 +69,7 @@
     realtime: "实时通话", on: "开", off: "关", pwMin: (n) => `密码至少 ${n} 位`,
     // runtime settings (relay 0.15): changed here, in force at once, kept across restarts
     rtTitle: "额度（即时生效）", rtNote: "在这里改，所有客户端立刻按新数字走：新注册拿新额度，账号页、登录页、用完时的提示都读服务器的数字，不用发版、用户不用做任何事。留空恢复环境变量的值。调低只影响之后注册的人，不会从任何人的池子里扣。",
+    rtDailyCap: "每个账号每天的 token 上限", rtDailyCapHint: "0 = 不限。防止一个人一天用光提供方给所有人的配额；成员不受限。",
     rtAllowance: `每个新账号的免费额度（${SYM}）`, rtBonus: `邀请奖励（${SYM}，双方各得）`, rtSignup: "开放注册", rtSignupOff: "关闭后只有白名单和成员能登录；已登录的人不受影响。",
     rtEnv: (v) => `环境变量：${v}`, rtSet: "页面已设置", rtSave: "保存", rtSaved: "已保存，已生效。", rtApply: (n) => `把当前额度补给 ${n} 个老账号`, rtApplyNone: "所有账号拿到的额度都不低于当前值。",
     rtApplyConfirm: (n, c) => `给 ${n} 个拿到的额度低于 ${SYM}${c} 的账号补齐差额？每个账号的流水会记一笔「额度调整」。`, rtApplied: (n) => `已补给 ${n} 个账号。`,
@@ -210,6 +211,7 @@
     perMinute: (n) => (n > 0 ? `${n} a minute` : "no rate limit"), capLine: (c, u, b) => (c > 0 ? `${SYM}${c} (≈ $${u}) in all for non-members · +${SYM}${b} an invite, to both sides` : "no spend limit"), signupOpen: "sign-up open", signupClosed: "members only",
     realtime: "Real-time calls", on: "on", off: "off", pwMin: (n) => `passwords ≥ ${n} chars`,
     rtTitle: "Allowance (in force at once)", rtNote: "Change it here and every client follows at once: new sign-ups get the new allowance, and the account pages, the sign-in pages and the used-up notice all read the server's figures; no release, nothing for anyone to do. Empty puts the environment's value back. A lower figure only changes what new accounts get; nothing is taken from anyone's pool.",
+    rtDailyCap: "Tokens per account per day", rtDailyCapHint: "0 = none. Keeps one heavy day from emptying the provider's shared quota for everyone; members are not capped.",
     rtAllowance: `Free allowance for each new account (${SYM})`, rtBonus: `Invite bonus (${SYM}, to both sides)`, rtSignup: "Sign-up open", rtSignupOff: "Closed, only members and the list may sign in; whoever is signed in is unaffected.",
     rtEnv: (v) => `environment: ${v}`, rtSet: "set here", rtSave: "Save", rtSaved: "Saved and in force.", rtApply: (n) => `Bring ${n} older account${n === 1 ? "" : "s"} up to the current allowance`, rtApplyNone: "Every account has at least the current allowance.",
     rtApplyConfirm: (n, c) => `Top up the ${n} account(s) that were given less than ${SYM}${c}? Each gets a ledger line saying so.`, rtApplied: (n) => `${n} account(s) topped up.`,
@@ -1564,7 +1566,7 @@
   let rtMsg = "", rtBusy = false;
   async function rtSave() {
     const body = {};
-    for (const key of ["allowance_cny", "invite_bonus_cny", "signup_open", "upstream_base", "upstream_key"]) if (key in RT_DRAFT) body[key] = RT_DRAFT[key] === "" ? null : RT_DRAFT[key];
+    for (const key of ["allowance_cny", "invite_bonus_cny", "signup_open", "daily_cap_tokens", "upstream_base", "upstream_key"]) if (key in RT_DRAFT) body[key] = RT_DRAFT[key] === "" ? null : RT_DRAFT[key];
     // an emptied key field is "nothing typed", not "back to the environment" (that has its own button)
     if (body.upstream_key === null) delete body.upstream_key;
     if (!Object.keys(body).length) return;
@@ -1637,8 +1639,8 @@
     const c = ov.accounts || {};
     const limited = Math.max(0, Number(c.total || 0) - Number(c.unlimited || 0) - Number(c.disabled || 0));
     const note = (key) => h("span", { class: "fine" }, (set[key] ? T.rtSet + " · " : "") + T.rtEnv(typeof env[key] === "boolean" ? (env[key] ? T.on : T.off) : env[key]));
-    const num = (key, label) => [h("b", {}, label), h("span", { class: "rt" },
-      h("input", { type: "number", step: "0.5", min: "0", "data-focus": "rt-" + key, value: key in RT_DRAFT ? RT_DRAFT[key] : (v[key] ?? ""), oninput: (e) => { RT_DRAFT[key] = e.target.value; draw(); } }), note(key))];
+    const num = (key, label, step = "0.5", hint = null) => [h("b", {}, label), h("span", { class: "rt" },
+      h("input", { type: "number", step, min: "0", "data-focus": "rt-" + key, value: key in RT_DRAFT ? RT_DRAFT[key] : (v[key] ?? ""), oninput: (e) => { RT_DRAFT[key] = e.target.value; draw(); } }), note(key), hint ? h("span", { class: "fine" }, hint) : null)];
     const on = "signup_open" in RT_DRAFT ? RT_DRAFT.signup_open : !!v.signup_open;
     const dirty = Object.keys(RT_DRAFT).length > 0;
     return h("div", { class: "panel" }, h("h2", {}, T.rtTitle, h("span", { class: "sp" }), h("button", { class: "btn sm", disabled: dirty && !rtBusy ? null : "", onclick: rtSave }, T.rtSave)),
@@ -1646,6 +1648,7 @@
       h("div", { class: "kv" },
         ...num("allowance_cny", T.rtAllowance),
         ...num("invite_bonus_cny", T.rtBonus),
+        ...num("daily_cap_tokens", T.rtDailyCap, "1000", T.rtDailyCapHint),
         h("b", {}, T.rtSignup), h("span", { class: "rt" }, h("label", { class: "sw" }, h("input", { type: "checkbox", checked: on ? "" : null, onchange: (e) => { RT_DRAFT.signup_open = e.target.checked; draw(); } }), " ", on ? T.on : T.off), note("signup_open"), h("span", { class: "fine" }, T.rtSignupOff))),
       h("div", { class: "acts", style: "padding:0 16px 12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center" },
         Number(v.allowance_cny) > 0 && rt.below_allowance > 0

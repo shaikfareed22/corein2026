@@ -41,7 +41,9 @@ async def test_settings_change_at_once_and_reach_older_accounts_only_when_asked(
     # The page reads what is in force, what the environment says, and what it set itself.
     rt = (await client.get("/v1/admin/settings", headers=ADMIN)).json()
     assert rt["values"]["allowance_cny"] == 25 and rt["env"]["allowance_cny"] == 25
-    assert rt["overridden"] == {k: False for k in ("allowance_cny", "invite_bonus_cny", "signup_open", "upstream_base", "upstream_key")}
+    assert rt["overridden"] == {
+        k: False for k in ("allowance_cny", "invite_bonus_cny", "signup_open", "daily_cap_tokens", "upstream_base", "upstream_key")
+    }
     assert rt["below_allowance"] == 0
 
     # Lowered: the next sign-up gets the new figure; the first account keeps its pool.
@@ -199,3 +201,27 @@ async def test_older_accounts_are_marked_with_the_allowance_of_the_day():
     assert db.below_allowance(30_000_000) == 1 and db.below_allowance(25_000_000) == 0
     assert db.raise_allowance(30_000_000) == 1 and db.raise_allowance(30_000_000) == 0
     assert db._conn.execute("SELECT grant_uy FROM accounts WHERE id=?", (row["id"],)).fetchone()[0] == 30_000_000
+
+
+async def test_the_daily_cap_is_set_from_the_page_and_spares_members():
+    app, client, sender, up, cloud, settings = make(allowance_cny=25, allowed_identifiers="13900139000")
+    person = await sign_up(client, sender, "13800138000", "pixel")
+    member = await sign_up(client, sender, "13900139000", "pixel")
+    ask = {"model": "qwen3.8-flash", "messages": [{"role": "user", "content": "hi"}]}
+    assert (await client.post("/v1/chat/completions", headers=auth(person["api_key"]), json=ask)).status_code == 200
+
+    r = await client.post("/v1/admin/settings", headers=ADMIN, json={"daily_cap_tokens": "1.5"})
+    assert r.status_code == 400 and "whole number" in r.text
+    r = await client.post("/v1/admin/settings", headers=ADMIN, json={"daily_cap_tokens": 1})
+    assert r.status_code == 200 and r.json()["values"]["daily_cap_tokens"] == 1 and r.json()["overridden"]["daily_cap_tokens"]
+    me = (await client.get("/v1/me", headers=auth(person["api_key"]))).json()
+    assert me["tokens"]["daily_cap"] == 1 and me["tokens"]["used_today"] >= 1
+    r = await client.post("/v1/chat/completions", headers=auth(person["api_key"]), json=ask)
+    assert r.status_code == 429 and r.json()["error"]["code"] == "daily_cap"
+    # a member is not capped
+    assert (await client.post("/v1/chat/completions", headers=auth(member["api_key"]), json=ask)).status_code == 200
+    assert (await client.post("/v1/chat/completions", headers=auth(member["api_key"]), json=ask)).status_code == 200
+    # back to the environment: no cap
+    r = await client.post("/v1/admin/settings", headers=ADMIN, json={"daily_cap_tokens": None})
+    assert r.status_code == 200 and r.json()["values"]["daily_cap_tokens"] == 0
+    assert (await client.post("/v1/chat/completions", headers=auth(person["api_key"]), json=ask)).status_code == 200

@@ -197,7 +197,7 @@ for the full list. The ones that matter:
 | `CURRENCY` / `CURRENCY_SYMBOL` | `CNY` / derived | the one currency every amount is in — the menu's prices, `ALLOWANCE_CNY`, `INVITE_BONUS_CNY`, the `_cny` fields of the API (the `cny` in those names is history, not a conversion) — and the sign the apps print before amounts (¥ ₹ $ € £ … from the code when empty). The apps, the console and the admin page read `currency_symbol` from the relay |
 | `USD_CNY` | 7.1 | units of `CURRENCY` to the US dollar, for the dollar figure shown beside each amount; display only |
 | `SIGNUP_TOKENS` | 0 (no ceiling) | starter token grant per account, the older allowance |
-| `DAILY_CAP_TOKENS` | 0 (off) | tokens per account per day |
+| `DAILY_CAP_TOKENS` | 0 (off) | tokens per limited account per day (members are not capped). *Runtime setting* (0.29) — the admin page changes it without a restart |
 | `PER_MINUTE_REQUESTS` | 30 | per account — what stops a runaway loop |
 | `MAX_IN_FLIGHT` | 4 | requests of one account under way at the same time (0 = off); each holds a reservation against the allowance while it runs — see *Money* |
 | `UPSTREAM_TIMEOUT_S` | 180 | how long one call to the provider may take (connecting has 20 s of its own); a reservation that outlives it by two minutes is dropped |
