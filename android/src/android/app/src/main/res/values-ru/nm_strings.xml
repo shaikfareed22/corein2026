@@ -1165,4 +1165,31 @@
     <string name="nm_font_scale_medium">Средний</string>
     <string name="nm_font_scale_large">Крупный</string>
     <string name="nm_font_scale_extra_large">Очень крупный</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands использует службу специальных возможностей</string>
+    <string name="nm_hands_disclosure_p1">Пока выполняется запущенная вами задача, FOMO читает содержимое экрана и нажимает, прокручивает и вводит текст за вас, чтобы завершить задачу в других приложениях.</string>
+    <string name="nm_hands_disclosure_p2">Когда задача не выполняется, оно ничего не делает и никогда не читает экран в фоновом режиме.</string>
+    <string name="nm_hands_disclosure_p3">Снимки экрана задачи отправляются только выбранной вами модели (вашему релею FOMO Cloud или вашему собственному провайдеру), чтобы определить следующий шаг; после шага они не хранятся ни на одном сервере. Нажатие, которое платит, отправляет или удаляет, всегда ждёт вашей карточки подтверждения.</string>
+    <string name="nm_hands_disclosure_continue">Перейти в Настройки</string>
+    <string name="nm_hands_disclosure_not_now">Не сейчас</string>
+    <string name="nm_hands_disclosure_footer">Отключить можно в любой момент: Настройки → Специальные возможности → FOMO.</string>
+    <string name="nm_a11y_service_description">FOMO Hands использует эту службу, чтобы завершать запущенные вами задачи. Пока задача выполняется, оно читает содержимое экрана и нажимает, прокручивает и вводит текст за вас в других приложениях. Когда задача не выполняется, оно ничего не делает и никогда не читает экран в фоновом режиме. Снимки экрана отправляются только выбранной вами модели и не хранятся; нажатие, которое платит, отправляет или удаляет, ждёт вашего подтверждения.</string>
+    <string name="nm_report_reply_action">Пожаловаться на этот ответ</string>
+    <string name="nm_report_reply_why">Что с ним не так?</string>
+    <string name="nm_report_reason_harmful">Вредный или опасный</string>
+    <string name="nm_report_reason_sexual">Сексуальный контент</string>
+    <string name="nm_report_reason_hate">Ненависть или травля</string>
+    <string name="nm_report_reason_wrong">Неверный или вводящий в заблуждение</string>
+    <string name="nm_report_reason_other">Другое</string>
+    <string name="nm_report_note_hint">Что ещё нам стоит знать (необязательно)</string>
+    <string name="nm_report_send">Отправить</string>
+    <string name="nm_report_sent">Спасибо, жалоба отправлена.</string>
+    <string name="nm_report_rate_limited">Сегодня вы уже отправили несколько жалоб; попробуйте завтра.</string>
+    <string name="nm_report_failed">Жалоба не отправилась. Попробуйте позже.</string>
+    <string name="nm_report_email_subject">FOMO: жалоба на ответ ИИ</string>
+    <string name="nm_report_email_reason">Причина: %1$s</string>
+    <string name="nm_report_email_note">Примечание: %1$s</string>
+    <string name="nm_report_email_reply">Ответ:</string>
+    <string name="nm_report_no_mail_app">Почтовое приложение не найдено. Напишите на %1$s.</string>
 </resources>

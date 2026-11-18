@@ -1157,4 +1157,31 @@
     <string name="nm_font_scale_medium">Mittel</string>
     <string name="nm_font_scale_large">Groß</string>
     <string name="nm_font_scale_extra_large">Sehr groß</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands nutzt einen Bedienungshilfen-Dienst</string>
+    <string name="nm_hands_disclosure_p1">Während eine von dir gestartete Aufgabe läuft, liest FOMO, was auf dem Bildschirm steht, und tippt, scrollt und schreibt für dich, damit es die Aufgabe in anderen Apps zu Ende bringen kann.</string>
+    <string name="nm_hands_disclosure_p2">Läuft keine Aufgabe, tut es nichts, und es liest den Bildschirm nie im Hintergrund.</string>
+    <string name="nm_hands_disclosure_p3">Bildschirmfotos der Aufgabe gehen nur an das von dir gewählte Modell (dein FOMO-Cloud-Relay oder deinen eigenen Anbieter), um den nächsten Schritt zu bestimmen; nach dem Schritt werden sie auf keinem Server gespeichert. Ein Tipp, der bezahlt, sendet oder löscht, wartet immer auf deine Freigabekarte.</string>
+    <string name="nm_hands_disclosure_continue">Weiter zu den Einstellungen</string>
+    <string name="nm_hands_disclosure_not_now">Nicht jetzt</string>
+    <string name="nm_hands_disclosure_footer">Du kannst es jederzeit unter Einstellungen → Bedienungshilfen → FOMO ausschalten.</string>
+    <string name="nm_a11y_service_description">FOMO Hands nutzt diesen Dienst, um Aufgaben zu Ende zu bringen, die du startest. Während eine Aufgabe läuft, liest es, was auf dem Bildschirm steht, und tippt, scrollt und schreibt für dich in anderen Apps. Läuft keine Aufgabe, tut es nichts, und es liest den Bildschirm nie im Hintergrund. Bildschirmfotos gehen nur an das von dir gewählte Modell und werden nicht aufbewahrt; ein Tipp, der bezahlt, sendet oder löscht, wartet auf deine Freigabe.</string>
+    <string name="nm_report_reply_action">Diese Antwort melden</string>
+    <string name="nm_report_reply_why">Was stimmt damit nicht?</string>
+    <string name="nm_report_reason_harmful">Schädlich oder gefährlich</string>
+    <string name="nm_report_reason_sexual">Sexuelle Inhalte</string>
+    <string name="nm_report_reason_hate">Hass oder Belästigung</string>
+    <string name="nm_report_reason_wrong">Falsch oder irreführend</string>
+    <string name="nm_report_reason_other">Etwas anderes</string>
+    <string name="nm_report_note_hint">Sonst noch etwas, das wir wissen sollten (optional)</string>
+    <string name="nm_report_send">Senden</string>
+    <string name="nm_report_sent">Danke, die Meldung wurde gesendet.</string>
+    <string name="nm_report_rate_limited">Du hast heute schon mehrere Meldungen gesendet; versuche es morgen noch einmal.</string>
+    <string name="nm_report_failed">Die Meldung ist nicht durchgegangen. Versuche es später noch einmal.</string>
+    <string name="nm_report_email_subject">FOMO: gemeldete KI-Antwort</string>
+    <string name="nm_report_email_reason">Grund: %1$s</string>
+    <string name="nm_report_email_note">Anmerkung: %1$s</string>
+    <string name="nm_report_email_reply">Antwort:</string>
+    <string name="nm_report_no_mail_app">Keine E-Mail-App gefunden. Schreib an %1$s.</string>
 </resources>

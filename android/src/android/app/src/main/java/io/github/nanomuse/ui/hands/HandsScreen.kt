@@ -57,6 +57,8 @@ fun HandsScreen(onBack: () -> Unit, onOpenProviders: () -> Unit, onOpenHandsMode
     val enabled by remember(context) { Hands.enabledFlow(context) }.collectAsState(initial = Hands.enabled(context))
     var tick by remember { mutableIntStateOf(0) }
     val active by Hands.active.collectAsState()
+    // Play policy: the disclosure dialog first, Settings → Accessibility only from its consent button.
+    val openAccessibility = rememberHandsAccessibilityOpener()
 
     // Permissions are granted in other apps; re-read when the user comes back.
     val owner = LocalLifecycleOwner.current
@@ -115,7 +117,7 @@ fun HandsScreen(onBack: () -> Unit, onOpenProviders: () -> Unit, onOpenHandsMode
                 ok = readiness.serviceOn,
                 okText = stringResource(R.string.nm_hands_need_on),
                 fixText = stringResource(R.string.nm_hands_need_a11y_fix),
-                onFix = { openAccessibilitySettings(context) },
+                onFix = openAccessibility,
             )
             NeedRow(
                 icon = Icons.Outlined.Layers,
@@ -202,14 +204,6 @@ private fun NeedRow(
 @Composable
 private fun RuleRow(text: String, last: Boolean = false) {
     SettingsRow(title = text, showDivider = !last, minHeight = 48.dp)
-}
-
-private fun openAccessibilitySettings(context: Context) {
-    try {
-        context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-    } catch (_: Throwable) {
-        runCatching { context.startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
-    }
 }
 
 /** The sentence for how the screen model was arrived at ([Hands.screenModel]). */

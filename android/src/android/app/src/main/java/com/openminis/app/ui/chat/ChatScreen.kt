@@ -957,6 +957,9 @@ fun ChatScreen(
     // id (rather than a boolean plus a separate field) keeps the dialog and
     // its target impossible to desynchronize.
     var deleteFromHereTargetId by remember { mutableStateOf<String?>(null) }
+    // Play's AI-generated content policy: the reply text a pending "Report
+    // this reply" is about, or null when no report dialog is open.
+    var reportReplyText by remember { mutableStateOf<String?>(null) }
     // [T-new-chat-menu-entry] Confirmation gate for "New Chat" while the
     // current session is still streaming — stopping the running task needs
     // an explicit confirm; idle sessions skip the dialog entirely.
@@ -3910,6 +3913,7 @@ fun ChatScreen(
                         // replay, hidden while streaming via isStreamingNow.
                         onReadFromStart = { fullText -> selectionReader.speak(fullText) },
                         isStreamingNow = { viewModel.isStreaming.value },
+                        onReport = { md -> reportReplyText = md },
                         selectionController = selectionController,
                     )
                 }
@@ -7080,6 +7084,15 @@ fun ChatScreen(
                         viewModel.setInputText("")
                         showClearChatDialog = false
                     },
+                )
+            }
+            // Play's AI-generated content policy: "Report this reply" from the
+            // reply's long-press toolbar. Nothing in the chat changes.
+            reportReplyText?.let { text ->
+                io.github.nanomuse.ui.chat.NmReportReplyDialog(
+                    text = text,
+                    modelId = viewModel.nmCurrentModelId(),
+                    onDone = { reportReplyText = null },
                 )
             }
             // [T-android-delete-from-here] Confirm before truncating. The cut

@@ -62,6 +62,8 @@ fun OffloadPermissionScreen(
     val context = LocalContext.current
 
     var a11yEnabled by remember { mutableStateOf(isA11yServiceEnabled(context)) }
+    // Play policy: the disclosure dialog first, Settings → Accessibility only from its consent button.
+    val openAccessibility = io.github.nanomuse.ui.hands.rememberHandsAccessibilityOpener()
     // [T-android-restricted-settings] Android 13+ refuses to arm the
     // accessibility toggle for installs flagged as restricted; surfaced below
     // so the "Open accessibility settings" action doesn't dead-end.
@@ -138,7 +140,7 @@ fun OffloadPermissionScreen(
                 if (a11yEnabled) R.string.perm_a11y_system_ready
                 else R.string.perm_a11y_system_disabled,
             systemActionTitleRes = R.string.perm_a11y_open_settings,
-            onSystemAction = { openAccessibilitySettings(context) },
+            onSystemAction = openAccessibility,
         )
 
         // [T-android-restricted-settings] Shown ONLY when the OS has actually
@@ -487,24 +489,6 @@ private fun isA11yServiceEnabled(context: Context): Boolean {
         Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
     ) ?: return false
     return enabled.split(':').any { it.equals(expected, ignoreCase = true) }
-}
-
-private fun openAccessibilitySettings(context: Context) {
-    try {
-        context.startActivity(
-            Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-        )
-    } catch (_: Throwable) {
-        try {
-            context.startActivity(
-                Intent(Settings.ACTION_SETTINGS).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-            )
-        } catch (_: Throwable) {}
-    }
 }
 
 /**

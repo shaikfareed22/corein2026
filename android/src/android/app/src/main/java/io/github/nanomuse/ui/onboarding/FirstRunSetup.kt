@@ -418,6 +418,8 @@ private fun HandsPage(onDone: () -> Unit) {
     }
     val readiness = remember(tick) { Hands.readiness(context) }
     val allSet = readiness.serviceOn && readiness.overlayOk
+    // Play policy: the disclosure dialog first, Settings → Accessibility only from its consent button.
+    val openAccessibility = io.github.nanomuse.ui.hands.rememberHandsAccessibilityOpener()
 
     Page(
         hero = { io.github.nanomuse.ui.muse.NmBrandMark(size = 104.dp) }, // the permission ask carries the app's mark, as the sign-in does (#224.6)
@@ -427,7 +429,7 @@ private fun HandsPage(onDone: () -> Unit) {
         onPrimary = {
             when {
                 allSet -> { Hands.setEnabled(context, true); onDone() }
-                !readiness.serviceOn -> openAccessibilitySettings(context)
+                !readiness.serviceOn -> openAccessibility()
                 else -> openOverlaySettings(context)
             }
         },
@@ -441,7 +443,7 @@ private fun HandsPage(onDone: () -> Unit) {
             subtitle = stringResource(R.string.nm_hands_need_a11y_fix),
             ok = readiness.serviceOn,
             okLabel = stringResource(R.string.nm_hands_need_on),
-            onFix = { openAccessibilitySettings(context) },
+            onFix = openAccessibility,
         )
         Spacer(Modifier.height(10.dp))
         PermissionRow(
@@ -667,14 +669,6 @@ private fun NoticeCard(title: String, body: String) {
 }
 
 // ── the settings pages the permissions live on ─────────────────────────────
-
-private fun openAccessibilitySettings(context: Context) {
-    try {
-        context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-    } catch (_: Throwable) {
-        runCatching { context.startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
-    }
-}
 
 private fun openOverlaySettings(context: Context) {
     try {

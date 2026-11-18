@@ -3,7 +3,6 @@ package com.openminis.app.ui.settings
 import android.widget.Toast
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -61,6 +60,8 @@ import kotlinx.coroutines.launch
 fun SystemPermissionsScreen(onBack: () -> Unit) {
     val context = LocalContext.current
     var a11yEnabled by remember { mutableStateOf(isAccessibilityEnabled(context)) }
+    // Play policy: the disclosure dialog first, Settings → Accessibility only from its consent button.
+    val openAccessibility = io.github.nanomuse.ui.hands.rememberHandsAccessibilityOpener()
     // [T-android-a11y-miui-service-failure] "Service failed" degraded state:
     // the OEM ROM (MIUI etc.) reports the service as enabled in Settings but
     // has killed the process / revoked the binding, so getInstance() is null.
@@ -137,7 +138,7 @@ fun SystemPermissionsScreen(onBack: () -> Unit) {
                         stringResource(R.string.system_permissions_a11y_enabled)
                     else
                         stringResource(R.string.system_permissions_a11y_disabled),
-                    onClick = { openAccessibilitySettings(context) },
+                    onClick = openAccessibility,
                     showDivider = false,
                 )
             }
@@ -233,7 +234,7 @@ fun SystemPermissionsScreen(onBack: () -> Unit) {
                         },
                         onClick = {
                             if (!shizukuReady) {
-                                openAccessibilitySettings(context)
+                                openAccessibility()
                                 return@SettingsRow
                             }
                             if (repairing) return@SettingsRow
@@ -371,22 +372,4 @@ private fun isAccessibilityEnabled(context: Context): Boolean {
         Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
     ) ?: return false
     return enabled.split(':').any { it.equals(expected, ignoreCase = true) }
-}
-
-private fun openAccessibilitySettings(context: Context) {
-    try {
-        context.startActivity(
-            Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-        )
-    } catch (_: Throwable) {
-        try {
-            context.startActivity(
-                Intent(Settings.ACTION_SETTINGS).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-            )
-        } catch (_: Throwable) {}
-    }
 }

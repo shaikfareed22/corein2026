@@ -7348,6 +7348,9 @@ class ChatViewModel(
     // Settings → Models stay as they are (io.github.nanomuse.chat.CloudRetry).
     private var nmOneTurnProvider: LLMProvider? = null
     fun nmOffersCloudRetry(): Boolean = io.github.nanomuse.chat.CloudRetry.offered(context, _activeEntryId.value)
+
+    /** The id of the model answering this chat, for a report of its reply; empty before the first turn. */
+    fun nmCurrentModelId(): String = currentModel?.id.orEmpty()
     fun nmRetryLastOnCloud() {
         nmOneTurnProvider = io.github.nanomuse.chat.CloudRetry.provider(context) ?: return
         retryLast()

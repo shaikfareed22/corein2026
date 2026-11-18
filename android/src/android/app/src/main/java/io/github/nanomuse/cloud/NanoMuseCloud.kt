@@ -1134,6 +1134,49 @@ object NanoMuseCloud {
         io.github.nanomuse.sync.ConversationSync.forget(context) // the next account starts with its own ids and cursor
     }
 
+    // ── reports (Play's AI-generated content policy) ─────────────────────────
+
+    /** The longest reply text a report carries; the rest is cut. */
+    const val REPORT_TEXT_MAX = 4000
+
+    /** The support address when `GET /v1/config` names none, or cannot be reached. */
+    const val SUPPORT_EMAIL_DEFAULT = "supportcorein@corein.in"
+
+    enum class ReportOutcome { SENT, RATE_LIMITED, FAILED, NO_ACCOUNT }
+
+    /**
+     * Flags one AI reply to the relay: `POST /v1/reports` with the account key, body
+     * `{"kind":"ai_output","reason","model","text","note"}`; the relay answers 204. 429 is the
+     * daily cap ([ReportOutcome.RATE_LIMITED]); any other failure is [ReportOutcome.FAILED].
+     * With no account key nothing is sent ([ReportOutcome.NO_ACCOUNT]): the caller falls back
+     * to e-mail. [reason] is one of harmful, sexual, hate, wrong, other.
+     */
+    suspend fun reportAiOutput(context: Context, reason: String, model: String, text: String, note: String): ReportOutcome = withContext(Dispatchers.IO) {
+        val key = apiKey(context) ?: return@withContext ReportOutcome.NO_ACCOUNT
+        val body = JSONObject()
+            .put("kind", "ai_output")
+            .put("reason", reason)
+            .put("model", model)
+            .put("text", text.take(REPORT_TEXT_MAX))
+            .put("note", note)
+        try {
+            call(context, "POST", "/v1/reports", body, token = key)
+            ReportOutcome.SENT
+        } catch (e: CloudException) {
+            if (e.status == 429) ReportOutcome.RATE_LIMITED else ReportOutcome.FAILED
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (_: Throwable) {
+            ReportOutcome.FAILED
+        }
+    }
+
+    /** The relay's `support_email` from `GET /v1/config` (no key needed), or [SUPPORT_EMAIL_DEFAULT]. */
+    suspend fun supportEmail(context: Context): String = withContext(Dispatchers.IO) {
+        runCatching { call(context, "GET", "/v1/config", null, token = null).optString("support_email") }
+            .getOrNull()?.trim()?.takeIf { it.isNotBlank() } ?: SUPPORT_EMAIL_DEFAULT
+    }
+
     /**
      * One request to the relay, suspending until it answers. Cancelling the coroutine cancels
      * the call ([await]): a sign-in page left while the code is on its way frees the socket

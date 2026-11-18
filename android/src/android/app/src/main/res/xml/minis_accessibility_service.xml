@@ -8,6 +8,6 @@
     android:canTakeScreenshot="true"
     android:canRequestEnhancedWebAccessibility="false"
     android:canRequestFilterKeyEvents="false"
-    android:description="@string/a11y_service_description"
+    android:description="@string/nm_a11y_service_description"
     android:summary="@string/a11y_service_summary"
     android:notificationTimeout="100" />

@@ -1157,4 +1157,31 @@
     <string name="nm_font_scale_medium">Orta</string>
     <string name="nm_font_scale_large">Büyük</string>
     <string name="nm_font_scale_extra_large">Çok büyük</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands bir erişilebilirlik hizmeti kullanır</string>
+    <string name="nm_hands_disclosure_p1">Başlattığınız bir görev çalışırken FOMO ekranda ne olduğunu okur ve görevi başka uygulamalarda bitirebilmek için sizin yerinize dokunur, kaydırır ve yazar.</string>
+    <string name="nm_hands_disclosure_p2">Çalışan bir görev yokken hiçbir şey yapmaz ve ekranı asla arka planda okumaz.</string>
+    <string name="nm_hands_disclosure_p3">Görevin ekran görüntüleri yalnızca seçtiğiniz modele (FOMO Cloud aktarıcınıza veya kendi sağlayıcınıza) bir sonraki adıma karar vermek için gönderilir; adımdan sonra hiçbir sunucuda saklanmaz. Ödeme yapan, gönderen veya silen bir dokunuş her zaman onay kartınızı bekler.</string>
+    <string name="nm_hands_disclosure_continue">Ayarlara devam et</string>
+    <string name="nm_hands_disclosure_not_now">Şimdi değil</string>
+    <string name="nm_hands_disclosure_footer">Ayarlar → Erişilebilirlik → FOMO altından istediğiniz zaman kapatabilirsiniz.</string>
+    <string name="nm_a11y_service_description">FOMO Hands bu hizmeti, başlattığınız görevleri bitirmek için kullanır. Bir görev çalışırken ekranda ne olduğunu okur ve başka uygulamalarda sizin yerinize dokunur, kaydırır ve yazar. Çalışan bir görev yokken hiçbir şey yapmaz ve ekranı asla arka planda okumaz. Ekran görüntüleri yalnızca seçtiğiniz modele gider ve saklanmaz; ödeme yapan, gönderen veya silen bir dokunuş onayınızı bekler.</string>
+    <string name="nm_report_reply_action">Bu yanıtı bildir</string>
+    <string name="nm_report_reply_why">Nesi yanlış?</string>
+    <string name="nm_report_reason_harmful">Zararlı veya tehlikeli</string>
+    <string name="nm_report_reason_sexual">Cinsel içerik</string>
+    <string name="nm_report_reason_hate">Nefret veya taciz</string>
+    <string name="nm_report_reason_wrong">Yanlış veya yanıltıcı</string>
+    <string name="nm_report_reason_other">Başka bir şey</string>
+    <string name="nm_report_note_hint">Bilmemiz gereken başka bir şey (isteğe bağlı)</string>
+    <string name="nm_report_send">Gönder</string>
+    <string name="nm_report_sent">Teşekkürler, bildirim gönderildi.</string>
+    <string name="nm_report_rate_limited">Bugün zaten birkaç bildirim gönderdiniz; yarın yeniden deneyin.</string>
+    <string name="nm_report_failed">Bildirim iletilemedi. Daha sonra yeniden deneyin.</string>
+    <string name="nm_report_email_subject">FOMO: bildirilen yapay zekâ yanıtı</string>
+    <string name="nm_report_email_reason">Neden: %1$s</string>
+    <string name="nm_report_email_note">Not: %1$s</string>
+    <string name="nm_report_email_reply">Yanıt:</string>
+    <string name="nm_report_no_mail_app">E-posta uygulaması bulunamadı. %1$s adresine yazın.</string>
 </resources>

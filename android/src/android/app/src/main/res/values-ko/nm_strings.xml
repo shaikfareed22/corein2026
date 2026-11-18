@@ -1153,4 +1153,31 @@
     <string name="nm_font_scale_medium">중간</string>
     <string name="nm_font_scale_large">크게</string>
     <string name="nm_font_scale_extra_large">매우 크게</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands는 접근성 서비스를 사용합니다</string>
+    <string name="nm_hands_disclosure_p1">시작한 작업이 실행되는 동안 FOMO는 화면의 내용을 읽고 대신 탭하고, 스크롤하고, 입력하여 다른 앱에서 작업을 끝냅니다.</string>
+    <string name="nm_hands_disclosure_p2">실행 중인 작업이 없으면 아무것도 하지 않으며, 백그라운드에서 화면을 읽지 않습니다.</string>
+    <string name="nm_hands_disclosure_p3">작업의 스크린샷은 다음 단계를 정하기 위해 선택한 모델(FOMO Cloud 릴레이 또는 직접 설정한 제공자)에만 전송되며, 단계가 끝난 뒤 어떤 서버에도 저장되지 않습니다. 결제, 전송, 삭제로 이어지는 탭은 항상 승인 카드를 기다립니다.</string>
+    <string name="nm_hands_disclosure_continue">설정으로 계속</string>
+    <string name="nm_hands_disclosure_not_now">나중에</string>
+    <string name="nm_hands_disclosure_footer">설정 → 접근성 → FOMO에서 언제든지 끌 수 있습니다.</string>
+    <string name="nm_a11y_service_description">FOMO Hands는 이 서비스를 사용해 사용자가 시작한 작업을 끝냅니다. 작업이 실행되는 동안 화면의 내용을 읽고 다른 앱에서 대신 탭하고, 스크롤하고, 입력합니다. 실행 중인 작업이 없으면 아무것도 하지 않으며 백그라운드에서 화면을 읽지 않습니다. 스크린샷은 선택한 모델에만 전송되고 보관되지 않습니다. 결제, 전송, 삭제로 이어지는 탭은 사용자의 승인을 기다립니다.</string>
+    <string name="nm_report_reply_action">이 답변 신고</string>
+    <string name="nm_report_reply_why">무엇이 문제인가요?</string>
+    <string name="nm_report_reason_harmful">유해하거나 위험함</string>
+    <string name="nm_report_reason_sexual">성적인 내용</string>
+    <string name="nm_report_reason_hate">증오 또는 괴롭힘</string>
+    <string name="nm_report_reason_wrong">틀렸거나 오해를 일으킴</string>
+    <string name="nm_report_reason_other">기타</string>
+    <string name="nm_report_note_hint">그 밖에 알려 주실 내용 (선택)</string>
+    <string name="nm_report_send">보내기</string>
+    <string name="nm_report_sent">감사합니다. 신고가 전송되었습니다.</string>
+    <string name="nm_report_rate_limited">오늘 이미 여러 건을 신고했습니다. 내일 다시 시도해 주세요.</string>
+    <string name="nm_report_failed">신고가 전송되지 않았습니다. 나중에 다시 시도해 주세요.</string>
+    <string name="nm_report_email_subject">FOMO: 신고된 AI 답변</string>
+    <string name="nm_report_email_reason">이유: %1$s</string>
+    <string name="nm_report_email_note">메모: %1$s</string>
+    <string name="nm_report_email_reply">답변:</string>
+    <string name="nm_report_no_mail_app">메일 앱을 찾을 수 없습니다. %1$s(으)로 보내 주세요.</string>
 </resources>

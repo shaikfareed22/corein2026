@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.LocaleList
-import android.provider.Settings
 import com.openminis.app.accessibility.AccessibilityRecoveryManager
 import android.graphics.Color
 import androidx.activity.ComponentActivity
@@ -427,18 +426,21 @@ class MainActivity : ComponentActivity() {
                         b.setMessage(getString(R.string.a11y_repair_dialog_message_manual))
                             .setPositiveButton(R.string.a11y_repair_action_open_settings) { d, _ ->
                                 d.dismiss()
-                                try {
-                                    startActivity(
-                                        Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
-                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                        }
-                                    )
-                                } catch (_: Throwable) {
-                                    // Some OEMs hide this panel; the user can
-                                    // still reach it from Settings manually.
-                                }
-                                AccessibilityRecoveryManager.respond(
-                                    AccessibilityRecoveryManager.Decision.OPEN_SETTINGS
+                                // Play policy: the accessibility disclosure first;
+                                // Settings opens only from its consent button, and
+                                // "Not now" counts as a cancel for the waiting turn.
+                                io.github.nanomuse.ui.hands.HandsDisclosure.show(
+                                    this@MainActivity,
+                                    onContinue = {
+                                        AccessibilityRecoveryManager.respond(
+                                            AccessibilityRecoveryManager.Decision.OPEN_SETTINGS
+                                        )
+                                    },
+                                    onNotNow = {
+                                        AccessibilityRecoveryManager.respond(
+                                            AccessibilityRecoveryManager.Decision.CANCEL
+                                        )
+                                    },
                                 )
                             }
                     }

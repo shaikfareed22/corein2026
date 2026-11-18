@@ -1157,4 +1157,31 @@
     <string name="nm_font_scale_medium">Katamtaman</string>
     <string name="nm_font_scale_large">Malaki</string>
     <string name="nm_font_scale_extra_large">Napakalaki</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">Gumagamit ang FOMO Hands ng accessibility service</string>
+    <string name="nm_hands_disclosure_p1">Habang tumatakbo ang isang gawaing sinimulan mo, binabasa ng FOMO ang nasa screen at nagta-tap, nag-i-scroll at nagta-type para sa iyo, para matapos nito ang gawain sa ibang app.</string>
+    <string name="nm_hands_disclosure_p2">Wala itong ginagawa kapag walang tumatakbong gawain, at hindi nito kailanman binabasa ang screen sa background.</string>
+    <string name="nm_hands_disclosure_p3">Ang mga screenshot ng gawain ay ipinapadala lamang sa modelong pinili mo (ang iyong FOMO Cloud relay o ang sarili mong provider) para magdesisyon sa susunod na hakbang; hindi ito iniimbak sa anumang server pagkatapos ng hakbang. Ang tap na nagbabayad, nagpapadala o nagbubura ay laging naghihintay sa iyong approval card.</string>
+    <string name="nm_hands_disclosure_continue">Magpatuloy sa Settings</string>
+    <string name="nm_hands_disclosure_not_now">Hindi ngayon</string>
+    <string name="nm_hands_disclosure_footer">Maaari mo itong patayin anumang oras sa Settings → Accessibility → FOMO.</string>
+    <string name="nm_a11y_service_description">Ginagamit ng FOMO Hands ang serbisyong ito para tapusin ang mga gawaing sinimulan mo. Habang tumatakbo ang isang gawain, binabasa nito ang nasa screen at nagta-tap, nag-i-scroll at nagta-type para sa iyo sa ibang app. Wala itong ginagawa kapag walang tumatakbong gawain at hindi nito kailanman binabasa ang screen sa background. Ang mga screenshot ay napupunta lamang sa modelong pinili mo at hindi iniingatan; ang tap na nagbabayad, nagpapadala o nagbubura ay naghihintay sa iyong pag-apruba.</string>
+    <string name="nm_report_reply_action">I-report ang sagot na ito</string>
+    <string name="nm_report_reply_why">Ano ang mali dito?</string>
+    <string name="nm_report_reason_harmful">Nakakasama o mapanganib</string>
+    <string name="nm_report_reason_sexual">Sekswal na nilalaman</string>
+    <string name="nm_report_reason_hate">Pagkamuhi o panliligalig</string>
+    <string name="nm_report_reason_wrong">Mali o nakakalinlang</string>
+    <string name="nm_report_reason_other">Iba pa</string>
+    <string name="nm_report_note_hint">May iba pa bang dapat naming malaman (opsyonal)</string>
+    <string name="nm_report_send">Ipadala</string>
+    <string name="nm_report_sent">Salamat, naipadala ang report.</string>
+    <string name="nm_report_rate_limited">Nakapagpadala ka na ng ilang report ngayong araw; subukan ulit bukas.</string>
+    <string name="nm_report_failed">Hindi naipadala ang report. Subukan ulit mamaya.</string>
+    <string name="nm_report_email_subject">FOMO: ni-report na sagot ng AI</string>
+    <string name="nm_report_email_reason">Dahilan: %1$s</string>
+    <string name="nm_report_email_note">Tala: %1$s</string>
+    <string name="nm_report_email_reply">Sagot:</string>
+    <string name="nm_report_no_mail_app">Walang nahanap na e-mail app. Sumulat sa %1$s.</string>
 </resources>

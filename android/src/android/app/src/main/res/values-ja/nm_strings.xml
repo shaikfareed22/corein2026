@@ -1153,4 +1153,31 @@
     <string name="nm_font_scale_medium">中</string>
     <string name="nm_font_scale_large">大きい</string>
     <string name="nm_font_scale_extra_large">とても大きい</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands はユーザー補助サービスを使います</string>
+    <string name="nm_hands_disclosure_p1">あなたが始めたタスクの実行中、FOMO は画面の内容を読み取り、あなたの代わりにタップ、スクロール、入力を行って、他のアプリでタスクを終わらせます。</string>
+    <string name="nm_hands_disclosure_p2">タスクが動いていないときは何もせず、バックグラウンドで画面を読むことはありません。</string>
+    <string name="nm_hands_disclosure_p3">タスクのスクリーンショットは、次の手順を決めるために、あなたが選んだモデル（FOMO Cloud のリレーまたはご自身のプロバイダー）にだけ送られ、手順の後はどのサーバーにも保存されません。支払い、送信、削除につながるタップは、必ずあなたの承認カードを待ちます。</string>
+    <string name="nm_hands_disclosure_continue">設定に進む</string>
+    <string name="nm_hands_disclosure_not_now">今はしない</string>
+    <string name="nm_hands_disclosure_footer">設定 → ユーザー補助 → FOMO からいつでもオフにできます。</string>
+    <string name="nm_a11y_service_description">FOMO Hands はこのサービスを使って、あなたが始めたタスクを終わらせます。タスクの実行中は画面の内容を読み取り、他のアプリであなたの代わりにタップ、スクロール、入力を行います。タスクが動いていないときは何もせず、バックグラウンドで画面を読むことはありません。スクリーンショットはあなたが選んだモデルにだけ送られ、保存されません。支払い、送信、削除につながるタップはあなたの承認を待ちます。</string>
+    <string name="nm_report_reply_action">この返答を報告</string>
+    <string name="nm_report_reply_why">どこに問題がありますか？</string>
+    <string name="nm_report_reason_harmful">有害または危険</string>
+    <string name="nm_report_reason_sexual">性的な内容</string>
+    <string name="nm_report_reason_hate">ヘイトまたはハラスメント</string>
+    <string name="nm_report_reason_wrong">誤りまたは誤解を招く</string>
+    <string name="nm_report_reason_other">その他</string>
+    <string name="nm_report_note_hint">ほかに知っておくべきこと（任意）</string>
+    <string name="nm_report_send">送信</string>
+    <string name="nm_report_sent">ありがとうございます。報告を送信しました。</string>
+    <string name="nm_report_rate_limited">本日はすでに複数の報告を送信しています。明日もう一度お試しください。</string>
+    <string name="nm_report_failed">報告を送信できませんでした。後でもう一度お試しください。</string>
+    <string name="nm_report_email_subject">FOMO: 報告された AI の返答</string>
+    <string name="nm_report_email_reason">理由: %1$s</string>
+    <string name="nm_report_email_note">メモ: %1$s</string>
+    <string name="nm_report_email_reply">返答:</string>
+    <string name="nm_report_no_mail_app">メールアプリが見つかりません。%1$s 宛てにお書きください。</string>
 </resources>

@@ -92,6 +92,12 @@ internal class MinisMarkdownTextToolbar(
      */
     private val isStreamingNow: () -> Boolean = { false },
     /**
+     * Play's AI-generated content policy: invoked when the user taps **Report this reply**.
+     * Receives the owning assistant message's markdown source (the bounds registry only
+     * holds assistant messages, so the selection is inside a reply). Null hides the action.
+     */
+    private val onReport: ((String) -> Unit)? = null,
+    /**
      * [T-android-markdown-table-copy-actions] The MinisTextKit selection
      * controller. This toolbar is the one Compose's SelectionContainer shows
      * (via LocalTextToolbar), and a table-cell long-press also sets the
@@ -162,6 +168,18 @@ internal class MinisMarkdownTextToolbar(
      * when that field is non-null — a selection whose owning message we cannot
      * identify has no "whole reply" to restart.
      */
+    /** Play's AI-generated content policy: flag the reply that owns the current selection (see [onReport]). */
+    internal fun reportReply() {
+        val sink = onReport ?: return
+        val source = state.originatingMarkdown ?: return
+        if (source.isNotBlank()) sink(source)
+    }
+
+    internal val canReport: Boolean
+        get() = onReport != null &&
+            state.originatingMarkdown != null &&
+            !isStreamingNow()
+
     internal fun readFromStart() {
         val sink = onReadFromStart ?: return
         val source = state.originatingMarkdown ?: return
@@ -397,6 +415,15 @@ internal fun MinisMarkdownTextToolbarHost(toolbar: MinisMarkdownTextToolbar) {
                     ToolbarDivider()
                     ToolbarButton(label = stringResource(R.string.selection_copy_full_plain_text)) {
                         toolbar.copyPlainText()
+                        toolbar.hide()
+                    }
+                }
+                // Play's AI-generated content policy: flag the reply that owns
+                // the selection. Only on a finished assistant reply.
+                if (toolbar.canReport) {
+                    ToolbarDivider()
+                    ToolbarButton(label = stringResource(R.string.nm_report_reply_action)) {
+                        toolbar.reportReply()
                         toolbar.hide()
                     }
                 }

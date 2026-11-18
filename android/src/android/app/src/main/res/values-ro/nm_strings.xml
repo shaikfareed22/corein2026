@@ -1161,4 +1161,31 @@
     <string name="nm_font_scale_medium">Mediu</string>
     <string name="nm_font_scale_large">Mare</string>
     <string name="nm_font_scale_extra_large">Foarte mare</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands folosește un serviciu de accesibilitate</string>
+    <string name="nm_hands_disclosure_p1">Cât timp rulează o sarcină pe care ai pornit-o, FOMO citește ce este pe ecran și atinge, derulează și tastează pentru tine, ca să poată termina sarcina în alte aplicații.</string>
+    <string name="nm_hands_disclosure_p2">Nu face nimic când nu rulează nicio sarcină și nu citește niciodată ecranul în fundal.</string>
+    <string name="nm_hands_disclosure_p3">Capturile de ecran ale sarcinii sunt trimise doar modelului pe care l-ai ales (releul tău FOMO Cloud sau furnizorul tău propriu) pentru a decide pasul următor; nu sunt stocate pe niciun server după acel pas. O atingere care plătește, trimite sau șterge așteaptă întotdeauna cardul tău de aprobare.</string>
+    <string name="nm_hands_disclosure_continue">Continuă la Setări</string>
+    <string name="nm_hands_disclosure_not_now">Nu acum</string>
+    <string name="nm_hands_disclosure_footer">Îl poți dezactiva oricând din Setări → Accesibilitate → FOMO.</string>
+    <string name="nm_a11y_service_description">FOMO Hands folosește acest serviciu pentru a termina sarcinile pe care le pornești. Cât timp rulează o sarcină, citește ce este pe ecran și atinge, derulează și tastează pentru tine în alte aplicații. Nu face nimic când nu rulează nicio sarcină și nu citește niciodată ecranul în fundal. Capturile de ecran ajung doar la modelul pe care l-ai ales și nu sunt păstrate; o atingere care plătește, trimite sau șterge așteaptă aprobarea ta.</string>
+    <string name="nm_report_reply_action">Raportează acest răspuns</string>
+    <string name="nm_report_reply_why">Ce este în neregulă cu el?</string>
+    <string name="nm_report_reason_harmful">Dăunător sau periculos</string>
+    <string name="nm_report_reason_sexual">Conținut sexual</string>
+    <string name="nm_report_reason_hate">Ură sau hărțuire</string>
+    <string name="nm_report_reason_wrong">Greșit sau înșelător</string>
+    <string name="nm_report_reason_other">Altceva</string>
+    <string name="nm_report_note_hint">Altceva ce ar trebui să știm (opțional)</string>
+    <string name="nm_report_send">Trimite</string>
+    <string name="nm_report_sent">Mulțumim, raportul a fost trimis.</string>
+    <string name="nm_report_rate_limited">Ai trimis deja mai multe rapoarte astăzi; încearcă din nou mâine.</string>
+    <string name="nm_report_failed">Raportul nu a ajuns. Încearcă din nou mai târziu.</string>
+    <string name="nm_report_email_subject">FOMO: răspuns AI raportat</string>
+    <string name="nm_report_email_reason">Motiv: %1$s</string>
+    <string name="nm_report_email_note">Notă: %1$s</string>
+    <string name="nm_report_email_reply">Răspuns:</string>
+    <string name="nm_report_no_mail_app">Nu s-a găsit nicio aplicație de e-mail. Scrie la %1$s.</string>
 </resources>

@@ -1136,4 +1136,31 @@
     <string name="nm_font_scale_medium">Medium</string>
     <string name="nm_font_scale_large">Large</string>
     <string name="nm_font_scale_extra_large">XL</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands uses an accessibility service</string>
+    <string name="nm_hands_disclosure_p1">While a task you started is running, FOMO reads what is on the screen and taps, scrolls and types for you, so it can finish the task in other apps.</string>
+    <string name="nm_hands_disclosure_p2">It does nothing when no task is running, and it never reads the screen in the background.</string>
+    <string name="nm_hands_disclosure_p3">Screenshots of the task are sent only to the model you chose (your FOMO Cloud relay or your own provider) to decide the next step; they are not stored on any server after the step. A tap that pays, sends or deletes always waits for your approval card.</string>
+    <string name="nm_hands_disclosure_continue">Continue to Settings</string>
+    <string name="nm_hands_disclosure_not_now">Not now</string>
+    <string name="nm_hands_disclosure_footer">You can turn it off any time under Settings → Accessibility → FOMO.</string>
+    <string name="nm_a11y_service_description">FOMO Hands uses this service to finish tasks you start. While a task runs, it reads what is on the screen and taps, scrolls and types for you in other apps. It does nothing when no task is running and never reads the screen in the background. Screenshots go only to the model you chose and are not kept; a tap that pays, sends or deletes waits for your approval.</string>
+    <string name="nm_report_reply_action">Report this reply</string>
+    <string name="nm_report_reply_why">What is wrong with it?</string>
+    <string name="nm_report_reason_harmful">Harmful or dangerous</string>
+    <string name="nm_report_reason_sexual">Sexual content</string>
+    <string name="nm_report_reason_hate">Hate or harassment</string>
+    <string name="nm_report_reason_wrong">Wrong or misleading</string>
+    <string name="nm_report_reason_other">Something else</string>
+    <string name="nm_report_note_hint">Anything else we should know (optional)</string>
+    <string name="nm_report_send">Send</string>
+    <string name="nm_report_sent">Thanks, the report was sent.</string>
+    <string name="nm_report_rate_limited">You have sent several reports today; try again tomorrow.</string>
+    <string name="nm_report_failed">The report did not go through. Try again later.</string>
+    <string name="nm_report_email_subject">FOMO: reported AI reply</string>
+    <string name="nm_report_email_reason">Reason: %1$s</string>
+    <string name="nm_report_email_note">Note: %1$s</string>
+    <string name="nm_report_email_reply">Reply:</string>
+    <string name="nm_report_no_mail_app">No e-mail app was found. Write to %1$s.</string>
 </resources>

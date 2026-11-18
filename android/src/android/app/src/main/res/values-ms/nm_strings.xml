@@ -1153,4 +1153,31 @@
     <string name="nm_font_scale_medium">Sederhana</string>
     <string name="nm_font_scale_large">Besar</string>
     <string name="nm_font_scale_extra_large">Sangat besar</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands menggunakan perkhidmatan kebolehcapaian</string>
+    <string name="nm_hands_disclosure_p1">Semasa tugas yang anda mulakan sedang berjalan, FOMO membaca apa yang ada pada skrin dan mengetik, menatal dan menaip untuk anda, supaya ia dapat menyelesaikan tugas itu dalam aplikasi lain.</string>
+    <string name="nm_hands_disclosure_p2">Ia tidak melakukan apa-apa apabila tiada tugas berjalan, dan ia tidak pernah membaca skrin di latar belakang.</string>
+    <string name="nm_hands_disclosure_p3">Tangkapan skrin tugas hanya dihantar kepada model yang anda pilih (relay FOMO Cloud anda atau pembekal anda sendiri) untuk menentukan langkah seterusnya; ia tidak disimpan pada mana-mana pelayan selepas langkah itu. Ketikan yang membayar, menghantar atau memadam sentiasa menunggu kad kelulusan anda.</string>
+    <string name="nm_hands_disclosure_continue">Teruskan ke Tetapan</string>
+    <string name="nm_hands_disclosure_not_now">Bukan sekarang</string>
+    <string name="nm_hands_disclosure_footer">Anda boleh mematikannya bila-bila masa di Tetapan → Kebolehcapaian → FOMO.</string>
+    <string name="nm_a11y_service_description">FOMO Hands menggunakan perkhidmatan ini untuk menyelesaikan tugas yang anda mulakan. Semasa tugas berjalan, ia membaca apa yang ada pada skrin dan mengetik, menatal dan menaip untuk anda dalam aplikasi lain. Ia tidak melakukan apa-apa apabila tiada tugas berjalan dan tidak pernah membaca skrin di latar belakang. Tangkapan skrin hanya dihantar kepada model yang anda pilih dan tidak disimpan; ketikan yang membayar, menghantar atau memadam menunggu kelulusan anda.</string>
+    <string name="nm_report_reply_action">Laporkan balasan ini</string>
+    <string name="nm_report_reply_why">Apa yang salah dengannya?</string>
+    <string name="nm_report_reason_harmful">Berbahaya atau membahayakan</string>
+    <string name="nm_report_reason_sexual">Kandungan seksual</string>
+    <string name="nm_report_reason_hate">Kebencian atau gangguan</string>
+    <string name="nm_report_reason_wrong">Salah atau mengelirukan</string>
+    <string name="nm_report_reason_other">Perkara lain</string>
+    <string name="nm_report_note_hint">Apa-apa lagi yang perlu kami tahu (pilihan)</string>
+    <string name="nm_report_send">Hantar</string>
+    <string name="nm_report_sent">Terima kasih, laporan telah dihantar.</string>
+    <string name="nm_report_rate_limited">Anda telah menghantar beberapa laporan hari ini; cuba lagi esok.</string>
+    <string name="nm_report_failed">Laporan tidak berjaya dihantar. Cuba lagi nanti.</string>
+    <string name="nm_report_email_subject">FOMO: balasan AI yang dilaporkan</string>
+    <string name="nm_report_email_reason">Sebab: %1$s</string>
+    <string name="nm_report_email_note">Nota: %1$s</string>
+    <string name="nm_report_email_reply">Balasan:</string>
+    <string name="nm_report_no_mail_app">Tiada aplikasi e-mel ditemui. Tulis kepada %1$s.</string>
 </resources>

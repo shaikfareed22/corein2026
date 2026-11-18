@@ -1153,4 +1153,31 @@
     <string name="nm_font_scale_medium">ปานกลาง</string>
     <string name="nm_font_scale_large">ใหญ่</string>
     <string name="nm_font_scale_extra_large">ใหญ่มาก</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands ใช้บริการการช่วยเหลือการเข้าถึง</string>
+    <string name="nm_hands_disclosure_p1">ขณะที่งานที่คุณเริ่มกำลังทำอยู่ FOMO จะอ่านสิ่งที่อยู่บนหน้าจอ แล้วแตะ เลื่อน และพิมพ์แทนคุณ เพื่อให้ทำงานนั้นให้เสร็จในแอปอื่นได้</string>
+    <string name="nm_hands_disclosure_p2">เมื่อไม่มีงานกำลังทำอยู่ มันจะไม่ทำอะไรเลย และไม่เคยอ่านหน้าจอในพื้นหลัง</string>
+    <string name="nm_hands_disclosure_p3">ภาพหน้าจอของงานจะถูกส่งไปยังโมเดลที่คุณเลือกเท่านั้น (รีเลย์ FOMO Cloud ของคุณหรือผู้ให้บริการของคุณเอง) เพื่อตัดสินใจขั้นตอนถัดไป และจะไม่ถูกเก็บไว้บนเซิร์ฟเวอร์ใดหลังจากขั้นตอนนั้น การแตะที่จ่ายเงิน ส่ง หรือลบ จะรอการ์ดอนุมัติของคุณเสมอ</string>
+    <string name="nm_hands_disclosure_continue">ไปที่การตั้งค่า</string>
+    <string name="nm_hands_disclosure_not_now">ไว้ก่อน</string>
+    <string name="nm_hands_disclosure_footer">คุณปิดได้ทุกเมื่อที่ การตั้งค่า → การช่วยเหลือการเข้าถึง → FOMO</string>
+    <string name="nm_a11y_service_description">FOMO Hands ใช้บริการนี้เพื่อทำงานที่คุณเริ่มให้เสร็จ ขณะที่งานกำลังทำอยู่ มันจะอ่านสิ่งที่อยู่บนหน้าจอ แล้วแตะ เลื่อน และพิมพ์แทนคุณในแอปอื่น เมื่อไม่มีงานกำลังทำอยู่ มันจะไม่ทำอะไรเลยและไม่เคยอ่านหน้าจอในพื้นหลัง ภาพหน้าจอจะถูกส่งไปยังโมเดลที่คุณเลือกเท่านั้นและไม่ถูกเก็บไว้ การแตะที่จ่ายเงิน ส่ง หรือลบ จะรอการอนุมัติของคุณ</string>
+    <string name="nm_report_reply_action">รายงานคำตอบนี้</string>
+    <string name="nm_report_reply_why">มีอะไรผิดปกติ</string>
+    <string name="nm_report_reason_harmful">เป็นอันตรายหรือเสี่ยง</string>
+    <string name="nm_report_reason_sexual">เนื้อหาทางเพศ</string>
+    <string name="nm_report_reason_hate">ความเกลียดชังหรือการคุกคาม</string>
+    <string name="nm_report_reason_wrong">ผิดหรือทำให้เข้าใจผิด</string>
+    <string name="nm_report_reason_other">อย่างอื่น</string>
+    <string name="nm_report_note_hint">มีอะไรอีกที่เราควรรู้ (ไม่บังคับ)</string>
+    <string name="nm_report_send">ส่ง</string>
+    <string name="nm_report_sent">ขอบคุณ ส่งรายงานแล้ว</string>
+    <string name="nm_report_rate_limited">วันนี้คุณส่งรายงานไปหลายครั้งแล้ว ลองอีกครั้งพรุ่งนี้</string>
+    <string name="nm_report_failed">ส่งรายงานไม่สำเร็จ ลองอีกครั้งภายหลัง</string>
+    <string name="nm_report_email_subject">FOMO: รายงานคำตอบของ AI</string>
+    <string name="nm_report_email_reason">เหตุผล: %1$s</string>
+    <string name="nm_report_email_note">หมายเหตุ: %1$s</string>
+    <string name="nm_report_email_reply">คำตอบ:</string>
+    <string name="nm_report_no_mail_app">ไม่พบแอปอีเมล โปรดเขียนถึง %1$s</string>
 </resources>

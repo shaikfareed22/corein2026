@@ -1158,4 +1158,31 @@
     <string name="nm_font_scale_medium">Moyen</string>
     <string name="nm_font_scale_large">Grand</string>
     <string name="nm_font_scale_extra_large">Très grand</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands utilise un service d\'accessibilité</string>
+    <string name="nm_hands_disclosure_p1">Pendant qu\'une tâche que vous avez lancée s\'exécute, FOMO lit ce qui est à l\'écran et touche, fait défiler et saisit du texte pour vous, afin de terminer la tâche dans d\'autres applis.</string>
+    <string name="nm_hands_disclosure_p2">Il ne fait rien quand aucune tâche n\'est en cours, et il ne lit jamais l\'écran en arrière-plan.</string>
+    <string name="nm_hands_disclosure_p3">Les captures d\'écran de la tâche sont envoyées uniquement au modèle que vous avez choisi (votre relais FOMO Cloud ou votre propre fournisseur) pour décider de l\'étape suivante ; elles ne sont conservées sur aucun serveur après l\'étape. Un appui qui paie, envoie ou supprime attend toujours votre carte d\'approbation.</string>
+    <string name="nm_hands_disclosure_continue">Continuer vers les Paramètres</string>
+    <string name="nm_hands_disclosure_not_now">Pas maintenant</string>
+    <string name="nm_hands_disclosure_footer">Vous pouvez le désactiver à tout moment dans Paramètres → Accessibilité → FOMO.</string>
+    <string name="nm_a11y_service_description">FOMO Hands utilise ce service pour terminer les tâches que vous lancez. Pendant qu\'une tâche s\'exécute, il lit ce qui est à l\'écran et touche, fait défiler et saisit du texte pour vous dans d\'autres applis. Il ne fait rien quand aucune tâche n\'est en cours et ne lit jamais l\'écran en arrière-plan. Les captures d\'écran vont uniquement au modèle que vous avez choisi et ne sont pas conservées ; un appui qui paie, envoie ou supprime attend votre approbation.</string>
+    <string name="nm_report_reply_action">Signaler cette réponse</string>
+    <string name="nm_report_reply_why">Qu\'est-ce qui ne va pas ?</string>
+    <string name="nm_report_reason_harmful">Nuisible ou dangereuse</string>
+    <string name="nm_report_reason_sexual">Contenu sexuel</string>
+    <string name="nm_report_reason_hate">Haine ou harcèlement</string>
+    <string name="nm_report_reason_wrong">Fausse ou trompeuse</string>
+    <string name="nm_report_reason_other">Autre chose</string>
+    <string name="nm_report_note_hint">Autre chose à nous dire (facultatif)</string>
+    <string name="nm_report_send">Envoyer</string>
+    <string name="nm_report_sent">Merci, le signalement a été envoyé.</string>
+    <string name="nm_report_rate_limited">Vous avez envoyé plusieurs signalements aujourd\'hui ; réessayez demain.</string>
+    <string name="nm_report_failed">Le signalement n\'a pas abouti. Réessayez plus tard.</string>
+    <string name="nm_report_email_subject">FOMO : réponse d\'IA signalée</string>
+    <string name="nm_report_email_reason">Motif : %1$s</string>
+    <string name="nm_report_email_note">Remarque : %1$s</string>
+    <string name="nm_report_email_reply">Réponse :</string>
+    <string name="nm_report_no_mail_app">Aucune appli de courriel trouvée. Écrivez à %1$s.</string>
 </resources>

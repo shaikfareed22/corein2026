@@ -1165,4 +1165,31 @@
     <string name="nm_font_scale_medium">Średni</string>
     <string name="nm_font_scale_large">Duży</string>
     <string name="nm_font_scale_extra_large">Bardzo duży</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">FOMO Hands korzysta z usługi ułatwień dostępu</string>
+    <string name="nm_hands_disclosure_p1">Gdy działa zadanie, które uruchomiłeś, FOMO odczytuje to, co jest na ekranie, i stuka, przewija oraz pisze za Ciebie, aby dokończyć zadanie w innych aplikacjach.</string>
+    <string name="nm_hands_disclosure_p2">Nic nie robi, gdy żadne zadanie nie działa, i nigdy nie odczytuje ekranu w tle.</string>
+    <string name="nm_hands_disclosure_p3">Zrzuty ekranu zadania są wysyłane tylko do wybranego przez Ciebie modelu (Twojego przekaźnika FOMO Cloud lub własnego dostawcy), aby ustalić następny krok; po tym kroku nie są przechowywane na żadnym serwerze. Stuknięcie, które płaci, wysyła lub usuwa, zawsze czeka na Twoją kartę zatwierdzenia.</string>
+    <string name="nm_hands_disclosure_continue">Przejdź do Ustawień</string>
+    <string name="nm_hands_disclosure_not_now">Nie teraz</string>
+    <string name="nm_hands_disclosure_footer">Możesz to wyłączyć w każdej chwili w Ustawienia → Ułatwienia dostępu → FOMO.</string>
+    <string name="nm_a11y_service_description">FOMO Hands korzysta z tej usługi, aby dokończyć zadania, które uruchamiasz. Gdy zadanie działa, odczytuje to, co jest na ekranie, i stuka, przewija oraz pisze za Ciebie w innych aplikacjach. Nic nie robi, gdy żadne zadanie nie działa, i nigdy nie odczytuje ekranu w tle. Zrzuty ekranu trafiają tylko do wybranego modelu i nie są przechowywane; stuknięcie, które płaci, wysyła lub usuwa, czeka na Twoje zatwierdzenie.</string>
+    <string name="nm_report_reply_action">Zgłoś tę odpowiedź</string>
+    <string name="nm_report_reply_why">Co jest z nią nie tak?</string>
+    <string name="nm_report_reason_harmful">Szkodliwa lub niebezpieczna</string>
+    <string name="nm_report_reason_sexual">Treści seksualne</string>
+    <string name="nm_report_reason_hate">Nienawiść lub nękanie</string>
+    <string name="nm_report_reason_wrong">Błędna lub myląca</string>
+    <string name="nm_report_reason_other">Coś innego</string>
+    <string name="nm_report_note_hint">Coś jeszcze, o czym powinniśmy wiedzieć (opcjonalnie)</string>
+    <string name="nm_report_send">Wyślij</string>
+    <string name="nm_report_sent">Dziękujemy, zgłoszenie zostało wysłane.</string>
+    <string name="nm_report_rate_limited">Wysłałeś dziś już kilka zgłoszeń; spróbuj ponownie jutro.</string>
+    <string name="nm_report_failed">Zgłoszenie nie zostało wysłane. Spróbuj ponownie później.</string>
+    <string name="nm_report_email_subject">FOMO: zgłoszona odpowiedź AI</string>
+    <string name="nm_report_email_reason">Powód: %1$s</string>
+    <string name="nm_report_email_note">Uwaga: %1$s</string>
+    <string name="nm_report_email_reply">Odpowiedź:</string>
+    <string name="nm_report_no_mail_app">Nie znaleziono aplikacji e-mail. Napisz na %1$s.</string>
 </resources>

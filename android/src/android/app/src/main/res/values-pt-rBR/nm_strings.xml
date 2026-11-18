@@ -1158,4 +1158,31 @@
     <string name="nm_font_scale_medium">Médio</string>
     <string name="nm_font_scale_large">Grande</string>
     <string name="nm_font_scale_extra_large">Muito grande</string>
+
+    <!-- Google Play: the accessibility disclosure and the report of an AI reply -->
+    <string name="nm_hands_disclosure_title">O FOMO Hands usa um serviço de acessibilidade</string>
+    <string name="nm_hands_disclosure_p1">Enquanto uma tarefa que você iniciou está em andamento, o FOMO lê o que está na tela e toca, rola e digita por você, para concluir a tarefa em outros apps.</string>
+    <string name="nm_hands_disclosure_p2">Ele não faz nada quando nenhuma tarefa está em andamento, e nunca lê a tela em segundo plano.</string>
+    <string name="nm_hands_disclosure_p3">As capturas de tela da tarefa são enviadas apenas ao modelo que você escolheu (seu relay do FOMO Cloud ou seu próprio provedor) para decidir o próximo passo; elas não ficam armazenadas em nenhum servidor depois do passo. Um toque que paga, envia ou apaga sempre espera pelo seu cartão de aprovação.</string>
+    <string name="nm_hands_disclosure_continue">Continuar para as Configurações</string>
+    <string name="nm_hands_disclosure_not_now">Agora não</string>
+    <string name="nm_hands_disclosure_footer">Você pode desativar a qualquer momento em Configurações → Acessibilidade → FOMO.</string>
+    <string name="nm_a11y_service_description">O FOMO Hands usa este serviço para concluir as tarefas que você inicia. Enquanto uma tarefa está em andamento, ele lê o que está na tela e toca, rola e digita por você em outros apps. Ele não faz nada quando nenhuma tarefa está em andamento e nunca lê a tela em segundo plano. As capturas de tela vão apenas para o modelo que você escolheu e não são guardadas; um toque que paga, envia ou apaga espera pela sua aprovação.</string>
+    <string name="nm_report_reply_action">Denunciar esta resposta</string>
+    <string name="nm_report_reply_why">O que há de errado com ela?</string>
+    <string name="nm_report_reason_harmful">Prejudicial ou perigosa</string>
+    <string name="nm_report_reason_sexual">Conteúdo sexual</string>
+    <string name="nm_report_reason_hate">Ódio ou assédio</string>
+    <string name="nm_report_reason_wrong">Errada ou enganosa</string>
+    <string name="nm_report_reason_other">Outra coisa</string>
+    <string name="nm_report_note_hint">Algo mais que devemos saber (opcional)</string>
+    <string name="nm_report_send">Enviar</string>
+    <string name="nm_report_sent">Obrigado, a denúncia foi enviada.</string>
+    <string name="nm_report_rate_limited">Você já enviou várias denúncias hoje; tente de novo amanhã.</string>
+    <string name="nm_report_failed">A denúncia não foi enviada. Tente de novo mais tarde.</string>
+    <string name="nm_report_email_subject">FOMO: resposta de IA denunciada</string>
+    <string name="nm_report_email_reason">Motivo: %1$s</string>
+    <string name="nm_report_email_note">Observação: %1$s</string>
+    <string name="nm_report_email_reply">Resposta:</string>
+    <string name="nm_report_no_mail_app">Nenhum app de e-mail foi encontrado. Escreva para %1$s.</string>
 </resources>
