@@ -38,6 +38,10 @@ its base URL.
   hashes, the keyed hash of a code still waiting to be used (six digits, so
   hashing it plainly would be a table an attacker could work through), video
   task ids, token counts per request, and the profile below.
+- **Report this reply.** `POST /v1/reports` `{reason, text, model?, note?}` (0.29) keeps a
+  reply the person flagged — ten a day per account — for the admin page's *Reports* tab,
+  where each is marked handled; `/v1/config` carries `support_email` for an app that has
+  no account to send with. Google Play's AI-generated content policy asks for the button.
 - **One look on every device.** `GET` / `PUT` / `DELETE /v1/me/profile` keep
   the agent's name and face for the account — the dragon, an emoji on a colour,
   or a face drawn in the avatar studio with its five small stills (WebP, 200 KB

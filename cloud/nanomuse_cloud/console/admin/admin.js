@@ -102,7 +102,8 @@
     catalog: "模型目录", catalogNote: "key 下能用的模型（菜单之外）：relay 向每个模型各问一句话、再给一张品红色小图，确认它能回答、能不能看图；答案保存 7 天。客户端拿到的「能看图」就是这里的结果。", catalogOff: "模型目录未开启（CLOUD_CATALOG=0）。", catalogNames: "按名字推断，未逐个验证（CLOUD_CATALOG_PROBE=0）。", catalogProbing: "正在验证…", catalogPending: (n) => `${fmt(n)} 个待验证`, catalogFetched: (t) => `列表更新于 ${t}`, catalogError: (e) => `读取列表失败：${e}`,
     cModel: "模型", cKind: "类型", cSees: "看图", cVerified: "已验证", cYes: "是", cNo: "否", cUnusable: "服务商拒绝的模型（不出现在客户端）", cNoUnusable: "没有被拒绝的模型。", cCount: (n, v) => `${fmt(n)} 个对话模型 · ${fmt(v)} 个能看图`,
     // 0.14: the page in pages
-    nav: { overview: "总览", people: "用户", invites: "邀请", places: "地区", money: "花费", activity: "动态", demo: "在线体验", data: "数据控制", site: "官网", models: "模型", health: "服务状态", stats: "统计", controls: "控制", settings: "配置" },
+    nav: { overview: "总览", people: "用户", invites: "邀请", places: "地区", money: "花费", activity: "动态", demo: "在线体验", data: "数据控制", site: "官网", models: "模型", health: "服务状态", stats: "统计", reports: "举报", controls: "控制", settings: "配置" },
+    rep: { title: "被举报的回答", note: "用户在应用里点「举报这条回答」后到这里。每个账号每天最多 %n 条。处理完点「已处理」；应用商店的政策要求有这个入口，也要求你真的看。", none: "还没有举报。", open: (n) => `${n} 条待处理`, showAll: "显示已处理的", hideDone: "只看待处理", reasons: { harmful: "有害或危险", sexual: "色情", hate: "仇恨或骚扰", wrong: "错误或误导", other: "其他" }, when: "时间", who: "账号", reason: "原因", model: "模型", text: "回答", note: "用户备注", done: "已处理", reopen: "重新打开", by: (w) => `${w} 处理` },
     // 0.22: the Controls page, the Stats page, the GitHub series
     ctl: {
       title: "控制", note: "每个开关立刻生效、重启后保持；谁在何时改了什么记在下面的日志里。关闭前会先说明确切后果。",
@@ -237,7 +238,8 @@
     pCountry: "Country / region", pProvince: "Province / state", pAccounts: "Accounts", pNew: "New", pSignins: "Sign-ins", pRequests: "Requests", pDemo: "Demo visitors", pUnknown: "unknown", pLocal: "local network", pNone: "No visits recorded yet.", pAccountsNote: "accounts by their latest address",
     catalog: "Model catalog", catalogNote: "The models under the key beyond the menu: the relay asks each one a one-word question and then shows it a small magenta picture, to learn whether it answers and whether it sees; the answers stand for seven days. The “sees pictures” the apps show is what is here.", catalogOff: "The catalog is off (CLOUD_CATALOG=0).", catalogNames: "Guessed from names, not checked one by one (CLOUD_CATALOG_PROBE=0).", catalogProbing: "Checking…", catalogPending: (n) => `${fmt(n)} to check`, catalogFetched: (t) => `list read ${t}`, catalogError: (e) => `The list could not be read: ${e}`,
     cModel: "Model", cKind: "Kind", cSees: "Sees pictures", cVerified: "Checked", cYes: "yes", cNo: "no", cUnusable: "Models the provider refuses (not offered to the apps)", cNoUnusable: "None refused.", cCount: (n, v) => `${fmt(n)} chat models · ${fmt(v)} see pictures`,
-    nav: { overview: "Overview", people: "People", invites: "Invites", places: "Places", money: "Spend", activity: "Activity", demo: "Demo", data: "Data", site: "Site", models: "Models", health: "Health", stats: "Stats", controls: "Controls", settings: "Settings" },
+    nav: { overview: "Overview", people: "People", invites: "Invites", places: "Places", money: "Spend", activity: "Activity", demo: "Demo", data: "Data", site: "Site", models: "Models", health: "Health", stats: "Stats", reports: "Reports", controls: "Controls", settings: "Settings" },
+    rep: { title: "Reported replies", note: "What people flag with “Report this reply” in the app lands here, ten a day per account at most. Mark each one handled when you have looked; the store policies ask for the button, and for you to read what comes through it.", none: "No reports yet.", open: (n) => `${n} open`, showAll: "Show handled too", hideDone: "Open only", reasons: { harmful: "Harmful or dangerous", sexual: "Sexual content", hate: "Hate or harassment", wrong: "Wrong or misleading", other: "Something else" }, when: "When", who: "Account", reason: "Reason", model: "Model", text: "Reply", note: "Their note", done: "Handled", reopen: "Reopen", by: (w) => `handled by ${w}` },
     ctl: {
       title: "Controls", note: "Each switch applies at once and survives a restart; who changed what, and when, is in the log below. A switch says exactly what turning it off does before it flips.",
       names: { free_allowance: "Free allowance", signups: "Sign-ups", cloud_service: "Cloud service", sync: "Conversation sync", hub: "Device hub" },
@@ -361,7 +363,7 @@
     "control.switch": ["warn", ICON.warn], "control.rule": ["warn", ICON.warn],
   };
   const FILTERS = [["", "all"], ["sign_in.code,sign_in.password,sign_in.session,sign_in.failed,account.created", "signIns"], ["budget.refused", "refusals"], ["upstream.error", "errors"], ["content.rejected", "contentChecks"], ["call.ended", "calls"], ["password.set,password.changed,password.cleared", "passwords"]];
-  const VIEWS = ["overview", "people", "invites", "places", "money", "activity", "demo", "data", "site", "models", "health", "stats", "controls", "settings"];
+  const VIEWS = ["overview", "people", "invites", "places", "money", "activity", "demo", "data", "site", "models", "health", "stats", "reports", "controls", "settings"];
   const PAGE = 50;
 
   // ── state ──────────────────────────────────────────────────────
@@ -445,10 +447,12 @@
     sync: () => "/v1/admin/sync",
     // 0.22
     controls: () => "/v1/admin/controls",
+    // 0.29
+    reports: () => "/v1/admin/reports?limit=300",
     stats: (d) => `/v1/admin/stats?days=${d}`,
     github: (d) => `/v1/admin/github?days=${d}`,
   };
-  const TIMELESS = new Set(["catalog", "health", "nudges", "sync", "controls", "invites"]);
+  const TIMELESS = new Set(["catalog", "health", "nudges", "sync", "controls", "invites", "reports"]);
   const CACHE = new Map();
   const cacheKey = (key) => `${key}:${TIMELESS.has(key) ? 0 : days}`;
   /** The view's data, or null while it is on its way (the view draws again when it lands);
@@ -1915,7 +1919,36 @@
         h("div", {}, h("h3", {}, T.gh.releases), rankRows((latest.releases || []).map((r) => ({ name: r.tag, hits: r.downloads }))))),
       h("div", { class: "fine", style: "padding:0 16px 12px" }, T.gh.note));
   }
-  const RENDER = { overview: overviewView, people: peopleView, invites: invitesView, places: placesView, money: moneyView, activity: activityView, demo: demoView, data: dataView, site: siteView, models: modelsView, health: healthView, stats: statsView, controls: controlsView, settings: settingsView };
+  // ── reports of AI output (relay 0.29) ──
+  let repShowDone = false;
+  async function repResolve(id, resolved) {
+    try { await api("POST", `/v1/admin/reports/${id}/resolve`, { resolved }); } catch (e) { alert(e.message); }
+    forget("reports"); draw();
+  }
+  function reportsView() {
+    const rv = need("reports");
+    if (!rv) return loadingPanel(T.rep.title);
+    if (rv._error) return failedPanel(T.rep.title, "reports", rv._error);
+    const all = rv.reports || [];
+    const rows = repShowDone ? all : all.filter((r) => !r.resolved_at);
+    return h("div", { class: "panel" },
+      h("h2", {}, T.rep.title, h("span", { class: "pill" }, T.rep.open(rv.open || 0)), h("span", { class: "sp" }),
+        h("button", { class: "btn quiet sm", onclick: () => { repShowDone = !repShowDone; draw(); } }, repShowDone ? T.rep.hideDone : T.rep.showAll)),
+      h("div", { class: "fine", style: "padding:12px 16px 0" }, T.rep.note.replace("%n", rv.per_day || 10)),
+      rows.length ? h("table", { class: "plain" },
+        h("thead", {}, h("tr", {}, h("th", {}, T.rep.when), h("th", {}, T.rep.who), h("th", {}, T.rep.reason), h("th", {}, T.rep.model), h("th", {}, T.rep.text), h("th", {}, ""))),
+        h("tbody", {}, ...rows.map((r) => h("tr", { style: r.resolved_at ? "opacity:.55" : null },
+          h("td", { class: "nowrap" }, when(r.ts)),
+          h("td", { class: "nowrap" }, r.hint || r.account_id.slice(0, 8)),
+          h("td", { class: "nowrap" }, T.rep.reasons[r.reason] || r.reason),
+          h("td", { class: "nowrap" }, h("code", {}, r.model || "—")),
+          h("td", { class: "wrap" }, h("div", { style: "max-height:9em; overflow:auto; white-space:pre-wrap" }, r.text), r.note ? h("div", { class: "sub" }, T.rep.note + ": " + r.note) : null),
+          h("td", { class: "nowrap" }, r.resolved_at
+            ? [h("span", { class: "sub" }, T.rep.by(r.resolved_by || "—")), " ", h("button", { class: "btn quiet sm", onclick: () => repResolve(r.id, false) }, T.rep.reopen)]
+            : h("button", { class: "btn sm", onclick: () => repResolve(r.id, true) }, T.rep.done))))))
+        : h("div", { class: "empty" }, T.rep.none));
+  }
+  const RENDER = { overview: overviewView, people: peopleView, invites: invitesView, places: placesView, money: moneyView, activity: activityView, demo: demoView, data: dataView, site: siteView, models: modelsView, health: healthView, stats: statsView, controls: controlsView, reports: reportsView, settings: settingsView };
 
   // ── the shell: bar, nav, one view ──────────────────────────────
   function drawMain() {

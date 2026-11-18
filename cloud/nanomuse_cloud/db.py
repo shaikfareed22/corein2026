@@ -264,6 +264,22 @@ CREATE TABLE IF NOT EXISTS deleted_keys (
     key_hash      TEXT PRIMARY KEY,
     deleted_at    INTEGER NOT NULL
 );
+-- 0.29: a reply the person flagged from the app (Google Play's AI-generated content policy
+-- asks for the button); the operator reads them on the admin page and marks them handled.
+CREATE TABLE IF NOT EXISTS reports (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    account_id    TEXT NOT NULL,
+    ts            INTEGER NOT NULL,
+    kind          TEXT NOT NULL DEFAULT 'ai_output',
+    reason        TEXT NOT NULL,              -- harmful | sexual | hate | wrong | other
+    model         TEXT NOT NULL DEFAULT '',
+    text          TEXT NOT NULL DEFAULT '',   -- the reply, cut to 4000 characters
+    note          TEXT NOT NULL DEFAULT '',   -- the person's words, cut to 500
+    resolved_at   INTEGER NOT NULL DEFAULT 0,
+    resolved_by   TEXT NOT NULL DEFAULT ''
+);
+CREATE INDEX IF NOT EXISTS reports_open ON reports(resolved_at, id);
+CREATE INDEX IF NOT EXISTS reports_account ON reports(account_id, ts);
 """
 
 # How long a deleted account's key hashes are remembered. Long enough for every device of the
@@ -565,6 +581,37 @@ class Database:
                 "INSERT INTO control_audit(ts, actor, ip, action, target, detail) VALUES (?,?,?,?,?,?)",
                 (now(), actor[:80], who.ip, action, target[:80], (detail or "")[:300]),
             )
+
+    # -- 0.29: reports of AI output -----------------------------------------------------------
+
+    def report_add(self, account_id: str, kind: str, reason: str, model: str, text: str, note: str) -> int:
+        with self.tx() as c:
+            cur = c.execute(
+                "INSERT INTO reports(account_id, ts, kind, reason, model, text, note) VALUES (?,?,?,?,?,?,?)",
+                (account_id, now(), kind[:40], reason[:40], (model or "")[:120], (text or "")[:4000], (note or "")[:500]),
+            )
+            return int(cur.lastrowid)
+
+    def reports_from_since(self, account_id: str, since: int) -> int:
+        with self._lock:
+            return int(self._conn.execute("SELECT COUNT(*) FROM reports WHERE account_id=? AND ts>=?", (account_id, since)).fetchone()[0])
+
+    def reports_recent(self, limit: int = 200, open_only: bool = False) -> list[sqlite3.Row]:
+        where = "WHERE resolved_at=0" if open_only else ""
+        with self._lock:
+            return self._conn.execute(f"SELECT * FROM reports {where} ORDER BY id DESC LIMIT ?", (max(1, min(limit, 1000)),)).fetchall()
+
+    def reports_open_count(self) -> int:
+        with self._lock:
+            return int(self._conn.execute("SELECT COUNT(*) FROM reports WHERE resolved_at=0").fetchone()[0])
+
+    def report_resolve(self, report_id: int, actor: str, resolved: bool = True) -> bool:
+        with self.tx() as c:
+            cur = c.execute(
+                "UPDATE reports SET resolved_at=?, resolved_by=? WHERE id=?",
+                (now() if resolved else 0, actor[:80] if resolved else "", int(report_id)),
+            )
+            return cur.rowcount > 0
 
     def audit_recent(self, limit: int = 200) -> list[sqlite3.Row]:
         with self._lock:

@@ -645,6 +645,8 @@ class Cloud:
         return {
             "version": __version__,
             "signup_open": self.s.signup_open and self.controls.on("signups"),
+            # 0.29: where a report of AI output goes when the app has no account to send it with
+            "support_email": self.s.admin_email,
             # 0.22: which of the operator's switches are off, so a sign-in page can say so
             "paused": [k for k, v in self.controls.paused().items() if v],
             # 0.27: the currency every `_cny` figure is in, and the sign the apps print
@@ -2841,6 +2843,43 @@ class Cloud:
             if decrypt:
                 idents[r["id"]] = self.crypto.decrypt(r["id"], r["identifier_enc"] or "") or ""
         return hints, idents
+
+    # -- 0.29: reports of AI output -----------------------------------------------------------
+
+    REPORT_REASONS = ("harmful", "sexual", "hate", "wrong", "other")
+    REPORTS_PER_DAY = 10
+
+    def add_report(self, caller: Caller, body: dict) -> int:
+        """A reply the person flagged: kept with the reason, the model and the text, for the
+        operator's Reports tab. Ten a day per account; the text is cut, never parsed."""
+        reason = str(body.get("reason") or "").strip().lower()
+        if reason not in self.REPORT_REASONS:
+            raise CloudError(400, "bad_request", "reason is one of " + ", ".join(self.REPORT_REASONS))
+        text = str(body.get("text") or "").strip()
+        if not text:
+            raise CloudError(400, "bad_request", "text is the reply being reported")
+        if self.db.reports_from_since(caller.account_id, now() - 86400) >= self.REPORTS_PER_DAY:
+            raise CloudError(429, "too_many_reports", f"{self.REPORTS_PER_DAY} reports a day per account")
+        kind = str(body.get("kind") or "ai_output").strip()[:40] or "ai_output"
+        report_id = self.db.report_add(caller.account_id, kind, reason, str(body.get("model") or ""), text, str(body.get("note") or ""))
+        self.db.add_event(caller.account_id, "report.sent", f"{reason} · {str(body.get('model') or '')[:40]}")
+        log.warning("report #%d from %s: %s (%s)", report_id, caller.account_id[:8], reason, str(body.get("model") or "")[:40])
+        return report_id
+
+    def admin_reports(self, limit: int = 200, open_only: bool = False) -> dict:
+        rows = []
+        for r in self.db.reports_recent(limit, open_only):
+            d = dict(r)
+            acct = self.db.account(d["account_id"])
+            d["hint"] = acct["hint"] if acct is not None else ""
+            rows.append(d)
+        return {"reports": rows, "open": self.db.reports_open_count(), "per_day": self.REPORTS_PER_DAY}
+
+    def admin_resolve_report(self, report_id: int, actor: str, resolved: bool = True) -> dict:
+        if not self.db.report_resolve(report_id, actor, resolved):
+            raise CloudError(404, "not_found", "no such report")
+        self.db.audit_add(actor, "report.resolved" if resolved else "report.reopened", str(report_id), "")
+        return {"ok": True, "open": self.db.reports_open_count()}
 
     def admin_settings(self) -> dict:
         return {

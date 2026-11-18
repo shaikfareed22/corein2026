@@ -618,6 +618,13 @@ def create_app(
             await hub.broadcast_profile(caller.account_id, int(out["rev"]), device[:80])
         return out
 
+    @app.post("/v1/reports", status_code=204)
+    async def me_report(request: Request, caller: Caller = Depends(caller_dep)) -> Response:
+        """{kind?, reason, model?, text, note?}: the person flags a reply (0.29). 204; 429 after
+        ten in a day. The operator reads them on the admin page's Reports tab."""
+        cloud.add_report(caller, await _json(request))
+        return Response(status_code=204)
+
     @app.delete("/v1/me/profile", status_code=204)
     async def me_delete_profile(caller: Caller = Depends(caller_dep)) -> Response:
         cloud.delete_profile(caller)
@@ -1738,6 +1745,17 @@ def create_app(
         """Who flipped it, for the audit line: the page sends `actor` (a name typed once), the
         CLI its user, else the word console."""
         return str(request.headers.get("x-admin-actor") or "console")[:80]
+
+    @app.get("/v1/admin/reports", dependencies=[Depends(admin_dep)])
+    async def admin_reports(limit: int = 200, open: int = 0) -> dict:
+        """The flagged replies, newest first (0.29): {reports, open, per_day}; ?open=1 = unresolved only."""
+        return cloud.admin_reports(limit, bool(open))
+
+    @app.post("/v1/admin/reports/{report_id}/resolve", dependencies=[Depends(admin_dep)])
+    async def admin_report_resolve(report_id: int, request: Request) -> dict:
+        """Mark a report handled ({resolved: false} reopens it); the audit log says who."""
+        body = await _json(request)
+        return cloud.admin_resolve_report(report_id, _actor(request), bool(body.get("resolved", True)))
 
     @app.get("/v1/admin/controls", dependencies=[Depends(admin_dep)])
     async def admin_controls() -> dict:
