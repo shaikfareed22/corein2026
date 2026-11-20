@@ -4,6 +4,10 @@ All notable changes to FOMO (called corein until 1.1.0; before the fork on 2026-
 
 ## [Unreleased]
 
+### Project
+
+- **The homepage at fomo.corein.in is black and white.** White with black text, black with white text on a device in dark mode, a black bar and footer that carry the logo as it is; the gradients, the coloured icon tiles and the scroll animations are gone, and the sentences and download links are the same. The main button on an Android phone pointed at a file name no release has (`corein-<version>-arm64.apk`); it now downloads `fomo-<version>-arm64.apk`.
+
 ## [1.2.2] - 2026-11-20 · Harbor
 
 The Android app carries what Google Play asks of it, and the relay can be run on a small server with a provider of the operator's choice: a disclosure before the accessibility settings, a way to report a reply, an App Bundle beside the APK, and a relay whose model provider, daily allowance and currency are settings rather than code. The relay is 0.27.0.

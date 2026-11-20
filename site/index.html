@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FOMO</title>
   <meta name="description" content="FOMO is an open-source personal agent for every device you own: it does things, keeps working while the app is closed, remembers you, and asks before anything you could not undo." />
-  <meta name="theme-color" content="#070B14" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#000000" />
   <link rel="icon" href="assets/fomo-icon.svg" />
   <link rel="apple-touch-icon" href="assets/app-icon.png" />
   <meta property="og:title" content="FOMO" />
@@ -14,138 +15,128 @@
   <style>
     @font-face { font-family: "Figtree"; src: url("assets/fonts/figtree-latin.woff2") format("woff2"); font-weight: 300 900; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
     @font-face { font-family: "Figtree"; src: url("assets/fonts/figtree-latin-ext.woff2") format("woff2"); font-weight: 300 900; font-display: swap; unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+    /* Black, white and the greys between them; nothing else. Light by default, dark when the
+       device asks for it. --ink is the one strong colour, --paper its opposite. The bar at the
+       top and the footer are black in both, because the logo is white letters with its orange
+       arrow and is shown as it is. */
     :root {
-      --bg: #070B14; --bg-2: #0B1120; --panel: rgba(255,255,255,0.04); --panel-2: rgba(255,255,255,0.07);
-      --line: rgba(255,255,255,0.10); --line-2: rgba(255,255,255,0.18);
-      --text: #E6EAF2; --muted: #9AA4B8; --dim: #6B7489;
-      --blue: #3B82F6; --blue-2: #60A5FA; --violet: #8B5CF6; --cyan: #22D3EE; --mint: #34D399;
-      --grad: linear-gradient(90deg, #60A5FA 0%, #8B5CF6 50%, #22D3EE 100%);
-      --radius: 20px; --max: 1140px;
+      --paper: #ffffff; --ink: #0a0a0a; --muted: #5f5f5f; --faint: #8a8a8a;
+      --line: #e4e4e4; --soft: #f6f6f6;
+      --bar: #000000; --bar-fg: #f5f5f5; --bar-muted: #a3a3a3; --bar-line: #262626;
+      --radius: 6px; --max: 1120px;
+      --sans: "Figtree", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #000000; --ink: #f5f5f5; --muted: #a3a3a3; --faint: #737373;
+        --line: #262626; --soft: #0f0f0f;
+      }
+    }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: "Figtree", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif; color: var(--text); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-    a { color: var(--blue-2); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    h1, h2, h3 { color: #fff; letter-spacing: -0.02em; line-height: 1.12; margin: 0; }
-    h2 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 800; }
-    h3 { font-size: 18px; font-weight: 700; }
+    body { margin: 0; font-family: var(--sans); color: var(--ink); background: var(--paper); line-height: 1.55; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+    ::selection { background: var(--ink); color: var(--paper); }
+    a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+    h1, h2, h3 { margin: 0; letter-spacing: -0.03em; line-height: 1.08; font-weight: 700; text-wrap: balance; }
+    h2 { font-size: clamp(28px, 4vw, 44px); }
+    h3 { font-size: 18px; letter-spacing: -0.01em; line-height: 1.3; font-weight: 650; }
     p { margin: 0; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; background: var(--panel-2); padding: 1px 6px; border-radius: 6px; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; position: relative; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; }
-    .eyebrow::before { content: ""; width: 18px; height: 2px; background: var(--grad); border-radius: 2px; }
-    .lead { font-size: 18px; color: var(--muted); max-width: 640px; }
-    .shine { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-
-    /* background */
-    .sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: radial-gradient(1200px 700px at 50% -20%, #121a33 0%, var(--bg) 60%); }
-    .sky .orb { position: absolute; width: 60vw; height: 60vw; max-width: 760px; max-height: 760px; border-radius: 50%; filter: blur(80px); opacity: .35; animation: drift 22s ease-in-out infinite alternate; }
-    .sky .o1 { background: #1d4ed8; top: -20vw; left: -10vw; }
-    .sky .o2 { background: #6d28d9; top: 10vh; right: -20vw; animation-duration: 28s; animation-delay: -8s; }
-    .sky .o3 { background: #0e7490; bottom: -30vh; left: 30vw; animation-duration: 34s; animation-delay: -16s; opacity: .25; }
-    .sky .grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(800px 500px at 50% 0%, #000 0%, transparent 100%); -webkit-mask-image: radial-gradient(800px 500px at 50% 0%, #000 0%, transparent 100%); }
-    @keyframes drift { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(8vw, 6vh, 0) scale(1.12); } }
+    code { font-family: var(--mono); font-size: 0.9em; background: var(--soft); border: 1px solid var(--line); padding: 0 5px; border-radius: 4px; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .label { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-bottom: 18px; }
+    .lead { font-size: clamp(17px, 1.5vw, 19px); color: var(--muted); max-width: 620px; }
 
     /* nav */
-    .nav { position: sticky; top: 0; z-index: 10; backdrop-filter: saturate(160%) blur(14px); background: rgba(7,11,20,0.62); border-bottom: 1px solid var(--line); }
-    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-    .brand img { height: 30px; width: auto; display: block; }
-    .links { display: flex; gap: 24px; align-items: center; font-weight: 600; font-size: 15px; }
-    .links a { color: var(--text); position: relative; }
-    .links a:not(.cta)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; border-radius: 2px; }
-    .links a:not(.cta):hover { text-decoration: none; }
-    .links a:not(.cta):hover::after { transform: scaleX(1); }
-    .links a.cta { background: #fff; color: #0B1120; padding: 9px 16px; border-radius: 999px; }
-    .links a.cta:hover { text-decoration: none; background: #e9eefc; }
-    @media (max-width: 640px) { .links a:not(.cta) { display: none; } }
+    .nav { position: sticky; top: 0; z-index: 10; background: var(--bar); color: var(--bar-fg); border-bottom: 1px solid var(--bar-line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: block; }
+    .brand img, footer .mark img { height: 26px; width: auto; display: block; }
+    .links { display: flex; gap: 28px; align-items: center; font-size: 15px; font-weight: 500; }
+    .links a { text-decoration: none; color: var(--bar-muted); transition: color .15s ease; }
+    .links a:hover { color: var(--bar-fg); }
+    .links a.cta { color: var(--bar); background: var(--bar-fg); padding: 8px 16px; border-radius: var(--radius); font-weight: 600; }
+    .links a.cta:hover { color: var(--bar); opacity: .82; }
+    @media (max-width: 680px) { .links a:not(.cta) { display: none; } }
+
+    /* buttons */
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: var(--radius); font-weight: 600; font-size: 16px; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: transparent; transition: border-color .15s ease, opacity .15s ease; }
+    .btn:hover { border-color: var(--ink); }
+    .btn.primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    .btn.primary:hover { opacity: .82; }
+    .btn svg { width: 18px; height: 18px; }
 
     /* hero */
-    .hero { padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 7vw, 88px); text-align: center; }
-    .hero .wordmark { width: min(400px, 72vw); height: auto; display: block; margin: 0 auto 26px; filter: drop-shadow(0 0 40px rgba(96,165,250,0.25)); animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
-    .hero h1 { font-size: clamp(30px, 5.2vw, 58px); font-weight: 800; max-width: 860px; margin: 0 auto 18px; animation: rise .9s .1s cubic-bezier(.2,.7,.2,1) both; }
-    .hero .lead { margin: 0 auto 34px; animation: rise .9s .2s cubic-bezier(.2,.7,.2,1) both; }
-    .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: rise .9s .3s cubic-bezier(.2,.7,.2,1) both; }
-    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: 16px; border: 1px solid var(--line-2); color: #fff; background: var(--panel); transition: transform .15s ease, box-shadow .2s ease, background .15s ease; }
-    .btn:hover { text-decoration: none; transform: translateY(-2px); background: var(--panel-2); }
-    .btn.primary { background: linear-gradient(90deg, #2563eb, #7c3aed); border-color: transparent; box-shadow: 0 10px 30px rgba(99,102,241,0.35); }
-    .btn.primary:hover { box-shadow: 0 14px 40px rgba(99,102,241,0.5); }
-    .btn svg { width: 18px; height: 18px; }
-    .fine { margin-top: 18px; font-size: 14px; color: var(--dim); animation: rise .9s .4s cubic-bezier(.2,.7,.2,1) both; }
-    .ticker { margin-top: 44px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; animation: rise .9s .5s cubic-bezier(.2,.7,.2,1) both; }
-    .ticker span { font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; background: var(--panel); }
-    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-
-    /* reveal on scroll */
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
-    .reveal.in { opacity: 1; transform: none; }
-    .reveal[data-delay="1"] { transition-delay: .08s; } .reveal[data-delay="2"] { transition-delay: .16s; } .reveal[data-delay="3"] { transition-delay: .24s; } .reveal[data-delay="4"] { transition-delay: .32s; } .reveal[data-delay="5"] { transition-delay: .40s; }
+    .hero { padding: clamp(64px, 10vw, 136px) 0 clamp(56px, 8vw, 104px); }
+    .hero h1 { font-size: clamp(40px, 7vw, 84px); letter-spacing: -0.045em; line-height: 1; max-width: 15ch; margin-bottom: 28px; }
+    .hero .lead { margin-bottom: 36px; }
+    .fine { margin-top: 20px; font-size: 14px; color: var(--faint); max-width: 620px; }
+    .platforms { margin-top: clamp(48px, 7vw, 88px); padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
 
     /* sections */
-    section { padding: clamp(56px, 8vw, 104px) 0; }
-    .head { max-width: 760px; margin-bottom: 40px; }
-    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
-    .card { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; overflow: hidden; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
-    .card::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: var(--grad); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
-    .card:hover { transform: translateY(-4px); background: var(--panel-2); }
-    .card:hover::before { opacity: 1; }
-    .card .ico { width: 42px; height: 42px; border-radius: 12px; background: rgba(96,165,250,0.12); color: var(--blue-2); display: grid; place-items: center; margin-bottom: 16px; }
-    .card:nth-child(2) .ico { color: var(--violet); background: rgba(139,92,246,0.14); }
-    .card:nth-child(3) .ico { color: var(--cyan); background: rgba(34,211,238,0.12); }
-    .card:nth-child(4) .ico { color: var(--mint); background: rgba(52,211,153,0.12); }
-    .card:nth-child(5) .ico { color: #F59E0B; background: rgba(245,158,11,0.12); }
-    .card:nth-child(6) .ico { color: #F472B6; background: rgba(244,114,182,0.12); }
-    .card .ico svg { width: 22px; height: 22px; }
+    section { padding: clamp(64px, 9vw, 120px) 0; }
+    section + section { border-top: 1px solid var(--line); }
+    .head { max-width: 720px; margin-bottom: clamp(36px, 5vw, 56px); }
+    .head .lead { margin-top: 18px; }
+
+    /* what it does: six columns of text, each under a rule */
+    .grid { display: grid; gap: 44px 32px; grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .grid { grid-template-columns: 1fr; gap: 32px; } }
+    .card { border-top: 1px solid var(--ink); padding-top: 20px; }
+    .card .ico { margin-bottom: 18px; height: 22px; }
+    .card .ico svg { width: 22px; height: 22px; display: block; }
     .card h3 { margin-bottom: 8px; }
     .card p { font-size: 15px; color: var(--muted); }
 
     /* devices */
-    .devices { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-    .device { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 6px; transition: transform .2s ease, border-color .2s ease; }
-    .device:hover { transform: translateY(-3px); border-color: var(--line-2); }
-    .device.mine { border-color: rgba(96,165,250,0.5); box-shadow: 0 0 0 1px rgba(96,165,250,0.25), 0 12px 40px rgba(59,130,246,0.15); }
-    .device .name { font-weight: 800; color: #fff; font-size: 17px; display: flex; align-items: center; gap: 8px; }
-    .device .name .tag { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(34,211,238,0.4); padding: 2px 7px; border-radius: 999px; }
-    .device .req { font-size: 13px; color: var(--dim); }
-    .device .dl { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
-    .device .dl a { font-size: 14px; font-weight: 600; background: var(--panel-2); border: 1px solid var(--line); padding: 7px 12px; border-radius: 999px; color: #fff; transition: border-color .15s ease, background .15s ease; }
-    .device .dl a:hover { border-color: var(--blue-2); background: rgba(96,165,250,0.15); text-decoration: none; }
-    .version { font-size: 14px; color: var(--dim); margin-top: 20px; }
-    .version strong { color: var(--text); }
+    .devices { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .device { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 4px; }
+    .device.mine { border-color: var(--ink); }
+    .device .name { font-weight: 650; font-size: 17px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .device .name .tag { font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--paper); background: var(--ink); padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+    .device .req { font-size: 13px; color: var(--faint); }
+    .device .dl { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+    .device .dl a { font-size: 14px; font-weight: 600; }
+    .version { font-size: 14px; color: var(--muted); margin-top: 24px; }
+    .version strong { color: var(--ink); font-family: var(--mono); font-weight: 500; }
 
-    /* steps */
-    .steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); counter-reset: step; }
-    .step { position: relative; padding: 24px 24px 24px 68px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); transition: transform .2s ease, border-color .2s ease; }
-    .step:hover { transform: translateY(-3px); border-color: var(--line-2); }
-    .step::before { counter-increment: step; content: counter(step); position: absolute; left: 22px; top: 22px; width: 32px; height: 32px; border-radius: 50%; background: var(--grad); color: #0B1120; font-weight: 800; display: grid; place-items: center; font-size: 14px; }
+    /* how it works: three numbered steps */
+    .steps { display: grid; gap: 40px 32px; grid-template-columns: repeat(3, 1fr); counter-reset: step; }
+    @media (max-width: 900px) { .steps { grid-template-columns: 1fr; gap: 32px; } }
+    .step { border-top: 1px solid var(--ink); padding-top: 20px; }
+    .step::before { counter-increment: step; content: counter(step, decimal-leading-zero); display: block; font-family: var(--mono); font-size: 13px; color: var(--faint); margin-bottom: 18px; }
     .step h3 { margin-bottom: 8px; }
     .step p { font-size: 15px; color: var(--muted); }
+    .providers { margin-top: clamp(40px, 6vw, 64px); padding-top: 20px; border-top: 1px solid var(--line); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
 
-    /* chips */
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-    .chip { font-size: 14px; font-weight: 600; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; transition: border-color .15s ease, transform .15s ease; }
-    .chip:hover { border-color: var(--violet); transform: translateY(-2px); }
-
-    /* final call */
-    .cta-band { margin: 0 20px; }
-    .cta-band .box { max-width: var(--max); margin: 0 auto; border-radius: 28px; padding: clamp(36px, 6vw, 64px); text-align: center; position: relative; overflow: hidden; border: 1px solid var(--line-2); background: linear-gradient(135deg, rgba(37,99,235,0.25), rgba(124,58,237,0.25) 50%, rgba(34,211,238,0.18)); }
-    .cta-band .box::after { content: ""; position: absolute; inset: 0; background: radial-gradient(600px 240px at 50% 120%, rgba(255,255,255,0.12), transparent 70%); pointer-events: none; }
-    .cta-band h2 { margin-bottom: 10px; }
-    .cta-band p { color: var(--muted); max-width: 560px; margin: 0 auto 26px; }
+    /* final call: the page inverted */
+    .cta-band { background: var(--ink); color: var(--paper); padding: clamp(64px, 9vw, 112px) 0; }
+    .cta-band h2 { font-size: clamp(32px, 5vw, 56px); letter-spacing: -0.04em; margin-bottom: 16px; }
+    .cta-band p { max-width: 560px; margin-bottom: 32px; font-size: clamp(17px, 1.5vw, 19px); opacity: .7; }
+    .cta-band .btn { color: var(--paper); border-color: color-mix(in srgb, var(--paper) 30%, transparent); }
+    .cta-band .btn:hover { border-color: var(--paper); }
+    .cta-band .btn.primary { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+    .cta-band :focus-visible { outline-color: var(--paper); }
 
     /* footer */
-    footer { padding: 48px 0 60px; margin-top: 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); }
-    footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; justify-content: space-between; align-items: center; }
-    footer .mark img { height: 26px; width: auto; display: block; opacity: .95; }
-    footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
-    footer a { color: var(--muted); }
-    footer p { max-width: 720px; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .sky .orb, .hero *, .reveal { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; } }
+    footer { padding: 48px 0 64px; font-size: 14px; background: var(--bar); color: var(--bar-muted); border-top: 1px solid var(--bar-line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 20px 32px; justify-content: space-between; align-items: center; }
+    footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+    footer nav a { text-decoration: none; }
+    footer nav a:hover { color: var(--bar-fg); text-decoration: underline; }
+    footer p { flex-basis: 100%; color: #8a8a8a; padding-top: 20px; border-top: 1px solid var(--bar-line); }
+    .nav :focus-visible, footer :focus-visible { outline-color: var(--bar-fg); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
   </style>
 </head>
 <body>
-  <div class="sky" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="grid"></div></div>
-
   <header class="nav">
     <div class="wrap">
       <a class="brand" href="/" aria-label="FOMO home"><img src="assets/fomo-logo-transparent.png" alt="FOMO" /></a>
@@ -161,7 +152,7 @@
 
   <section class="hero">
     <div class="wrap">
-      <h1>Your personal agent, <span class="shine">on every device you own.</span></h1>
+      <h1>Your personal agent, on every device you own.</h1>
       <p class="lead">One agent with a name and a look of its own. It does things instead of answering questions, keeps working while the app is closed, remembers you, and stops to ask before anything you could not undo.</p>
       <div class="buttons">
         <a class="btn primary" id="dl-main" href="#download">
@@ -171,64 +162,67 @@
         <a class="btn" href="docs/">Read the docs</a>
       </div>
       <p class="fine">Free software, GPL-3.0-or-later. Bring your own model key. Runs on your devices and a relay you can host yourself.</p>
-      <div class="ticker" aria-label="Platforms"><span>Android</span><span>Windows</span><span>macOS</span><span>Linux</span><span>Web</span><span>Telegram</span></div>
+      <div class="platforms" aria-label="Platforms"><span>Android</span><span>Windows</span><span>macOS</span><span>Linux</span><span>Web</span><span>Telegram</span></div>
     </div>
   </section>
 
   <section id="what">
     <div class="wrap">
-      <div class="head reveal">
-        <span class="eyebrow">What it does</span>
-        <h2>It works, <span class="shine">not just talks.</span></h2>
+      <div class="head">
+        <span class="label">What it does</span>
+        <h2>It works, not just talks.</h2>
       </div>
       <div class="grid">
-        <div class="card reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div><h3>Does things</h3><p>A Linux shell, a browser, MCP servers and skills, and, with Hands on, the apps on your phone and the windows on your computer through their screens.</p></div>
-        <div class="card reveal" data-delay="1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Asks first</h3><p>A stop before deleting, sending or paying, remembered for once, this chat or always. Passwords and codes are yours to type; a login or a CAPTCHA is handed to you.</p></div>
-        <div class="card reveal" data-delay="2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>Reaches your other devices</h3><p>Say it on the phone, it runs on your PC. <code>@PC …</code> at the start of a message sends the task there, and approvals come back to the device in your hand.</p></div>
-        <div class="card reveal" data-delay="3"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Keeps going</h3><p>Goals checked on a schedule, routines that run while the app is closed, a feed written for you each morning.</p></div>
-        <div class="card reveal" data-delay="4"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 13h8M8 17h5"/></svg></div><h3>Remembers you</h3><p>What it is, what it knows about you and when it wakes are Markdown files you can read and edit.</p></div>
-        <div class="card reveal" data-delay="5"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H8l-4 4V6z"/></svg></div><h3>Lives in your chat apps</h3><p>It answers in Telegram and the business messengers you already use, with the same memory as everywhere else.</p></div>
+        <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div><h3>Does things</h3><p>A Linux shell, a browser, MCP servers and skills, and, with Hands on, the apps on your phone and the windows on your computer through their screens.</p></div>
+        <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Asks first</h3><p>A stop before deleting, sending or paying, remembered for once, this chat or always. Passwords and codes are yours to type; a login or a CAPTCHA is handed to you.</p></div>
+        <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>Reaches your other devices</h3><p>Say it on the phone, it runs on your PC. <code>@PC …</code> at the start of a message sends the task there, and approvals come back to the device in your hand.</p></div>
+        <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Keeps going</h3><p>Goals checked on a schedule, routines that run while the app is closed, a feed written for you each morning.</p></div>
+        <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 13h8M8 17h5"/></svg></div><h3>Remembers you</h3><p>What it is, what it knows about you and when it wakes are Markdown files you can read and edit.</p></div>
+        <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H8l-4 4V6z"/></svg></div><h3>Lives in your chat apps</h3><p>It answers in Telegram and the business messengers you already use, with the same memory as everywhere else.</p></div>
       </div>
     </div>
   </section>
 
   <section id="download">
     <div class="wrap">
-      <div class="head reveal">
-        <span class="eyebrow">Every device</span>
-        <h2>Install it <span class="shine">where you are.</span></h2>
+      <div class="head">
+        <span class="label">Every device</span>
+        <h2>Install it where you are.</h2>
         <p class="lead">The phone, the desktop and the web share one account and show the same conversations. Every version installs over the last and keeps your data.</p>
       </div>
       <div class="devices">
-        <div class="device reveal" data-os="android"><span class="name">Android</span><span class="req">8.0 or newer, 64-bit</span><div class="dl"><a data-asset="fomo-{v}-arm64.apk" href="#">APK</a></div></div>
-        <div class="device reveal" data-delay="1" data-os="windows"><span class="name">Windows</span><span class="req">10 or 11, 64-bit</span><div class="dl"><a data-asset="fomo-Desktop-{v}-win-x64.exe" href="#">Installer</a></div></div>
-        <div class="device reveal" data-delay="2" data-os="mac"><span class="name">macOS</span><span class="req">12 or newer</span><div class="dl"><a data-asset="fomo-Desktop-{v}-mac-arm64.dmg" href="#">Apple Silicon</a><a data-asset="fomo-Desktop-{v}-mac-x64.dmg" href="#">Intel</a></div></div>
-        <div class="device reveal" data-delay="3" data-os="linux"><span class="name">Linux</span><span class="req">x64</span><div class="dl"><a data-asset="fomo-Desktop-{v}-linux-x64.AppImage" href="#">AppImage</a><a data-asset="fomo-Desktop-{v}-linux-x64.deb" href="#">.deb</a><a data-asset="fomo-Desktop-{v}-linux-x64.tar.gz" href="#">tar.gz</a></div></div>
-        <div class="device reveal" data-delay="4" data-os="web"><span class="name">Web and servers</span><span class="req">Docker, any machine</span><div class="dl"><a href="docs/self-hosting">Run it yourself</a></div></div>
+        <div class="device" data-os="android"><span class="name">Android</span><span class="req">8.0 or newer, 64-bit</span><div class="dl"><a data-asset="fomo-{v}-arm64.apk" href="#">APK</a></div></div>
+        <div class="device" data-os="windows"><span class="name">Windows</span><span class="req">10 or 11, 64-bit</span><div class="dl"><a data-asset="fomo-Desktop-{v}-win-x64.exe" href="#">Installer</a></div></div>
+        <div class="device" data-os="mac"><span class="name">macOS</span><span class="req">12 or newer</span><div class="dl"><a data-asset="fomo-Desktop-{v}-mac-arm64.dmg" href="#">Apple Silicon</a><a data-asset="fomo-Desktop-{v}-mac-x64.dmg" href="#">Intel</a></div></div>
+        <div class="device" data-os="linux"><span class="name">Linux</span><span class="req">x64</span><div class="dl"><a data-asset="fomo-Desktop-{v}-linux-x64.AppImage" href="#">AppImage</a><a data-asset="fomo-Desktop-{v}-linux-x64.deb" href="#">.deb</a><a data-asset="fomo-Desktop-{v}-linux-x64.tar.gz" href="#">tar.gz</a></div></div>
+        <div class="device" data-os="web"><span class="name">Web and servers</span><span class="req">Docker, any machine</span><div class="dl"><a href="docs/self-hosting">Run it yourself</a></div></div>
       </div>
-      <p class="version reveal" id="version-line">Latest release: <a href="https://github.com/shaikfareed22/corein2026/releases/latest">every file and its checksum on GitHub</a>.</p>
+      <p class="version" id="version-line">Latest release: <a href="https://github.com/shaikfareed22/corein2026/releases/latest">every file and its checksum on GitHub</a>.</p>
     </div>
   </section>
 
   <section id="how">
     <div class="wrap">
-      <div class="head reveal">
-        <span class="eyebrow">How it works</span>
-        <h2>Your devices, your key, <span class="shine">your relay.</span></h2>
+      <div class="head">
+        <span class="label">How it works</span>
+        <h2>Your devices, your key, your relay.</h2>
       </div>
       <div class="steps">
-        <div class="step reveal"><h3>Each device runs its own agent</h3><p>The phone inside the app, with Alpine Linux in a sandbox; the computer inside FOMO Desktop, with the hands that work its screen. Files and screenshots stay where they were made.</p></div>
-        <div class="step reveal" data-delay="1"><h3>A relay joins them</h3><p>Sign in once and your devices find each other through the relay, which carries the text of conversations so every device shows the same chats. Run your own with one script.</p></div>
-        <div class="step reveal" data-delay="2"><h3>Your key goes to your provider</h3><p>Model requests travel from your device straight to the provider you chose. The relay holds no model key and never sees yours.</p></div>
+        <div class="step"><h3>Each device runs its own agent</h3><p>The phone inside the app, with Alpine Linux in a sandbox; the computer inside FOMO Desktop, with the hands that work its screen. Files and screenshots stay where they were made.</p></div>
+        <div class="step"><h3>A relay joins them</h3><p>Sign in once and your devices find each other through the relay, which carries the text of conversations so every device shows the same chats. Run your own with one script.</p></div>
+        <div class="step"><h3>Your key goes to your provider</h3><p>Model requests travel from your device straight to the provider you chose. The relay holds no model key and never sees yours.</p></div>
       </div>
-      <div class="chips reveal" aria-label="Providers">
-        <span class="chip">Google Gemini</span><span class="chip">OpenRouter</span><span class="chip">OpenAI</span><span class="chip">DeepSeek</span><span class="chip">Anthropic</span><span class="chip">Groq</span><span class="chip">Mistral</span><span class="chip">Ollama</span><span class="chip">LM Studio</span><span class="chip">any OpenAI-compatible endpoint</span>
+      <div class="providers">
+        <span class="label">Providers</span>
+        <div class="chips" aria-label="Providers">
+          <span class="chip">Google Gemini</span><span class="chip">OpenRouter</span><span class="chip">OpenAI</span><span class="chip">DeepSeek</span><span class="chip">Anthropic</span><span class="chip">Groq</span><span class="chip">Mistral</span><span class="chip">Ollama</span><span class="chip">LM Studio</span><span class="chip">any OpenAI-compatible endpoint</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="cta-band reveal">
-    <div class="box">
+  <div class="cta-band">
+    <div class="wrap">
       <h2>Ready when you are.</h2>
       <p>Install it on the device in your hand, add a key from a provider you trust, and give it the first thing on your list.</p>
       <div class="buttons"><a class="btn primary" href="#download">Get FOMO</a><a class="btn" href="https://github.com/shaikfareed22/corein2026">Star on GitHub</a></div>
@@ -253,7 +247,7 @@
   <script>
     (function () {
       var repo = "shaikfareed22/corein2026";
-      var fallback = "1.2.1";
+      var fallback = "1.2.2";
       function base(v) { return "https://github.com/" + repo + "/releases/download/v" + v + "/"; }
       function os() {
         var ua = navigator.userAgent;
@@ -271,7 +265,7 @@
         if (line) line.innerHTML = "Latest release: <strong>" + v + "</strong> · <a href=\"https://github.com/" + repo + "/releases/tag/v" + v + "\">every file and its checksum on GitHub</a>. Windows shows “Run anyway” and macOS “Open Anyway” once.";
         var main = document.getElementById("dl-main"), label = document.getElementById("dl-main-label");
         var o = os(), asset = "", text = "Download";
-        if (o === "android") { asset = "corein-" + v + "-arm64.apk"; text = "Download for Android"; }
+        if (o === "android") { asset = "fomo-" + v + "-arm64.apk"; text = "Download for Android"; }
         else if (o === "windows") { asset = "fomo-Desktop-" + v + "-win-x64.exe"; text = "Download for Windows"; }
         else if (o === "mac") { asset = "fomo-Desktop-" + v + "-mac-arm64.dmg"; text = "Download for macOS"; }
         else if (o === "linux") { asset = "fomo-Desktop-" + v + "-linux-x64.AppImage"; text = "Download for Linux"; }
@@ -287,16 +281,6 @@
           .then(function (j) { if (j && j.tag_name && /^v\d+\.\d+\.\d+$/.test(j.tag_name)) fill(j.tag_name.slice(1)); })
           .catch(function () {});
       } catch (e) {}
-      // reveal on scroll
-      var els = document.querySelectorAll(".reveal");
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-        els.forEach(function (el) { io.observe(el); });
-      } else { els.forEach(function (el) { el.classList.add("in"); }); }
-      // whatever the observer missed is shown after a moment, so nothing stays hidden
-      setTimeout(function () { els.forEach(function (el) { el.classList.add("in"); }); }, 2500);
     })();
   </script>
 </body>
