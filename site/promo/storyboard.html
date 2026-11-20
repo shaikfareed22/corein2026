@@ -290,11 +290,13 @@
     <script src="../assets/mascot.js"></script>
     <script>
       (function () {
-        var MASCOT = window.NANOMUSE_MASCOT || {};
+        // Every round frame shows the FOMO icon. The mood pictures mascot.js names are paths
+        // relative to the homepage, so from /promo/ they led nowhere and the frames stayed empty.
+        var LOGO = '<img src="../assets/fomo-icon.svg" alt="FOMO" width="200" height="200">';
         function panda(el, mood, startAbs) {
           if (el.dataset.current !== mood) {
             el.dataset.current = mood;
-            el.innerHTML = '<span class="clip">' + (MASCOT[mood] || "") + "</span>";
+            el.innerHTML = '<span class="clip">' + LOGO + "</span>";
             var badge = el.parentElement && el.classList.contains("avatar") ? el.querySelector(".badge") : null;
             if (el.classList.contains("avatar") && !badge) {
               var b = document.createElement("span");
