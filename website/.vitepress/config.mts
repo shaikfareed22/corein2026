@@ -130,63 +130,6 @@ const contribute: DefaultTheme.SidebarItem[] = [
   { text: 'Changelog', link: `${REPO}/blob/main/CHANGELOG.md` },
 ]
 
-// The same pages in Chinese, under /zh/. The group and item names follow what the apps'
-// Chinese screens call things (CONTRIBUTING.md, "Translating the docs", has the glossary).
-const zhGetStarted: DefaultTheme.SidebarItem[] = [
-  { text: 'Android', link: '/zh/android' },
-  { text: 'iPhone 和 iPad', link: '/zh/ios' },
-  { text: '桌面版', link: '/zh/desktop' },
-  { text: '网页控制台', link: '/zh/web' },
-  { text: '一个账号，所有设备', link: '/zh/trial' },
-  { text: '自己的模型 key', link: '/zh/own-key' },
-  { text: '故障排查', link: '/zh/troubleshooting' },
-]
-
-const zhUseIt: DefaultTheme.SidebarItem[] = [
-  { text: '每一台设备', link: '/zh/every-device' },
-  { text: '「手」：把屏幕当手用', link: '/zh/gui' },
-  { text: '桌面版的电脑操作', link: '/zh/desktop-muse#computer-use' },
-  { text: '动态、点子、目标、资源库', link: '/zh/desktop-muse#rail-rooms' },
-  { text: '终端里的记忆和目标', link: '/zh/cli' },
-  { text: '连接器', link: '/zh/configuration#connectors' },
-  { text: '聊天入口：飞书、钉钉、企业微信、Telegram', link: '/zh/channels' },
-  { text: '编程助手', link: '/zh/coding-agents' },
-  { text: '形象工作室', link: '/zh/avatar' },
-  { text: '浏览器', link: '/zh/browser' },
-  { text: '不走屏幕的中文服务', link: '/zh/services' },
-  { text: '展示站', link: '/zh/showcase' },
-]
-
-const zhRunIt: DefaultTheme.SidebarItem[] = [
-  { text: '自己运行 FOMO', link: '/zh/self-hosting' },
-  { text: 'Docker 里的运行时', link: '/zh/deployment' },
-  { text: '配置', link: '/zh/configuration' },
-  { text: 'FOMO Cloud：中继', link: '/zh/cloud' },
-]
-
-const zhUnderstandIt: DefaultTheme.SidebarItem[] = [
-  { text: '架构', link: '/zh/architecture' },
-  { text: '哨兵（Sentinel）', link: '/zh/sentinel' },
-  { text: '隐私', link: '/zh/privacy' },
-  { text: '什么留在手机上，归谁', link: '/zh/sync' },
-  { text: 'hub：设备互联', link: '/zh/hub' },
-  { text: '设计：长什么样，为什么', link: '/zh/design' },
-  { text: 'DeepSeek Harness 上的 FOMO', link: '/zh/harness' },
-  { text: '手机自身的能力', link: '/zh/device' },
-  { text: '手机 App 的设计', link: '/zh/app' },
-  { text: '手机上的本地运行时', link: '/zh/local-runtime' },
-  { text: '品牌', link: '/zh/brand' },
-]
-
-const zhContribute: DefaultTheme.SidebarItem[] = [
-  { text: '参与贡献（英文）', link: `${REPO}/blob/main/CONTRIBUTING.md` },
-  { text: 'AGENTS.md（英文）', link: `${REPO}/blob/main/AGENTS.md` },
-  { text: '路线图', link: '/zh/roadmap' },
-  { text: '各客户端的功能对照', link: '/zh/parity' },
-  { text: '发布说明', link: `${REPO}/releases` },
-  { text: '更新日志', link: `${REPO}/blob/main/CHANGELOG.md` },
-]
-
 export default defineConfig({
   title: 'FOMO',
   description: 'An open-source personal agent for every device you own.',
@@ -198,9 +141,7 @@ export default defineConfig({
   lastUpdated: false,
   // light or dark as the device asks (the homepage does the same); the switch in the nav overrides it
   appearance: true,
-  // One site, two languages. `root` is English at /, `zh` is 简体中文 at /zh/ with the same
-  // file names under docs/zh/. Nav, sidebar, search, footer and the edit link are per
-  // locale; the language menu in the nav is VitePress's own.
+  // One language: `root` is English at /. Nav, sidebar, footer and the edit link live under it.
   locales: {
     root: {
       label: 'English',
@@ -284,36 +225,10 @@ export default defineConfig({
       }
     },
   },
-  // What both languages share. GitHub is not in socialLinks: the nav shows it with the
+  // GitHub is not in socialLinks: the nav shows it with the
   // star count instead (theme/GitHubStars.vue, the `nav-bar-content-after` slot).
   themeConfig: {
     logo: { src: '/fomo-logo-transparent.png', alt: 'FOMO' },
-    search: {
-      provider: 'local',
-      options: {
-        locales: {
-          zh: {
-            translations: {
-              button: { buttonText: '搜索文档', buttonAriaLabel: '搜索文档' },
-              modal: {
-                displayDetails: '显示详细列表',
-                resetButtonTitle: '清空',
-                backButtonTitle: '关闭搜索',
-                noResultsText: '没有找到',
-                footer: {
-                  selectText: '打开',
-                  selectKeyAriaLabel: '回车',
-                  navigateText: '上下移动',
-                  navigateUpKeyAriaLabel: '上箭头',
-                  navigateDownKeyAriaLabel: '下箭头',
-                  closeText: '关闭',
-                  closeKeyAriaLabel: 'Esc',
-                },
-              },
-            },
-          },
-        },
-      },
-    },
+    search: { provider: 'local' },
   },
 })

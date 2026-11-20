@@ -34,7 +34,7 @@ Open the app, sign in with an e-mail address, add a model key under *Settings �
   </tr>
   <tr>
     <td width="50%" valign="top"><b>Remembers you.</b><br>What it is, what it knows about you and when it wakes are Markdown files you can read and edit.</td>
-    <td width="50%" valign="top"><b>Lives in your chat apps.</b><br>It answers in Telegram, 飞书, 钉钉 and 企业微信.</td>
+    <td width="50%" valign="top"><b>Lives in your chat apps.</b><br>It answers in Telegram, Feishu, DingTalk and WeCom.</td>
   </tr>
   <tr>
     <td width="50%" valign="top"><b>A look of its own.</b><br>Describe one, your image model draws it, a video model makes it move. A small dragon by default.</td>

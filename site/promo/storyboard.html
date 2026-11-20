@@ -117,7 +117,6 @@
       <div class="big-panda cue pop" data-at="200" data-panda="idle"></div>
       <div class="word cue" data-at="700"><img src="../assets/mark.svg" alt="" />FOMO</div>
       <div class="h m cue" data-at="1200" style="margin-top: 22px">An open-source personal AI agent</div>
-      <div class="h m cn cue" data-at="1500" style="color: var(--muted); font-size: 30px; margin-top: 8px">开源的个人 AI 智能体</div>
       <div class="sub cue" data-at="2000">Inspired by Meta Muse · MIT · runs on your machine</div>
     </section>
 
@@ -132,24 +131,24 @@
               <div class="phone-name">FOMO</div>
               <div class="phone-status" id="p1-status" data-state="idle">
                 <span class="s-idle">Idle · tap the avatar for activity</span>
-                <span class="s-working">Working · 12306, 高德, 飞书</span>
+                <span class="s-working">Working · 12306, Amap, Feishu</span>
                 <span class="s-waiting">1 approval waiting for you</span>
-                <span class="s-done">Done · sent to 杭州出差</span>
+                <span class="s-done">Done · sent to Hangzhou trip</span>
               </div>
             </div>
             <span class="pill icon">···</span>
           </div>
           <div class="phone-body">
-            <div class="msg user cue" data-at="3600">周五去杭州，帮我看下午的高铁，把最快的一趟和到西湖的路线发到项目群。</div>
+            <div class="msg user cue" data-at="3600">Hangzhou on Friday: find me an afternoon high-speed train, and post the fastest one and the route to West Lake in the project group.</div>
             <div class="chip cue" data-at="5000" data-done="6600"><span class="mono">amap__maps_direction_transit_integrated</span><i class="spin"></i></div>
-            <div class="chip cue" data-at="6700" data-done="8600"><span class="mono">phone · 12306 · 上海 → 杭州东，周五 14–18 点</span><i class="spin"></i></div>
+            <div class="chip cue" data-at="6700" data-done="8600"><span class="mono">phone · 12306 · Shanghai → Hangzhou East, Friday 14:00 to 18:00</span><i class="spin"></i></div>
             <div class="approval cue pop" data-at="8800" data-until="12900">
               <div class="ap-head">
                 <span class="shield"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg></span>
                 <div>
                   <div class="ap-who">FOMO wants to</div>
                   <div class="ap-what mono">lark-cli im +messages-send</div>
-                  <div class="ap-why">Post the train and the route to the 杭州出差 group</div>
+                  <div class="ap-why">Post the train and the route to the Hangzhou trip group</div>
                   <span class="risk">SENSITIVE</span>
                   <div class="ap-link">Exactly what will run</div>
                 </div>
@@ -159,8 +158,8 @@
                 <span class="ap-btn allow" data-press="12300">Allow</span>
               </div>
             </div>
-            <div class="chip cue" data-at="12900" data-done="14000"><span class="mono">lark-cli im +messages-send → 杭州出差</span><i class="spin"></i></div>
-            <div class="msg bot cue" data-at="14100">已发到「杭州出差」群。G7351 14:22 上海虹桥出发，15:07 到杭州东，二等座 ¥73；出站换地铁 1 号线到龙翔桥，骑车 8 分钟到断桥。票还没买，你一句话我就下单。</div>
+            <div class="chip cue" data-at="12900" data-done="14000"><span class="mono">lark-cli im +messages-send → Hangzhou trip</span><i class="spin"></i></div>
+            <div class="msg bot cue" data-at="14100">Posted to the Hangzhou trip group. G7351 leaves Shanghai Hongqiao at 14:22 and reaches Hangzhou East at 15:07, second class ¥73; from the station take Metro Line 1 to Longxiangqiao, then 8 minutes by bike to the Broken Bridge. The ticket is not bought yet: say the word and I will book it.</div>
           </div>
           <div class="phone-composer"><span class="plus">+</span><span class="composer-text" id="p1-typed"></span><span class="muted" id="p1-placeholder">Message</span><span class="send">↑</span></div>
           <div class="phone-tabs">
@@ -172,10 +171,10 @@
           </div>
         </div>
         <div class="captions">
-          <div class="cap h l cue" data-at="400" data-until="4300">Ask it.<span class="cn">说一句。</span></div>
-          <div class="cap h l cue" data-at="4300" data-until="8800">It works.<br /><span class="muted" style="font-size: 30px; font-weight: 600">On your machine, in the background.</span><span class="cn">它去干活。在你的机器上，后台进行。</span></div>
-          <div class="cap h l cue" data-at="8800" data-until="14100">It asks before anything<br />it can't undo.<span class="cn">无法撤销的事，先问你。</span></div>
-          <div class="cap h l cue" data-at="14100">Done.<br /><span class="muted" style="font-size: 30px; font-weight: 600">Sent to the group. The ticket waits for your word.</span><span class="cn">完成。已发到群里，票等你一句话。</span></div>
+          <div class="cap h l cue" data-at="400" data-until="4300">Ask it.</div>
+          <div class="cap h l cue" data-at="4300" data-until="8800">It works.<br /><span class="muted" style="font-size: 30px; font-weight: 600">On your machine, in the background.</span></div>
+          <div class="cap h l cue" data-at="8800" data-until="14100">It asks before anything<br />it can't undo.</div>
+          <div class="cap h l cue" data-at="14100">Done.<br /><span class="muted" style="font-size: 30px; font-weight: 600">Sent to the group. The ticket waits for your word.</span></div>
         </div>
       </div>
     </section>
@@ -183,18 +182,18 @@
     <!-- 3 · hands -->
     <section class="scene" id="s-hands">
       <div class="hands-wrap">
-        <div class="h l cue" data-at="200">One agent, many hands <span class="cn muted" style="font-size: 30px; margin-left: 16px">一个智能体，很多只手</span></div>
+        <div class="h l cue" data-at="200">One agent, many hands</div>
         <div class="tiles">
           <div class="tile cue" data-at="900"><div class="ico">🌐</div><h4>Web &amp; files</h4><p>Searches, reads pages, writes documents and code into a workspace you can open.</p></div>
           <div class="tile cue" data-at="1400"><div class="ico">⌨️</div><h4>Shell, sandboxed</h4><p>Commands run in bubblewrap with only the folders you share.</p></div>
-          <div class="tile cue" data-at="1900"><div class="ico">🗺️</div><h4>MCP servers · 高德</h4><p>Places, weather, routes and travel times as tools.</p></div>
-          <div class="tile cue" data-at="2400"><div class="ico">🐦</div><h4>CLIs · 飞书</h4><p>Calendar, messages, docs and tasks through <code>lark-cli</code>, with your login.</p></div>
+          <div class="tile cue" data-at="1900"><div class="ico">🗺️</div><h4>MCP servers · Amap</h4><p>Places, weather, routes and travel times as tools.</p></div>
+          <div class="tile cue" data-at="2400"><div class="ico">🐦</div><h4>CLIs · Feishu</h4><p>Calendar, messages, docs and tasks through <code>lark-cli</code>, with your login.</p></div>
           <div class="tile cue" data-at="2900"><div class="ico">📚</div><h4>Skills</h4><p>Agent Skills format. Nine built in; add a folder with a <code>SKILL.md</code>.</p></div>
           <div class="tile cue" data-at="3400"><div class="ico">🧭</div><h4>A real browser</h4><p>Chromium, when a site needs clicking or a login.</p></div>
-          <div class="tile cue" data-at="3900"><div class="ico">📱</div><h4>The phone screen</h4><p>Reads the screen and taps through apps that have no API — 12306, 美团, 高德.</p></div>
-          <div class="tile cue" data-at="4400" style="background: var(--accent); color: #fff; border-color: var(--accent)"><div class="ico">🐾</div><h4>All in one task</h4><p style="color: rgba(255,255,255,.85)">高德 for the route, 12306 on the phone, 飞书 for the message.</p></div>
+          <div class="tile cue" data-at="3900"><div class="ico">📱</div><h4>The phone screen</h4><p>Reads the screen and taps through apps that have no API — 12306, Meituan, Amap.</p></div>
+          <div class="tile cue" data-at="4400" style="background: var(--accent); color: #fff; border-color: var(--accent)"><div class="ico">🐾</div><h4>All in one task</h4><p style="color: rgba(255,255,255,.85)">Amap for the route, 12306 on the phone, Feishu for the message.</p></div>
         </div>
-        <div class="foot-cap cue" data-at="5600">The phone screen is one hand. Not the only one.<span class="cn">屏幕只是其中一只手。</span></div>
+        <div class="foot-cap cue" data-at="5600">The phone screen is one hand. Not the only one.</div>
       </div>
     </section>
 
@@ -203,13 +202,13 @@
       <div class="split">
         <div class="phone cue pop" data-at="0" id="p2">
           <div class="app12306">
-            <div class="bar"><span>中国铁路 12306</span><span style="font-weight: 500; font-size: 13px">9月26日 周五</span></div>
-            <div class="route"><span>上海<small>虹桥 · 出发</small></span><span style="color: #999">→</span><span>杭州东<small>到达</small></span></div>
-            <div class="row cue" data-at="600"><span class="t">G7315 · 14:05 → 14:58</span><span class="price">¥73</span><span class="g">53 分 · 二等座</span><span class="ok">有票</span></div>
-            <div class="row hi cue" data-at="800"><span class="t">G7351 · 14:22 → 15:07</span><span class="price">¥73</span><span class="g">45 分 · 二等座 · 最快</span><span class="ok">有票</span></div>
-            <div class="row cue" data-at="1000"><span class="t">G1355 · 14:38 → 15:31</span><span class="price">¥73</span><span class="g">53 分 · 二等座</span><span class="ok">有票</span></div>
-            <div class="row cue" data-at="1200"><span class="t">D3141 · 15:02 → 16:10</span><span class="price">¥49</span><span class="g">68 分 · 二等座</span><span class="ok">候补</span></div>
-            <div class="pay">选择乘客并支付 ¥73</div>
+            <div class="bar"><span>China Railway 12306</span><span style="font-weight: 500; font-size: 13px">Fri 26 Sep</span></div>
+            <div class="route"><span>Shanghai<small>Hongqiao · departs</small></span><span style="color: #999">→</span><span>Hangzhou East<small>arrives</small></span></div>
+            <div class="row cue" data-at="600"><span class="t">G7315 · 14:05 → 14:58</span><span class="price">¥73</span><span class="g">53 min · 2nd class</span><span class="ok">Available</span></div>
+            <div class="row hi cue" data-at="800"><span class="t">G7351 · 14:22 → 15:07</span><span class="price">¥73</span><span class="g">45 min · 2nd class · fastest</span><span class="ok">Available</span></div>
+            <div class="row cue" data-at="1000"><span class="t">G1355 · 14:38 → 15:31</span><span class="price">¥73</span><span class="g">53 min · 2nd class</span><span class="ok">Available</span></div>
+            <div class="row cue" data-at="1200"><span class="t">D3141 · 15:02 → 16:10</span><span class="price">¥49</span><span class="g">68 min · 2nd class</span><span class="ok">Waitlist</span></div>
+            <div class="pay">Choose a passenger and pay ¥73</div>
             <span class="ripple cue" data-at="2400" data-until="3400" style="left: 150px; top: 262px"></span>
             <span class="ripple cue" data-at="4400" data-until="5400" style="left: 150px; top: 586px"></span>
             <div class="overlay cue pop" data-at="5200">
@@ -218,7 +217,7 @@
                   <span class="shield"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg></span>
                   <div>
                     <div class="ap-who">FOMO wants to</div>
-                    <div class="ap-what mono">tap: 支付 ¥73 · 12306</div>
+                    <div class="ap-what mono">tap: Pay ¥73 · 12306</div>
                     <div class="ap-why">Pay for G7351, second class, one passenger</div>
                     <span class="risk">PAYMENT</span>
                   </div>
@@ -229,8 +228,8 @@
           </div>
         </div>
         <div class="captions">
-          <div class="cap h l cue" data-at="400" data-until="5200">No API? It reads the screen<br />and taps.<span class="cn">没有 API 的 App？它读屏幕、点按钮。</span></div>
-          <div class="cap h l cue" data-at="5200">…and stops before it pays.<span class="cn">……到付款前，停下来问你。</span></div>
+          <div class="cap h l cue" data-at="400" data-until="5200">No API? It reads the screen<br />and taps.</div>
+          <div class="cap h l cue" data-at="5200">…and stops before it pays.</div>
         </div>
       </div>
     </section>
@@ -239,7 +238,7 @@
     <section class="scene" id="s-screens">
       <div class="screens-wrap">
         <div class="h l cue" data-at="200">Feed · Ideas · Goals · Library</div>
-        <div class="sub cue" data-at="600">What it did while you were away, in plain words. <span class="cn">你不在时它做了什么，用大白话告诉你。</span></div>
+        <div class="sub cue" data-at="600">What it did while you were away, in plain words.</div>
         <div class="shots">
           <img class="cue slide" data-at="1100" src="../assets/screens/feed.png" alt="" />
           <img class="cue slide" data-at="1500" src="../assets/screens/goals.png" alt="" />
@@ -259,9 +258,9 @@
           <div class="cue" data-at="4500" style="color: #b8b8b8">Scan the QR code with the Android app. Ctrl+C stops it.</div>
         </div>
         <div>
-          <div class="h l cue" data-at="600">Your machine.<br />Any model.<span class="cn" style="display: block; font-size: 28px; color: var(--muted); margin-top: 10px">你的机器，模型随你选。</span></div>
+          <div class="h l cue" data-at="600">Your machine.<br />Any model.</div>
           <div class="models">
-            <span class="cue" data-at="2600">DeepSeek</span><span class="cue" data-at="2800">通义千问 Qwen</span><span class="cue" data-at="3000">Kimi</span><span class="cue" data-at="3200">GLM</span><span class="cue" data-at="3400">MiniMax</span><span class="cue" data-at="3600">OpenAI</span><span class="cue" data-at="3800">Ollama</span>
+            <span class="cue" data-at="2600">DeepSeek</span><span class="cue" data-at="2800">Qwen</span><span class="cue" data-at="3000">Kimi</span><span class="cue" data-at="3200">GLM</span><span class="cue" data-at="3400">MiniMax</span><span class="cue" data-at="3600">OpenAI</span><span class="cue" data-at="3800">Ollama</span>
           </div>
           <div class="sub cue" data-at="4800">Any OpenAI-compatible endpoint. Domestic ones need no proxy.</div>
         </div>
@@ -271,11 +270,11 @@
     <!-- 7 · platforms -->
     <section class="scene" id="s-where">
       <div class="screens-wrap">
-        <div class="h l cue" data-at="200">Phone today. Web and desktop next. <span class="cn muted" style="display: block; font-size: 28px; margin-top: 10px">今天在手机上。网页和桌面端在路上。</span></div>
+        <div class="h l cue" data-at="200">Phone today. Web and desktop next.</div>
         <div class="devices">
-          <div class="dev phone-d on cue" data-at="1000"><div class="frame"><div class="mini" data-panda="happy"></div></div><h4>Phone</h4><div class="when">Now · 现在</div><div class="note">Android app, your computer does the work.<br />No cloud VM.</div></div>
-          <div class="dev web-d cue" data-at="1600"><div class="frame"><img src="../assets/mark.svg" alt="" style="width: 44px; opacity: .35" /></div><h4>Web</h4><div class="when">Next · 下一步</div><div class="note">Hosted, a VM per user.</div></div>
-          <div class="dev desk-d cue" data-at="2200"><div class="frame"><img src="../assets/mark.svg" alt="" style="width: 44px; opacity: .35" /></div><h4>Desktop</h4><div class="when">Later · 之后</div><div class="note">Local and cloud-VM editions.</div></div>
+          <div class="dev phone-d on cue" data-at="1000"><div class="frame"><div class="mini" data-panda="happy"></div></div><h4>Phone</h4><div class="when">Now</div><div class="note">Android app, your computer does the work.<br />No cloud VM.</div></div>
+          <div class="dev web-d cue" data-at="1600"><div class="frame"><img src="../assets/mark.svg" alt="" style="width: 44px; opacity: .35" /></div><h4>Web</h4><div class="when">Next</div><div class="note">Hosted, a VM per user.</div></div>
+          <div class="dev desk-d cue" data-at="2200"><div class="frame"><img src="../assets/mark.svg" alt="" style="width: 44px; opacity: .35" /></div><h4>Desktop</h4><div class="when">Later</div><div class="note">Local and cloud-VM editions.</div></div>
         </div>
       </div>
     </section>
@@ -310,7 +309,7 @@
 
         var LINE1 = "uv tool install nanomuse";
         var LINE2 = "nanomuse serve --host 0.0.0.0";
-        var ASK = "周五去杭州，帮我看下午的高铁，把最快的一趟和到西湖的路线发到项目群。";
+        var ASK = "Hangzhou on Friday: find me an afternoon high-speed train, and post the fastest one and the route to West Lake in the project group.";
 
         var scenes = [
           { id: "s-title", start: 0, end: 5200 },

@@ -17,9 +17,9 @@ watch it play in real time in a browser; under Playwright the page does not tick
 
 | Time | Scene | What is on screen |
 |---|---|---|
-| 0:00 | Title | The panda, the wordmark, "An open-source personal AI agent", 中文 line, "Inspired by Meta Muse". |
-| 0:05 | Ask → works → asks → done | The phone: the Hangzhou task is typed and sent; 高德 and 12306 chips; the 飞书 approval card, Allow, the message goes out; the result. Captions beside it. |
-| 0:24 | One agent, many hands | Eight tiles: web & files, sandboxed shell, MCP · 高德, CLIs · 飞书, skills, browser, the phone screen, all in one task. |
+| 0:00 | Title | The panda, the wordmark, "An open-source personal AI agent", a second line under it, "Inspired by Meta Muse". |
+| 0:05 | Ask → works → asks → done | The phone: the Hangzhou task is typed and sent; Amap and 12306 chips; the Feishu approval card, Allow, the message goes out; the result. Captions beside it. |
+| 0:24 | One agent, many hands | Eight tiles: web & files, sandboxed shell, MCP · Amap, CLIs · Feishu, skills, browser, the phone screen, all in one task. |
 | 0:32 | The screen | A 12306-style train list, a tap on the fastest train, a tap on pay — and the payment approval card that stops it. |
 | 0:40 | The screens | Feed, Goals, Library and Chat screenshots slide in. |
 | 0:47 | Your machine, any model | A terminal types `uv tool install nanomuse` and `nanomuse serve`; model chips. |

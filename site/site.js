@@ -11,7 +11,7 @@
     } catch (e) {
       /* private mode */
     }
-    document.title = lang === "zh-CN" ? "FOMO — 开源的个人 AI 智能体" : "FOMO — an open-source personal AI agent";
+    document.title = "FOMO: an open-source personal AI agent";
   }
   var saved = null;
   try {
