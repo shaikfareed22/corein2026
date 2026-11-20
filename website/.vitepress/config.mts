@@ -196,7 +196,8 @@ export default defineConfig({
   srcExclude: ['tasks/**', 'archive/**', 'traces/**', 'briefs/**', 'releases/**', 'readme/**', 'zh/**', 'fork.md', ...notPages],
   cleanUrls: true,
   lastUpdated: false,
-  appearance: 'force-dark',
+  // light or dark as the device asks (the homepage does the same); the switch in the nav overrides it
+  appearance: true,
   // One site, two languages. `root` is English at /, `zh` is 简体中文 at /zh/ with the same
   // file names under docs/zh/. Nav, sidebar, search, footer and the edit link are per
   // locale; the language menu in the nav is VitePress's own.

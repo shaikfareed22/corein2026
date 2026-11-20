@@ -7,6 +7,7 @@ All notable changes to FOMO (called corein until 1.1.0; before the fork on 2026-
 ### Project
 
 - **The homepage at fomo.corein.in is black and white.** White with black text, black with white text on a device in dark mode, a black bar and footer that carry the logo as it is; the gradients, the coloured icon tiles and the scroll animations are gone, and the sentences and download links are the same. The main button on an Android phone pointed at a file name no release has (`corein-<version>-arm64.apk`); it now downloads `fomo-<version>-arm64.apk`.
+- **The docs at fomo.corein.in/docs wear the same black and white**, light or dark as the device asks, with a switch in the bar; code blocks keep their shading without the colours. The homepage's hero plays one task from the sentence to the answer, with the stop before sending in the middle, and the blocks below it come in as they are scrolled to; with reduced motion on, nothing moves.
 
 ## [1.2.2] - 2026-11-20 · Harbor
 
