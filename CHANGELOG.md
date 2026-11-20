@@ -4,6 +4,16 @@ All notable changes to FOMO (called corein until 1.1.0; before the fork on 2026-
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-11-20 · Harbor
+
+The Android app carries what Google Play asks of it, and the relay can be run on a small server with a provider of the operator's choice: a disclosure before the accessibility settings, a way to report a reply, an App Bundle beside the APK, and a relay whose model provider, daily allowance and currency are settings rather than code. The relay is 0.27.0.
+
+### Android
+
+- **A disclosure before the accessibility settings.** Every place that sends you to turn on the hands' accessibility service first shows what the service does, when it runs and where screenshots go; Settings opens only from the dialog's consent button, and the service's own description says the same.
+- **Report this reply.** The long-press toolbar of an assistant reply has *Report this reply*: a reason and an optional note, sent to the relay with the account's key, or by e-mail to the relay's support address when there is no account. Strings in all fourteen locales.
+- **An App Bundle with every release.** The release job builds `fomo-<version>.aab` beside the APK, signed with the same key; it is the file Google Play takes.
+
 ### Cloud
 
 - **A deploy kit for an AWS free-tier instance with Google Gemini behind the relay for every account** (`cloud/deploy/aws-gemini/`): one idempotent `bootstrap.sh` (Docker, a 2 GB swap file, a DuckDNS name kept by cron, `cloud/.env` from `env.template` with fresh secrets kept across re-runs, backup and self-check timers, a DNS check before Caddy asks Let's Encrypt, a health wait), a `CLOUD_MODELS` menu of `gemini-3.5-flash-lite` (recommended for chat and for the hands: a free-tier key answers in a second with it, while the full Flash model can take minutes and time out) and `gemini-3.8-flash`, `CHAT_DEFAULTS={}` since Gemini rejects `enable_thinking`, and a README with the AWS console steps and how to point each app at the relay. Pictures and clips stay off (those routes assume DashScope). `tests/test_deploy_aws_gemini.py` checks the menu through the relay's own parser.

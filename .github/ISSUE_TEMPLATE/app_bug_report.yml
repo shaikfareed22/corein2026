@@ -34,7 +34,7 @@ body:
     id: version
     attributes:
       label: FOMO version / FOMO 版本
-      description: "Settings → About, e.g. 1.2.1 (51) / 设置 → 关于，例如 1.2.1 (51)"
+      description: "Settings → About, e.g. 1.2.2 (52) / 设置 → 关于，例如 1.2.2 (52)"
     validations:
       required: true
   - type: input
